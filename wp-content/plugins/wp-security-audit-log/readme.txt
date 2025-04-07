@@ -6,7 +6,7 @@ License URI: https://www.gnu.org/licenses/gpl.html
 Tags: activity log, event log, user tracking, logger, history 
 Requires at least: 5.5
 Tested up to: 6.7.2
-Stable tag: 5.3.3
+Stable tag: 5.3.4.1
 Requires PHP: 7.4
 
 The #1 user-rated activity log plugin for event logging, activity monitoring and change tracking.
@@ -78,7 +78,7 @@ The premium edition of WP Activity Log takes WordPress user activity tracking to
 - See who is logged in and their current activities in real-time
 - Log off any user at the click of a button
 - Generate fully-configurable HTML and CSV reports
-- Get email and SMS notifications with important changes (fully configurable)
+- Get email, SMS and Slack notifications with important changes (fully configurable)
 - Search filters to fine tune the search results and find what you need in seconds
 - Store activity log in an external database to improve security and scalability
 - Mirror the activity log to logs management systems such as AWS CloudWatch, Loggly, and Papertrail in real-time
@@ -205,7 +205,7 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 2. See who is logged in to your WordPress and manage users sessions with Users Sessions Management in the Premium edition.
 3. The plugin settings from where site administrator can configure generic plugin settings such as [reverse proxy support](https://melapress.com/support/kb/wp-activity-log-support-reverse-proxies-web-application-firewalls/?utm_source=wp+repo&utm_medium=repo+link&utm_campaign=wordpress_org&utm_content=wsal), who can manage the plugin etc.
 4. Use the event Inspector to see more technical details about each event in the activity log, such as the session ID and UserAgent string.
-5. Configuring WordPress email and instant SMS alerts with the Email & SMS Notifications module in the Premium edition.
+5. Configuring WordPress email and instant SMS or Slack alerts with the Email, SMS & Slack Notifications module in the Premium edition.
 6. Search in the WordPress activity log with the use filters to fine tune the search results.
 7. The Enable/Disable events section from where Administrators can disable or enable activity log events.
 8. The Activity Log Viewer of a Super Admin in a WordPress multisite network installation alllows the admin to view the logs from all the network, or filter the logs of a specific site.
@@ -217,14 +217,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 
 == Changelog ==
 
-= 5.3.3 (2025-03-04) =
-
-**Security fix**
-	 * Fixed an insecure deserialization issue. Huge thanks to the Patchstack team for their help on this one.
+= 5.3.4.1 (2024-04-04) =
 
  * **Bug fixes**
-	 * Fixed a number of PHP warnings that could occur when certain system-related events were generated (6024, 6025, 6035, 6036, 6037, 6041, 6042, 6001, 6002, 6003, 6005, 6004, 6044, 6040).
-	 * Fixed an edge case issue in which periodic emails were not sent due to some issues with the cron job.
-	 * Fixed translation loading errors appearing in the Query Monitor plugin (translation loading too early in some cases).
+	 * Fixed an issue that affected the redirects setup on multisite networks.
 
 Refer to the complete [plugin changelog](https://melapress.com/support/kb/wp-activity-log-plugin-changelog/?utm_source=wp+repo&utm_medium=repo+link&utm_campaign=wordpress_org&utm_content=wsal) for more detailed information about what was new, improved and fixed in previous version updates of WP Activity Log.
