@@ -1,0 +1,326 @@
+<link rel="stylesheet" href="Style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+<main class="mainContainerCotizacion">
+  <div class="principalContainerCotizacion">
+    <!-- card 1: Calcular cotizacion -->
+    <div class="firstCard">
+      <h1 class="titlefirstCard">Cotiza tu <span class="highlight-seguro">seguro</span></h1>
+      <h2 class="subtitlefirstCard">Seguro Bicibles</h2>
+      <p class="descriptionfirstCard">
+        Rueda Tranquilo en tu bici, Positiva te acompaña en cada pedaleo. Este seguro te da respaldo económico cuando
+        sufras
+        un accidente en tu bicicleta.
+      </p>
+      <p class="notefirstCard">
+        <span>*Esta póliza no cubre competencias profesionales.</span>
+        <br />
+        Recuerda registrar tu bici
+        <a target="_blank" href="https://registrobicibogota.movilidadbogota.gov.co/#!/">aquí</a>
+      </p>
+      <div class="tabs">
+        <button class="tab active" data-tab="para-ti">Para ti</button>
+        <button class="tab" data-tab="para-tu-bici">Para tu bici</button>
+        <button class="tab" data-tab="para-ti-y-tu-bici">Para ti y tu bici</button>
+      </div>
+      <form id="formCard" class="formCard">
+        <div class="tab-content-container">
+          <div class="tab-content active" id="para-ti">
+            <label>Nombre</label>
+            <div class="radio-group">
+              <label class="custom-radio">
+                <input type="radio" name="duracion" value="anual" />
+                Anual
+              </label>
+              <label class="custom-radio">
+                <input type="radio" name="duracion" value="24-horas" />
+                24 horas
+              </label>
+            </div>
+          </div>
+          <div class="tab-content" id="para-tu-bici">
+            <div class="label-input">
+              <label for="year">Año de compra de tu bici *</label>
+              <select id="year">
+                <option disabled>Seleccione</option>
+              </select>
+            </div>
+            <div class="label-input">
+              <div class="input-with-tooltip-bici">
+                <span class="info-icon-tooltip-bici">i</span>
+                <div class="tooltip-cot-bici">
+                  <p>El valor de tu Bici debe ser mayor a $500.000 e inferior o igual a $5.000.000.</p>
+                  <p class="orange__color">
+                    Si el costo de tu Bici es superior a los $5.000.000 Comunicate con nosotros al #345 o (601)-3487555
+                  </p>
+                </div>
+                <label for="value">Valor de tu bici *</label>
+              </div>
+              <input type="text" id="value" placeholder="Ingrese" />
+              <p class="error-message" id="value-error">Ingresa la información</p>
+            </div>
+          </div>
+          <div class="tab-content" id="para-ti-y-tu-bici">
+            <div class="label-input">
+              <label for="year-combined">Año de compra de tu bici *</label>
+              <select id="year-combined">
+                <option disabled>Seleccione</option>
+              </select>
+            </div>
+            <div class="label-input">
+              <div class="input-with-tooltip">
+                <span class="info-icon__tooltip">i</span>
+                <div class="tooltipCotizaciones">
+                  <p>El valor de tu Bici debe ser mayor a $500.000 e inferior o igual a $5.000.000.</p>
+                  <p class="orange__color">
+                    Si el costo de tu Bici es superior a los $5.000.000 Comunicate con nosotros al #345 o (601)-3487555
+                  </p>
+                </div>
+                <label for="value-combined">Valor de tu bici *</label>
+              </div>
+              <input type="text" id="value-combined" placeholder="Ingrese" />
+              <p class="error-message" id="value-combined-error">Ingresa la información</p>
+            </div>
+          </div>
+        </div>
+        <div class="container__calculate-button">
+          <button type="button" class="calculate-button">Calcular</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ! Card 2: Resultados Vacios -->
+    <div class="secondCard">
+      <header class="header__secund">
+        <h1><span class="orange">Resultados</span> cotización</h1>
+      </header>
+
+      <div class="cost-section__secund">
+        <p>El costo de tu seguro es</p>
+        <div>
+          <div class="main-cost">------</div>
+          <div class="annual">------</div>
+        </div>
+      </div>
+
+      <div class="coverage-list__secund">
+        <h2 class="coverage-title">Este costo incluye:</h2>
+
+        <div class="container__coverage">
+          <img src="https://positivapruebas.com.co//wp-content/uploads/Frame.png" alt="Cost-Icon" />
+          <div class="container__coverage-text">
+            <p>Diligencia el formulario de cotización</p>
+            <p>para conocer el costo y las coberturas del seguro</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ! Card 3 -->
+    <article class="thirdCard">
+      <header class="headerThird">
+        <h1><span class="orange">Resultados</span> cotización</h1>
+      </header>
+
+      <section class="cost-section">
+        <p class="cost-text">El costo de tu seguro es</p>
+
+        <div class="cost-container">
+          <p class="annual" id="text-anual">Anuales</p>
+          <p class="main-cost">$ 450.000</p>
+        </div>
+      </section>
+
+
+      <section class="breakdown">
+        <div class="breakdown-item" id="valorSeguroSection">
+          <span>Valor seguro para ti:</span>
+          <span class="breakdown-item-value">$ 75.000</span>
+        </div>
+        <div class="breakdown-item">
+          <span>Valor del seguro para tu bici sin IVA:</span>
+          <span class="breakdown-item-value">$ 253.421</span>
+        </div>
+        <div class="breakdown-item">
+          <span>IVA del seguro de tu bici:</span>
+          <span class="breakdown-item-value">$ 48.149</span>
+        </div>
+      </section>
+
+      <section class="coverage-list">
+        <h2 class="coverage-title">Este costo incluye:</h2>
+
+        <div class="coverage-item">
+          <div class="coverage-name">
+            <img class="heart-icon" src="https://positivapruebas.com.co//wp-content/uploads/corazoncito.svg"
+              alt="heart-icon" />
+            <span class="coverage-name-text">Daños a terceros</span>
+          </div>
+          <span class="coverage-value">$ 35.000.000</span>
+        </div>
+
+        <div class="coverage-item">
+          <div class="coverage-name">
+            <img class="heart-icon" src="https://positivapruebas.com.co//wp-content/uploads/corazoncito.svg"
+              alt="heart-icon" />
+            <span class="coverage-name-text">Gastos de defensa</span>
+          </div>
+          <span class="coverage-value">$ 7.000.000</span>
+        </div>
+
+     <div class="coverage-item">
+  <div class="coverage-name">
+    <img class="heart-icon" src="https://positivapruebas.com.co//wp-content/uploads/corazoncito.svg"
+      alt="heart-icon" />
+    <span class="coverage-name-text">Perdida total por daño</span>
+  </div>
+  <div class="coverage-icon">
+    <span class="coverage-value reemplace_valueBici">$ 1.250.000</span>
+    <div class="label-input">
+      <div class="input-with-tooltip-bici">
+        <span class="info-icon-tooltip-bici">i</span>
+        <div class="tooltip-cot-bici tooltip-cobertura-bici">
+          <p>
+            Valor de la cobertura corresponde al costo del valor de la Bicicleta...
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+   <div class="coverage-item">
+  <div class="coverage-name">
+    <img class="heart-icon" src="https://positivapruebas.com.co//wp-content/uploads/corazoncito.svg"
+      alt="heart-icon" />
+    <span class="coverage-name-text">Perdida total por hurto</span>
+  </div>
+  <div class="coverage-icon">
+    <span class="coverage-value reemplace_valueBici">$ 1.250.000</span>
+    <div class="label-input">
+      <div class="input-with-tooltip-bici">
+        <span class="info-icon-tooltip-bici">i</span>
+        <div class="tooltip-cot-bici tooltip-cobertura-bici">
+          <p>
+            Valor de la cobertura corresponde al costo del valor de la Bicicleta...
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <div class="coverage-item">
+  <div class="coverage-name">
+    <img class="heart-icon" src="https://positivapruebas.com.co//wp-content/uploads/corazoncito.svg"
+      alt="heart-icon" />
+    <span class="coverage-name-text">Perdida total por terremoto</span>
+  </div>
+  <div class="coverage-icon">
+    <span class="coverage-value reemplace_valueBici">$ 1.250.000</span>
+    <div class="label-input">
+      <div class="input-with-tooltip-bici">
+        <span class="info-icon-tooltip-bici">i</span>
+        <div class="tooltip-cot-bici tooltip-cobertura-bici">
+          <p>
+            Valor de la cobertura corresponde al costo del valor de la Bicicleta...
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        <div class="coverage-item">
+          <div class="coverage-name">
+            <img class="heart-icon" src="https://positivapruebas.com.co//wp-content/uploads/corazoncito.svg"
+              alt="heart-icon" />
+            <span class="coverage-name-text">Asistencia por movilidad</span>
+          </div>
+          <span class="premium open-modal-btn-premium">Premium</span>
+        </div>
+      </section>
+
+      <section class="btn-qr-section-container">
+        <div class="qr-section">
+          <article>
+            <p>Esta compra debes hacerla desde tu</p>
+            <p>celular. <span>Escanea el código QR.</span></p>
+          </article>
+          <canvas id="qr-code"></canvas>
+        </div>
+        <div class="btn-section">
+          <a href="#" id="btnSeguro">Quiero este seguro</a>
+        </div>
+      </section>
+    </article>
+
+    <!-- ! Card 4 -->
+    <article class="fourCard">
+      <header class="headerFour">
+        <h1><span class="orange">Resultados</span> cotización</h1>
+      </header>
+
+      <section class="cost-section">
+        <p class="cost-text">El costo de tu seguro es</p>
+        <p class="main-cost">$ 75.000</p>
+        <p class="location">Solo para Bogotá</p>
+        <p class="annual">Anual</p>
+      </section>
+
+      <section class="button-section">
+        <a href="#">Quiero este seguro</a>
+      </section>
+    </article>
+  </div>
+</main>
+
+<!-- ! Modal Validations -->
+<div class="modal-validacion-bici" id="modal">
+  <div class="modal-content-bici">
+    <span class="close-btn-bici"><img
+        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg"></span>
+    <img src="https://positivapruebas.com.co//wp-content/uploads/lupa-error-modal.svg" alt="Icon"
+      class="img__validationError" />
+    <div class="container__titleModal">
+      <h2>Monto no válido</h2>
+      <span class="title-line"></span>
+    </div>
+    <p>El monto debe ser igual o mayor a $500,000 o igual o menor a $5,000,000 para continuar.</p>
+  </div>
+</div>
+
+<!-- ! Modal Premium -->
+<div id="servicesModal" class="modal-premium-bici">
+  <div class="modal-content-bici">
+    <span class="close-modal-premium-bici"><img
+        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg"></span>
+    <div class="services-container">
+      <div class="service-column">
+        <h2>Asistencia de Mantenimiento a la Bici</h2>
+        <ul id="maintenanceServices"></ul>
+      </div>
+      <div class="service-column">
+        <h2>Asistencia al Ciclista</h2>
+        <ul id="cyclistServices"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ! Toast -->
+<article id="toast">
+  <section class="toast-container-bici">
+    <div class="toast-border-bici"></div>
+    <section>
+      <img src="https://positivapruebas.com.co//wp-content/uploads/Toast-error.svg" alt="error"
+        class=".img-toast-error-bici" />
+    </section>
+    <section class="toast-text-container-bici">
+      <p>Por favor, completa todos los campos obligatorios</p>
+      <p>Los campos pendientes están resaltados para tu referencia.</p>
+    </section>
+    <span class="toast-close-bici">x</span>
+  </section>
+</article>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+<script src="js.js"></script>
