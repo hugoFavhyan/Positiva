@@ -1,6 +1,6 @@
 let isfourCardVisible = false;
 const mediaQuery = window.matchMedia("(max-width: 768px)");
-let toastTimeout; 
+let toastTimeout;
 
 const formatNumberWithDots = (value) => {
   const numberString = value.replace(/\D/g, ""); // Solo digitos
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btn = document.querySelector(".open-modal-btn-premium");
   const closeModalPremium = document.querySelector(".close-modal-premium-bici");
   const toast = document.getElementById("toast");
-   const closeToast = document.querySelector(".toast-close-bici");
+  const closeToast = document.querySelector(".toast-close-bici");
   const valueError = document.getElementById("value-error");
   const valueCombinedError = document.getElementById("value-combined-error");
   const valorSeguroSection = document.getElementById("valorSeguroSection");
@@ -177,39 +177,39 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   radioButtons.forEach((radio) => {
-  radio.addEventListener("change", () => {
-    if (radio.checked) {
-      const activeTab = document.querySelector(".tab.active").getAttribute("data-tab");
+    radio.addEventListener("change", () => {
+      if (radio.checked) {
+        const activeTab = document.querySelector(".tab.active").getAttribute("data-tab");
 
-      // Ocultar card 2 y mostrar la card 4 (para-ti)
-      const elements = document.querySelectorAll(".secondCard");
-      elements.forEach((element) => element.style.display = "none");
-      fourCard.style.display = "block";
-      isfourCardVisible = true;
+        // Ocultar card 2 y mostrar la card 4 (para-ti)
+        const elements = document.querySelectorAll(".secondCard");
+        elements.forEach((element) => element.style.display = "none");
+        fourCard.style.display = "block";
+        isfourCardVisible = true;
 
-      // Actualizar textos y enlaces
-      if (radio.value === "anual") {
-        mainCost.textContent = "$ 75.000";
-        annualText.textContent = "Anual";
-        urlSeguro = "https://positivapruebas.com.co/seguros/formulario-plan-para-ti-anual/";
-      } else if (radio.value === "24-horas") {
-        mainCost.textContent = "$ 5.000";
-        annualText.textContent = "24 Horas";
-        urlSeguro = "https://positivapruebas.com.co/seguros/formulario-plan-para-ti-24-horas/";
+        // Actualizar textos y enlaces
+        if (radio.value === "anual") {
+          mainCost.textContent = "$ 75.000";
+          annualText.textContent = "Anual";
+          urlSeguro = "Bicibles/Bicibles formulario año/index.html";
+        } else if (radio.value === "24-horas") {
+          mainCost.textContent = "$ 5.000";
+          annualText.textContent = "24 Horas";
+          urlSeguro = "Bicibles/bicibles-formulario 24 horas/index.html";
+        }
+
+        // Aplicar URL a ambos botones
+        insuranceLink.href = urlSeguro;
+        const btnResponsive = document.querySelector(".fourCard .button-section a");
+        if (btnResponsive) btnResponsive.href = urlSeguro;
+
+        // Marcar el botón activo visualmente
+        radioButtons.forEach((r) => {
+          r.parentElement.style.setProperty("--radio-color", r === radio ? "#DF7702" : "transparent");
+        });
       }
-
-      // Aplicar URL a ambos botones
-      insuranceLink.href = urlSeguro;
-      const btnResponsive = document.querySelector(".fourCard .button-section a");
-      if (btnResponsive) btnResponsive.href = urlSeguro;
-
-      // Marcar el botón activo visualmente
-      radioButtons.forEach((r) => {
-        r.parentElement.style.setProperty("--radio-color", r === radio ? "#DF7702" : "transparent");
-      });
-    }
+    });
   });
-});
 
 
   // Población de selects de años

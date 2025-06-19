@@ -337,17 +337,39 @@ class ModalManager {
     }
 }
 // Clase principal para manejar el formulario
+// Reemplaza tu clase PersonalDataForm existente con esta
 class PersonalDataForm {
     constructor() {
         this.mediaQuery = window.matchMedia("(max-width: 768px)");
         this.locationService = new LocationService();
         this.modalManager = new ModalManager();
-        this.errorMessages = new ErrorMessages(); // Instancia de la nueva clase
+        this.errorMessages = new ErrorMessages();
         this.cityAutocomplete = null;
         this.elements = {};
         this.validators = {};
         this.isValid = false;
+
+        // --- INICIO: Definiciones para validación específica ---
+        this.blockedCedula = "123456789"; // ¡CAMBIA ESTE NÚMERO POR LA CÉDULA REAL!
+        
+        // ===== ¡NUEVO! Define aquí la fecha de expedición específica que causará el error =====
+        // El formato DEBE SER AÑO-MES-DÍA (YYYY-MM-DD)
+        this.incorrectExpeditionDate = "2014-06-25";
+
+        this.blockedCedulaMessage = {
+            title: "No es posible continuar con el proceso",
+            body: "El tipo y número de documento ingresados no han superado las validaciones establecidas.\n\nSi tienes alguna inquietud, comunícate con nuestro equipo de soporte para obtener más información.",
+            reference: "2345610928"
+        };
+
+        this.invalidDateForBlockedCedulaMessage = {
+            title: "Fecha de expedición no válida",
+            body: "Por favor, asegúrate de que la fecha de expedición del documento sea correcta para continuar.",
+            reference: "2345610928"
+        };
+        // --- FIN: Definiciones ---
     }
+
     async init() {
         this.getElements();
         this.setupSelectOptions();
@@ -357,13 +379,13 @@ class PersonalDataForm {
         this.setupModals();
         this.setupEventListeners();
     }
+
     getElements() {
         const elementIds = [
             'tipoDocumento', 'numeroDocumento', 'direccionResidencia', 'primerNombre',
             'apellido', 'genero', 'correoElectronico', 'confirmarCorreo', 'telefono',
             'ciudad', 'resultado-ciudad', 'fechaNacimiento', 'fechaExpedicion',
             'autorizacionDatos', 'formularioDatosPersonales',
-            // Añadir elementos del modal de validación para poder actualizarlos
             'modalValidationTitle', 'modalValidationMessage'
         ];
         elementIds.forEach(id => {
@@ -373,18 +395,14 @@ class PersonalDataForm {
         this.elements.containerCheckbox = document.querySelector(".etiqueta-checkbox");
         this.elements.botonContinuar = document.querySelector(".boton-continuar");
     }
+
     setupSelectOptions() {
-        const documentTypes = [
-            { text: "Cédula de Ciudadanía", value: "Cédula de Ciudadanía" },
-            { text: "NIT", value: "Número de Identificación Tributaria" },
-        ];
-        const genderTypes = [
-            { text: "Masculino", value: "Masculino" },
-            { text: "Femenino", value: "Femenino" },
-        ];
+        const documentTypes = [{ text: "Cédula de Ciudadanía", value: "Cédula de Ciudadanía" }, { text: "NIT", value: "Número de Identificación Tributaria" }];
+        const genderTypes = [{ text: "Masculino", value: "Masculino" }, { text: "Femenino", value: "Femenino" }];
         this.mapDataToSelect(documentTypes, this.elements.tipoDocumento);
         this.mapDataToSelect(genderTypes, this.elements.genero);
     }
+
     mapDataToSelect(options, selectElement) {
         options.forEach(option => {
             const optionElement = document.createElement("option");
@@ -393,33 +411,34 @@ class PersonalDataForm {
             selectElement.appendChild(optionElement);
         });
     }
+
     setupValidations() {
         Validator.validateAddress(this.elements.direccionResidencia);
         Validator.validateAlphanumeric(this.elements.primerNombre);
         Validator.validateAlphanumeric(this.elements.apellido);
         Validator.validateNumbers(this.elements.numeroDocumento);
-        // Crear instancias de validadores pasando la instancia de ErrorMessages
         this.validators.emailPrimary = new EmailValidator(this.elements.correoElectronico, this.errorMessages);
         this.validators.emailConfirm = new EmailValidator(this.elements.confirmarCorreo, this.errorMessages);
         this.validators.phone = new PhoneValidator(this.elements.telefono, this.errorMessages);
         this.validators.birthDate = new BirthDateValidator(this.elements.fechaNacimiento, this.errorMessages);
         this.setupErrorClearing();
     }
+
     setupErrorClearing() {
         const inputs = this.elements.formularioDatosPersonales.querySelectorAll("input, select");
         inputs.forEach(input => {
-            input.addEventListener("input", () => {
-                this.clearFieldError(input);
-            });
+            input.addEventListener("input", () => this.clearFieldError(input));
         });
     }
+
     clearFieldError(input) {
         input.style.borderColor = "#e0e0e0";
         const errorMessage = input.nextElementSibling;
-        if (errorMessage) {
+        if (errorMessage && errorMessage.classList.contains('error-message')) {
             errorMessage.style.display = "none";
         }
     }
+
     async loadLocationData() {
         try {
             await this.locationService.loadLocations();
@@ -427,61 +446,102 @@ class PersonalDataForm {
             console.error("Error al cargar datos de ubicación:", error);
         }
     }
+
     setupCityAutocomplete() {
-        this.cityAutocomplete = new CityAutocomplete(
-            this.locationService,
-            this.elements.ciudad,
-            this.elements["resultado-ciudad"]
-        );
+        this.cityAutocomplete = new CityAutocomplete(this.locationService, this.elements.ciudad, this.elements["resultado-ciudad"]);
     }
+
     setupModals() {
         const modalValidations = document.getElementById("modalValidations");
         const closeModal = modalValidations.querySelector(".close");
         this.modalManager.registerModal("validations", modalValidations, closeModal);
     }
+
     setupEventListeners() {
-        this.elements.botonContinuar.addEventListener("click", (event) => {
-            this.handleSubmit(event);
-        });
+        this.elements.botonContinuar.addEventListener("click", (event) => this.handleSubmit(event));
+        this.elements.numeroDocumento.addEventListener("blur", () => this.validateBlockedCedulaOnBlur());
     }
+
+    showCustomValidationErrorModal(errorData) {
+        this.elements.modalValidationTitle.textContent = errorData.title;
+        this.elements.modalValidationMessage.innerHTML = errorData.body.replace(/\n/g, '<br>');
+        const refContainer = document.getElementById('modalValidationReferenceContainer');
+        const refInput = document.getElementById('modalValidationReferenceInput');
+        if (errorData.reference) {
+            refInput.value = errorData.reference;
+            refContainer.style.display = 'block';
+        } else {
+            refContainer.style.display = 'none';
+        }
+        this.modalManager.openModal("validations");
+    }
+
+    validateBlockedCedulaOnBlur() {
+        const documentoValue = this.elements.numeroDocumento.value.trim();
+        if (documentoValue === this.blockedCedula) {
+            this.showCustomValidationErrorModal(this.blockedCedulaMessage);
+            this.showFieldError(this.elements.numeroDocumento, "Este número de documento no puede continuar.");
+        }
+    }
+
     validateForm() {
         let isFormValid = true;
-        const inputs = this.elements.formularioDatosPersonales.querySelectorAll("input, select");
+        const inputs = this.elements.formularioDatosPersonales.querySelectorAll("input[required], select[required]");
         inputs.forEach(input => this.clearFieldError(input));
+
+        // --- INICIO: LÓGICA DE VALIDACIÓN ACTUALIZADA ---
+        const documentoValue = this.elements.numeroDocumento.value.trim();
+        const fechaExpedicionValue = this.elements.fechaExpedicion.value;
+
+        if (documentoValue === this.blockedCedula) {
+            // Escenario 1: La cédula es la bloqueada Y la fecha de expedición es la fecha incorrecta específica.
+            if (fechaExpedicionValue === this.incorrectExpeditionDate) {
+                this.showCustomValidationErrorModal(this.invalidDateForBlockedCedulaMessage);
+                this.showFieldError(this.elements.fechaExpedicion, 'Fecha de expedición no válida.');
+                return false;
+            }
+
+            // Escenario 2: La cédula es la bloqueada, pero con cualquier otra fecha (o si está vacía).
+            this.showCustomValidationErrorModal(this.blockedCedulaMessage);
+            return false;
+        }
+        // --- FIN: LÓGICA DE VALIDACIÓN ACTUALIZADA ---
+
         inputs.forEach(input => {
-            if (input.id === "ciudad") {
-                if (!this.validateCity(input)) isFormValid = false;
-            } else if (!input.value) {
-                this.showFieldError(input, this.errorMessages.get('REQUIRED'));
-                isFormValid = false;
+            if ((input.type === 'checkbox' && !input.checked) || !input.value) {
+                if (input.id !== 'autorizacionDatos') {
+                    this.showFieldError(input, this.errorMessages.get('REQUIRED'));
+                    isFormValid = false;
+                }
             }
         });
+
+        if (!this.validateCity(this.elements.ciudad)) isFormValid = false;
         if (!this.validators.emailPrimary.validateStructure()) isFormValid = false;
         if (!this.validators.emailConfirm.validateStructure()) isFormValid = false;
         if (!this.validators.phone.validatePhone()) isFormValid = false;
+
         if (!this.validators.birthDate.validateAge()) {
             const error = this.errorMessages.get('AGE_RANGE_MODAL');
-            this.elements.modalValidationTitle.textContent = error.title;
-            this.elements.modalValidationMessage.textContent = error.body;
-            this.modalManager.openModal("validations");
-            return false; // Salir temprano para mostrar solo este error modal
+            this.showCustomValidationErrorModal(error);
+            return false;
         }
+
         if (this.elements.correoElectronico.value !== this.elements.confirmarCorreo.value) {
             const error = this.errorMessages.get('EMAIL_MISMATCH_MODAL');
-            this.elements.modalValidationTitle.textContent = error.title;
-            this.elements.modalValidationMessage.textContent = error.body;
-            this.modalManager.openModal("validations");
-            return false; // Salir temprano
+            this.showCustomValidationErrorModal(error);
+            return false;
         }
+
         if (!this.elements.autorizacionDatos.checked) {
             const error = this.errorMessages.get('DATA_AUTH_MODAL');
-            this.elements.modalValidationTitle.textContent = error.title;
-            this.elements.modalValidationMessage.textContent = error.body;
-            this.modalManager.openModal("validations");
+            this.showCustomValidationErrorModal(error);
             isFormValid = false;
         }
+
         return isFormValid;
     }
+
     validateCity(cityInput) {
         const value = cityInput.value.trim().toLowerCase();
         const parts = value.split(" - ");
@@ -489,25 +549,32 @@ class PersonalDataForm {
             const municipalityInput = parts[0].trim();
             const departmentInput = parts[1].trim();
             const isValid = this.locationService.municipalities.some(m => m.nombreMunicipio.toLowerCase() === municipalityInput) &&
-                            this.locationService.departments.some(d => d.NombreDepartamento.toLowerCase() === departmentInput);
+                this.locationService.departments.some(d => d.NombreDepartamento.toLowerCase() === departmentInput);
             if (!isValid) {
                 this.showFieldError(cityInput, this.errorMessages.get('INVALID_CITY'));
                 return false;
             }
         } else {
-            this.showFieldError(cityInput, this.errorMessages.get('REQUIRED'));
+            if (!value) {
+                this.showFieldError(cityInput, this.errorMessages.get('REQUIRED'));
+                return false;
+            }
+            this.showFieldError(cityInput, this.errorMessages.get('INVALID_CITY'));
             return false;
         }
+        this.clearFieldError(cityInput);
         return true;
     }
+
     showFieldError(input, message) {
         input.style.borderColor = "red";
         const errorMessage = input.nextElementSibling;
-        if (errorMessage) {
+        if (errorMessage && errorMessage.classList.contains('error-message')) {
             errorMessage.textContent = message;
             errorMessage.style.display = "block";
         }
     }
+
     handleSubmit(event) {
         event.preventDefault();
         if (this.validateForm()) {
@@ -516,6 +583,7 @@ class PersonalDataForm {
             this.onFormError();
         }
     }
+
     onFormSuccess() {
         console.log("Formulario válido");
         if (this.mediaQuery.matches) {
@@ -528,18 +596,24 @@ class PersonalDataForm {
         document.getElementById("resumen-compra").style.display = "block";
         this.populateSummary();
     }
+
     onFormError() {
+        console.log("Formulario inválido");
         if (this.mediaQuery.matches) {
             this.elements.formGroup.style.rowGap = "10px";
         } else {
             this.elements.formGroup.style.rowGap = "30px";
         }
-        const toast = document.getElementById("toast");
-        toast.classList.add("showToastError");
-        setTimeout(() => {
-            toast.classList.remove("showToastError");
-        }, 3000);
+        const isModalActive = document.querySelector('.modal.active');
+        if (!isModalActive) {
+            const toast = document.getElementById("toast");
+            toast.classList.add("showToastError");
+            setTimeout(() => {
+                toast.classList.remove("showToastError");
+            }, 3000);
+        }
     }
+
     populateSummary() {
         const summaryElements = {
             nombre: `${this.elements.primerNombre.value} ${this.elements.apellido.value}`,

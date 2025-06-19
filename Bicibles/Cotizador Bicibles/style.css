@@ -270,9 +270,10 @@ input {
 }
 /* Estilo para posicionar ÚNICAMENTE los tooltips de las coberturas */
 .tooltip-cobertura-bici { 
-    left: -290px;
+    left: -249px;
     top: -60px;
-    width: 280px; 
+    width: 223px;
+    padding: 15px;
 }
 .tooltip-secundario-cot-bici {
     display: none;
@@ -502,6 +503,11 @@ input {
 .thirdCard .coverage-value {
     color: #173748;
     font-weight: 600;
+}
+.thirdCard .coverage-value-inc{
+  color: #173748;
+  font-weight: 600; 
+  padding-right: 25px; 
 }
 .thirdCard .coverage-icon {
     display: flex;
@@ -745,8 +751,8 @@ input {
 }
 .close-modal-premium-bici {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
     color: white;
     border-radius: 50%;
     width: 27px;
@@ -784,9 +790,10 @@ input {
     align-items: center;
     margin-bottom: 15px;
     padding-bottom: 5px;
-    border-bottom: 3px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
     color: #203e4f;
     font-weight: 500;
+    gap: 10px;
 }
 .modal-premium-bicili img {
     width: 24px;
@@ -951,7 +958,7 @@ input {
 }
 
 input#value-combined, input#value {
-    height: 50px;
+    height: 42px;
     border-color: #c7c6c6;
 }
 #para-ti-y-tu-bici label:first-child, #para-ti label, .label-input label {

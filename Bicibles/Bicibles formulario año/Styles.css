@@ -599,6 +599,26 @@ overflow-y: auto;
 .input-with-tooltip:hover .tooltipCotizaciones {
   display: flex;
 }
+/* Estilos para el campo de referencia en el modal de validación */
+#modalValidations .referentPago {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+#modalValidations .text-confirmModal {
+  width: 80%;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  background-color: #f7f7f7;
+  color: #333;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+}
 /* ! End tooltip */
 /* Estilo en pantallas medianas (móviles) */
 /* Pantallas medianas (móviles, hasta 480px) */
