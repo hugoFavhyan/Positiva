@@ -1,0 +1,1357 @@
+/*Etilo para icono cerrar de un Pop-Up */
+.popup-boton-circular .dialog-close-button {
+    border-radius: 50%;
+    padding: 5px;
+}
+
+/* Estilo de icono en el encabezado */
+.icono-encabezado .elementor-heading-title {
+    display: flex;
+    justify-content: center;
+}
+
+/* Nuevo stilo de tooltip para elementor*/
+.tooltip-cotizador {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding-left: 8px;
+}
+
+.tooltip-cotizador img {
+    height: 20px;
+}
+
+.tooltip-cotizador .tooltip-cot-text {
+    font-family: "Montserrat", sans-serif;
+    visibility: hidden;
+    width: 370px;
+    text-align: left;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ff7500;
+    position: absolute;
+    bottom: 100%;
+    transform: translateX(-102%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+    background-color: #ffffff;
+    text-decoration: none;
+    left: 70%;
+    color: #173748;
+    font-size: 18px;
+    font-weight: 50;
+}
+
+.tooltip-cotizador:hover .tooltip-cot-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/*Estilos generales de Cotizador*/
+.mainContainerCotizacion {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    height: 115vh;
+}
+
+.principalContainerCotizacion {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
+    padding-top: 4rem;
+}
+
+/* ! Card 1 */
+.firstCard {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px 30px;
+    max-width: 550px;
+    max-height: 580px;
+}
+
+.titlefirstCard {
+    font-size: 35px;
+    font-weight: 700;
+    position: relative;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+}
+
+.highlight-seguro {
+    color: #ff6b00;
+}
+
+.subtitlefirstCard {
+    font-size: 18px;
+    color: #555;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    margin-top: 4px;
+}
+
+.descriptionfirstCard,
+.notefirstCard {
+    font-size: 16px;
+    line-height: 1.4rem;
+    color: #333333;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+}
+
+.notefirstCard span {
+    font-weight: 700;
+}
+
+.notefirstCard a {
+    color: #ff6b00;
+    text-decoration: none;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1.5rem;
+}
+
+.tab {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    color: #6c6c6c;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 10px 5px 10px;
+}
+
+.tab.active {
+    border-bottom: 3px solid #ff6b00;
+    font-weight: 500;
+    color: #173748;
+}
+
+.tab-content-container {
+    position: relative;
+    min-height: 80px;
+}
+
+.tab-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+
+.tab-content.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#para-ti {
+    display: flex;
+    flex-direction: column;
+}
+
+#para-tu-bici {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#para-ti-y-tu-bici {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.formCard {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    text-align: left;
+    font-size: 14px;
+    color: #333;
+}
+
+select,
+input {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: "Poppins", sans-serif;
+}
+
+.label-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-group {
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    margin-top: 2px;
+    border: 2px solid #e0e0e0;
+    border-radius: 50px;
+    gap: 20px;
+}
+
+.radio-group {
+    padding: 15px 0 10px 10px !important;
+}
+
+.radio-group>label {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+
+.custom-radio {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.custom-radio input[type="radio"] {
+    display: none;
+}
+
+.custom-radio::before {
+    content: "";
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #df7702;
+    border-radius: 50%;
+    margin-top: 2px;
+    margin-right: 8px;
+    transition: background-color 0.3s ease;
+    background-color: var(--radio-color, transparent);
+}
+
+.input-with-tooltip {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-icon__tooltip {
+    font-size: 8px;
+    font-weight: bold;
+    background-color: #f97316;
+    color: white;
+    border-radius: 50%;
+    padding: 1px 6px;
+    cursor: pointer;
+    position: relative;
+    top: -4px;
+}
+
+.tooltipCotizaciones {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    gap: 10px;
+    left: 20px;
+    top: 0px;
+    background-color: white;
+    border: 1px solid #f97316;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    z-index: 10;
+    text-align: left;
+}
+
+.input-with-tooltip:hover .tooltipCotizaciones {
+    display: flex;
+}
+
+.tooltip_secund {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    gap: 10px;
+    left: -200px;
+    top: -115px;
+    background-color: white;
+    border: 1px solid #f97316;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 12rem;
+    z-index: 10;
+}
+
+.input-with-tooltip:hover .tooltip_secund {
+    display: flex;
+}
+
+.tooltip_secund:hover {
+    display: flex;
+}
+
+.tooltipCotizaciones p {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    font-size: 14px;
+    color: #3e3e3e;
+    font-weight: 500;
+}
+
+.tooltipCotizaciones>.orange__color {
+    color: #f97316;
+    font-weight: 600;
+}
+
+.container__calculate-button, .cointainer-what-this-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.3rem;
+}
+
+.calculate-button {
+    display: none;
+    background-color: #f97316;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 40%;
+    min-width: 130px;
+}
+
+.calculate-button:hover {
+    background-color: #f97416a8;
+    transition: background 0.3s ease;
+}
+
+/* ! Card 2 */
+.secondCard {
+    max-width: 582px;
+    max-height: 610px;
+    width: 100%;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 28px 34px;
+}
+
+.header__secund {
+    margin-bottom: 24px;
+    font-family: "Poppins", sans-serif;
+}
+
+.header__secund h1 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.header__secund .orange {
+    color: #ff6600;
+}
+
+.cost-section__secund {
+    background-color: #f7f7f7;
+    padding: 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Roboto", sans-serif;
+}
+
+.cost-section__secund p {
+    font-weight: 400;
+    color: #333333;
+}
+
+.cost-section__secund .main-cost {
+    font-size: 24px;
+    color: #1a2b3c;
+}
+
+.cost-section__secund .annual {
+    font-size: 14px;
+    color: #666;
+    text-align: right;
+}
+
+.coverage-list__secund {
+    font-family: "Roboto", sans-serif;
+    color: #6e6e6e;
+    min-height: 25rem;
+}
+
+.coverage-list__secund .coverage-title {
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 0.4rem;
+}
+
+.container__coverage {
+    display: flex;
+    flex-direction: column;
+    padding: 42px;
+    justify-content: center;
+    align-items: center;
+    min-height: 18rem;
+}
+
+.container__coverage img {
+    max-width: 6rem;
+}
+
+.container__coverage-text {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 400;
+}
+
+.container__coverage-text p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* ! Card 3 */
+.thirdCard {
+    display: none;
+    width: 100%;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    flex-direction: column;
+}
+
+.thirdCard .headerThird {
+    margin-bottom: 1rem;
+}
+
+.thirdCard .headerThird h1 {
+    font-size: 24px;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+}
+
+.thirdCard .headerThird .orange {
+    color: #ff6600;
+}
+
+.thirdCard .cost-section {
+    background-color: #f7f7f7;
+    padding: 16px 20px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    font-family: "Roboto", sans-serif;
+}
+
+.thirdCard .cost-section .cost-text {
+    font-size: 16px;
+    margin: 0;
+    padding-top: 0.3rem;
+}
+
+.thirdCard .main-cost {
+    font-size: 30px;
+    font-weight: 600;
+    color: #173748;
+    margin: 0;
+    text-align: end;
+}
+
+.thirdCard .annual {
+    font-size: 14px;
+    color: #333333;
+    grid-column-start: 2;
+    margin: 0;
+    text-align: end;
+}
+
+.cost-container {
+    text-align: right;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.thirdCard .breakdown {
+    background-color: #f5f5f5;
+    padding: 16px 20px 10px 20px;
+    border-radius: 4px;
+    font-family: "Roboto", sans-serif;
+}
+
+.thirdCard .breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.thirdCard .breakdown-item-value {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.thirdCard .coverage-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.thirdCard .coverage-list {
+    margin-top: 24px;
+    font-family: "Roboto", sans-serif;
+}
+
+.thirdCard .coverage-title {
+    color: #333333;
+    font-size: 16px;
+    margin-bottom: 16px;
+    font-weight: 400;
+}
+
+.thirdCard .coverage-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.thirdCard .coverage-name-text {
+    color: #173748;
+}
+
+.thirdCard .coverage-value {
+    color: #173748;
+    font-weight: 600;
+}
+
+.thirdCard .coverage-icon {
+    display: flex;
+    gap: 0.7rem;
+    align-items: anchor-center;
+}
+
+.thirdCard .heart-icon {
+    color: #ff6600;
+    font-size: 20px;
+}
+
+.thirdCard .premium {
+    color: #ff6600;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-right: 5%;
+}
+
+.thirdCard .qr-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.thirdCard .qr-section p {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: #173748;
+}
+
+.thirdCard .qr-section span {
+    color: #ff7500;
+}
+
+/*! Card 4 */
+.fourCard {
+    display: none;
+    max-width: 580px;
+    max-height: 500px;
+    width: 100%;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.fourCard .headerFour {
+    margin-bottom: 1rem;
+}
+
+.fourCard .headerFour h1 {
+    font-size: 24px;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+}
+
+.fourCard .headerFour .orange {
+    color: #ff6600;
+}
+
+.fourCard .cost-section {
+    background-color: #f7f7f7;
+    padding: 16px 20px 0px 20px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 8px;
+    font-family: "Roboto", sans-serif;
+}
+
+.fourCard .cost-section .cost-text {
+    font-size: 16px;
+    margin: 0;
+    padding-top: 0.3rem;
+}
+
+.fourCard .main-cost {
+    font-size: 30px;
+    font-weight: 600;
+    color: #173748;
+    margin: 0;
+    text-align: end;
+}
+
+.fourCard .location {
+    margin: 0;
+    margin-top: -0.8rem;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333333;
+}
+
+.fourCard .annual {
+    font-size: 14px;
+    color: #333333;
+    margin: 0;
+    text-align: end;
+}
+
+.fourCard .button-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.fourCard .button-section a {
+    background-color: #173748;
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 50%;
+    min-width: 130px;
+    font-family: "Poppins", sans-serif;
+    text-decoration: none;
+}
+
+.fourCard .button-section a:hover {
+    background-color: #173748b1;
+    transition: background 0.3s ease;
+}
+
+/*! Modal validation */
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    border-radius: 15px;
+    transform: scale(0.7);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal-content h2 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.modal-content>p {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    margin-top: 2.5rem;
+    font-size: 16px;
+}
+
+.container__titleModal {
+    text-align: center;
+}
+
+.title-line {
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: #f97316;
+    margin: 8px auto 0 auto;
+    border-radius: 2px;
+}
+
+.modal.active .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    border-radius: 50%;
+    width: 33px;
+    height: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.container__img__lupaModal {
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    ;
+    width: 100%;
+}
+
+.img__lupaModal {
+    width: 87px;
+    height: auto !important;
+    ;
+}
+
+.img__validationError {
+    width: 96px;
+}
+
+/* ! Modal Premium */
+.modalPremium {
+    display: flex;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.modalPremium.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modalPremium.active .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modalPremium .modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 69rem;
+    border-radius: 15px;
+    transform: scale(0.7);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    font-family: "Roboto", sans-serif;
+}
+
+.close-modalPremium {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    border-radius: 50%;
+    width: 27px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.8rem;
+}
+
+.modalPremium .services-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: left;
+    gap: 2rem;
+}
+
+.modalPremium .service-column {
+    flex: 1;
+    min-width: 300px;
+    margin: 10px;
+}
+
+.modalPremium h2 {
+    color: #234151;
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.modalPremium ul {
+    list-style-type: none;
+    padding-left: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+.modalPremium li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 3px solid #eeeeee;
+    color: #203e4f;
+    font-weight: 500;
+}
+
+.modalPremium li img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.open-modal-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* ! Toast */
+#toast {
+    display: block;
+    position: fixed;
+    top: 1rem;
+    right: 0px;
+    background: #fff;
+    color: #000;
+    padding: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#toast.showToastError {
+    display: block;
+    margin-top: 3rem;
+    opacity: 1;
+    visibility: visible;
+}
+
+.toast-container {
+    display: flex;
+}
+
+.toast-border {
+    height: 3rem;
+    width: 12px;
+    border-left: 4px solid red;
+    border-radius: 3px;
+}
+
+.toast-text-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0 0.8rem;
+}
+
+.toast-text-container p {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+}
+
+.toast-text-container p:first-child {
+    font-weight: 600;
+    font-size: 16px;
+    color: #101010;
+}
+
+.toast-text-container p:last-child {
+    font-size: 14px;
+    color: #656565;
+}
+
+.error-message {
+    color: #e60003;
+    display: none;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.img__toastError {
+    width: 25px;
+    height: auto;
+}
+
+/* Contenedor principal */
+.seguro-container {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    margin: -70px auto 20px auto;
+    max-width: 1020px;
+}
+
+/* Título */
+.seguro-title {
+    font-size: 35px;
+    font-weight: 600;
+    color: #173748;
+    font-family: "Poppins", sans-serif;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    color: #ff6a00;
+    background: transparent;
+}
+
+/* Beneficios */
+.benefits {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Estilo de cada beneficio */
+.benefit {
+    display: flex;
+    align-items: center;
+    max-width: 250px;
+    text-align: justify;
+    gap: 10px;
+}
+
+.benefit-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.benefit-text {
+    font-size: 14px;
+    color: #333333;
+    font-family: "Poppins", sans-serif;
+    line-height: 1.4;
+}
+
+.benefit-text strong {
+    color: #173748;
+}
+
+.btn-section {
+    display: none;
+}
+
+.qr-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.btn-section a {
+    background-color: #f97316;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 60%;
+    min-width: 130px;
+    text-decoration: none;
+}
+
+[type=button]:focus, [type=button]:hover, [type=submit]:focus, [type=submit]:hover, button:focus, button:hover {
+    color: #6c6c6c;
+    background-color: #ffffff;
+}
+
+input#value-combined, input#value {
+    height: 50px;
+    border-color: #c7c6c6;
+}
+
+#para-ti-y-tu-bici label:first-child, #para-ti label, .label-input label {
+    padding-bottom: 10px;
+}
+
+/* ==========================================================================
+   Componentes: Bicibles listing to right field price  
+   ========================================================================== */
+/* Centro de ayuda
+   - se usa para poner el precio a la derecha en una lista
+*/
+.list-field-r span.elementor-icon-list-text {
+    width: 600px;
+}
+
+.list-field-r strong.field-r {
+    float: right;
+}
+
+.list-field-r strong.premium {
+    color: #FF9338;
+    text-decoration-line: underline;
+}
+
+.svg-bg-toolpoint {
+    width: 20px;
+    height: 20px;
+    background-image: url('https://positivapruebas.com.co/wp-content/uploads/info-bicibles-positiva-1.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    float: inline-end;
+    position: relative;
+    right: -8px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.elementor-tooltip {
+    position: relative;
+    display: contents;
+    cursor: pointer;
+    color: #0066cc;
+    text-decoration: underline dotted;
+}
+
+.elementor-tooltip .tooltip-text-cotiza {
+    font-family: "Montserrat", sans-serif;
+    visibility: hidden;
+    width: 370px;
+    text-align: left;
+    padding: 5%;
+    border-radius: 5px;
+    border: 1px solid #ff7500;
+    position: absolute;
+    bottom: 100%;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s;
+    background-color: #ffffff;
+    text-decoration: none;
+    left: 70%;
+    color: #173748;
+    font-size: 18px;
+    font-weight: 50;
+}
+
+.elementor-tooltip:hover .tooltip-text-cotiza {
+    visibility: visible;
+    opacity: 1;
+}
+
+@media screen and (max-width: 1072px) {
+    .mainContainerCotizacion {
+        height: 100%;
+    }
+
+    .firstCard {
+        max-height: none;
+    }
+
+    .principalContainerCotizacion {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .seguro-container {
+        margin: 150px auto 20px auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #para-ti-y-tu-bici {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tab-content-container {
+        min-height: 70px;
+    }
+
+    .tab-content-container.active-combined {
+        min-height: 175px;
+    }
+
+    .thirdCard .qr-section {
+        justify-content: center;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .thirdCard .qr-section article {
+        order: 2;
+    }
+
+    .seguro-container {
+        margin: 21px auto 20px auto;
+    }
+
+    .qr-section {
+        display: none !important;
+    }
+
+    .btn-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    .thirdCard .breakdown-item-value {
+        font-size: 14px;
+        flex: 0 0 30%;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+    }
+
+    .breakdown-item {
+        font-size: 14px;
+    }
+
+    .thirdCard .breakdown {
+        padding: 16px 10px 10px 10px;
+        order: 2;
+    }
+
+    .thirdCard .cost-section {
+        align-items: center;
+        flex-direction: column;
+        order: 3;
+        margin-top: 15px;
+    }
+
+    .thirdCard .headerThird {
+        order: 1;
+    }
+
+    .thirdCard .coverage-list {
+        order: 4;
+    }
+
+    .btn-qr-section-container {
+        order: 5;
+    }
+
+    .cost-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+        background-color: #06485B;
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 8px;
+        height: 35px;
+        margin-top: 2px;
+    }
+
+    .thirdCard .main-cost {
+        color: #FFF;
+        font-size: 21px;
+    }
+
+    .thirdCard .annual {
+        color: #FFF;
+    }
+
+    .principalContainerCotizacion {
+        align-items: center;
+    }
+
+    .firstCard {
+        width: 90%;
+    }
+
+    .tab {
+        font-size: 14px;
+    }
+
+    .seguro-container {
+        box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: -50px auto 20px auto;
+        position: relative;
+        width: 90%;
+    }
+
+    .secondCard {
+        width: 90%;
+        margin-bottom: 80px;
+    }
+
+    .thirdCard {
+        width: 90%;
+        margin-bottom: 80px;
+    }
+
+    .tabs-cotiza {
+        margin-top: 5%
+    }
+
+    .benefits {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .benefit {
+        display: flex;
+        align-items: center;
+        max-width: 300px;
+        text-align: center;
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .thirdCard .coverage-name {
+        width: 50%;
+    }
+
+    .thirdCard .coverage-value {
+        width: 60%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+    .thirdCard .coverage-icon {
+        width: 70%;
+        justify-content: end;
+    }
+
+    .label-input {
+        justify-content: center;
+    }
+
+    .titlefirstCard, .seguro-title {
+        font-size: 28px;
+    }
+
+    .fourCard {
+        width: 90%;
+    }
+
+    .fourCard .button-section a {
+        width: 60%;
+    }
+
+    .fourCard .location {
+        margin-top: 0rem;
+    }
+
+    .mainContainerCotizacion {
+        background-size: 50%;
+    }
+}
+
+@media screen and (max-width: 378px) {
+    .thirdCard .main-cost {
+        font-size: 16px;
+    }
+
+    .tab {
+        font-size: 12px;
+    }
+
+    .fourCard .button-section a {
+        width: 65%;
+    }
+
+    .fourCard .main-cost {
+        font-size: 25px;
+    }
+}
