@@ -588,12 +588,6 @@ class TravelerManager {
 /**
  * Maneja la lógica de cotización, el carrito de compras y la generación de formularios de viajero.
  */
-/**
- * Maneja la lógica de cotización, el carrito de compras y la generación de formularios de viajero.
- */
-/**
- * Maneja la lógica de cotización, el carrito de compras y la generación de formularios de viajero.
- */
 class QuoteManager {
   constructor(modalManager) {
     this.modalManager = modalManager;
@@ -764,7 +758,6 @@ class QuoteManager {
         break;
     }
     formDiv.className = `acordeon__item form-${type}`;
-    // ===== SE AÑADEN LOS <p> DE ERROR AQUÍ =====
     formDiv.innerHTML = `
         <input type="radio" name="acordeon" class="acordeon-input" id="${type}${number}" ${isPrincipal ? "checked" : ""}>
         <label for="${type}${number}" class="acordeon__titulo flex">
@@ -774,8 +767,10 @@ class QuoteManager {
         <div class="acordeon__contenido">
             <div class="form-grid">
                 <div class="form-row-formViajeros"><label>Tipo de documento *</label><select id="${idPrefix}documentoID" class="selectcontainer small-input required2"><option value="CC">Nacional</option><option value="CE">Extranjera</option></select><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p></div>
-                <div class="form-row-formViajeros"><label>Numero de documento *</label><input type="number" class="selectcontainer small-input required2"><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p>
-                <p class="error-message-viajeros custom-doc-error" style="display:none;">Este número de documento no puede continuar.</p>
+                <div class="form-row-formViajeros">
+                    <label>Numero de documento *</label><input type="number" class="selectcontainer small-input required2">
+                    <p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p>
+                    <p class="error-message-viajeros custom-doc-error" style="display:none;">Este número de documento no puede continuar.</p>
                 </div>
             </div>
             <div class="input-date" style="margin-top: 10px;"><label>Fecha de ${type === 'minor' ? 'vencimiento' : 'expedición'} del documento *</label><input type="date" class="selectcontainer small-input required2"><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p>
@@ -793,63 +788,61 @@ class QuoteManager {
                 <div class="form-row-formViajeros"><label>Correo electrónico *</label><input type="email" id="${idPrefix}emailInput" placeholder="Ingrese" class="required2" /><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p></div>
                 <div class="form-row-formViajeros"><label>Confirma tu correo electrónico *</label><input type="email" data-email-confirm="${idPrefix}emailInput" placeholder="Ingrese" class="required2" /><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p><p class="error-message-viajeros email-match-error" style="display:none;">Los correos no coinciden</p></div>
             </div>
-            <div class="form-row-formViajeros"><label>Celular *</label><input type="tel" id="${idPrefix}numberInput" placeholder="Celular" pattern="[0-9]{10,15}" maxlength="15" class="required2" /><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p></div>
+            <div class="form-row-formViajeros">
+                <label>Celular *</label><input type="tel" id="${idPrefix}numberInput" placeholder="Celular" pattern="[0-9]{10,15}" maxlength="15" class="required2" />
+                <p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p>
+                <p class="error-message-viajeros phone-length-error" style="display:none;">El campo debe tener al menos 10 dígitos.</p>
+                </div>
         </div>
     `;
 
     const fields = formDiv.querySelectorAll('.required2');
     fields.forEach(field => {
       const eventType = (field.tagName.toLowerCase() === 'select' || field.type === 'date' || field.type === 'checkbox') ? 'change' : 'input';
+      
       field.addEventListener(eventType, () => {
-        // ===== SE AÑADE LA LÓGICA PARA MOSTRAR/OCULTAR EL ERROR DE CÉDULA =====
-        if (field.type === 'number') {
-          const label = field.parentElement.querySelector('label');
-          const customError = field.parentElement.querySelector('.custom-doc-error');
-          if (label && label.textContent.includes('Numero de documento')) {
-            if (field.value.trim() === '123456789') {
-              this.modalManager.show('documentValidation');
-              if (customError) customError.style.display = 'block';
-            } else {
-              if (customError) customError.style.display = 'none';
-            }
-          }
+        const parentWrapper = field.closest('.form-row-formViajeros, .input-date');
+        if (!parentWrapper) return;
+
+        parentWrapper.querySelectorAll('.error-message-viajeros').forEach(err => err.style.display = 'none');
+        let hasError = false;
+
+        if (field.value.trim() === '') {
+          hasError = true;
         }
 
-        let isFieldValid = true;
-        const parentWrapper = field.closest('.form-row-formViajeros, .input-date');
-        const requiredError = parentWrapper ? parentWrapper.querySelector('.required-error') : null;
-        if (field.value.trim() === '') {
-          isFieldValid = false;
-        } else if (requiredError) {
-          requiredError.style.display = 'none';
-        }
-        if (field.id.includes('DateBirthInput') && field.value) {
-          const ageError = parentWrapper.querySelector('.age-error');
-          const birthDate = new Date(field.value + "T00:00:00");
-          const today = new Date();
-          let age = today.getFullYear() - birthDate.getFullYear();
-          const m = today.getMonth() - birthDate.getMonth();
-          if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-          }
-          if (age < 15 || age > 65) {
-            isFieldValid = false;
-          } else if (ageError) {
-            ageError.style.display = 'none';
+        // Validación para el NÚMERO DE DOCUMENTO (solo el número restringido)
+        if (field.type === 'number' && parentWrapper.querySelector('label')?.textContent.includes('Numero de documento')) {
+          const customDocError = parentWrapper.querySelector('.custom-doc-error');
+          if (field.value.trim() === '123456789') {
+            this.modalManager.show('documentValidation');
+            if (customDocError) customDocError.style.display = 'block';
+            hasError = true;
           }
         }
+        
+        // ===== INICIO DE LA MODIFICACIÓN: Lógica movida al CELULAR =====
+        // Validación para el CELULAR (longitud)
+        if (field.type === 'tel') {
+            const phoneLengthError = parentWrapper.querySelector('.phone-length-error');
+            const phoneDigits = field.value.replace(/\D/g, '');
+            if (phoneDigits.length > 0 && phoneDigits.length < 10) {
+                if(phoneLengthError) phoneLengthError.style.display = 'block';
+                hasError = true;
+            }
+        }
+        // ===== FIN DE LA MODIFICACIÓN =====
+        
         if (field.hasAttribute('data-email-confirm')) {
-          const emailField = document.getElementById(field.dataset.emailConfirm);
-          const emailMatchError = parentWrapper.querySelector('.email-match-error');
-          if (emailField && field.value && emailField.value !== field.value) {
-            isFieldValid = false;
-          } else if (emailMatchError) {
-            emailMatchError.style.display = 'none';
-          }
+            const emailField = document.getElementById(field.dataset.emailConfirm);
+            const emailMatchError = parentWrapper.querySelector('.email-match-error');
+            if (emailField && field.value && emailField.value !== field.value) {
+                if (emailMatchError) emailMatchError.style.display = 'block';
+                hasError = true;
+            }
         }
-        if (isFieldValid) {
-          field.classList.remove('error-border');
-        }
+        
+        field.classList.toggle('error-border', hasError);
       });
     });
 
@@ -867,10 +860,6 @@ class QuoteManager {
     return this.validCoupons.some(c => c.code === couponCode.toUpperCase());
   }
 }
-// #endregion
-
-// #region CLASE PRINCIPAL DE LA APLICACIÓN
-
 /**
  * La clase principal de la aplicación.
  * Inicializa y orquesta todas las demás clases de gestión. Es el punto de entrada.
