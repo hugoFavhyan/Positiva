@@ -184,10 +184,12 @@
             </tbody>
           </table>
         </div>
-        <p class="condiciones">
-          Al continuar usted acepta nuestras
-          <a href="#" id="openModalInformation">Condiciones de servicio</a>
-        </p>
+      </div>
+      <p class="condiciones">
+        Al continuar usted acepta nuestras
+        <a href="#" id="openModalInformation">Condiciones de servicio</a>
+      </p>
+      <div class="datos-tomador">
         <div class="costo-seguro">
           <p>El costo de tu seguro es</p>
           <h3>
@@ -298,24 +300,22 @@
       </div>
     </div>
     <!-- ! Modal Validations -->
-   <div class="modal" id="modalValidations">
-  <div class="modal-content">
-    <span class="close"><img
-        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg"></span>
-    <img src="https://positivapruebas.com.co/wp-content/uploads/lupa-error-modal.svg" alt="Icon"
-      class="lupaModalIcon" />
-    <div class="container__titleModal">
-      <h2 id="modalValidationTitle">Título del Error</h2>
-      <div class="title-line"></div>
+    <div class="modal" id="modalValidations">
+      <div class="modal-content">
+        <span class="close"><img
+            src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg"></span>
+        <img src="https://positivapruebas.com.co/wp-content/uploads/lupa-error-modal.svg" alt="Icon"
+          class="lupaModalIcon" />
+        <div class="container__titleModal">
+          <h2 id="modalValidationTitle">Título del Error</h2>
+          <div class="title-line"></div>
+        </div>
+        <p id="modalValidationMessage">Mensaje de error.</p>
+        <div id="modalValidationReferenceContainer" style="display: none; margin-top: 15px;">
+          <input type="text" id="modalValidationReferenceInput" disabled class="text-confirmModal" />
+        </div>
+      </div>
     </div>
-    <p id="modalValidationMessage">Mensaje de error.</p>
-    
-    <div id="modalValidationReferenceContainer" style="display: none; margin-top: 15px;">
-      <p class="referentPago">Su referencia de pago es</p>
-      <input type="text" id="modalValidationReferenceInput" disabled class="text-confirmModal" />
-    </div>
-    </div>
-</div>
     <!-- ! Toast -->
     <article id="toast" class="modal-toast-bici">
       <section class="toast-container">

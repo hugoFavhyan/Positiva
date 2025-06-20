@@ -17,18 +17,26 @@ const handleInputFormat = (event) => {
 // Función para poblar el select de años
 const populateYearSelect = (selectId) => {
   const yearSelect = document.getElementById(selectId);
+  // Limpiamos cualquier opción que ya exista para evitar duplicados
+  yearSelect.innerHTML = '';
+
   const currentYear = new Date().getFullYear();
   const startYear = currentYear - 7;
 
-  for (let year = startYear + 1; year <= currentYear; year++) {
+  // Creamos y añadimos la opción "Seleccione" desde JavaScript
+  const defaultOption = document.createElement("option");
+  defaultOption.textContent = "Seleccione";
+  defaultOption.value = ""; // Un valor vacío para la opción por defecto
+  defaultOption.disabled = true;
+  defaultOption.selected = true; // La marcamos como seleccionada por defecto
+  yearSelect.appendChild(defaultOption);
+
+  // Añadimos los años de más reciente a más antiguo
+  for (let year = currentYear; year >= startYear; year--) {
     const option = document.createElement("option");
     option.value = year;
     option.textContent = year;
     yearSelect.appendChild(option);
-  }
-
-  if (yearSelect.options.length > 0) {
-    yearSelect.value = yearSelect.options[1].value; //contando el seleccionar
   }
 };
 
@@ -219,50 +227,73 @@ document.addEventListener("DOMContentLoaded", () => {
   const validateAndCalculate = (activeTab) => {
     let isValid = true;
     let numericValue;
+    let yearSelect;
+
+    // Obtener los elementos de error del año
+    const yearError = document.getElementById("year-error");
+    const yearCombinedError = document.getElementById("year-combined-error");
 
     // Limpiar mensajes de error anteriores
     valueError.style.display = "none";
     valueCombinedError.style.display = "none";
+    if (yearError) yearError.style.display = "none";
+    if (yearCombinedError) yearCombinedError.style.display = "none";
+
     valueInput.style.border = "";
     valueCombinedInput.style.border = "";
+    document.getElementById("year").style.border = "";
+    document.getElementById("year-combined").style.border = "";
+
 
     // Validar según la tab activa
     if (activeTab === "para-tu-bici") {
-      // Validar el campo "Valor de tu bici"
+      yearSelect = document.getElementById("year");
+      //  Validación para el AÑO 
+      if (!yearSelect.value) {
+        yearSelect.style.border = "2px solid red";
+        if (yearError) yearError.style.display = "block";
+        isValid = false;
+      }
+
+      // Validación para el VALOR
       if (!valueInput.value) {
         valueInput.style.border = "2px solid red";
-        document.getElementById("value-error").style.display = "block";
+        valueError.style.display = "block";
         isValid = false;
       } else {
         numericValue = parseInt(valueInput.value.replace(/\./g, ""), 10);
       }
+
     } else if (activeTab === "para-ti-y-tu-bici") {
-      // Validar el campo "Valor de tu bici combinado"
+      yearSelect = document.getElementById("year-combined");
+      // Validación para el AÑO
+      if (!yearSelect.value) {
+        yearSelect.style.border = "2px solid red";
+        if (yearCombinedError) yearCombinedError.style.display = "block";
+        isValid = false;
+      }
+
+      // Validación para el VALOR
       if (!valueCombinedInput.value) {
         valueCombinedInput.style.border = "2px solid red";
-        document.getElementById("value-combined-error").style.display = "block";
+        valueCombinedError.style.display = "block";
         isValid = false;
       } else {
         numericValue = parseInt(valueCombinedInput.value.replace(/\./g, ""), 10);
       }
     }
 
-    // Si no es válido, mostrar toast
+    // Si algún campo obligatorio (año o valor) no es válido, mostrar toast y detener
     if (!isValid) {
       showToast(toast);
       return;
     }
 
-    // Validar el valor según el rango
-    const validationConfig = {
-      "para-tu-bici": { min: 500000, max: 5000000 },
-      "para-ti-y-tu-bici": { min: 500000, max: 5000000 },
-    };
-
-    const isValueValid = validateValue(numericValue, validationConfig[activeTab].min, validationConfig[activeTab].max);
+    // Validar que el valor de la bici esté en el rango correcto
+    const isValueValid = validateValue(numericValue, 500000, 5000000);
     handleValidationResult(isValueValid, card2, cardThree, modal);
 
-    // Reemplazar el valor en los spans reemplace_valueBici
+    // Reemplazar el valor en los spans si todo es válido
     if (isValueValid) {
       const replaceValueElements = document.querySelectorAll(".reemplace_valueBici");
       replaceValueElements.forEach((element) => {

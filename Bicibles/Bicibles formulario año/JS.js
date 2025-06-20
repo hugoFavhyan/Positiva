@@ -351,21 +351,19 @@ class PersonalDataForm {
 
         // --- INICIO: Definiciones para validación específica ---
         this.blockedCedula = "123456789"; // ¡CAMBIA ESTE NÚMERO POR LA CÉDULA REAL!
-        
+
         // ===== ¡NUEVO! Define aquí la fecha de expedición específica que causará el error =====
         // El formato DEBE SER AÑO-MES-DÍA (YYYY-MM-DD)
         this.incorrectExpeditionDate = "2014-06-25";
 
         this.blockedCedulaMessage = {
             title: "No es posible continuar con el proceso",
-            body: "El tipo y número de documento ingresados no han superado las validaciones establecidas.\n\nSi tienes alguna inquietud, comunícate con nuestro equipo de soporte para obtener más información.",
-            reference: "2345610928"
+            body: "El tipo y número de documento ingresados no han superado las validaciones establecidas.\n\nSi tienes alguna inquietud, comunícate con nuestro equipo de soporte para obtener más información."
         };
 
         this.invalidDateForBlockedCedulaMessage = {
             title: "Fecha de expedición no válida",
-            body: "Por favor, asegúrate de que la fecha de expedición del documento sea correcta para continuar.",
-            reference: "2345610928"
+            body: "Por favor, asegúrate de que la fecha de expedición del documento sea correcta para continuar."
         };
         // --- FIN: Definiciones ---
     }
@@ -604,14 +602,13 @@ class PersonalDataForm {
         } else {
             this.elements.formGroup.style.rowGap = "30px";
         }
-        const isModalActive = document.querySelector('.modal.active');
-        if (!isModalActive) {
-            const toast = document.getElementById("toast");
-            toast.classList.add("showToastError");
-            setTimeout(() => {
-                toast.classList.remove("showToastError");
-            }, 3000);
-        }
+
+        // Se eliminó la condición 'if (!isModalActive)'
+        const toast = document.getElementById("toast");
+        toast.classList.add("showToastError");
+        setTimeout(() => {
+            toast.classList.remove("showToastError");
+        }, 3000);
     }
 
     populateSummary() {
@@ -643,7 +640,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const form = new PersonalDataForm();
     await form.init();
     // Configuración para el modal de confirmación final
-    const modalManager = new ModalManager(); 
+    const modalManager = new ModalManager();
     const confirmModalEl = document.getElementById("confirmModal");
     const closeConfirmEl = document.getElementById("closeConfirmModal");
     const openConfirmBtn = document.getElementById("openConfirmModal");

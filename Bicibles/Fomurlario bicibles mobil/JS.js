@@ -45,6 +45,25 @@
                 }
             });
         }
+        static validateOnlyLetters(inputElement) {
+            inputElement.addEventListener("keypress", (event) => {
+                const char = String.fromCharCode(event.which);
+                const lettersRegex = /^[a-zA-Z ]$/;
+                if (!lettersRegex.test(char)) {
+                    event.preventDefault();
+                }
+            });
+        }
+        static validateAddress(inputElement) {
+            inputElement.addEventListener("keypress", (event) => {
+                const char = String.fromCharCode(event.which);
+                // Permite letras, números, espacios, # y -
+                const addressRegex = /^[a-zA-Z0-9 #\-]$/;
+                if (!addressRegex.test(char)) {
+                    event.preventDefault();
+                }
+            });
+        }
     }
 
     // Clase para centralizar mensajes de error
@@ -422,421 +441,466 @@
 
     // Clase principal para manejar el formulario de bicicletas
     class BikePersonalDataForm {
-        constructor() {
-            this.mediaQuery = window.matchMedia("(max-width: 768px)");
-            this.locationService = new LocationService();
-            this.modalManager = new ModalManager();
-            this.errorMessages = new ErrorMessages();
-            this.cityAutocomplete = null;
-            this.elements = {};
-            this.validators = {};
-            this.queryParams = {};
-            this.isValid = false;
-        }
+    constructor() {
+        this.mediaQuery = window.matchMedia("(max-width: 768px)");
+        this.locationService = new LocationService();
+        this.modalManager = new ModalManager();
+        this.errorMessages = new ErrorMessages();
+        this.cityAutocomplete = null;
+        this.elements = {};
+        this.validators = {};
+        this.queryParams = {};
+        this.isValid = false;
+    }
 
-        async init() {
-            this.queryParams = FormUtils.getQueryParams();
-            this.getElements();
-            this.setupSelectOptions();
-            this.setupValidations();
-            await this.loadLocationData();
-            this.setupCityAutocomplete();
-            this.setupModals();
-            this.setupEventListeners();
-            this.setupUI();
-        }
+    async init() {
+        this.queryParams = FormUtils.getQueryParams();
+        this.getElements();
+        this.setupSelectOptions();
+        this.setupValidations();
+        await this.loadLocationData();
+        this.setupCityAutocomplete();
+        this.setupModals();
+        this.setupEventListeners();
+        this.setupUI();
+    }
 
-        getElements() {
-            const elementIds = [
-                'tipoDocumento', 'numeroDocumento', 'direccionResidencia', 'primerNombre',
-                'apellido', 'genero', 'correoElectronico', 'confirmarCorreo', 'telefono',
-                'ciudadPersona', 'fechaNacimiento', 'fechaExpedicion', 'autorizacionDatos',
-                'formularioDatosPersonales1', 'formularioDatosPersonales2',
-                'ciudadBici', 'year', 'color', 'numeroMarco', 'marca', 'clase', 'tipo',
-                'linea', 'numeroSticker'
-            ];
+    getElements() {
+        const elementIds = [
+            'tipoDocumento', 'numeroDocumento', 'direccionResidencia', 'primerNombre',
+            'apellido', 'genero', 'correoElectronico', 'confirmarCorreo', 'telefono',
+            'ciudadPersona', 'fechaNacimiento', 'fechaExpedicion', 'autorizacionDatos',
+            'formularioDatosPersonales1', 'formularioDatosPersonales2',
+            'ciudadBici', 'year', 'color', 'numeroMarco', 'marca', 'clase', 'tipo',
+            'linea', 'numeroSticker'
+        ];
 
-            elementIds.forEach(id => {
-                this.elements[id] = document.getElementById(id);
+        elementIds.forEach(id => {
+            this.elements[id] = document.getElementById(id);
+        });
+
+        // Elementos adicionales
+        this.elements.formGroup = document.querySelector(".form-anual__grupo");
+        this.elements.formGroup2 = document.querySelector(".form-anual__grupo-2");
+        this.elements.containerCheckbox = document.querySelector(".etiqueta-checkbox");
+        this.elements.botonContinuar = document.querySelector(".boton-continuar");
+        this.elements.tituloElement = document.querySelector(".form-anual__titulo");
+        this.elements.ciudadInputs = document.querySelectorAll(".ciudad");
+        this.elements.resultadoCiudades = document.querySelectorAll(".resultado-ciudad");
+        this.elements.containerTitleModal = document.querySelector(".container__titleModal");
+        this.elements.nameModalFinal = document.getElementById("nameText__ModalFinal");
+    }
+
+    setupSelectOptions() {
+        const documentTypes = [
+            { text: "Cédula de Ciudadanía", value: "Cédula de Ciudadanía" },
+            { text: "NIT", value: "Número de Identificación Tributaria" },
+        ];
+        const genderTypes = [
+            { text: "Masculino", value: "Masculino" },
+            { text: "Femenino", value: "Femenino" },
+        ];
+
+        FormUtils.mapDataToSelect(documentTypes, this.elements.tipoDocumento);
+        FormUtils.mapDataToSelect(genderTypes, this.elements.genero);
+    }
+
+    setupValidations() {
+        // Aplicar validaciones básicas
+        Validator.validateAlphanumeric(this.elements.numeroDocumento);
+        Validator.validateAddress(this.elements.direccionResidencia);
+        Validator.validateOnlyLetters(this.elements.primerNombre); 
+        Validator.validateOnlyLetters(this.elements.apellido); 
+        Validator.validateNumbers(this.elements.telefono);
+        Validator.validateNumbers(this.elements.numeroDocumento);
+        Validator.validateNumbers(this.elements.numeroMarco);
+        Validator.validateNumbers(this.elements.numeroSticker);
+
+        // Crear instancias de validadores
+        this.validators.emailPrimary = new EmailValidator(this.elements.correoElectronico, this.errorMessages);
+        this.validators.emailConfirm = new EmailValidator(this.elements.confirmarCorreo, this.errorMessages);
+        this.validators.phone = new PhoneValidator(this.elements.telefono, this.errorMessages);
+        this.validators.birthDate = new BirthDateValidator(this.elements.fechaNacimiento, this.errorMessages);
+
+        this.setupErrorClearing();
+    }
+
+    setupErrorClearing() {
+        const inputs1 = this.elements.formularioDatosPersonales1.querySelectorAll("input, select");
+        const inputs2 = this.elements.formularioDatosPersonales2.querySelectorAll("input, select");
+        const allInputs = [...inputs1, ...inputs2];
+
+        allInputs.forEach(input => {
+            input.addEventListener("input", () => {
+                this.clearFieldError(input);
             });
+        });
+    }
 
-            // Elementos adicionales
-            this.elements.formGroup = document.querySelector(".form-anual__grupo");
-            this.elements.formGroup2 = document.querySelector(".form-anual__grupo-2");
-            this.elements.containerCheckbox = document.querySelector(".etiqueta-checkbox");
-            this.elements.botonContinuar = document.querySelector(".boton-continuar");
-            this.elements.tituloElement = document.querySelector(".form-anual__titulo");
-            this.elements.ciudadInputs = document.querySelectorAll(".ciudad");
-            this.elements.resultadoCiudades = document.querySelectorAll(".resultado-ciudad");
-            this.elements.containerTitleModal = document.querySelector(".container__titleModal");
-            this.elements.nameModalFinal = document.getElementById("nameText__ModalFinal");
+    clearFieldError(input) {
+        input.style.borderColor = "#e0e0e0";
+        const errorMessage = input.nextElementSibling;
+        if (errorMessage) {
+            errorMessage.style.display = "none";
+        }
+    }
+
+    async loadLocationData() {
+        try {
+            await this.locationService.loadLocations();
+        } catch (error) {
+            console.error("Error al cargar datos de ubicación:", error);
+        }
+    }
+
+    setupCityAutocomplete() {
+        this.cityAutocomplete = new CityAutocomplete(
+            this.locationService,
+            Array.from(this.elements.ciudadInputs),
+            Array.from(this.elements.resultadoCiudades)
+        );
+    }
+
+    setupModals() {
+        // Modal de validaciones
+        const modalValidations = document.getElementById("modalValidations");
+        const closeModal = modalValidations?.querySelector(".close");
+        if (modalValidations && closeModal) {
+            this.modalManager.registerModal("validations", modalValidations, closeModal);
         }
 
-        setupSelectOptions() {
-            const documentTypes = [
-                { text: "Cédula de Ciudadanía", value: "Cédula de Ciudadanía" },
-                { text: "NIT", value: "Número de Identificación Tributaria" },
-            ];
-            const genderTypes = [
-                { text: "Masculino", value: "Masculino" },
-                { text: "Femenino", value: "Femenino" },
-            ];
-
-            FormUtils.mapDataToSelect(documentTypes, this.elements.tipoDocumento);
-            FormUtils.mapDataToSelect(genderTypes, this.elements.genero);
+        // Modal de información
+        const modalInfo = document.getElementById("modalInformation");
+        const closeModalInfo = modalInfo?.querySelector(".modalInformation-close");
+        if (modalInfo && closeModalInfo) {
+            this.modalManager.registerModal("information", modalInfo, closeModalInfo);
         }
 
-        setupValidations() {
-            // Aplicar validaciones básicas
-            Validator.validateAlphanumeric(this.elements.numeroDocumento);
-            Validator.validateAlphanumeric(this.elements.direccionResidencia);
-            Validator.validateAlphanumeric(this.elements.primerNombre);
-            Validator.validateAlphanumeric(this.elements.apellido);
-            Validator.validateNumbers(this.elements.telefono);
-            Validator.validateNumbers(this.elements.numeroDocumento);
-            Validator.validateNumbers(this.elements.numeroMarco);
-            Validator.validateNumbers(this.elements.numeroSticker);
-
-            // Crear instancias de validadores
-            this.validators.emailPrimary = new EmailValidator(this.elements.correoElectronico, this.errorMessages);
-            this.validators.emailConfirm = new EmailValidator(this.elements.confirmarCorreo, this.errorMessages);
-            this.validators.phone = new PhoneValidator(this.elements.telefono, this.errorMessages);
-            this.validators.birthDate = new BirthDateValidator(this.elements.fechaNacimiento, this.errorMessages);
-
-            this.setupErrorClearing();
+        // Modal de confirmación
+        const confirmModal = document.getElementById("confirmModal");
+        const closeConfirmModal = confirmModal?.querySelector(".confirmModal-close");
+        if (confirmModal && closeConfirmModal) {
+            this.modalManager.registerModal("confirm", confirmModal, closeConfirmModal);
         }
 
-        setupErrorClearing() {
-            const inputs1 = this.elements.formularioDatosPersonales1.querySelectorAll("input, select");
-            const inputs2 = this.elements.formularioDatosPersonales2.querySelectorAll("input, select");
-            const allInputs = [...inputs1, ...inputs2];
-
-            allInputs.forEach(input => {
-                input.addEventListener("input", () => {
-                    this.clearFieldError(input);
-                });
-            });
+        // Modal de registro
+        const modalRegister = document.getElementById("modalRegister");
+        const closeModalRegister = document.getElementById("closeModalRegister");
+        if (modalRegister && closeModalRegister) {
+            this.modalManager.registerModal("register", modalRegister, closeModalRegister);
         }
+    }
 
-        clearFieldError(input) {
-            input.style.borderColor = "#e0e0e0";
-            const errorMessage = input.nextElementSibling;
-            if (errorMessage) {
-                errorMessage.style.display = "none";
-            }
-        }
+    setupEventListeners() {
+        this.elements.botonContinuar.addEventListener("click", (event) => {
+            this.handleSubmit(event);
+        });
 
-        async loadLocationData() {
-            try {
-                await this.locationService.loadLocations();
-            } catch (error) {
-                console.error("Error al cargar datos de ubicación:", error);
-            }
-        }
+        // Event listener para el campo de número de documento
+        this.elements.numeroDocumento.addEventListener('input', (event) => {
+            this.validateCedula(event.target.value);
+        });
 
-        setupCityAutocomplete() {
-            this.cityAutocomplete = new CityAutocomplete(
-                this.locationService,
-                Array.from(this.elements.ciudadInputs),
-                Array.from(this.elements.resultadoCiudades)
-            );
-        }
-
-        setupModals() {
-            // Modal de validaciones
-            const modalValidations = document.getElementById("modalValidations");
-            const closeModal = modalValidations?.querySelector(".close");
-            if (modalValidations && closeModal) {
-                this.modalManager.registerModal("validations", modalValidations, closeModal);
-            }
-
-            // Modal de información
-            const modalInfo = document.getElementById("modalInformation");
-            const closeModalInfo = modalInfo?.querySelector(".modalInformation-close");
-            if (modalInfo && closeModalInfo) {
-                this.modalManager.registerModal("information", modalInfo, closeModalInfo);
-            }
-
-            // Modal de confirmación
-            const confirmModal = document.getElementById("confirmModal");
-            const closeConfirmModal = confirmModal?.querySelector(".confirmModal-close");
-            if (confirmModal && closeConfirmModal) {
-                this.modalManager.registerModal("confirm", confirmModal, closeConfirmModal);
-            }
-
-            // Modal de registro
-            const modalRegister = document.getElementById("modalRegister");
-            const closeModalRegister = document.getElementById("closeModalRegister");
-            if (modalRegister && closeModalRegister) {
-                this.modalManager.registerModal("register", modalRegister, closeModalRegister);
-            }
-        }
-
-        setupEventListeners() {
-            this.elements.botonContinuar.addEventListener("click", (event) => {
-                this.handleSubmit(event);
-            });
-
-            // Botón para abrir modal de información
-            const openModal = document.getElementById("openModal");
-            if (openModal) {
-                openModal.addEventListener("click", (event) => {
-                    event.preventDefault();
-                    this.modalManager.openModal("information");
-                });
-            }
-
-            // Botón para abrir modal de confirmación
-            const openConfirmModal = document.getElementById("openConfirmModal");
-            if (openConfirmModal) {
-                openConfirmModal.addEventListener("click", (event) => {
-                    event.preventDefault();
-                    this.modalManager.openModal("confirm");
-                });
-            }
-
-            // Botón para abrir modal de registro
-            const btnModalRegister = document.getElementById("btnModalRegister");
-            if (btnModalRegister) {
-                btnModalRegister.addEventListener("click", () => {
-                    this.modalManager.openModal("register");
-                });
-            }
-
-            // Botón de recarga/edición
-            const reloadButton = document.getElementById("reloadButton");
-            if (reloadButton) {
-                reloadButton.addEventListener("click", () => {
-                    this.showForms();
-                });
-            }
-
-            // Cerrar modales con Escape
-            window.addEventListener("keydown", (e) => {
-                if (e.key === "Escape") {
-                    this.modalManager.closeModal("confirm");
-                    this.modalManager.closeModal("information");
-                    this.modalManager.closeModal("register");
-                }
+        // Botón para abrir modal de información
+        const openModal = document.getElementById("openModal");
+        if (openModal) {
+            openModal.addEventListener("click", (event) => {
+                event.preventDefault();
+                this.modalManager.openModal("information");
             });
         }
 
-        setupUI() {
-            FormUtils.updateTitle(this.queryParams.tab, this.elements.tituloElement);
-            FormUtils.populateYearSelect("year", this.queryParams.biciYear);
-        }
-
-        validateForm() {
-            let isFormValid = true;
-            const inputs1 = this.elements.formularioDatosPersonales1.querySelectorAll("input, select");
-            const inputs2 = this.elements.formularioDatosPersonales2.querySelectorAll("input, select");
-            const allInputs = [...inputs1, ...inputs2];
-
-            // Limpiar errores previos
-            allInputs.forEach(input => this.clearFieldError(input));
-
-            // Validar campos requeridos
-            allInputs.forEach(input => {
-                if (input.classList.contains("ciudad")) {
-                    if (!this.validateAllCities()) {
-                        isFormValid = false;
-                    }
-                } else if (!input.value) {
-                    this.showFieldError(input, this.errorMessages.get('REQUIRED'));
-                    isFormValid = false;
-                }
+        // Botón para abrir modal de confirmación
+        const openConfirmModal = document.getElementById("openConfirmModal");
+        if (openConfirmModal) {
+            openConfirmModal.addEventListener("click", (event) => {
+                event.preventDefault();
+                this.modalManager.openModal("confirm");
             });
-
-            // Validaciones específicas
-            if (!this.validators.emailPrimary.validateStructure()) isFormValid = false;
-            if (!this.validators.emailConfirm.validateStructure()) isFormValid = false;
-            if (!this.validators.phone.validatePhone()) isFormValid = false;
-
-            // Validar edad
-            if (!this.validators.birthDate.validateAge()) {
-                const error = this.errorMessages.get('AGE_RANGE_MODAL');
-                this.showModalError(error.title, error.body);
-                return false;
-            }
-
-            // Validar coincidencia de correos
-            if (this.elements.correoElectronico.value !== this.elements.confirmarCorreo.value) {
-                const error = this.errorMessages.get('EMAIL_MISMATCH_MODAL');
-                this.showModalError(error.title, error.body);
-                return false;
-            }
-
-            // Validar checkbox
-            if (!this.elements.autorizacionDatos.checked) {
-                const error = this.errorMessages.get('DATA_AUTH_MODAL');
-                this.showModalError(error.title, error.body);
-                this.elements.containerTitleModal.style.maxWidth = "23rem";
-                this.elements.containerTitleModal.style.marginLeft = "1rem";
-                isFormValid = false;
-            }
-
-            return isFormValid;
         }
 
-        validateAllCities() {
-            let allCitiesValid = true;
-            
-            this.elements.ciudadInputs.forEach((ciudadInput) => {
-                const value = ciudadInput.value.trim().toLowerCase();
-                const parts = value.split(" - ");
-                
-                if (parts.length === 2) {
-                    const municipalityInput = parts[0].trim();
-                    const departmentInput = parts[1].trim();
-                    
-                    const municipalityValid = this.locationService.municipalities.some(
-                        m => m.nombreMunicipio.toLowerCase() === municipalityInput
-                    );
-                    const departmentValid = this.locationService.departments.some(
-                        d => d.NombreDepartamento.toLowerCase() === departmentInput
-                    );
-                    
-                    if (!municipalityValid || !departmentValid) {
-                        this.showFieldError(ciudadInput, this.errorMessages.get('INVALID_CITY'));
-                        allCitiesValid = false;
-                    }
-                } else {
-                    this.showFieldError(ciudadInput, this.errorMessages.get('REQUIRED'));
-                    allCitiesValid = false;
-                }
+        // Botón para abrir modal de registro
+        const btnModalRegister = document.getElementById("btnModalRegister");
+        if (btnModalRegister) {
+            btnModalRegister.addEventListener("click", () => {
+                this.modalManager.openModal("register");
             });
+        }
 
-            if (!allCitiesValid) {
-                this.adjustFormSpacing();
-                this.elements.containerCheckbox.style.marginTop = "0.5rem";
+        // Botón de recarga/edición
+        const reloadButton = document.getElementById("reloadButton");
+        if (reloadButton) {
+            reloadButton.addEventListener("click", () => {
+                this.showForms();
+            });
+        }
+
+        // Cerrar modales con Escape
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                this.modalManager.closeModal("confirm");
+                this.modalManager.closeModal("information");
+                this.modalManager.closeModal("register");
             }
+        });
+    }
 
-            return allCitiesValid;
-        }
+    setupUI() {
+        FormUtils.updateTitle(this.queryParams.tab, this.elements.tituloElement);
+        FormUtils.populateYearSelect("year", this.queryParams.biciYear);
+    }
+    
+    // Función para validar la cédula específica
+   validateCedula(cedula) {
+        if (cedula === '123456789') {
+            const title = "No es posible continuar con el proceso";
+            const body = "El tipo y número de documento ingresados no han superado las validaciones establecidas. Si tienes alguna inquietud, comunícate con nuestro equipo de soporte para obtener más información.";
+            this.showModalError(title, body);
 
-        showFieldError(input, message) {
-            input.style.borderColor = "red";
-            const errorMessage = input.nextElementSibling;
-            if (errorMessage) {
-                errorMessage.textContent = message;
-                errorMessage.style.display = "block";
-            }
-        }
+            // Seleccionamos el botón de cerrar del modal de validaciones
+            const closeModalButton = document.getElementById("modalValidations").querySelector(".close");
 
-        showModalError(title, body) {
-            const modal = document.getElementById("modalValidations");
-            const modalTitle = modal?.querySelector("h2");
-            const modalParagraph = modal?.querySelector("p");
-            
-            if (modalTitle && modalParagraph) {
-                modalTitle.textContent = title;
-                modalParagraph.textContent = body;
-                this.modalManager.openModal("validations");
-            }
-        }
-
-        adjustFormSpacing() {
-            if (this.mediaQuery.matches) {
-                this.elements.formGroup.style.rowGap = "10px";
-                this.elements.formGroup2.style.rowGap = "10px";
-            } else {
-                this.elements.formGroup.style.rowGap = "30px";
-                this.elements.formGroup2.style.rowGap = "30px";
-            }
-        }
-
-        handleSubmit(event) {
-            event.preventDefault();
-            if (this.validateForm()) {
-                this.onFormSuccess();
-            } else {
-                this.onFormError();
-            }
-        }
-
-        onFormSuccess() {
-            console.log("Formulario válido");
-            this.adjustFormSpacing();
-            this.elements.containerCheckbox.style.marginTop = "0";
-            this.hideForms();
-            this.showSummary();
-            this.populateSummary();
-        }
-
-        onFormError() {
-            const toast = document.getElementById("toast");
-            if (toast) {
-                toast.classList.add("showToastError");
-                setTimeout(() => {
-                    toast.classList.remove("showToastError");
-                }, 3000);
-            }
-        }
-
-        hideForms() {
-            const formPersona = document.querySelector(".form__anualPersonal");
-            const formBici = document.querySelector(".form__anualBici");
-            
-            if (formPersona) formPersona.style.display = "none";
-            if (formBici) formBici.style.display = "none";
-        }
-
-        showForms() {
-            const resumenCompra = document.getElementById("resumen-compra");
-            const formPersona = document.querySelector(".form__anualPersonal");
-            const formBici = document.querySelector(".form__anualBici");
-            
-            if (resumenCompra) resumenCompra.style.display = "none";
-            if (formPersona) formPersona.style.display = "block";
-            if (formBici) formBici.style.display = "block";
-        }
-
-        showSummary() {
-            const resumenElement = document.getElementById("resumen-compra");
-            if (resumenElement) {
-                resumenElement.style.display = "block";
-            }
-        }
-
-        populateSummary() {
-            const summaryMapping = {
-                // Datos personales
-                nombre: `${this.elements.primerNombre.value} ${this.elements.apellido.value}`,
-                tipoDocumentoResumen: this.elements.tipoDocumento.value,
-                documento: this.elements.numeroDocumento.value,
-                fechaExpedicionResumen: this.elements.fechaExpedicion.value,
-                direccion: this.elements.direccionResidencia.value,
-                fechaNacimientoResumen: this.elements.fechaNacimiento.value,
-                ciudadResumenPersona: this.elements.ciudadPersona.value,
-                email: this.elements.correoElectronico.value,
-                celular: this.elements.telefono.value,
-                // Datos de la bicicleta
-                ciudadResumenBici: this.elements.ciudadBici.value,
-                añoCompra: this.elements.year.value,
-                colorResumen: this.elements.color.value,
-                numeroMarcoResumen: this.elements.numeroMarco.value,
-                claseResumen: this.elements.clase.value,
-                marcaResumen: this.elements.marca.value,
-                lineaResumen: this.elements.linea.value,
-                tipoResumen: this.elements.tipo.value,
-                stickerResumen: this.elements.numeroSticker.value,
-                costoBici: this.queryParams.biciValue
+            // Creamos una función manejadora para poder añadirla y quitarla
+            const handleErrorAfterClose = () => {
+                this.showFieldError(this.elements.numeroDocumento, "Este número de documento no puede continuar");
+                // Removemos el event listener para que no se ejecute múltiples veces
+                closeModalButton.removeEventListener('click', handleErrorAfterClose);
             };
 
-            Object.keys(summaryMapping).forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.textContent = summaryMapping[id];
+            // Añadimos un event listener al botón de cerrar del pop-up
+            closeModalButton.addEventListener('click', handleErrorAfterClose);
+
+            return false;
+        }
+        return true;
+    }
+
+
+     validateForm() {
+        let isFormValid = true;
+        const inputs1 = this.elements.formularioDatosPersonales1.querySelectorAll("input, select");
+        const inputs2 = this.elements.formularioDatosPersonales2.querySelectorAll("input, select");
+        const allInputs = [...inputs1, ...inputs2];
+
+        // Limpiar errores previos
+        allInputs.forEach(input => this.clearFieldError(input));
+
+        // --- INICIO DE LA NUEVA VALIDACIÓN ---
+        // Validación especial para cédula y fecha de expedición específicas
+        if (this.elements.numeroDocumento.value === '123456789' && this.elements.fechaExpedicion.value === '2014-06-25') {
+            const title = "Fecha de expedición no válida";
+            const body = "Por favor, asegúrate de que la fecha de expedición del documento sea correcta para continuar.";
+            this.showModalError(title, body);
+            return false; // Detiene la validación para mostrar solo este error
+        }
+        // --- FIN DE LA NUEVA VALIDACIÓN ---
+
+        // Validar la cédula antes de las demás validaciones
+        if (!this.validateCedula(this.elements.numeroDocumento.value)) {
+            return false; 
+        }
+
+        // Validar campos requeridos
+        allInputs.forEach(input => {
+            if (input.classList.contains("ciudad")) {
+                if (!this.validateAllCities()) {
+                    isFormValid = false;
+                }
+            } else if (!input.value) {
+                this.showFieldError(input, this.errorMessages.get('REQUIRED'));
+                isFormValid = false;
             }
         });
 
-        // Actualizar nombre en modal final
-        if (this.elements.nameModalFinal) {
-            this.elements.nameModalFinal.textContent = summaryMapping.nombre;
+        // Validaciones específicas
+        if (!this.validators.emailPrimary.validateStructure()) isFormValid = false;
+        if (!this.validators.emailConfirm.validateStructure()) isFormValid = false;
+        if (!this.validators.phone.validatePhone()) isFormValid = false;
+
+        // Validar edad
+        if (!this.validators.birthDate.validateAge()) {
+            const error = this.errorMessages.get('AGE_RANGE_MODAL');
+            this.showModalError(error.title, error.body);
+            return false;
+        }
+
+        // Validar coincidencia de correos
+        if (this.elements.correoElectronico.value !== this.elements.confirmarCorreo.value) {
+            const error = this.errorMessages.get('EMAIL_MISMATCH_MODAL');
+            this.showModalError(error.title, error.body);
+            return false;
+        }
+
+        // Validar checkbox
+        if (!this.elements.autorizacionDatos.checked) {
+            const error = this.errorMessages.get('DATA_AUTH_MODAL');
+            this.showModalError(error.title, error.body);
+            this.elements.containerTitleModal.style.maxWidth = "23rem";
+            this.elements.containerTitleModal.style.marginLeft = "1rem";
+            isFormValid = false;
+        }
+
+        return isFormValid;
+    }
+
+    validateAllCities() {
+        let allCitiesValid = true;
+        
+        this.elements.ciudadInputs.forEach((ciudadInput) => {
+            const value = ciudadInput.value.trim().toLowerCase();
+            const parts = value.split(" - ");
+            
+            if (parts.length === 2) {
+                const municipalityInput = parts[0].trim();
+                const departmentInput = parts[1].trim();
+                
+                const municipalityValid = this.locationService.municipalities.some(
+                    m => m.nombreMunicipio.toLowerCase() === municipalityInput
+                );
+                const departmentValid = this.locationService.departments.some(
+                    d => d.NombreDepartamento.toLowerCase() === departmentInput
+                );
+                
+                if (!municipalityValid || !departmentValid) {
+                    this.showFieldError(ciudadInput, this.errorMessages.get('INVALID_CITY'));
+                    allCitiesValid = false;
+                }
+            } else {
+                this.showFieldError(ciudadInput, this.errorMessages.get('REQUIRED'));
+                allCitiesValid = false;
+            }
+        });
+
+        if (!allCitiesValid) {
+            this.adjustFormSpacing();
+            this.elements.containerCheckbox.style.marginTop = "0.5rem";
+        }
+
+        return allCitiesValid;
+    }
+
+    showFieldError(input, message) {
+        input.style.borderColor = "red";
+        const errorMessage = input.nextElementSibling;
+        if (errorMessage) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = "block";
         }
     }
-}
 
+    showModalError(title, body) {
+        const modal = document.getElementById("modalValidations");
+        const modalTitle = modal?.querySelector("h2");
+        const modalParagraph = modal?.querySelector("p");
+        
+        if (modalTitle && modalParagraph) {
+            modalTitle.textContent = title;
+            modalParagraph.textContent = body;
+            this.modalManager.openModal("validations");
+        }
+    }
+
+    adjustFormSpacing() {
+        if (this.mediaQuery.matches) {
+            this.elements.formGroup.style.rowGap = "10px";
+            this.elements.formGroup2.style.rowGap = "10px";
+        } else {
+            this.elements.formGroup.style.rowGap = "30px";
+            this.elements.formGroup2.style.rowGap = "30px";
+        }
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        if (this.validateForm()) {
+            this.onFormSuccess();
+        } else {
+            this.onFormError();
+        }
+    }
+
+    onFormSuccess() {
+        console.log("Formulario válido");
+        this.adjustFormSpacing();
+        this.elements.containerCheckbox.style.marginTop = "0";
+        this.hideForms();
+        this.showSummary();
+        this.populateSummary();
+    }
+
+    onFormError() {
+        const toast = document.getElementById("toast");
+        if (toast) {
+            toast.classList.add("showToastError");
+            setTimeout(() => {
+                toast.classList.remove("showToastError");
+            }, 3000);
+        }
+    }
+
+    hideForms() {
+        const formPersona = document.querySelector(".form__anualPersonal");
+        const formBici = document.querySelector(".form__anualBici");
+        
+        if (formPersona) formPersona.style.display = "none";
+        if (formBici) formBici.style.display = "none";
+    }
+
+    showForms() {
+        const resumenCompra = document.getElementById("resumen-compra");
+        const formPersona = document.querySelector(".form__anualPersonal");
+        const formBici = document.querySelector(".form__anualBici");
+        
+        if (resumenCompra) resumenCompra.style.display = "none";
+        if (formPersona) formPersona.style.display = "block";
+        if (formBici) formBici.style.display = "block";
+    }
+
+    showSummary() {
+        const resumenElement = document.getElementById("resumen-compra");
+        if (resumenElement) {
+            resumenElement.style.display = "block";
+        }
+    }
+
+    populateSummary() {
+        const summaryMapping = {
+            // Datos personales
+            nombre: `${this.elements.primerNombre.value} ${this.elements.apellido.value}`,
+            tipoDocumentoResumen: this.elements.tipoDocumento.value,
+            documento: this.elements.numeroDocumento.value,
+            fechaExpedicionResumen: this.elements.fechaExpedicion.value,
+            direccion: this.elements.direccionResidencia.value,
+            fechaNacimientoResumen: this.elements.fechaNacimiento.value,
+            ciudadResumenPersona: this.elements.ciudadPersona.value,
+            email: this.elements.correoElectronico.value,
+            celular: this.elements.telefono.value,
+            // Datos de la bicicleta
+            ciudadResumenBici: this.elements.ciudadBici.value,
+            añoCompra: this.elements.year.value,
+            colorResumen: this.elements.color.value,
+            numeroMarcoResumen: this.elements.numeroMarco.value,
+            claseResumen: this.elements.clase.value,
+            marcaResumen: this.elements.marca.value,
+            lineaResumen: this.elements.linea.value,
+            tipoResumen: this.elements.tipo.value,
+            stickerResumen: this.elements.numeroSticker.value,
+            costoBici: this.queryParams.biciValue
+        };
+
+        Object.keys(summaryMapping).forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = summaryMapping[id];
+        }
+    });
+
+    // Actualizar nombre en modal final
+    if (this.elements.nameModalFinal) {
+        this.elements.nameModalFinal.textContent = summaryMapping.nombre;
+    }
+}
+}
 // Clase base para manejo de opciones de selectores
 class SelectOption {
     constructor(value, text, code = null) {

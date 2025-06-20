@@ -418,15 +418,17 @@
   color: #173748;
   font-size: 18px;
   line-height: 17.5px;
-  text-align: left;
+  text-align: center;
   font-weight: 600;
 }
+
 .resumen-compra .condiciones a {
   font-family: "Montserrat", sans-serif;
   color: #ff6600;
   text-decoration: none;
   text-decoration: underline;
 }
+
 .resumen-compra .condiciones a:hover {
   text-decoration: underline;
 }

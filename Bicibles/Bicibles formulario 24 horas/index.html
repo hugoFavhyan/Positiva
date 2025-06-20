@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="Styles.css">
 <main class="container-main-visibles">
   <div class="main-visibles">
@@ -11,7 +10,7 @@
         <div class="form-anual__grupo">
           <div class="form-anual__campo">
             <label for="tipoDocumento">Tipo de documento<span class="campo-obligatorio">*</span></label>
-            <select id="tipoDocumento" required>
+            <select id="tipoDocumento">
               <option value="" selected disabled>Seleccione</option>
             </select>
             <p class="error-message" id="value-error">Selecciona una opción</p>
@@ -137,7 +136,7 @@
       </form>
     </div>
     <!-- Resume Card -->
-    <div class="resumen-compra" id="resumen-compra" style="display: none">
+   <div class="resumen-compra" id="resumen-compra" style="display: none">
       <h1 class="form-resumen_titulo">Resumen de <span class="compra">Compra</span></h1>
       <div class="datos-tomador">
         <h2 class="form-anual__subtitulo">Datos del Tomador / <span class="asegurado">Asegurado</span></h2>
@@ -184,15 +183,17 @@
             </tbody>
           </table>
         </div>
-        <p class="condiciones">
-          Al continuar usted acepta nuestras
-          <a href="#" id="openModalInformation">Condiciones de servicio</a>
-        </p>
+      </div>
+      <p class="condiciones">
+        Al continuar usted acepta nuestras
+        <a href="#" id="openModalInformation">Condiciones de servicio</a>
+      </p>
+      <div class="datos-tomador">
         <div class="costo-seguro">
           <p>El costo de tu seguro es</p>
           <h3>
-            $ 5.000 <br />
-            <span>24 horas</span>
+            $ 75.000 <br />
+            <span>Anual</span>
           </h3>
         </div>
         <div class="botones">
@@ -200,7 +201,8 @@
           <a href="#" class="boton-enviar boton-continuar" id="openConfirmModal">Continuar</a>
         </div>
       </div>
-      <p class="nota">En los próximos 3 días hábiles recibirás el certificado de la póliza en tu correo electrónico.</p>
+      <p class="nota">En los próximos 3 días hábiles recibirás el certificado de la póliza en tu <br>correo
+        electrónico.</p>
     </div>
     <!-- ! Modal Informatiion T&C -->
     <div class="modalInformation" id="modalInformation">
@@ -299,10 +301,13 @@
         <img src="https://positivapruebas.com.co/wp-content/uploads/lupa-error-modal.svg" alt="Icon"
           class="lupaModalIcon" />
         <div class="container__titleModal">
-          <h2>Fecha de expedición no válida</h2>
+          <h2 id="modalValidationTitle">Título del Error</h2>
           <div class="title-line"></div>
         </div>
-        <p>Por favor, asegúrate de que la fecha de expedición del documento sea correcta para continuar.</p>
+        <p id="modalValidationMessage">Mensaje de error.</p>
+        <div id="modalValidationReferenceContainer" style="display: none; margin-top: 15px;">
+          <input type="text" id="modalValidationReferenceInput" disabled class="text-confirmModal" />
+        </div>
       </div>
     </div>
     <!-- ! Toast -->

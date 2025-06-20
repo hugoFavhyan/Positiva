@@ -307,6 +307,27 @@
   max-width: 24rem;
 }
 
+/* Estilos para el campo de referencia en el modal de validación */
+#modalValidations .referentPago {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+#modalValidations .text-confirmModal {
+  width: 80%;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  background-color: #f7f7f7;
+  color: #333;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 .title-line {
   margin: auto;
   width: 60px;
@@ -490,7 +511,7 @@
   color: #173748;
   font-size: 18px;
   line-height: 17.5px;
-  text-align: left;
+  text-align: center;
   font-weight: 600;
 }
 

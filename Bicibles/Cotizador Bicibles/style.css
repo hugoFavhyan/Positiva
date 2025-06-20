@@ -1,13 +1,15 @@
 /*Etilo para icono cerrar de un Pop-Up */
 .popup-boton-circular .dialog-close-button {
-   border-radius: 50%;
-   padding: 5px;
+    border-radius: 50%;
+    padding: 5px;
 }
+
 /* Estilo de icono en el encabezado */
 .icono-encabezado .elementor-heading-title {
     display: flex;
     justify-content: center;
 }
+
 /* Nuevo stilo de tooltip para elementor*/
 .tooltip-cotizador {
     position: relative;
@@ -15,9 +17,11 @@
     cursor: pointer;
     padding-left: 8px;
 }
+
 .tooltip-cotizador img {
     height: 20px;
 }
+
 .tooltip-cotizador .tooltip-cot-text {
     font-family: "Montserrat", sans-serif;
     visibility: hidden;
@@ -39,16 +43,19 @@
     font-size: 18px;
     font-weight: 50;
 }
+
 .tooltip-cotizador:hover .tooltip-cot-text {
     visibility: visible;
     opacity: 1;
 }
+
 .input-with-tooltip-bici {
     position: relative;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
+
 .tooltip-cot-bici p {
     font-family: "Poppins", sans-serif;
     margin: 0;
@@ -56,22 +63,26 @@
     color: #3e3e3e;
     font-weight: 500;
 }
+
 .tooltip-cot-bici .orange__color {
     color: #f97316;
     font-weight: 600;
 }
+
 .mainContainerCotizacion {
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     height: 115vh;
 }
+
 .principalContainerCotizacion {
     display: flex;
     align-items: flex-start;
     gap: 3rem;
     padding-top: 4rem;
 }
+
 /* ! Card 1 */
 .firstCard {
     background-color: white;
@@ -81,6 +92,7 @@
     max-width: 550px;
     max-height: 580px;
 }
+
 .titlefirstCard {
     font-size: 35px;
     font-weight: 700;
@@ -88,9 +100,11 @@
     font-family: "Poppins", sans-serif;
     margin: 0;
 }
+
 .highlight-seguro {
     color: #ff6b00;
 }
+
 .subtitlefirstCard {
     font-size: 18px;
     color: #555;
@@ -100,6 +114,7 @@
     margin-bottom: 0.8rem;
     margin-top: 4px;
 }
+
 .descriptionfirstCard,
 .notefirstCard {
     font-size: 16px;
@@ -108,18 +123,22 @@
     font-weight: 400;
     font-family: "Roboto", sans-serif;
 }
+
 .notefirstCard span {
     font-weight: 700;
 }
+
 .notefirstCard a {
     color: #ff6b00;
     text-decoration: none;
 }
+
 .tabs {
     display: flex;
     justify-content: space-around;
     margin-bottom: 1.5rem;
 }
+
 .tab {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
@@ -130,15 +149,18 @@
     cursor: pointer;
     padding: 10px 10px 5px 10px;
 }
+
 .tab.active {
     border-bottom: 3px solid #ff6b00;
     font-weight: 500;
     color: #173748;
 }
+
 .tab-content-container {
     position: relative;
     min-height: 80px;
 }
+
 .tab-content {
     position: absolute;
     top: 0;
@@ -148,24 +170,29 @@
     visibility: hidden;
     transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
 }
+
 .tab-content.active {
     opacity: 1;
     visibility: visible;
 }
+
 #para-ti {
     display: flex;
     flex-direction: column;
 }
+
 #para-tu-bici {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
+
 #para-ti-y-tu-bici {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
 }
+
 .formCard {
     display: flex;
     flex-direction: column;
@@ -186,10 +213,12 @@ input {
     border-radius: 5px;
     font-family: "Poppins", sans-serif;
 }
+
 .label-input {
     display: flex;
     flex-direction: column;
 }
+
 .radio-group {
     padding: 7px;
     display: flex;
@@ -199,23 +228,28 @@ input {
     border-radius: 50px;
     gap: 20px;
 }
+
 .radio-group {
     padding: 15px 0 10px 10px !important;
 }
+
 .radio-group>label {
     display: flex;
     align-items: start;
     justify-content: center;
 }
+
 .custom-radio {
     display: flex;
     align-items: center;
     cursor: pointer;
     margin-right: 20px;
 }
+
 .custom-radio input[type="radio"] {
     display: none;
 }
+
 .custom-radio::before {
     content: "";
     display: inline-block;
@@ -228,12 +262,14 @@ input {
     transition: background-color 0.3s ease;
     background-color: var(--radio-color, transparent);
 }
+
 .input-with-tooltip {
     position: relative;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
+
 .info-icon-tooltip-bici {
     font-size: 8px;
     font-weight: bold;
@@ -249,6 +285,7 @@ input {
     display: flex;
     align-items: center;
 }
+
 .tooltip-cot-bici {
     display: none;
     position: absolute;
@@ -265,16 +302,19 @@ input {
     z-index: 10;
     text-align: left;
 }
+
 .input-with-tooltip-bici:hover .tooltip-cot-bici {
     display: flex;
 }
+
 /* Estilo para posicionar ÚNICAMENTE los tooltips de las coberturas */
-.tooltip-cobertura-bici { 
+.tooltip-cobertura-bici {
     left: -249px;
     top: -60px;
     width: 223px;
     padding: 15px;
 }
+
 .tooltip-secundario-cot-bici {
     display: none;
     position: absolute;
@@ -290,12 +330,15 @@ input {
     width: 12rem;
     z-index: 10;
 }
+
 .input-with-tooltip-bici:hover .tooltip-secundario-cot-bici {
     display: flex;
 }
+
 .tooltip_secund:hover {
     display: flex;
 }
+
 .tooltipCotizaciones p {
     font-family: "Poppins", sans-serif;
     margin: 0;
@@ -303,16 +346,19 @@ input {
     color: #3e3e3e;
     font-weight: 500;
 }
+
 .tooltipCotizaciones>.orange__color {
     color: #f97316;
     font-weight: 600;
 }
+
 .container__calculate-button, .cointainer-what-this-button {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 0.3rem;
 }
+
 .calculate-button {
     display: none;
     background-color: #f97316;
@@ -326,10 +372,12 @@ input {
     width: 40%;
     min-width: 130px;
 }
+
 .calculate-button:hover {
     background-color: #f97416a8;
     transition: background 0.3s ease;
 }
+
 /* ! Card 2 */
 .secondCard {
     max-width: 582px;
@@ -340,17 +388,21 @@ input {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 28px 34px;
 }
+
 .header__secund {
     margin-bottom: 24px;
     font-family: "Poppins", sans-serif;
 }
+
 .header__secund h1 {
     font-size: 20px;
     margin: 0;
 }
+
 .header__secund .orange {
     color: #ff6600;
 }
+
 .cost-section__secund {
     background-color: #f7f7f7;
     padding: 16px;
@@ -361,29 +413,35 @@ input {
     align-items: center;
     font-family: "Roboto", sans-serif;
 }
+
 .cost-section__secund p {
     font-weight: 400;
     color: #333333;
 }
+
 .cost-section__secund .main-cost {
     font-size: 24px;
     color: #1a2b3c;
 }
+
 .cost-section__secund .annual {
     font-size: 14px;
     color: #666;
     text-align: right;
 }
+
 .coverage-list__secund {
     font-family: "Roboto", sans-serif;
     color: #6e6e6e;
     min-height: 25rem;
 }
+
 .coverage-list__secund .coverage-title {
     font-size: 16px;
     font-weight: 400;
     margin-left: 0.4rem;
 }
+
 .container__coverage {
     display: flex;
     flex-direction: column;
@@ -392,18 +450,22 @@ input {
     align-items: center;
     min-height: 18rem;
 }
+
 .container__coverage img {
     max-width: 6rem;
 }
+
 .container__coverage-text {
     text-align: center;
     margin-top: 15px;
     font-weight: 400;
 }
+
 .container__coverage-text p {
     margin: 0;
     font-size: 14px;
 }
+
 /* ! Card 3 */
 .thirdCard {
     display: none;
@@ -414,18 +476,22 @@ input {
     padding: 30px;
     flex-direction: column;
 }
+
 .thirdCard .headerThird {
     margin-bottom: 1rem;
 }
+
 .thirdCard .headerThird h1 {
     font-size: 24px;
     margin: 0;
     font-family: "Poppins", sans-serif;
     font-weight: 600;
 }
+
 .thirdCard .headerThird .orange {
     color: #ff6600;
 }
+
 .thirdCard .cost-section {
     background-color: #f7f7f7;
     padding: 16px 20px;
@@ -436,11 +502,13 @@ input {
     align-items: start;
     font-family: "Roboto", sans-serif;
 }
+
 .thirdCard .cost-section .cost-text {
     font-size: 16px;
     margin: 0;
     padding-top: 0.3rem;
 }
+
 .thirdCard .main-cost {
     font-size: 30px;
     font-weight: 600;
@@ -448,6 +516,7 @@ input {
     margin: 0;
     text-align: end;
 }
+
 .thirdCard .annual {
     font-size: 14px;
     color: #333333;
@@ -455,26 +524,31 @@ input {
     margin: 0;
     text-align: end;
 }
+
 .cost-container {
     text-align: right;
     display: flex;
     flex-direction: column-reverse;
 }
+
 .thirdCard .breakdown {
     background-color: #f5f5f5;
     padding: 16px 20px 10px 20px;
     border-radius: 4px;
     font-family: "Roboto", sans-serif;
 }
+
 .thirdCard .breakdown-item {
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
 }
+
 .thirdCard .breakdown-item-value {
     font-weight: 600;
     font-size: 20px;
 }
+
 .thirdCard .coverage-item {
     display: flex;
     justify-content: space-between;
@@ -482,42 +556,51 @@ input {
     padding: 12px 0;
     border-bottom: 1px solid #eee;
 }
+
 .thirdCard .coverage-list {
     margin-top: 24px;
     font-family: "Roboto", sans-serif;
 }
+
 .thirdCard .coverage-title {
     color: #333333;
     font-size: 16px;
     margin-bottom: 16px;
     font-weight: 400;
 }
+
 .thirdCard .coverage-name {
     display: flex;
     align-items: center;
     gap: 12px;
 }
+
 .thirdCard .coverage-name-text {
     color: #173748;
 }
+
 .thirdCard .coverage-value {
     color: #173748;
     font-weight: 600;
 }
-.thirdCard .coverage-value-inc{
-  color: #173748;
-  font-weight: 600; 
-  padding-right: 25px; 
+
+.thirdCard .coverage-value-inc {
+    color: #173748;
+    font-weight: 600;
+    padding-right: 25px;
 }
+
 .thirdCard .coverage-icon {
     display: flex;
     gap: 0.7rem;
     align-items: anchor-center;
 }
+
 .thirdCard .heart-icon {
     color: #ff6600;
     font-size: 20px;
 }
+
 .thirdCard .premium {
     color: #ff6600;
     font-weight: bold;
@@ -525,6 +608,7 @@ input {
     cursor: pointer;
     margin-right: 5%;
 }
+
 .thirdCard .qr-section {
     display: flex;
     justify-content: space-around;
@@ -532,6 +616,7 @@ input {
     width: 100%;
     margin-top: 1rem;
 }
+
 .thirdCard .qr-section p {
     margin: 0;
     font-family: "Roboto", sans-serif;
@@ -539,9 +624,11 @@ input {
     font-size: 16px;
     color: #173748;
 }
+
 .thirdCard .qr-section span {
     color: #ff7500;
 }
+
 /*! Card 4 */
 .fourCard {
     display: none;
@@ -553,18 +640,22 @@ input {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 30px;
 }
+
 .fourCard .headerFour {
     margin-bottom: 1rem;
 }
+
 .fourCard .headerFour h1 {
     font-size: 24px;
     margin: 0;
     font-family: "Poppins", sans-serif;
     font-weight: 600;
 }
+
 .fourCard .headerFour .orange {
     color: #ff6600;
 }
+
 .fourCard .cost-section {
     background-color: #f7f7f7;
     padding: 16px 20px 0px 20px;
@@ -576,11 +667,13 @@ input {
     gap: 8px;
     font-family: "Roboto", sans-serif;
 }
+
 .fourCard .cost-section .cost-text {
     font-size: 16px;
     margin: 0;
     padding-top: 0.3rem;
 }
+
 .fourCard .main-cost {
     font-size: 30px;
     font-weight: 600;
@@ -588,6 +681,7 @@ input {
     margin: 0;
     text-align: end;
 }
+
 .fourCard .location {
     margin: 0;
     margin-top: -0.8rem;
@@ -595,12 +689,14 @@ input {
     font-weight: 600;
     color: #333333;
 }
+
 .fourCard .annual {
     font-size: 14px;
     color: #333333;
     margin: 0;
     text-align: end;
 }
+
 .fourCard .button-section {
     display: flex;
     justify-content: center;
@@ -608,6 +704,7 @@ input {
     margin-top: 2rem;
     text-align: center;
 }
+
 .fourCard .button-section a {
     background-color: #173748;
     color: white;
@@ -622,10 +719,12 @@ input {
     font-family: "Poppins", sans-serif;
     text-decoration: none;
 }
+
 .fourCard .button-section a:hover {
     background-color: #173748b1;
     transition: background 0.3s ease;
 }
+
 /*! Modal validation */
 .modal-validacion-bici {
     display: flex;
@@ -642,11 +741,13 @@ input {
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
+
 .modal-validacion-bici.active {
     opacity: 1;
     visibility: visible;
 }
-.modal-content-bici  {
+
+.modal-content-bici {
     background-color: #fff;
     padding: 20px;
     border: 1px solid #888;
@@ -658,20 +759,24 @@ input {
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
 .modal-content h2 {
     font-family: "Poppins", sans-serif;
     font-weight: 600;
     font-size: 25px;
 }
+
 .modal-content>p {
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     margin-top: 2.5rem;
     font-size: 16px;
 }
+
 .container__titleModal {
     text-align: center;
 }
+
 .title-line {
     display: block;
     width: 60px;
@@ -680,10 +785,12 @@ input {
     margin: 8px auto 0 auto;
     border-radius: 2px;
 }
+
 .modal-validacion-bici.active .modal-content-bici {
     transform: scale(1);
     opacity: 1;
 }
+
 .close-btn-bici {
     position: absolute;
     top: 10px;
@@ -698,6 +805,7 @@ input {
     cursor: pointer;
     font-size: 1.5rem;
 }
+
 .container__img__lupaModal {
     display: flex;
     justify-content: center !important;
@@ -705,14 +813,17 @@ input {
     ;
     width: 100%;
 }
+
 .img__lupaModal {
     width: 87px;
     height: auto !important;
     ;
 }
+
 .img__validationError {
     width: 96px;
 }
+
 /* ! Modal Premium */
 .modal-premium-bici {
     display: flex;
@@ -729,14 +840,17 @@ input {
     visibility: hidden;
     transition: opacity 0.5s ease, visibility 0.5s ease;
 }
+
 .modal-premium-bici.active {
     opacity: 1;
     visibility: visible;
 }
+
 .modal-premium-bici.active .modal-content-bici {
     transform: scale(1);
     opacity: 1;
 }
+
 .modal-premium-bici .modal-content-bici {
     background-color: #fefefe;
     padding: 20px;
@@ -749,6 +863,7 @@ input {
     transition: transform 0.3s ease, opacity 0.3s ease;
     font-family: "Roboto", sans-serif;
 }
+
 .close-modal-premium-bici {
     position: absolute;
     top: 20px;
@@ -763,6 +878,7 @@ input {
     cursor: pointer;
     font-size: 1.8rem;
 }
+
 .modal-premium-bici .services-container {
     display: flex;
     flex-wrap: wrap;
@@ -770,21 +886,25 @@ input {
     text-align: left;
     gap: 2rem;
 }
+
 .modal-premium-bici .service-column {
     flex: 1;
     min-width: 300px;
     margin: 10px;
 }
+
 .modal-premium-bici h2 {
     color: #234151;
     font-size: 1.5em;
     margin: 0;
 }
+
 .modal-premium-bici ul {
     list-style-type: none;
     padding-left: 1.2rem;
     margin-top: 1.5rem;
 }
+
 .modal-premium-bici li {
     display: flex;
     align-items: center;
@@ -795,16 +915,19 @@ input {
     font-weight: 500;
     gap: 10px;
 }
+
 .modal-premium-bicili img {
     width: 24px;
     height: 24px;
     margin-right: 10px;
 }
+
 .open-modal-btn {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
 }
+
 /* ! Toast */
 #toast {
     display: block;
@@ -819,52 +942,63 @@ input {
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
+
 #toast.show-toast-error-bici {
     display: block;
     margin-top: 3rem;
     opacity: 1;
     visibility: visible;
 }
+
 .toast-container-bici {
     display: flex;
-    align-items: flex-start; 
-    padding: 0.5rem; 
+    align-items: flex-start;
+    padding: 0.5rem;
 }
+
 .toast-close-bici {
-    font-family: Arial, Helvetica, sans-serif;;              
-    cursor: pointer;          
-    padding: 0 0.5rem;         
-    line-height: 1;           
-    margin-left: 1rem;         
+    font-family: Arial, Helvetica, sans-serif;
+    ;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    line-height: 1;
+    margin-left: 1rem;
 }
+
 .toast-close-bici:hover {
-    color: #000;             
+    color: #000;
 }
+
 .toast-border-bici {
     height: 3rem;
     width: 12px;
     border-left: 4px solid red;
     border-radius: 3px;
 }
+
 .toast-text-container-bici {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     padding: 0 0.8rem;
 }
+
 .toast-text-container-bici p {
     font-family: "Roboto", sans-serif;
     margin: 0;
 }
+
 .toast-text-container-bici p:first-child {
     font-weight: 600;
     font-size: 16px;
     color: #101010;
 }
+
 .toast-text-container-bici p:last-child {
     font-size: 14px;
     color: #656565;
 }
+
 .error-message {
     color: #e60003;
     display: none;
@@ -873,10 +1007,12 @@ input {
     font-size: 12px;
     font-weight: 500;
 }
+
 .img-toast-error-bici {
     width: 25px;
     height: auto;
 }
+
 /* Contenedor principal */
 .seguro-container {
     background-color: #fff;
@@ -887,6 +1023,7 @@ input {
     margin: -70px auto 20px auto;
     max-width: 1020px;
 }
+
 /* Título */
 .seguro-title {
     font-size: 35px;
@@ -895,10 +1032,12 @@ input {
     font-family: "Poppins", sans-serif;
     margin-bottom: 20px;
 }
+
 .highlight {
     color: #ff6a00;
     background: transparent;
 }
+
 /* Beneficios */
 .benefits {
     display: flex;
@@ -907,6 +1046,7 @@ input {
     flex-wrap: wrap;
     gap: 20px;
 }
+
 /* Estilo de cada beneficio */
 .benefit {
     display: flex;
@@ -915,23 +1055,28 @@ input {
     text-align: justify;
     gap: 10px;
 }
+
 .benefit-icon {
     width: 40px;
     height: 40px;
     margin-bottom: 10px;
 }
+
 .benefit-text {
     font-size: 14px;
     color: #333333;
     font-family: "Poppins", sans-serif;
     line-height: 1.4;
 }
+
 .benefit-text strong {
     color: #173748;
 }
+
 .btn-section {
     display: none;
 }
+
 .qr-section {
     display: flex;
     justify-content: space-around;
@@ -939,6 +1084,7 @@ input {
     width: 100%;
     margin-top: 1rem;
 }
+
 .btn-section a {
     background-color: #f97316;
     color: white;
@@ -952,18 +1098,25 @@ input {
     min-width: 130px;
     text-decoration: none;
 }
+
 [type=button]:focus, [type=button]:hover, [type=submit]:focus, [type=submit]:hover, button:focus, button:hover {
     color: #6c6c6c;
     background-color: #ffffff;
+}
+
+.modal-p {
+    padding-top: 25px;
 }
 
 input#value-combined, input#value {
     height: 42px;
     border-color: #c7c6c6;
 }
+
 #para-ti-y-tu-bici label:first-child, #para-ti label, .label-input label {
     padding-bottom: 10px;
 }
+
 /* ==========================================================================
    Componentes: Bicibles listing to right field price  
    ========================================================================== */
@@ -973,13 +1126,16 @@ input#value-combined, input#value {
 .list-field-r span.elementor-icon-list-text {
     width: 600px;
 }
+
 .list-field-r strong.field-r {
     float: right;
 }
+
 .list-field-r strong.premium {
     color: #FF9338;
     text-decoration-line: underline;
 }
+
 .svg-bg-toolpoint {
     width: 20px;
     height: 20px;
@@ -992,6 +1148,7 @@ input#value-combined, input#value {
     display: inline-block;
     cursor: pointer;
 }
+
 .elementor-tooltip {
     position: relative;
     display: contents;
@@ -999,6 +1156,7 @@ input#value-combined, input#value {
     color: #0066cc;
     text-decoration: underline dotted;
 }
+
 .elementor-tooltip .tooltip-text-cotiza {
     font-family: "Montserrat", sans-serif;
     visibility: hidden;
@@ -1020,50 +1178,63 @@ input#value-combined, input#value {
     font-size: 18px;
     font-weight: 50;
 }
+
 .elementor-tooltip:hover .tooltip-text-cotiza {
     visibility: visible;
     opacity: 1;
 }
+
 @media screen and (max-width: 1072px) {
     .mainContainerCotizacion {
         height: 100%;
     }
+
     .firstCard {
         max-height: none;
     }
+
     .principalContainerCotizacion {
         flex-direction: column;
         gap: 1.5rem;
     }
+
     .seguro-container {
         margin: 150px auto 20px auto;
     }
 }
+
 @media screen and (max-width: 768px) {
     #para-ti-y-tu-bici {
         display: flex;
         flex-direction: column;
     }
+
     .tab-content-container {
         min-height: 70px;
     }
+
     .tab-content-container.active-combined {
         min-height: 175px;
     }
+
     .thirdCard .qr-section {
         justify-content: center;
         flex-direction: column;
         gap: 1rem;
     }
+
     .thirdCard .qr-section article {
         order: 2;
     }
+
     .seguro-container {
         margin: 21px auto 20px auto;
     }
+
     .qr-section {
         display: none !important;
     }
+
     .btn-section {
         display: flex;
         justify-content: center;
@@ -1071,6 +1242,7 @@ input#value-combined, input#value {
         margin-top: 2rem;
         text-align: center;
     }
+
     .thirdCard .breakdown-item-value {
         font-size: 14px;
         flex: 0 0 30%;
@@ -1078,28 +1250,35 @@ input#value-combined, input#value {
         display: flex;
         align-items: center;
     }
+
     .breakdown-item {
         font-size: 14px;
     }
+
     .thirdCard .breakdown {
         padding: 16px 10px 10px 10px;
         order: 2;
     }
+
     .thirdCard .cost-section {
         align-items: center;
         flex-direction: column;
         order: 3;
         margin-top: 15px;
     }
+
     .thirdCard .headerThird {
         order: 1;
     }
+
     .thirdCard .coverage-list {
         order: 4;
     }
+
     .btn-qr-section-container {
         order: 5;
     }
+
     .cost-container {
         display: flex;
         flex-direction: row;
@@ -1113,39 +1292,49 @@ input#value-combined, input#value {
         height: 35px;
         margin-top: 2px;
     }
+
     .thirdCard .main-cost {
         color: #FFF;
         font-size: 21px;
     }
+
     .thirdCard .annual {
         color: #FFF;
     }
+
     .principalContainerCotizacion {
         align-items: center;
     }
+
     .firstCard {
         width: 90%;
     }
+
     .tab {
         font-size: 14px;
     }
+
     .seguro-container {
         box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
         margin: -50px auto 20px auto;
         position: relative;
         width: 90%;
     }
+
     .secondCard {
         width: 90%;
         margin-bottom: 80px;
     }
+
     .thirdCard {
         width: 90%;
         margin-bottom: 80px;
     }
+
     .tabs-cotiza {
         margin-top: 5%
     }
+
     .benefits {
         display: flex;
         justify-content: space-around;
@@ -1155,6 +1344,7 @@ input#value-combined, input#value {
         flex-direction: column;
         text-align: center;
     }
+
     .benefit {
         display: flex;
         align-items: center;
@@ -1163,48 +1353,61 @@ input#value-combined, input#value {
         gap: 10px;
         flex-direction: column;
     }
+
     .thirdCard .coverage-name {
         width: 50%;
     }
+
     .thirdCard .coverage-value {
         width: 60%;
         justify-content: center;
         align-items: center;
         display: flex;
     }
+
     .thirdCard .coverage-icon {
         width: 70%;
         justify-content: end;
     }
+
     .label-input {
         justify-content: center;
     }
+
     .titlefirstCard, .seguro-title {
         font-size: 28px;
     }
+
     .fourCard {
         width: 90%;
     }
+
     .fourCard .button-section a {
         width: 60%;
     }
+
     .fourCard .location {
         margin-top: 0rem;
     }
+
     .mainContainerCotizacion {
         background-size: 50%;
     }
 }
+
 @media screen and (max-width: 378px) {
     .thirdCard .main-cost {
         font-size: 16px;
     }
+
     .tab {
         font-size: 12px;
     }
+
     .fourCard .button-section a {
         width: 65%;
     }
+
     .fourCard .main-cost {
         font-size: 25px;
     }
