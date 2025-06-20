@@ -199,11 +199,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (radio.value === "anual") {
           mainCost.textContent = "$ 75.000";
           annualText.textContent = "Anual";
-          urlSeguro = "Bicibles/Bicibles formulario año/index.html";
+          urlSeguro = "../Bicibles/Bicibles formulario año/index.html";
         } else if (radio.value === "24-horas") {
           mainCost.textContent = "$ 5.000";
           annualText.textContent = "24 Horas";
-          urlSeguro = "Bicibles/bicibles-formulario 24 horas/index.html";
+          urlSeguro = "../Bicibles/Bicibles formulario 24 horas/index.html";
         }
 
         // Aplicar URL a ambos botones
@@ -319,7 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (yearValue && bikeValue) {
-      urlSeguro = `https://positivapruebas.com.co/seguros/resumen-de-pago-mobile/?tab=${activeTab}&biciYear=${yearValue}&biciValue=${bikeValue}`;
+      urlSeguro = `../Bicibles/Formulario bicibles mobil/index.html?tab=${activeTab}&biciYear=${yearValue}&biciValue=${bikeValue}`;
 
       new QRious({
         element: document.getElementById("qr-code"),
