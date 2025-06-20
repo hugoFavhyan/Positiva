@@ -17,6 +17,7 @@ function formatDate(dateString) {
 // #region DEFINICIÓN DE CLASES
 
 /**
+/**
  * Gestiona todos los diálogos modales (ventanas emergentes) en la aplicación.
  * Se encarga de mostrar, ocultar y configurar los eventos para cerrar los modales.
  */
@@ -38,6 +39,10 @@ class ModalManager {
       emailStructure: this._createModal("emailValidatedStructureError", "closeemailValidatedStructureError"),
       acceptTerms: this._createModal("AcceptTermsError", "closeAcceptTermsError"),
       dateDoc: this._createModal("DateDocModal", "closeDateDocModal"),
+      documentValidation: this._createModal("documentValidationModal", "closeDocumentValidationModal"),
+      // ===== INICIO DE LA MODIFICACIÓN =====
+      validations: this._createModal("modalValidations", "closeModalValidations"),
+      // ===== FIN DE LA MODIFICACIÓN =====
       toast: this._createModal("toast", "closeModaltToast"),
     };
     this._initializeCloseEvents();
@@ -111,7 +116,6 @@ class ModalManager {
     setTimeout(() => this.hide("toast"), 4000);
   }
 }
-
 /**
  * Gestiona la navegación y la lógica del formulario de múltiples pasos.
  */
@@ -201,45 +205,38 @@ class FormValidator {
     this.quoteManager = quoteManager;
   }
 
-  /**
-   * Valida el formulario de cotización inicial (paso 0).
-   * @returns {boolean} Verdadero si el formulario es válido, de lo contrario falso.
-   */
   validateStep0() {
     let isValid = true;
-    // Valida que los campos requeridos no estén vacíos.
     if (!this._validateRequiredFields(".required")) {
       isValid = false;
     }
-    // Valida que se haya seleccionado al menos un viajero.
     if (this.travelerManager.getTotalTravelers() === 0) {
       document.getElementById("viajeros-input").classList.add("error-border");
       isValid = false;
     }
-    // Valida que el checkbox de términos y condiciones esté marcado.
     if (!this._validateCheckbox("#accept", ".radioContainer")) {
       this.modalManager.show("acceptTerms");
       isValid = false;
     }
-    // Valida que el cupón, si se ingresó, sea válido.
     if (!this.validateCoupon()) {
       this.modalManager.show("errorCupon");
       isValid = false;
     }
-    // Si algo falló, muestra una notificación general.
     if (!isValid) {
       this.modalManager.showToast();
     }
     return isValid;
   }
 
-  /**
-   * Valida el formulario de información de viajeros (paso 2).
-   * @returns {boolean} Verdadero si el formulario es válido, de lo contrario falso.
-   */
   validateStep2() {
     let isValid = true;
+    
+    // ===== SE LIMPIAN LOS MENSAJES DE ERROR PERSONALIZADOS ANTES DE RE-VALIDAR =====
+    document.querySelectorAll('.custom-doc-error, .custom-date-error').forEach(el => el.style.display = 'none');
 
+    if (!this._validateSpecificDateAndDocument()) {
+      isValid = false;
+    }
     if (!this._validateRequiredFields(".required2")) isValid = false;
     if (!this._validateAgeFromBirthDate()) {
       this.modalManager.show("ageRange");
@@ -254,47 +251,62 @@ class FormValidator {
       isValid = false;
     }
     if (!this._validatePhoneInputs()) isValid = false;
-
-    // Muestra una notificación si la validación falla y no hay otro modal más específico visible.
     if (!isValid) {
-      const specificModalsVisible = ['age', 'acceptTerms', 'emailValidation'].some(modalName => {
+      const specificModalsVisible = ['age', 'acceptTerms', 'emailValidation', 'documentValidation', 'validations'].some(modalName => {
         const modal = this.modalManager.modals[modalName];
         return modal && modal.element && modal.element.style.display === 'flex';
       });
-
       if (!specificModalsVisible) {
         this.modalManager.showToast();
       }
     }
-
     return isValid;
   }
 
-  /**
-   * Valida el código del cupón de descuento.
-   * @returns {boolean} Verdadero si el cupón es válido o si el campo está vacío.
-   */
   validateCoupon() {
     const couponInput = document.getElementById("codecupponID");
     const couponCode = couponInput.value.trim().toUpperCase();
-    if (couponCode === "") return true; // Es válido no ingresar un cupón.
+    if (couponCode === "") return true;
     return this.quoteManager.isValidCoupon(couponCode);
   }
 
-  /**
-   * Valida todos los campos que tengan un selector CSS específico.
-   * Muestra un mensaje de error si el campo está vacío.
-   * @param {string} selector - El selector CSS para los campos a validar.
-   * @returns {boolean} Verdadero si todos los campos son válidos.
-   * @private
-   */
+  // ===== SE AÑADE LA LÓGICA PARA MOSTRAR LOS MENSAJES DE ERROR =====
+  _validateSpecificDateAndDocument() {
+    let isValid = true;
+    const accordionItems = document.querySelectorAll('.acordeon__item');
+    accordionItems.forEach(item => {
+      const docNumberInput = item.querySelector('.form-row-formViajeros input[type="number"]');
+      const dateInput = item.querySelector('.input-date input[type="date"]');
+      if (docNumberInput && dateInput) {
+        const dateLabel = dateInput.parentElement.querySelector('label');
+        if (dateLabel && dateLabel.textContent.includes('expedición')) {
+          const docValue = docNumberInput.value.trim();
+          const dateValue = dateInput.value;
+          if (docValue === '123456789' && dateValue === '2014-06-25') {
+            this.modalManager.show('validations');
+            docNumberInput.classList.add('error-border');
+            dateInput.classList.add('error-border');
+            
+            const docError = docNumberInput.parentElement.querySelector('.custom-doc-error');
+            const dateError = dateInput.parentElement.querySelector('.custom-date-error');
+
+            // Aquí se muestran los mensajes si se encuentran
+            if (docError) docError.style.display = 'block';
+            if (dateError) dateError.style.display = 'block';
+            
+            isValid = false;
+          }
+        }
+      }
+    });
+    return isValid;
+  }
+
   _validateRequiredFields(selector) {
     let isValid = true;
     document.querySelectorAll(selector).forEach(field => {
       const isFilled = field.type === 'checkbox' ? field.checked : field.value.trim() !== '';
       field.classList.toggle('error-border', !isFilled);
-
-      // Busca el mensaje de error "hermano" o dentro del padre.
       const errorMsg = field.closest('.form-row-formViajeros, .input-date, .cuppon, .radioContainer')?.querySelector('.required-error');
       if (errorMsg) {
         errorMsg.style.display = isFilled ? 'none' : 'block';
@@ -304,13 +316,6 @@ class FormValidator {
     return isValid;
   }
 
-  /**
-   * Valida un checkbox específico.
-   * @param {string} selector - El selector del checkbox.
-   * @param {string} containerSelector - El selector del contenedor del checkbox para aplicar el borde de error.
-   * @returns {boolean} Verdadero si el checkbox está marcado.
-   * @private
-   */
   _validateCheckbox(selector, containerSelector) {
     const checkbox = document.querySelector(selector);
     const container = document.querySelector(containerSelector);
@@ -319,16 +324,10 @@ class FormValidator {
     return isValid;
   }
 
-  /**
-   * Valida que todos los campos de correo electrónico tengan un formato válido y que los correos de confirmación coincidan.
-   * @returns {boolean} Verdadero si todos los correos son válidos.
-   * @private
-   */
   _validateAllEmails() {
     let allEmailsValid = true;
     const emailFields = document.querySelectorAll('input[type="email"].required2');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
     emailFields.forEach(field => {
       if (!emailRegex.test(field.value.trim())) {
         field.classList.add('error-border');
@@ -337,8 +336,6 @@ class FormValidator {
         field.classList.remove('error-border');
       }
     });
-
-    // Valida que el email y su confirmación coincidan.
     document.querySelectorAll('[data-email-confirm]').forEach(confirmField => {
       const emailField = document.getElementById(confirmField.dataset.emailConfirm);
       if (emailField && confirmField.value !== emailField.value) {
@@ -352,19 +349,13 @@ class FormValidator {
         if (errorMsg) errorMsg.style.display = 'none';
       }
     });
-
     return allEmailsValid;
   }
 
-  /**
-   * Valida que los campos de teléfono tengan al menos 10 dígitos.
-   * @returns {boolean} Verdadero si todos los teléfonos son válidos.
-   * @private
-   */
   _validatePhoneInputs() {
     let isValid = true;
     document.querySelectorAll('input[type="tel"]').forEach(input => {
-      const phone = input.value.replace(/\D/g, ''); // Elimina todo lo que no sea dígito.
+      const phone = input.value.replace(/\D/g, '');
       if (phone.length < 10) {
         input.classList.add('error-border');
         isValid = false;
@@ -375,20 +366,13 @@ class FormValidator {
     return isValid;
   }
 
-  /**
-   * Valida que la edad del viajero, calculada desde su fecha de nacimiento, esté entre 15 y 65 años.
-   * @returns {boolean} Verdadero si todas las edades son válidas.
-   * @private
-   */
   _validateAgeFromBirthDate() {
     let allAgesValid = true;
     document.querySelectorAll('input[type="date"][id$="DateBirthInput"].required2').forEach(field => {
       const birthDateString = field.value;
       const ageErrorMsg = field.parentElement.querySelector('.age-error');
       const requiredErrorMsg = field.parentElement.querySelector('.required-error');
-
       if (ageErrorMsg) ageErrorMsg.style.display = 'none';
-
       if (!birthDateString) {
         if (requiredErrorMsg) requiredErrorMsg.style.display = 'block';
         allAgesValid = false;
@@ -396,7 +380,6 @@ class FormValidator {
       } else {
         if (requiredErrorMsg) requiredErrorMsg.style.display = 'none';
       }
-
       const birthDate = new Date(birthDateString + "T00:00:00");
       const today = new Date();
       let age = today.getFullYear() - birthDate.getFullYear();
@@ -404,7 +387,6 @@ class FormValidator {
       if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
         age--;
       }
-
       if (age < 15 || age > 65) {
         field.classList.add('error-border');
         if (ageErrorMsg) ageErrorMsg.style.display = 'block';
@@ -417,7 +399,6 @@ class FormValidator {
     return allAgesValid;
   }
 }
-
 /**
  * Gestiona la selección del número de viajeros y sus edades.
  */
@@ -607,9 +588,15 @@ class TravelerManager {
 /**
  * Maneja la lógica de cotización, el carrito de compras y la generación de formularios de viajero.
  */
+/**
+ * Maneja la lógica de cotización, el carrito de compras y la generación de formularios de viajero.
+ */
+/**
+ * Maneja la lógica de cotización, el carrito de compras y la generación de formularios de viajero.
+ */
 class QuoteManager {
-  constructor() {
-    // Cupones de descuento válidos.
+  constructor(modalManager) {
+    this.modalManager = modalManager;
     this.validCoupons = [
       { code: "DESCUENTO10", discount: 10 },
       { code: "DESCUENTO20", discount: 20 },
@@ -627,10 +614,6 @@ class QuoteManager {
     this.codeReference = "2345610928";
   }
 
-  /**
-   * Actualiza toda la información del carrito y el resumen de la cotización.
-   * @param {TravelerManager} travelerManager - La instancia del gestor de viajeros.
-   */
   updateCartInfo(travelerManager) {
     const adultCount = travelerManager.getAdultCount();
     const minorCount = travelerManager.getMinorCount();
@@ -639,81 +622,45 @@ class QuoteManager {
     const dateStart = document.getElementById('dateStart');
     const dateEnd = document.getElementById('dateEnd');
     const selectedPlan = document.querySelector('input[name="TipoPlan"]:checked');
-
     if (!selectedPlan) return;
-
     const formattedDateStart = formatDate(dateStart.value);
     const formattedDateEnd = formatDate(dateEnd.value);
-
     let destinoPlan = selectDestino?.value === "Nacional" ? "Nacional" : "Internacional";
-
     const planCost = parseFloat(selectedPlan.value) || 0;
     const adultSubTotal = adultCount * planCost;
     const minorSubTotal = minorCount * planCost;
     const subtotal = adultSubTotal + minorSubTotal;
-
     const couponInput = document.getElementById("codecupponID");
     const couponCode = couponInput?.value.trim().toUpperCase() || "";
     const coupon = this.validCoupons.find(c => c.code === couponCode);
     const discountPercentage = coupon ? coupon.discount : 0;
     const discountAmount = (subtotal * discountPercentage) / 100;
     const finalCost = subtotal - discountAmount;
-
-    // Llama a los métodos internos para renderizar cada parte de la UI.
     this._renderCart(subtotal, discountAmount, finalCost, adultCount, minorCount, discountPercentage, adultSubTotal, minorSubTotal, destinoPlan);
     this._renderSummary(finalCost, selectedPlan.id, formattedDateStart, formattedDateEnd, discountPercentage, travelerManager);
     this._updateHeaders(selectOrigen?.value, selectDestino?.value);
   }
 
-  /**
-   * Muestra el descuento aplicado directamente en las tarjetas de los planes.
-   * @private
-   */
   _mostrarDescuentoEnTarjetas() {
     const couponInput = document.getElementById("codecupponID");
     const couponCode = couponInput?.value.trim().toUpperCase() || "";
     const coupon = this.validCoupons.find(c => c.code === couponCode);
     const discountPercentage = coupon ? coupon.discount : 0;
     const mensajeDescuento = discountPercentage > 0 ? `Descuento del ${discountPercentage}%` : "";
-
     document.getElementById("descuentoCardPlan1").textContent = mensajeDescuento;
     document.getElementById("descuentoCardPlan2").textContent = mensajeDescuento;
   }
 
-  /**
-   * Renderiza el contenido del carrito de compras en el Paso 2.
-   * @private
-   */
   _renderCart(subtotal, discountAmount, finalCost, adultCount, minorCount, discountPercentage, adultSubTotal, minorSubTotal, destinoPlan) {
     const adultTextHTML = adultCount > 0 ? `<tr><th>${destinoPlan} x ${adultCount} adulto${adultCount > 1 ? "s" : ""}</th><th>COP ${adultSubTotal.toLocaleString("es-CO")}</th></tr>` : "";
     const minorTextHTML = minorCount > 0 ? `<tr><th>${destinoPlan} x ${minorCount} menor${minorCount > 1 ? "es" : ""} de edad</th><th>COP ${minorSubTotal.toLocaleString("es-CO")}</th></tr>` : "";
     const discountHTML = discountAmount > 0 ? `<tr><td>Descuento ${discountPercentage}%</td><td>-COP ${discountAmount.toLocaleString("es-CO")}</td></tr>` : "";
-
-    let cartHTML = `<table style="margin-top: 15px">
-      <tbody>
-        ${adultTextHTML}
-        ${minorTextHTML}
-        <tr><td>Subtotal</td><td>COP ${subtotal.toLocaleString('es-CO')}</td></tr>
-        ${discountHTML}
-        <tr><td><b>TOTAL</b></td><td><b>COP ${finalCost.toLocaleString('es-CO')}</b></td></tr>
-      </tbody>
-    </table>`;
-
+    let cartHTML = `<table style="margin-top: 15px"><tbody>${adultTextHTML}${minorTextHTML}<tr><td>Subtotal</td><td>COP ${subtotal.toLocaleString('es-CO')}</td></tr>${discountHTML}<tr><td><b>TOTAL</b></td><td><b>COP ${finalCost.toLocaleString('es-CO')}</b></td></tr></tbody></table>`;
     if (this.dom.cart) this.dom.cart.innerHTML = cartHTML;
   }
 
-  /**
-   * Renderiza el resumen completo de la compra en el Paso 3.
-   * @private
-   */
-  /**
-   * Renderiza el resumen completo de la compra en el Paso 3.
-   * @private
-   */
   _renderSummary(finalCost, selectedPlanId, formattedDateStart, formattedDateEnd, discountPercentage, travelerManager) {
     if (!this.dom.totalSummary) return;
-
-    // Recalcula valores necesarios para el carrito.
     const adultCount = travelerManager.getAdultCount();
     const minorCount = travelerManager.getMinorCount();
     const destinoPlan = document.getElementById("destinoID")?.value === "Nacional" ? "Nacional" : "Internacional";
@@ -723,117 +670,62 @@ class QuoteManager {
     const minorSubTotal = minorCount * planCost;
     const subtotal = adultSubTotal + minorSubTotal;
     const discountAmount = (subtotal * discountPercentage) / 100;
-
-    // Construye la tabla del carrito para el resumen.
     const adultTextHTML = adultCount > 0 ? `<tr><th>${destinoPlan} x ${adultCount} adulto${adultCount > 1 ? "s" : ""}</th><th>COP ${adultSubTotal.toLocaleString("es-CO")}</th></tr>` : "";
     const minorTextHTML = minorCount > 0 ? `<tr><th>${destinoPlan} x ${minorCount} menor${minorCount > 1 ? "es" : ""} de edad</th><th>COP ${minorSubTotal.toLocaleString("es-CO")}</th></tr>` : "";
     const discountHTML = discountAmount > 0 ? `<tr><td>Descuento ${discountPercentage}%</td><td>-COP ${discountAmount.toLocaleString("es-CO")}</td></tr>` : "";
     const cartHTML = `<table style="margin-top: 15px"><tbody>${adultTextHTML}${minorTextHTML}<tr><td>Subtotal</td><td>COP ${subtotal.toLocaleString('es-CO')}</td></tr>${discountHTML}<tr><td><b>TOTAL</b></td><td><b>COP ${finalCost.toLocaleString('es-CO')}</b></td></tr></tbody></table>`;
-
-    // --- INICIO DE LA CORRECCIÓN DEFINITIVA ---
     const planElement = document.getElementById(selectedPlanId);
     const planCard = planElement?.nextElementSibling;
     const h3Element = planCard?.querySelector('h3');
-
-    let planName = "seleccionado"; // Valor por defecto
-
+    let planName = "seleccionado";
     if (h3Element) {
-        // Usamos .textContent que es más confiable para obtener el texto crudo.
-        // Luego, .trim() quita espacios al inicio/final y .replace() limpia los saltos de línea y espacios múltiples.
-        planName = h3Element.textContent.trim().replace(/\s+/g, ' ');
+      planName = h3Element.textContent.trim().replace(/\s+/g, ' ');
     }
-    // --- FIN DE LA CORRECCIÓN DEFINITIVA ---
-
-    // Construye el HTML final para el resumen del Paso 3.
-    this.dom.totalSummary.innerHTML = `
-        <div class="form-row-border-viajeros">
-            <div class="flex"><h3 class="multisteps-form__title">Resumen de <span style="color: #ff7500">compra</span></h3></div>
-            <div class="min-cart">
-                <ul>
-                    <li>La vigencia para su seguro de viaje va desde el ${formattedDateStart} al ${formattedDateEnd}.</li>
-                    <li>El tipo de plan que usted ha seleccionado es: <strong>${planName}</strong>.</li>
-                    <li>El valor a pagar por su compra con el descuento aplicado es de <strong>COP ${finalCost.toLocaleString("es-CO")}</strong>.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="form-row-border-viajeros carrito-viajeros">
-            <div class="flex">
-                <img src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/carrito.svg" alt="" style="margin-right: 10px" />
-                <div>
-                    <h3 class="multisteps-form__title">Tu <span style="color: #ff7500">carrito</span></h3>
-                    <span class="vigency-data">Vigencia del ${formattedDateStart} al ${formattedDateEnd}</span>
-                </div>
-            </div>
-            <div class="min-cart">${cartHTML}</div>
-        </div>
-    `;
+    this.dom.totalSummary.innerHTML = `<div class="form-row-border-viajeros"><div class="flex"><h3 class="multisteps-form__title">Resumen de <span style="color: #ff7500">compra</span></h3></div><div class="min-cart"><ul><li>La vigencia para su seguro de viaje va desde el ${formattedDateStart} al ${formattedDateEnd}.</li><li>El tipo de plan que usted ha seleccionado es: <strong>${planName}</strong>.</li><li>El valor a pagar por su compra con el descuento aplicado es de <strong>COP ${finalCost.toLocaleString("es-CO")}</strong>.</li></ul></div></div><div class="form-row-border-viajeros carrito-viajeros"><div class="flex"><img src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/carrito.svg" alt="" style="margin-right: 10px" /><div><h3 class="multisteps-form__title">Tu <span style="color: #ff7500">carrito</span></h3><span class="vigency-data">Vigencia del ${formattedDateStart} al ${formattedDateEnd}</span></div></div><div class="min-cart">${cartHTML}</div></div>`;
   }
-  /**
-   * Actualiza los encabezados de Origen y Destino.
-   * @private
-   */
+
   _updateHeaders(origen, destino) {
     if (this.dom.headerIda) this.dom.headerIda.querySelector('span').textContent = `${origen} - ${destino}`;
     if (this.dom.headerVuelta) this.dom.headerVuelta.querySelector('span').textContent = `${destino} - ${origen}`;
   }
 
-  /**
-   * Genera dinámicamente los formularios para cada viajero.
-   * @param {TravelerManager} travelerManager - La instancia del gestor de viajeros.
-   */
   generateTravelerForms(travelerManager) {
     this.dom.formContainer.innerHTML = '';
     this.dom.voucherContainer.innerHTML = '';
     const adultCount = travelerManager.getAdultCount();
     const minorCount = travelerManager.getMinorCount();
     let travelerNumber = 1;
-
-    // Crea formularios para adultos.
     for (let i = 1; i <= adultCount; i++) {
       this.dom.formContainer.appendChild(this._createForm('adult', travelerNumber, i === 1));
       travelerNumber++;
     }
-
-    // Si solo hay menores, crea un formulario para un adulto responsable.
     if (minorCount > 0 && adultCount === 0) {
       this.dom.formContainer.appendChild(this._createForm('responsible', 0, true));
     }
-
-    // Crea formularios para menores.
     for (let i = 1; i <= minorCount; i++) {
       this.dom.formContainer.appendChild(this._createForm('minor', travelerNumber, false));
       travelerNumber++;
     }
-
-    // Si hay viajeros, crea el formulario del voucher.
     if (adultCount > 0 || minorCount > 0) {
       this.dom.voucherContainer.innerHTML = this._createVoucherForm(adultCount > 0, adultCount);
       this._attachVoucherListener();
     }
   }
 
-  /**
-   * Configura el listener para el selector de quién recibe el voucher.
-   * Autocompleta los datos del voucher basados en la selección.
-   * @private
-   */
   _attachVoucherListener() {
     const nameVoucherSelect = document.getElementById('nameVoucherInput');
     if (!nameVoucherSelect) return;
-
     nameVoucherSelect.addEventListener('change', () => {
       const selectedValue = nameVoucherSelect.value;
       const voucherEmailInput = document.getElementById('voucherEmailInput');
       const voucherConfirmEmailInput = document.getElementById('voucherConfirmEmailInput');
       const voucherNumberInput = document.getElementById('voucherNumberInput');
-
       if (!selectedValue) {
         voucherEmailInput.value = '';
         voucherConfirmEmailInput.value = '';
         voucherNumberInput.value = '';
         return;
       }
-
       let sourceEmailId, sourcePhoneId;
       if (selectedValue === 'No-Viajero') {
         sourceEmailId = 'ResponsableMenoremailInput';
@@ -843,24 +735,16 @@ class QuoteManager {
         sourceEmailId = `${travelerNumber}emailInput`;
         sourcePhoneId = `${travelerNumber}numberInput`;
       }
-
       const sourceEmailInput = document.getElementById(sourceEmailId);
       const sourcePhoneInput = document.getElementById(sourcePhoneId);
-
       voucherEmailInput.value = sourceEmailInput ? sourceEmailInput.value : '';
       voucherConfirmEmailInput.value = sourceEmailInput ? sourceEmailInput.value : '';
       voucherNumberInput.value = sourcePhoneInput ? sourcePhoneInput.value : '';
     });
   }
 
-  /**
-   * Crea el HTML para el formulario de un viajero y AÑADE LOS LISTENERS DE VALIDACIÓN EN TIEMPO REAL.
-   * @returns {HTMLElement} El elemento div del formulario.
-   * @private
-   */
   _createForm(type, number, isPrincipal) {
     const formDiv = document.createElement('div');
-    // ... (lógica de prefijos y títulos igual que antes)
     let title, subtitle, idPrefix;
     switch (type) {
       case 'adult':
@@ -879,8 +763,8 @@ class QuoteManager {
         idPrefix = 'ResponsableMenor';
         break;
     }
-
     formDiv.className = `acordeon__item form-${type}`;
+    // ===== SE AÑADEN LOS <p> DE ERROR AQUÍ =====
     formDiv.innerHTML = `
         <input type="radio" name="acordeon" class="acordeon-input" id="${type}${number}" ${isPrincipal ? "checked" : ""}>
         <label for="${type}${number}" class="acordeon__titulo flex">
@@ -890,9 +774,13 @@ class QuoteManager {
         <div class="acordeon__contenido">
             <div class="form-grid">
                 <div class="form-row-formViajeros"><label>Tipo de documento *</label><select id="${idPrefix}documentoID" class="selectcontainer small-input required2"><option value="CC">Nacional</option><option value="CE">Extranjera</option></select><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p></div>
-                <div class="form-row-formViajeros"><label>Numero de documento *</label><input type="number" class="selectcontainer small-input required2"><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p></div>
+                <div class="form-row-formViajeros"><label>Numero de documento *</label><input type="number" class="selectcontainer small-input required2"><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p>
+                <p class="error-message-viajeros custom-doc-error" style="display:none;">Este número de documento no puede continuar.</p>
+                </div>
             </div>
-            <div class="input-date" style="margin-top: 10px;"><label>Fecha de ${type === 'minor' ? 'vencimiento' : 'expedición'} del documento *</label><input type="date" class="selectcontainer small-input required2"><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p></div>
+            <div class="input-date" style="margin-top: 10px;"><label>Fecha de ${type === 'minor' ? 'vencimiento' : 'expedición'} del documento *</label><input type="date" class="selectcontainer small-input required2"><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p>
+            <p class="error-message-viajeros custom-date-error" style="display:none;">Fecha de expedición no válida.</p>
+            </div>
             <div class="form-grid">
                 <div class="form-row-formViajeros"><label>Nombre *</label><input type="text" id="${idPrefix}nameInput" placeholder="Ingrese" class="required2" /><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p></div>
                 <div class="form-row-formViajeros"><label>Apellidos *</label><input type="text" placeholder="Ingrese" class="required2" /><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p></div>
@@ -902,46 +790,39 @@ class QuoteManager {
                 <div class="form-row-formViajeros"><label>Género *</label><select class="selectcontainer small-input required2"><option value="Hombre">Hombre</option><option value="Mujer">Mujer</option></select><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p></div>
             </div>
             <div class="form-grid">
-                <div class="form-row-formViajeros">
-                    <label>Correo electrónico *</label>
-                    <input type="email" id="${idPrefix}emailInput" placeholder="Ingrese" class="required2" />
-                    <p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p>
-                </div>
-                <div class="form-row-formViajeros">
-                    <label>Confirma tu correo electrónico *</label>
-                    <input type="email" data-email-confirm="${idPrefix}emailInput" placeholder="Ingrese" class="required2" />
-                    <p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p>
-                    <p class="error-message-viajeros email-match-error" style="display:none;">Los correos no coinciden</p>
-                </div>
+                <div class="form-row-formViajeros"><label>Correo electrónico *</label><input type="email" id="${idPrefix}emailInput" placeholder="Ingrese" class="required2" /><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p></div>
+                <div class="form-row-formViajeros"><label>Confirma tu correo electrónico *</label><input type="email" data-email-confirm="${idPrefix}emailInput" placeholder="Ingrese" class="required2" /><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p><p class="error-message-viajeros email-match-error" style="display:none;">Los correos no coinciden</p></div>
             </div>
-            <div class="form-row-formViajeros">
-                <label>Celular *</label>
-                <input type="tel" id="${idPrefix}numberInput" placeholder="Celular" pattern="[0-9]{10,15}" maxlength="15" class="required2" />
-                <p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p>
-            </div>
+            <div class="form-row-formViajeros"><label>Celular *</label><input type="tel" id="${idPrefix}numberInput" placeholder="Celular" pattern="[0-9]{10,15}" maxlength="15" class="required2" /><p class="error-message-viajeros required-error" style="display:none;">Campo obligatorio</p></div>
         </div>
     `;
 
-    // ===== INICIO DE LA LÓGICA AGREGADA =====
-    // Se buscan todos los campos dentro del formulario recién creado.
     const fields = formDiv.querySelectorAll('.required2');
     fields.forEach(field => {
-      // Se determina el tipo de evento adecuado para cada campo.
       const eventType = (field.tagName.toLowerCase() === 'select' || field.type === 'date' || field.type === 'checkbox') ? 'change' : 'input';
-
       field.addEventListener(eventType, () => {
+        // ===== SE AÑADE LA LÓGICA PARA MOSTRAR/OCULTAR EL ERROR DE CÉDULA =====
+        if (field.type === 'number') {
+          const label = field.parentElement.querySelector('label');
+          const customError = field.parentElement.querySelector('.custom-doc-error');
+          if (label && label.textContent.includes('Numero de documento')) {
+            if (field.value.trim() === '123456789') {
+              this.modalManager.show('documentValidation');
+              if (customError) customError.style.display = 'block';
+            } else {
+              if (customError) customError.style.display = 'none';
+            }
+          }
+        }
+
         let isFieldValid = true;
         const parentWrapper = field.closest('.form-row-formViajeros, .input-date');
         const requiredError = parentWrapper ? parentWrapper.querySelector('.required-error') : null;
-
-        // 1. Validación de campo requerido
         if (field.value.trim() === '') {
           isFieldValid = false;
         } else if (requiredError) {
           requiredError.style.display = 'none';
         }
-
-        // 2. Validación de edad (si es el campo de fecha de nacimiento)
         if (field.id.includes('DateBirthInput') && field.value) {
           const ageError = parentWrapper.querySelector('.age-error');
           const birthDate = new Date(field.value + "T00:00:00");
@@ -957,8 +838,6 @@ class QuoteManager {
             ageError.style.display = 'none';
           }
         }
-
-        // 3. Validación de coincidencia de correos
         if (field.hasAttribute('data-email-confirm')) {
           const emailField = document.getElementById(field.dataset.emailConfirm);
           const emailMatchError = parentWrapper.querySelector('.email-match-error');
@@ -968,52 +847,26 @@ class QuoteManager {
             emailMatchError.style.display = 'none';
           }
         }
-
-        // Si el campo es válido, se quita el borde rojo.
         if (isFieldValid) {
           field.classList.remove('error-border');
         }
       });
     });
-    // ===== FIN DE LA LÓGICA AGREGADA =====
 
     return formDiv;
   }
 
-  /**
-   * Crea el HTML para el formulario de información del voucher.
-   * @returns {string} El HTML del formulario.
-   * @private
-   */
   _createVoucherForm(hasAdults, adultCount) {
-    let optionsHTML = hasAdults
-      ? Array.from({ length: adultCount }, (_, i) => `<option value="Viajero ${i + 1}">Viajero ${i + 1}</option>`).join('')
-      : `<option value="No-Viajero">No viajero mayor de edad</option>`;
-
-    return `
-        <div class="flex">
-            <img src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/billete-de-avion.svg" alt="" style="margin-right: 10px" />
-            <div><h3 class="multisteps-form__title">Información del <span style="color: #ff7500">voucher</span></h3></div>
-        </div>
-        <div class="form-row-formViajeros"><label>¿Quién recibe el voucher? *</label><select id="nameVoucherInput" class="selectcontainer small-input required2"><option value="" hidden selected>Seleccione</option>${optionsHTML}</select></div>
-        <div class="form-grid">
-            <div class="form-row-formViajeros"><label>Correo electrónico *</label><input type="email" id="voucherEmailInput" placeholder="Ingrese" class="required2" /></div>
-            <div class="form-row-formViajeros"><label>Confirma tu correo electrónico *</label><input type="email" id="voucherConfirmEmailInput" data-email-confirm="voucherEmailInput" placeholder="Ingrese" class="required2" /><p class="error-message-viajeros email-match-error" style="display:none;">los correos no coinciden</p></div>
-        </div>
-        <div class="form-row-formViajeros"><label>Celular *</label><input type="tel" id="voucherNumberInput" placeholder="Celular" class="required2" maxlength="15" pattern="[0-9]{10,15}" /></div>
-    `;
+    let optionsHTML = hasAdults ?
+      Array.from({ length: adultCount }, (_, i) => `<option value="Viajero ${i + 1}">Viajero ${i + 1}</option>`).join('') :
+      `<option value="No-Viajero">No viajero mayor de edad</option>`;
+    return `<div class="flex"><img src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/billete-de-avion.svg" alt="" style="margin-right: 10px" /><div><h3 class="multisteps-form__title">Información del <span style="color: #ff7500">voucher</span></h3></div></div><div class="form-row-formViajeros"><label>¿Quién recibe el voucher? *</label><select id="nameVoucherInput" class="selectcontainer small-input required2"><option value="" hidden selected>Seleccione</option>${optionsHTML}</select></div><div class="form-grid"><div class="form-row-formViajeros"><label>Correo electrónico *</label><input type="email" id="voucherEmailInput" placeholder="Ingrese" class="required2" /></div><div class="form-row-formViajeros"><label>Confirma tu correo electrónico *</label><input type="email" id="voucherConfirmEmailInput" data-email-confirm="voucherEmailInput" placeholder="Ingrese" class="required2" /><p class="error-message-viajeros email-match-error" style="display:none;">los correos no coinciden</p></div></div><div class="form-row-formViajeros"><label>Celular *</label><input type="tel" id="voucherNumberInput" placeholder="Celular" class="required2" maxlength="15" pattern="[0-9]{10,15}" /></div>`;
   }
 
-  /**
-   * Verifica si un código de cupón es válido.
-   * @param {string} couponCode - El código del cupón.
-   * @returns {boolean} Verdadero si el cupón existe.
-   */
   isValidCoupon(couponCode) {
     return this.validCoupons.some(c => c.code === couponCode.toUpperCase());
   }
 }
-
 // #endregion
 
 // #region CLASE PRINCIPAL DE LA APLICACIÓN
@@ -1027,7 +880,7 @@ class TravelerQuoteApp {
     // Instancia todas las clases gestoras.
     this.modalManager = new ModalManager();
     this.travelerManager = new TravelerManager(this.modalManager);
-    this.quoteManager = new QuoteManager();
+    this.quoteManager = new QuoteManager(this.modalManager);
     this.formValidator = new FormValidator(this.modalManager, this.travelerManager, this.quoteManager);
     this.formStepper = new FormStepper();
     // Inicia la aplicación.

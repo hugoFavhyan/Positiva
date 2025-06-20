@@ -1147,15 +1147,22 @@
               </div>
               <div class="modal-viajerosGen" id="modalValidations">
                 <div class="modal-content">
-                  <span class="close"><img
-                      src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg"></span>
-                  <img src="https://positivapruebas.com.co/wp-content/uploads/lupa-error-modal.svg" alt="Icon"
-                    class="lupaModalIcon" />
-                  <div class="container__titleModal">
-                    <h2>Fecha de expedición no válida</h2>
-                    <div class="title-line"></div>
+
+                  <div class="modal-header">
+                    <button id="closeModalValidations" class="close-modal-btn">×</button>
                   </div>
-                  <p>Por favor, asegúrate de que la fecha de expedición del documento sea correcta para continuar.</p>
+
+                  <div class="modal-text flex">
+                    <img src="https://positivapruebas.com.co/wp-content/uploads/lupa-error-modal.svg" alt="Icon"
+                      class="imgModal" />
+
+                    <span>Fecha de expedición no válida</span>
+
+                    <div class="lineaContainerArchivosDevolucion"></div>
+
+                    <p>Por favor, asegúrate de que la fecha de expedición del documento sea correcta para continuar.</p>
+                  </div>
+
                 </div>
               </div>
               <div id="ageRangeModal" class="modal-viajerosGen" style="display: none">
@@ -1192,6 +1199,26 @@
                     <div class="lineaContainerArchivosDevolucion"></div>
                     <p>
                       Por favor, asegúrate de que la fecha de vencimiento del documento sea correcta para continuar.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div id="documentValidationModal" class="modal-viajerosGen" style="display: none">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button id="closeDocumentValidationModal" class="close-modal-btn">
+                      ×
+                    </button>
+                  </div>
+                  <div class="modal-text flex">
+                    <img class="imgModal"
+                      src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/error.svg/94c48011-85a1-960c-c797-aae73bc072a1?t=1733237256245">
+                    <span>No es posible continuar con el proceso</span>
+                    <div class="lineaContainerArchivosDevolucion"></div>
+                    <p>
+                      El tipo y número de documento ingresados no han superado las validaciones establecidas.
+                      <br><br>
+                      Si tienes alguna inquietud, comunícate con nuestro equipo de soporte para obtener más información.
                     </p>
                   </div>
                 </div>
