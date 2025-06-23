@@ -1,4 +1,3 @@
-
 .container-body {
   font-family: Poppins;
   background-image: url("https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/fondo.svg/049e9ec1-ac6d-01f3-d2fe-ee2e25db414b?t=1732808723717") !important;
@@ -302,7 +301,7 @@
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.7);
 }
-.container-body .modal-content {
+.container-body .modal-cont-viajeros {
   display: block;
   background-color: #fefefe;
   margin: 10% auto;
@@ -314,32 +313,30 @@
   border-radius: 16px;
   height: min-content;
 }
-.container-body .modal-content .modal-text {
+.container-body .modal-cont-viajeros .modal-text {
   justify-content: center;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
-.container-body .modal-content .modal-text span {
+.container-body .modal-cont-viajeros .modal-text span {
   font-size: 25px;
   font-weight: 600;
 }
-.container-body .modal-content .modal-text #showName  {
+.container-body .modal-cont-viajeros .modal-text #showName  {
   font-size: 16px !important;
   font-weight: 400;
 }
-.container-body .modal-content .modal-text #showcodeReference{
+.container-body .modal-cont-viajeros .modal-text #showcodeReference{
   border: 1px solid gray;
   padding: 5px 10px; 
   font-size: 16px;
 }
-
 /* Este es el selector corregido y mejorado */
 #showcodeReference {
     border: 1px solid gray;
     padding: 10px 15px; /* Un poco más de espacio para que se vea mejor */
     font-size: 16px;
-    
     /* ---- Estilos recomendados basados en tu JS ---- */
     /* Tu JS inserta un ícono y texto, 'flex' los alineará correctamente */
     display: flex; 
@@ -347,13 +344,12 @@
     gap: 10px; /* Añade un espacio entre el ícono y el texto */
     margin-top: 15px; /* Le da un espacio superior para separarlo */
 }
-.container-body .modal-content .modal-text .imgModal {
+.container-body .modal-cont-viajeros .modal-text .imgModal {
   width: 80px;
   height: auto;
 }
-.container-body .close-modal-btn {
+.container-body .close-btn-viajeros {
   color: #fff;
-  background: #393b38;
   padding: 0px 13px;
   border-radius: 56px;
   font-size: 30px;
@@ -367,7 +363,7 @@
   border: none;
   padding: 0;
 }
-.container-body .close-modal-btn:hover {
+.container-body .close-btn-viajeros:hover {
   background-color: #e74c3c;
   border: none;
 }
@@ -923,7 +919,7 @@
   background-color: transparent !important;
   z-index: 9;
 }
-.container-body .modal-toast-gen .modal-content {
+.container-body .modal-toast-gen .modal-cont-viajeros {
   margin: 0;
   position: absolute;
   right: 0px;
@@ -1066,7 +1062,7 @@
   .container-body .multisteps-form__form .checkout {
     flex-direction: column;
   }
-  .container-body .modal-content {
+  .container-body .modal-cont-viajeros {
     width: 75%;
     height: fit-content;
   }
@@ -1092,7 +1088,7 @@
     .container-body .form-grid {
       grid-template-columns: 1fr;
   }
-  .container-body .modal-toast-gen .modal-content {
+  .container-body .modal-toast-gen .modal-cont-viajeros {
     width: 95%;
   }
   .container-body .label-details-plan{

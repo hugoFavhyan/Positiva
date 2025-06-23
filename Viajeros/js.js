@@ -113,7 +113,7 @@ class ModalManager {
    */
   showToast() {
     this.show("toast");
-    setTimeout(() => this.hide("toast"), 4000);
+    setTimeout(() => this.hide("toast"), 500000);
   }
 }
 /**
@@ -1115,4 +1115,4 @@ document.getElementById("submit-button-travelers").addEventListener("click", fun
 // Se asegura de que el DOM esté completamente cargado antes de iniciar la aplicación.
 document.addEventListener("DOMContentLoaded", () => {
   new TravelerQuoteApp();
-});
+});    
