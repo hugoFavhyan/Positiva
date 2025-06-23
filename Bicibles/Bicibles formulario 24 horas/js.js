@@ -412,6 +412,8 @@ class ModalManager {
     }
 }
 // Clase principal para manejar el formulario
+// REEMPLAZA TODA LA CLASE PersonalDataForm CON ESTA VERSIÓN CORREGIDA:
+
 class PersonalDataForm {
     constructor() {
         this.mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -421,6 +423,7 @@ class PersonalDataForm {
         this.cityAutocomplete = null;
         this.elements = {};
         this.validators = {};
+        this.initialized = false; // ← NUEVA PROPIEDAD PARA EVITAR MÚLTIPLES INICIALIZACIONES
 
         // --- Definiciones para la validación específica ---
         this.blockedCedula = "123456789";
@@ -438,6 +441,12 @@ class PersonalDataForm {
     }
 
     async init() {
+        // ← VERIFICAR SI YA ESTÁ INICIALIZADO
+        if (this.initialized) {
+            console.log('Formulario ya inicializado, saltando...');
+            return;
+        }
+
         this.getElements();
         this.setupSelectOptions();
         this.setupValidations();
@@ -445,6 +454,13 @@ class PersonalDataForm {
         this.setupCityAutocomplete();
         this.setupModals();
         this.setupEventListeners();
+        
+        this.initialized = true; // ← MARCAR COMO INICIALIZADO
+        
+        // ← AGREGAR CLASE AL FORMULARIO PARA IDENTIFICAR QUE YA ESTÁ INICIALIZADO
+        if (this.elements.formularioDatosPersonales) {
+            this.elements.formularioDatosPersonales.classList.add('form-initialized');
+        }
     }
 
     getElements() {
@@ -464,13 +480,37 @@ class PersonalDataForm {
     }
 
     setupSelectOptions() {
-        const documentTypes = [{ text: "Cédula de Ciudadanía", value: "Cédula de Ciudadanía" }, { text: "NIT", value: "Número de Identificación Tributaria" }];
-        const genderTypes = [{ text: "Masculino", value: "Masculino" }, { text: "Femenino", value: "Femenino" }];
-        this.mapDataToSelect(documentTypes, this.elements.tipoDocumento);
-        this.mapDataToSelect(genderTypes, this.elements.genero);
+        // ← VERIFICAR SI LOS SELECTS YA TIENEN OPCIONES (ADEMÁS DE LA PRIMERA)
+        if (this.elements.tipoDocumento && this.elements.tipoDocumento.options.length > 1) {
+            console.log('Select de tipo documento ya tiene opciones, saltando...');
+            return;
+        }
+        
+        if (this.elements.genero && this.elements.genero.options.length > 1) {
+            console.log('Select de género ya tiene opciones, saltando...');
+            return;
+        }
+
+        const documentTypes = [
+            { text: "Cédula de Ciudadanía", value: "Cédula de Ciudadanía" }, 
+            { text: "NIT", value: "Número de Identificación Tributaria" }
+        ];
+        const genderTypes = [
+            { text: "Masculino", value: "Masculino" }, 
+            { text: "Femenino", value: "Femenino" }
+        ];
+        
+        if (this.elements.tipoDocumento) {
+            this.mapDataToSelect(documentTypes, this.elements.tipoDocumento);
+        }
+        if (this.elements.genero) {
+            this.mapDataToSelect(genderTypes, this.elements.genero);
+        }
     }
 
     mapDataToSelect(options, selectElement) {
+        if (!selectElement) return;
+        
         options.forEach(option => {
             const optionElement = document.createElement("option");
             optionElement.value = option.value;
@@ -480,22 +520,58 @@ class PersonalDataForm {
     }
 
     setupValidations() {
-        Validator.validateAlphanumeric(this.elements.primerNombre);
-        Validator.validateAlphanumeric(this.elements.apellido);
-        Validator.validateNumbers(this.elements.numeroDocumento);
-        Validator.validateAddress(this.elements.direccionResidencia);
-        this.validators.emailPrimary = new EmailValidator(this.elements.correoElectronico, this.errorMessages);
-        this.validators.emailConfirm = new EmailValidator(this.elements.confirmarCorreo, this.errorMessages);
-        this.validators.phone = new PhoneValidator(this.elements.telefono, this.errorMessages);
-        this.validators.birthDate = new BirthDateValidator(this.elements.fechaNacimiento, this.errorMessages);
-        this.validators.activationDate = new ActivationDateValidator(this.elements.fechaActivacion, this.errorMessages);
+        // ← VERIFICAR SI LAS VALIDACIONES YA ESTÁN CONFIGURADAS
+        if (this.elements.primerNombre && this.elements.primerNombre.hasAttribute('data-validation-setup')) {
+            console.log('Validaciones ya configuradas, saltando...');
+            return;
+        }
+
+        if (this.elements.primerNombre) {
+            Validator.validateAlphanumeric(this.elements.primerNombre);
+            this.elements.primerNombre.setAttribute('data-validation-setup', 'true');
+        }
+        if (this.elements.apellido) {
+            Validator.validateAlphanumeric(this.elements.apellido);
+            this.elements.apellido.setAttribute('data-validation-setup', 'true');
+        }
+        if (this.elements.numeroDocumento) {
+            Validator.validateNumbers(this.elements.numeroDocumento);
+            this.elements.numeroDocumento.setAttribute('data-validation-setup', 'true');
+        }
+        if (this.elements.direccionResidencia) {
+            Validator.validateAddress(this.elements.direccionResidencia);
+            this.elements.direccionResidencia.setAttribute('data-validation-setup', 'true');
+        }
+        
+        if (this.elements.correoElectronico) {
+            this.validators.emailPrimary = new EmailValidator(this.elements.correoElectronico, this.errorMessages);
+        }
+        if (this.elements.confirmarCorreo) {
+            this.validators.emailConfirm = new EmailValidator(this.elements.confirmarCorreo, this.errorMessages);
+        }
+        if (this.elements.telefono) {
+            this.validators.phone = new PhoneValidator(this.elements.telefono, this.errorMessages);
+        }
+        if (this.elements.fechaNacimiento) {
+            this.validators.birthDate = new BirthDateValidator(this.elements.fechaNacimiento, this.errorMessages);
+        }
+        if (this.elements.fechaActivacion) {
+            this.validators.activationDate = new ActivationDateValidator(this.elements.fechaActivacion, this.errorMessages);
+        }
+        
         this.setupErrorClearing();
     }
 
     setupErrorClearing() {
+        if (!this.elements.formularioDatosPersonales) return;
+        
         const inputs = this.elements.formularioDatosPersonales.querySelectorAll("input, select");
         inputs.forEach(input => {
-            input.addEventListener("input", () => this.clearFieldError(input));
+            // ← VERIFICAR SI YA TIENE EL EVENT LISTENER
+            if (!input.hasAttribute('data-error-clearing-setup')) {
+                input.addEventListener("input", () => this.clearFieldError(input));
+                input.setAttribute('data-error-clearing-setup', 'true');
+            }
         });
     }
 
@@ -508,6 +584,12 @@ class PersonalDataForm {
     }
 
     async loadLocationData() {
+        // ← VERIFICAR SI LOS DATOS YA ESTÁN CARGADOS
+        if (this.locationService.municipios.length > 0 && this.locationService.departamentos.length > 0) {
+            console.log('Datos de ubicación ya cargados, saltando...');
+            return;
+        }
+
         try {
             await this.locationService.getCities();
         } catch (error) {
@@ -516,31 +598,60 @@ class PersonalDataForm {
     }
 
     setupCityAutocomplete() {
-        this.cityAutocomplete = new CityAutocomplete(this.locationService, this.elements.ciudad, this.elements["resultado-ciudad"]);
+        // ← VERIFICAR SI EL AUTOCOMPLETADO YA ESTÁ CONFIGURADO
+        if (this.cityAutocomplete) {
+            console.log('Autocompletado de ciudad ya configurado, saltando...');
+            return;
+        }
+
+        if (this.elements.ciudad && this.elements["resultado-ciudad"]) {
+            this.cityAutocomplete = new CityAutocomplete(this.locationService, this.elements.ciudad, this.elements["resultado-ciudad"]);
+        }
     }
 
     setupModals() {
         const modalValidations = document.getElementById("modalValidations");
+        if (!modalValidations) return;
+        
         const closeModal = modalValidations.querySelector(".close");
-        this.modalManager.registerModal("validations", modalValidations, closeModal);
+        if (closeModal) {
+            this.modalManager.registerModal("validations", modalValidations, closeModal);
+        }
     }
 
     setupEventListeners() {
-        this.elements.botonContinuar.addEventListener("click", (event) => this.handleSubmit(event));
-        this.elements.numeroDocumento.addEventListener("blur", () => this.validateBlockedCedulaOnBlur());
+        // ← VERIFICAR SI LOS EVENT LISTENERS YA ESTÁN CONFIGURADOS
+        if (this.elements.botonContinuar && this.elements.botonContinuar.hasAttribute('data-listeners-setup')) {
+            console.log('Event listeners ya configurados, saltando...');
+            return;
+        }
+
+        if (this.elements.botonContinuar) {
+            this.elements.botonContinuar.addEventListener("click", (event) => this.handleSubmit(event));
+            this.elements.botonContinuar.setAttribute('data-listeners-setup', 'true');
+        }
+        
+        if (this.elements.numeroDocumento) {
+            this.elements.numeroDocumento.addEventListener("blur", () => this.validateBlockedCedulaOnBlur());
+        }
 
         const reloadButton = document.getElementById("reloadButton");
-        if (reloadButton) {
+        if (reloadButton && !reloadButton.hasAttribute('data-listeners-setup')) {
             reloadButton.addEventListener("click", () => {
                 document.getElementById("resumen-compra").style.display = "none";
                 document.getElementById("form-anual").style.display = "block";
             });
+            reloadButton.setAttribute('data-listeners-setup', 'true');
         }
     }
 
     showCustomValidationErrorModal(errorData) {
-        this.elements.modalValidationTitle.textContent = errorData.title;
-        this.elements.modalValidationMessage.innerHTML = errorData.body.replace(/\n/g, '<br>');
+        if (this.elements.modalValidationTitle) {
+            this.elements.modalValidationTitle.textContent = errorData.title;
+        }
+        if (this.elements.modalValidationMessage) {
+            this.elements.modalValidationMessage.innerHTML = errorData.body.replace(/\n/g, '<br>');
+        }
         this.modalManager.openModal("validations");
     }
 
@@ -683,44 +794,87 @@ class PersonalDataForm {
 
     onFormError() {
         const toast = document.getElementById("toast");
-        toast.classList.add("showToastError");
-        setTimeout(() => {
-            toast.classList.remove("showToastError");
-        }, 3000);
+        if (toast) {
+            toast.classList.add("showToastError");
+            setTimeout(() => {
+                toast.classList.remove("showToastError");
+            }, 3000);
+        }
     }
 
-    populateSummary() {
-        const summaryElements = {
-            nombre: `${this.elements.primerNombre.value} ${this.elements.apellido.value}`,
-            tipoDocumentoResumen: this.elements.tipoDocumento.value,
-            documento: this.elements.numeroDocumento.value,
-            fechaExpedicionResumen: this.elements.fechaExpedicion.value,
-            direccion: this.elements.direccionResidencia.value,
-            fechaNacimientoResumen: this.elements.fechaNacimiento.value,
-            CiudadResumen: this.elements.ciudad.value,
-            email: this.elements.correoElectronico.value,
-            celular: this.elements.telefono.value
-        };
-        Object.keys(summaryElements).forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.textContent = summaryElements[id];
-            }
-        });
-        const nameModalFinal = document.getElementById("nameText__ModalFinal");
-        if (nameModalFinal) {
-            nameModalFinal.textContent = summaryElements.nombre;
+
+populateSummary() {
+    // Debug: verificar valores antes de asignar
+    console.log('Valores del formulario:');
+    console.log('Tipo documento:', this.elements.tipoDocumento.value);
+    console.log('Número documento:', this.elements.numeroDocumento.value);
+    
+    const summaryElements = {
+        nombre: `${this.elements.primerNombre.value} ${this.elements.apellido.value}`,
+        tipoDocumentoResumen: this.elements.tipoDocumento.value,
+        documento: this.elements.numeroDocumento.value,
+        fechaExpedicionResumen: this.elements.fechaExpedicion.value,
+        direccion: this.elements.direccionResidencia.value,
+        fechaNacimientoResumen: this.elements.fechaNacimiento.value,
+        CiudadResumen: this.elements.ciudad.value,
+        email: this.elements.correoElectronico.value,
+        celular: this.elements.telefono.value
+    };
+    
+    Object.keys(summaryElements).forEach(id => {
+        const element = document.getElementById(id);
+        console.log(`Elemento ${id}:`, element, 'Valor:', summaryElements[id]); // Debug
+
+        if (element) {
+            element.textContent = summaryElements[id];
+        } else {
+            console.warn(`Elemento con ID "${id}" no encontrado en el DOM`);
         }
+    });
+    
+    const nameModalFinal = document.getElementById("nameText__ModalFinal");
+    if (nameModalFinal) {
+        nameModalFinal.textContent = summaryElements.nombre;
+    }
+}
+}
+// Función para verificar si los elementos existen
+function checkElementsExist() {
+    const criticalElements = [
+        'tipoDocumento', 'numeroDocumento', 'primerNombre', 'apellido',
+        'correoElectronico', 'confirmarCorreo', 'telefono', 'ciudad',
+        'fechaNacimiento', 'fechaExpedicion', 'fechaActivacion',
+        'formularioDatosPersonales'
+    ];
+    
+    return criticalElements.every(id => document.getElementById(id) !== null);
+}
+
+// Función de inicialización segura
+async function initializeFormSafely() {
+    if (!checkElementsExist()) {
+        // Si los elementos no existen, esperar un poco más
+        setTimeout(initializeFormSafely, 100);
+        return;
+    }
+
+    try {
+        const form = new PersonalDataForm();
+        await form.init();
+        setupAdditionalModals();
+        console.log('Formulario inicializado correctamente');
+    } catch (error) {
+        console.error('Error al inicializar el formulario:', error);
+        // Reintentar una vez más si hay error
+        setTimeout(initializeFormSafely, 500);
     }
 }
 
-// Inicialización cuando el DOM esté listo
-document.addEventListener("DOMContentLoaded", async () => {
-    const form = new PersonalDataForm();
-    await form.init();
-
-    // Configuración para el modal de confirmación final
+// Función para configurar modales adicionales
+function setupAdditionalModals() {
     const modalManager = new ModalManager();
+    
+    // Modal de confirmación
     const confirmModalEl = document.getElementById("confirmModal");
     const closeConfirmEl = document.getElementById("closeConfirmModal");
     const openConfirmBtn = document.getElementById("openConfirmModal");
@@ -729,47 +883,36 @@ document.addEventListener("DOMContentLoaded", async () => {
         modalManager.registerModal("confirm", confirmModalEl, closeConfirmEl);
         openConfirmBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            const userName = document.getElementById("nombre").textContent || "cliente";
-            document.getElementById("nameText__ModalFinal").textContent = userName;
+            const userName = document.getElementById("nombre")?.textContent || "cliente";
+            const nameElement = document.getElementById("nameText__ModalFinal");
+            if (nameElement) {
+                nameElement.textContent = userName;
+            }
             modalManager.openModal("confirm");
-        });
-        window.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") modalManager.closeModal("confirm");
         });
     }
 
-
+    // Modal de información
     const informationModalEl = document.getElementById("modalInformation");
     const openInformationBtn = document.getElementById("openModalInformation");
 
-    console.log("Modal element:", informationModalEl); // Debug
-    console.log("Open button:", openInformationBtn); // Debug
-
     if (informationModalEl && openInformationBtn) {
-        // Buscar el botón de cerrar dentro del modal
         const closeInformationEl = informationModalEl.querySelector(".modalInformation-close");
-        console.log("Close button:", closeInformationEl); // Debug
-
+        
         if (closeInformationEl) {
             modalManager.registerModal("information", informationModalEl, closeInformationEl);
         }
 
-        // Evento para abrir el modal
         openInformationBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            console.log("Clicking open modal"); // Debug
-
-            // Método directo para abrir el modal
             informationModalEl.style.display = "flex";
             informationModalEl.classList.add("active");
-
-            // También usar el modalManager si está registrado
+            
             if (closeInformationEl) {
                 modalManager.openModal("information");
             }
         });
 
-        // Evento para cerrar el modal (método directo)
         if (closeInformationEl) {
             closeInformationEl.addEventListener("click", () => {
                 informationModalEl.style.display = "none";
@@ -778,7 +921,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
         }
 
-        // Cerrar modal al hacer clic fuera de él
         window.addEventListener("click", (e) => {
             if (e.target === informationModalEl) {
                 informationModalEl.style.display = "none";
@@ -788,32 +930,82 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             }
         });
-    } else {
-        console.error("No se encontraron los elementos del modal de información");
-        console.error("Modal:", informationModalEl);
-        console.error("Button:", openInformationBtn);
     }
 
-    // Event listener global para cerrar modales con Escape
+    // Botón de recarga
+    const reloadButton = document.getElementById("reloadButton");
+    if (reloadButton) {
+        reloadButton.addEventListener("click", () => {
+            const resumenCompra = document.getElementById("resumen-compra");
+            const formAnual = document.getElementById("form-anual");
+            if (resumenCompra) resumenCompra.style.display = "none";
+            if (formAnual) formAnual.style.display = "block";
+        });
+    }
+
+    // Event listeners globales
     window.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
             modalManager.closeModal("confirm");
             modalManager.closeModal("information");
-
-            // Método directo también
+            
             if (informationModalEl) {
                 informationModalEl.style.display = "none";
                 informationModalEl.classList.remove("active");
             }
         }
     });
+}
 
-    // Funcionalidad para el botón de recargar/editar (tu código existente)
-    const reloadButton = document.getElementById("reloadButton");
-    if (reloadButton) {
-        reloadButton.addEventListener("click", () => {
-            document.getElementById("resumen-compra").style.display = "none";
-            document.getElementById("form-anual").style.display = "block";
-        });
+// MÚLTIPLES MÉTODOS DE INICIALIZACIÓN PARA ASEGURAR COMPATIBILIDAD CON ELEMENTOR
+
+// Método 1: DOMContentLoaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeFormSafely);
+} else {
+    // Si el DOM ya está listo
+    initializeFormSafely();
+}
+
+// Método 2: window.load como respaldo
+window.addEventListener('load', () => {
+    // Solo inicializar si no se ha hecho ya
+    if (!document.querySelector('.form-initialized')) {
+        setTimeout(initializeFormSafely, 100);
     }
-});    
+});
+
+// Método 3: Para Elementor específicamente
+if (typeof elementorFrontend !== 'undefined') {
+    elementorFrontend.hooks.addAction('frontend/element_ready/global', initializeFormSafely);
+}
+
+// Método 4: Observer para detectar cuando se añaden elementos al DOM
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.addedNodes.length > 0) {
+            const hasFormElements = Array.from(mutation.addedNodes).some(node => 
+                node.nodeType === 1 && (
+                    node.id === 'formularioDatosPersonales' || 
+                    node.querySelector && node.querySelector('#formularioDatosPersonales')
+                )
+            );
+            
+            if (hasFormElements && checkElementsExist()) {
+                observer.disconnect(); // Dejar de observar
+                setTimeout(initializeFormSafely, 100);
+            }
+        }
+    });
+});
+
+// Iniciar observación
+observer.observe(document.body, {
+    childList: true,
+    subtree: true
+});
+
+// Detener observación después de 10 segundos para evitar consumo excesivo de recursos
+setTimeout(() => {
+    observer.disconnect();
+}, 10000);
