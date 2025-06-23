@@ -58,12 +58,13 @@ class Validator {
 class ErrorMessages {
     constructor() {
         this.messages = {
-            REQUIRED: "Ingresa la información",
+            REQUIRED: "Este campo es obligatorio.", // Mensaje unificado
             INVALID_EMAIL_STRUCTURE: "Estructura de correo inválida.",
             PHONE_LENGTH: "El campo debe tener al menos 10 dígitos.",
-            AGE_RANGE_FIELD: "No cumples con el rango de edad",
-            ACTIVATION_DATE_RANGE: "No cumples con el rango de 6 horas de anticipación",
-            INVALID_CITY: "Selecciona una ciudad válida",
+            AGE_RANGE_FIELD: "No cumples con el rango de edad.",
+            ACTIVATION_DATE_RANGE: "No cumples con el rango de 6 horas de anticipación.",
+            INVALID_CITY: "Selecciona una ciudad válida de la lista.",
+            INVALID_EXPEDITION_DATE: "Fecha de expedición no válida.", // <-- MENSAJE AÑADIDO
             AGE_RANGE_MODAL: {
                 title: "Edad no permitida",
                 body: "La edad debe estar entre 2 y 65 años para continuar."
@@ -87,7 +88,6 @@ class ErrorMessages {
         return this.messages[key] || "Error desconocido.";
     }
 }
-
 // Clase para manejar validación de emails con comportamiento específico
 class EmailValidator extends Validator {
     constructor(inputElement, errorMessages) {
@@ -412,7 +412,6 @@ class ModalManager {
     }
 }
 // Clase principal para manejar el formulario
-
 class PersonalDataForm {
     constructor() {
         this.mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -423,10 +422,9 @@ class PersonalDataForm {
         this.elements = {};
         this.validators = {};
 
-        // --- INICIO: Definiciones para la validación específica ---
-        // ¡CAMBIA ESTOS VALORES POR LOS QUE NECESITES!
-        this.blockedCedula = "123456789"; // Cédula que activará la validación especial
-        this.incorrectExpeditionDate = "2014-06-25"; // Formato: AÑO-MES-DÍA
+        // --- Definiciones para la validación específica ---
+        this.blockedCedula = "123456789";
+        this.incorrectExpeditionDate = "2014-06-25";
 
         this.blockedCedulaMessage = {
             title: "No es posible continuar con el proceso",
@@ -437,7 +435,6 @@ class PersonalDataForm {
             title: "Fecha de expedición no válida",
             body: "Por favor, asegúrate de que la fecha de expedición del documento sea correcta para continuar."
         };
-        // --- FIN: Definiciones ---
     }
 
     async init() {
@@ -539,43 +536,11 @@ class PersonalDataForm {
                 document.getElementById("form-anual").style.display = "block";
             });
         }
-
-        // Manejadores para los otros modales
-        const openInformationBtn = document.getElementById("openModalInformation");
-        const informationModalEl = document.getElementById("modalInformation");
-        const closeInformationEl = informationModalEl ? informationModalEl.querySelector(".modalInformation-close") : null;
-        this.modalManager.registerModal("information", informationModalEl, closeInformationEl);
-        if (openInformationBtn) {
-            openInformationBtn.addEventListener("click", (e) => {
-                e.preventDefault();
-                this.modalManager.openModal("information");
-            });
-        }
-
-        const openConfirmBtn = document.getElementById("openConfirmModal");
-        const confirmModalEl = document.getElementById("confirmModal");
-        const closeConfirmEl = document.getElementById("closeConfirmModal");
-        this.modalManager.registerModal("confirm", confirmModalEl, closeConfirmEl);
-        if (openConfirmBtn) {
-            openConfirmBtn.addEventListener("click", (e) => {
-                e.preventDefault();
-                this.modalManager.openModal("confirm");
-            });
-        }
     }
 
     showCustomValidationErrorModal(errorData) {
         this.elements.modalValidationTitle.textContent = errorData.title;
         this.elements.modalValidationMessage.innerHTML = errorData.body.replace(/\n/g, '<br>');
-        const refContainer = document.getElementById('modalValidationReferenceContainer');
-        const refInput = document.getElementById('modalValidationReferenceInput');
-
-        if (errorData.reference) {
-            refInput.value = errorData.reference;
-            refContainer.style.display = 'block';
-        } else {
-            refContainer.style.display = 'none';
-        }
         this.modalManager.openModal("validations");
     }
 
@@ -587,72 +552,92 @@ class PersonalDataForm {
         }
     }
 
+    // =================================================================
+    //  MÉTODO DE VALIDACIÓN CORREGIDO CON LA LÓGICA DE PRIORIDAD
+    // =================================================================
     validateForm() {
-        const inputs = this.elements.formularioDatosPersonales.querySelectorAll("input[required], select[required]");
-        inputs.forEach(input => this.clearFieldError(input));
-
-        // --- 1. VALIDACIONES CRÍTICAS (MUESTRAN UN MODAL Y DETIENEN TODO) ---
-
-        // a) Cédula bloqueada y fecha de expedición incorrecta
-        const documentoValue = this.elements.numeroDocumento.value.trim();
-        if (documentoValue === this.blockedCedula) {
-            const fechaExpedicionValue = this.elements.fechaExpedicion.value;
-            if (fechaExpedicionValue === this.incorrectExpeditionDate) {
-                this.showCustomValidationErrorModal(this.invalidDateForBlockedCedulaMessage);
-            } else {
-                this.showCustomValidationErrorModal(this.blockedCedulaMessage);
-            }
-            return false;
-        }
-
-        // b) Rango de edad (Fecha de Nacimiento)
-        if (this.elements.fechaNacimiento.value && !this.validators.birthDate.validateAge()) {
-            this.showCustomValidationErrorModal(this.errorMessages.get('AGE_RANGE_MODAL'));
-            return false;
-        }
-
-        // c) Rango de fecha de activación
-        if (this.elements.fechaActivacion.value && !this.validators.activationDate.validateActivationDate()) {
-            this.showCustomValidationErrorModal(this.errorMessages.get('ACTIVATION_DATE_MODAL'));
-            return false;
-        }
-
-        // d) Coincidencia de correos
-        if (this.elements.correoElectronico.value && this.elements.confirmarCorreo.value && (this.elements.correoElectronico.value !== this.elements.confirmarCorreo.value)) {
-            this.showCustomValidationErrorModal(this.errorMessages.get('EMAIL_MISMATCH_MODAL'));
-            return false;
-        }
-
-        // e) Autorización de datos
-        if (!this.elements.autorizacionDatos.checked) {
-            this.showCustomValidationErrorModal(this.errorMessages.get('DATA_AUTH_MODAL'));
-            return false;
-        }
-
-        // --- 2. VALIDACIÓN DE CAMPOS REQUERIDOS Y DE FORMATO ---
         let isFormValid = true;
+        let isModalTriggered = false; // Para saber si ya se mostró un modal
+        
+        const allInputs = this.elements.formularioDatosPersonales.querySelectorAll("input, select");
+        allInputs.forEach(input => this.clearFieldError(input));
 
-        inputs.forEach(input => {
+        // --- FASE 1: VALIDACIONES DE CAMPO (INLINE) ---
+        // Primero, se validan todos los errores que aparecen debajo de los campos.
+        
+        const requiredInputs = this.elements.formularioDatosPersonales.querySelectorAll("input[required], select[required]");
+        requiredInputs.forEach(input => {
             if ((input.type === 'checkbox' && !input.checked) || (!input.value && input.type !== 'checkbox')) {
-                // La autorización de datos ya se validó arriba, así que la omitimos aquí.
-                if (input.id !== 'autorizacionDatos') {
+                if (input.id !== 'autorizacionDatos') { // El checkbox de datos se valida al final
                     this.showFieldError(input, this.errorMessages.get('REQUIRED'));
                     isFormValid = false;
                 }
             }
         });
 
-        // Validaciones de estructura que no muestran modal, solo marcan el campo
-        if (this.elements.correoElectronico.value && !this.validators.emailPrimary.validateStructure()) isFormValid = false;
-        if (this.elements.confirmarCorreo.value && !this.validators.emailConfirm.validateStructure()) isFormValid = false;
-        if (this.elements.telefono.value && !this.validators.phone.validatePhone()) isFormValid = false;
-        if (this.elements.ciudad.value && !this.validateCity(this.elements.ciudad)) isFormValid = false;
+        if (!this.validators.emailPrimary.validateStructure()) isFormValid = false;
+        if (!this.validators.emailConfirm.validateStructure()) isFormValid = false;
+        if (!this.validators.phone.validatePhone()) isFormValid = false;
+        if (!this.validateCity(this.elements.ciudad)) isFormValid = false;
+        if (this.elements.fechaNacimiento.value && !this.validators.birthDate.validateAge()) isFormValid = false;
+        if (this.elements.fechaActivacion.value && !this.validators.activationDate.validateActivationDate()) isFormValid = false;
 
+        // --- FASE 2: VALIDACIONES CRÍTICAS (MODALES) ---
+        // Estas validaciones muestran un popup, pero solo después de que las de Fase 1 hayan marcado los campos.
+
+        const documentoValue = this.elements.numeroDocumento.value.trim();
+        const fechaExpedicionValue = this.elements.fechaExpedicion.value;
+
+        if (documentoValue === this.blockedCedula) {
+            if (fechaExpedicionValue === this.incorrectExpeditionDate) {
+                // **AQUÍ ESTÁ LA CORRECCIÓN PRINCIPAL**
+                // 1. Muestra el error debajo del campo de fecha.
+                this.showFieldError(this.elements.fechaExpedicion, this.errorMessages.get('INVALID_EXPEDITION_DATE'));
+                // 2. Muestra el modal correspondiente.
+                this.showCustomValidationErrorModal(this.invalidDateForBlockedCedulaMessage);
+                isFormValid = false;
+                isModalTriggered = true;
+            } else if(documentoValue && fechaExpedicionValue) {
+                // Si la cédula es la bloqueada pero la fecha es otra, muestra el modal general.
+                this.showCustomValidationErrorModal(this.blockedCedulaMessage);
+                isFormValid = false;
+                isModalTriggered = true;
+            }
+        }
+        
+        if (!isModalTriggered && this.elements.fechaNacimiento.value && !this.validators.birthDate.validateAge()) {
+            this.showCustomValidationErrorModal(this.errorMessages.get('AGE_RANGE_MODAL'));
+            isFormValid = false;
+            isModalTriggered = true;
+        }
+
+        if (!isModalTriggered && this.elements.fechaActivacion.value && !this.validators.activationDate.validateActivationDate()) {
+            this.showCustomValidationErrorModal(this.errorMessages.get('ACTIVATION_DATE_MODAL'));
+            isFormValid = false;
+            isModalTriggered = true;
+        }
+
+        if (!isModalTriggered && this.elements.correoElectronico.value && this.elements.confirmarCorreo.value && (this.elements.correoElectronico.value !== this.elements.confirmarCorreo.value)) {
+            this.showCustomValidationErrorModal(this.errorMessages.get('EMAIL_MISMATCH_MODAL'));
+            isFormValid = false;
+            isModalTriggered = true;
+        }
+
+        // --- FASE 3: VALIDACIÓN FINAL (MODAL DE TRATAMIENTO DE DATOS) ---
+        // Esta es la última validación. Se ejecuta solo si ningún otro modal ha sido activado
+        // y el formulario ya tiene errores de campo (isFormValid === false).
+        if (!isModalTriggered && !this.elements.autorizacionDatos.checked) {
+            this.showCustomValidationErrorModal(this.errorMessages.get('DATA_AUTH_MODAL'));
+            isFormValid = false;
+        }
+        
         return isFormValid;
     }
 
     validateCity(cityInput) {
         const value = cityInput.value.trim().toLowerCase();
+        if (!value) return true; 
+
         const parts = value.split(" - ");
         if (parts.length === 2) {
             const municipalityInput = parts[0].trim();
@@ -664,11 +649,10 @@ class PersonalDataForm {
                 return false;
             }
         } else {
-            if (value) {
-                this.showFieldError(cityInput, this.errorMessages.get('INVALID_CITY'));
-                return false;
-            }
+            this.showFieldError(cityInput, this.errorMessages.get('INVALID_CITY'));
+            return false;
         }
+        this.clearFieldError(cityInput);
         return true;
     }
 
@@ -683,12 +667,9 @@ class PersonalDataForm {
 
     handleSubmit(event) {
         event.preventDefault();
-        // Primero, valida el formulario.
         if (this.validateForm()) {
-            // Si es válido, procede al siguiente paso.
             this.onFormSuccess();
         } else {
-            // Si no es válido, muestra el toast. Los modales ya se habrán mostrado si era necesario.
             this.onFormError();
         }
     }
