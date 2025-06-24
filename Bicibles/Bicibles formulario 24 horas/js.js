@@ -412,7 +412,6 @@ class ModalManager {
     }
 }
 // Clase principal para manejar el formulario
-// REEMPLAZA TODA LA CLASE PersonalDataForm CON ESTA VERSIÓN CORREGIDA:
 
 class PersonalDataForm {
     constructor() {
