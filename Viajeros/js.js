@@ -492,9 +492,6 @@ class FormValidator {
     }
 }
 
-/**
- * Gestiona la selección del número de viajeros y sus edades.
- */
 class TravelerManager {
     constructor(modalManager) {
         this.modalManager = modalManager;
@@ -839,8 +836,6 @@ class QuoteManager {
         });
     }
 
-    // Reemplaza el método _createForm en tu clase QuoteManager por este bloque completo.
-    // Reemplaza este método completo en tu clase QuoteManager
     _createForm(type, number, isPrincipal) {
         const formDiv = document.createElement('div');
         let title, subtitle, idPrefix;
@@ -1002,7 +997,6 @@ class QuoteManager {
                 }
                 field.classList.toggle('error-border', !isFilled);
 
-                // --- INICIO DE LA NUEVA LÓGICA PARA CORREOS ---
                 const isPrimaryEmail = field.id.endsWith('emailInput');
                 const isConfirmEmail = field.hasAttribute('data-email-confirm');
 
@@ -1042,7 +1036,6 @@ class QuoteManager {
 }
 /**
  * La clase principal de la aplicación.
- * Inicializa y orquesta todas las demás clases de gestión. Es el punto de entrada.
  */
 class TravelerQuoteApp {
     constructor() {
