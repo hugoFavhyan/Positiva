@@ -1,0 +1,66 @@
+/* Caja general */
+body {
+    margin: 0;
+}
+
+.Cont-Gen-Ex {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.Cont-Ex {
+    background: center / cover no-repeat url(https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402976/background.svg/cb881c88-8e40-4282-1e8b-9c0ec008a972?t=1733242195791);
+    padding: 90px 60px 100px 60px;
+}
+
+.Cont-cotiz-Ex {
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.Cont-form-Ex {
+    width: 45%;
+    border-radius: 30px;
+    background-color: #fff;
+    margin-top: 29px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Cont-res-EX {
+    width: 55%;
+    height: auto;
+    border-radius: 30px;
+    background-color: #fff;
+    margin-top: 29px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Cont-form-title{
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+    margin-bottom: 20px;
+}
+
+.Cont-form-title h1 {
+    font-size: 36px;
+    font-family: Poppins, sans-serif;
+    font-weight: 700;
+}
+
+.Cont-form-title h1{
+   color: #173748;
+}
+
+.Cont-form-title spam{
+   color: #FF7500;
+}
+
