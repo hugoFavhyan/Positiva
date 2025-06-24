@@ -1,0 +1,1596 @@
+/* --- ESTILO GENERAL DEL CONTENEDOR PRINCIPAL --- */
+/* Modifica aquí el fondo, padding y fuente principal de todo el componente. */
+.container-body {
+    font-family: Poppins;
+    background-color: #f5f5f5;
+    background-position: left;
+    background-repeat: no-repeat;
+    padding: 25px 50px 75px;
+}
+
+/* --- ESTILO PÁRRAFO PREDETERMINADO --- */
+/* Estilo base para los elementos <p> dentro del contenedor. */
+.container-body p {
+    margin: 5px 0;
+}
+
+/* --- ESTRUCTURA PRINCIPAL DEL COTIZADOR (2 COLUMNAS) --- */
+/* Define el layout flexible que separa el formulario (izquierda) y el resumen (derecha). */
+.container-body .container-cotizador {
+    display: flex;
+}
+
+/* --- COLUMNA IZQUIERDA: FORMULARIO DE COTIZACIÓN --- */
+/* Ancho máximo para la columna del formulario. */
+.container-body .div-form {
+    max-width: 40%;
+}
+
+/* --- SECCIONES DEL FORMULARIO (INFO BÁSICA Y CUPÓN) --- */
+/* Estilo común para las cajas blancas que contienen la información básica y el cupón. */
+.container-body .basic-info,
+.container-body .cuppon {
+    height: auto;
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+/* --- ALINEACIÓN DEL CHECKBOX DE TÉRMINOS EN LA SECCIÓN DE CUPÓN --- */
+.container-body .cuppon .radioContainer {
+    display: flex;
+    align-items: baseline;
+}
+
+/* Margen para el input del checkbox para separarlo del texto. */
+.container-body .cuppon .radioContainer input {
+    margin-right: 10px;
+}
+
+/* --- COLUMNA DERECHA: RESUMEN Y PASOS --- */
+/* Define el ancho, padding y estilo de la columna de resumen/pasos. */
+.container-body .div-order {
+    max-width: 60%;
+    width: 66%;
+    height: auto;
+    border-radius: 20px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    margin-left: 20px;
+    margin-right: -20px;
+    box-sizing: border-box;
+}
+
+/* --- TÍTULOS PRINCIPALES DEL FORMULARIO --- */
+/* Estilo para los títulos como "Cotizador del Seguro Viajero". */
+.container-body .form-title {
+    color: #000;
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 1.563em;
+    margin: 0;
+}
+
+/* --- TÍTULOS SECUNDARIOS (EJ. CUPÓN) --- */
+/* Estilo para títulos más pequeños como "¿Tienes un cupón de descuento?". */
+.container-body .form-title2 {
+    color: #000;
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 1em;
+    margin: 0;
+}
+
+/* --- CLASES DE VISIBILIDAD --- */
+/* Clases de utilidad para mostrar u ocultar elementos. */
+.container-body .block {
+    display: block;
+}
+
+.container-body .none {
+    display: none;
+}
+
+/* --- SUBTÍTULOS Y TEXTO INFORMATIVO --- */
+/* Estilo para textos descriptivos, como el aviso de "Importante". */
+.container-body .form-subtitle {
+    color: #000;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+/* --- LÍNEA DIVISORIA EN MODALES --- */
+/* Estilo para la línea naranja decorativa usada en las ventanas emergentes. */
+.container-body .lineaContainerArchivosDevolucion {
+    width: 60px;
+    height: 5px;
+    background: #ff8500;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-radius: 5px;
+}
+
+/* --- GRID DE IMÁGENES (LOGOS DE PAGO) --- */
+/* Estructura de la grilla para mostrar los logos de los métodos de pago. */
+.container-body .grid-img {
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    place-items: center;
+}
+
+/* Ajuste de las imágenes dentro de la grilla. */
+.container-body .grid-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* --- LÍNEA VERTICAL (DECORATIVA) --- */
+.linea-vertical {
+  height: 150px; 
+  width: 0px; 
+  border-left: 2px solid black; 
+  margin: 0 10px; 
+}
+
+/* Elimina el borde derecho del último elemento en la grilla. */
+.container-body .grid-img img:last-child {
+    border-right: none !important;
+}
+
+/* --- ESTRUCTURA DE FORMULARIO EN GRID --- */
+/* Layout de dos columnas para campos de formulario. */
+.container-body .form-grid {
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr;
+    grid-column-gap: 1%;
+}
+
+/* Layout de grilla específico para campos de teléfono. */
+.container-body .form-grid-phone {
+    display: grid;
+    grid-template-columns: 0.3fr 0.9fr;
+    grid-column-gap: 1%;
+}
+
+/* --- FILA DE FORMULARIO --- */
+/* Contenedor genérico para una fila de un campo de formulario. */
+.form-row-formViajeros {
+    margin: 0;
+    padding: 10px 0;
+}
+
+/* --- FILA PARA EL SELECTOR DE VIAJEROS --- */
+.container-body .form-row-viajeros {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    align-items: center;
+}
+
+/* --- ANCHO DE INPUTS --- */
+/* Clase para hacer que los inputs ocupen todo el ancho disponible. */
+.container-body .small-input {
+    width: 100%;
+}
+
+/* --- ETIQUETAS DE FORMULARIO (LABEL) --- */
+/* Estilo general para todas las etiquetas de los campos. */
+.container-body label {
+    text-align: left;
+    color: #000;
+    font-family: Poppins;
+    font-weight: 500;
+    margin: 10px 0 10px 0;
+    font-size: 16px;
+}
+
+/* Estilo específico para las etiquetas dentro del selector de viajeros (Adultos/Menores). */
+.container-body .custom-select-viajeros label {
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo para el texto secundario (span) dentro de las etiquetas de viajeros. */
+.container-body .custom-select-viajeros label span {
+    font-size: 14px;
+    color: #112211;
+    font-weight: 400;
+}
+
+/* --- MENSAJE DE ÉXITO DEL FORMULARIO --- */
+.container-body .form-success-message {
+    text-align: left;
+    color: #000;
+    font-family: Poppins;
+    font-weight: 600;
+    margin: 10px 0 0 0;
+}
+
+/* --- CONTENEDOR PARA RADIO BUTTONS Y CHECKBOXES --- */
+/* Define el padding y borde para los contenedores de opciones. */
+.container-body .radioContainer {
+    padding: 5px;
+    margin: 15px 0;
+    place-items: unset;
+    border-radius: 5px;
+    border: 1px solid transparent;
+}
+
+/* Estilo para las etiquetas asociadas a los radio/checkbox. */
+.container-body .radioContainer label {
+    text-align: left;
+    color: #000;
+    font-family: Poppins;
+    font-weight: 400;
+    justify-content: center;
+    margin: 0 !important;
+}
+
+/* --- TEXTO NARANJA --- */
+/* Clase de utilidad para resaltar texto con el color corporativo. */
+.container-body .orange-text {
+    color: #ff7500;
+    font-weight: 600;
+}
+
+/* --- ESTILOS PARA INPUTS DE NÚMERO --- */
+/* Oculta las flechas de control en los campos de tipo "number". */
+.container-body input::-webkit-outer-spin-button,
+.container-body input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Oculta las flechas en Firefox. */
+.container-body input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* --- ESTILOS GENERALES PARA INPUTS Y SELECTS --- */
+/* Estilo base para todos los campos de texto, número, fecha y selectores. */
+.container-body input[type="text"],
+.container-body input[type="number"],
+.container-body input[type="tel"],
+.container-body input[type="email"],
+.container-body input[type="date"],
+.container-body select {
+    border: 1px solid #dadada;
+    border-radius: 7px;
+    padding: 5px;
+    padding: 8px 10px;
+    width: -webkit-fill-available;
+    font-family: Poppins;
+}
+
+/* --- ESTILO PARA LABELS DENTRO DE BOTONES --- */
+.container-body .btn-positiva label {
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- CONTENEDOR DE BOTONES --- */
+.container-body .btn-positiva {
+    display: flex;
+}
+
+/* Oculta el radio button real, ya que el control es el label. */
+.container-body .btn-positiva input[type="radio"] {
+    display: none;
+}
+
+/* Muestra el radio button cuando está seleccionado (si fuera necesario). */
+.container-body .btn-positiva input[type="radio"]:checked {
+    display: block;
+}
+
+/* --- FILA DE BOTONES --- */
+/* Centra los botones en su contenedor. */
+.container-body .button-row {
+    justify-content: center;
+    display: flex;
+}
+
+/* --- BOTONES PRINCIPALES --- */
+/* Estilo común para todos los botones de acción (Cotizar, Continuar, Finalizar, etc.). */
+.container-body .submit-button-travelers,
+.container-body .btn-positiva,
+.container-body .js-btn-next,
+.container-body .js-btn-prev,
+.container-body .btn-success {
+    width: auto;
+    border-radius: 5px;
+    padding: 12px 30px;
+    margin-top: 10px;
+    background: #ff7500;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-family: Poppins;
+    font-size: 16px;
+    justify-content: center;
+}
+
+/* Efecto hover para los botones. */
+.submit-button-travelers:hover,
+.btn-positiva:hover,
+.js-btn-next:hover,
+.js-btn-prev:hover .btn-success:hover {
+    background: #ffa700;
+}
+
+/* Estilo de foco para accesibilidad. */
+.submit-button-travelers:focus,
+.btn-positiva:focus,
+.js-btn-next:focus,
+.js-btn-prev:focus,
+.btn-success:focus {
+    outline: none;
+}
+
+/* --- TEXTO DE PLACEHOLDER --- */
+/* Estilo para el texto provisional en los inputs. */
+.container-body::placeholder {
+    color: #ccc;
+    padding-left: 10px !important;
+    font-family: Poppins;
+}
+
+/* Estilo para las opciones dentro del selector de viajeros. */
+.container-body .container-body .selectcontainer .option-viajeros {
+    color: #000 !important;
+}
+
+/* --- BORDE DE ERROR PARA VALIDACIÓN --- */
+/* Clase que se añade a los campos para indicar un error de validación. */
+.container-body .error-border {
+    border: 1px solid red !important;
+}
+
+/* --- CONTENEDOR CON BORDE SUAVE --- */
+/* Estilo de borde utilizado para agrupar visualmente elementos del formulario. */
+.container-body .form-row-border-viajeros {
+    border: 1px solid #f2f2f2;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin: 10px 0;
+}
+/* Estilo para el precio en el checkout */
+.titulo-precio{
+    color: #FF7500;
+    font-weight: 600 !important;
+}
+/* Sombra para los contenedores en el formulario de varios pasos. */
+.container-body .multisteps-form__form .form-row-border-viajeros {
+    box-shadow: 0px 4px 16px 0px #0000000d;
+}
+
+/* --- ALTURA Y SCROLL PARA PANELES DE PASOS --- */
+/* Define una altura fija y scroll vertical para los paneles de los pasos 1 y 2. */
+.container-body .paso2,
+.container-body .paso1 {
+    overflow-y: auto;
+    height: 720px;
+}
+
+/* --- ESTILO PARA INPUT DE FECHA --- */
+.container-body input[type="date"] {
+    width: -webkit-fill-available;
+}
+
+/* --- ESTILO PERSONALIZADO PARA RADIO BUTTONS --- */
+/* Oculta la apariencia nativa. */
+.container-body input[type="radio"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Estilo del radio button cuando está seleccionado. */
+.container-body input[type="radio"]:checked {
+    border-color: #000;
+    width: 16px;
+    height: 16px;
+}
+
+/* Círculo interior del radio button seleccionado. */
+.container-body input[type="radio"]:checked::before {
+    content: "";
+    width: 13px;
+    height: 13px;
+    background-color: #ff7500;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* --- ESTILO PERSONALIZADO PARA CHECKBOXES --- */
+/* Color del check. */
+.container-body input[type="checkbox"] {
+    accent-color: #e74c3c;
+    width: 16px;
+}
+
+/* --- ESTILOS PARA MODALES (VENTANAS EMERGENTES) --- */
+/* Contenedor del overlay oscuro del modal. */
+.container-body .modal-viajerosGen {
+    display: none;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Contenedor del contenido del modal (la ventana blanca). */
+.container-body .modal-cont-viajeros {
+    display: block;
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 500px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    height: min-content;
+}
+
+/* Alineación del texto y elementos dentro del modal. */
+.container-body .modal-cont-viajeros .modal-text {
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Estilo del título del modal. */
+.container-body .modal-cont-viajeros .modal-text span {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+/* Estilo para el nombre del usuario en el modal de éxito. */
+.container-body .modal-cont-viajeros .modal-text #showName {
+    font-size: 16px !important;
+    font-weight: 400;
+}
+
+/* Estilo para la referencia de pago en el modal de éxito. */
+.container-body .modal-cont-viajeros .modal-text #showcodeReference {
+    border: 1px solid gray;
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+/* Estilo alternativo y mejorado para el código de referencia. */
+#showcodeReference {
+    border: 1px solid gray;
+    padding: 10px 15px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* Tamaño del ícono dentro del modal. */
+.container-body .modal-cont-viajeros .modal-text .imgModal {
+    width: 98px;
+    height: auto;
+}
+
+/* Tamaño del ícono en los modales tipo "toast". */
+.container-body .modal-cont-viajeros .modal-text .imgModal-toast {
+    width: 30px;
+    height: auto;
+}
+
+/* --- BOTÓN DE CIERRE DEL MODAL --- */
+.container-body .close-btn-viajeros {
+    color: #fff;
+    padding: 0px 13px;
+    border-radius: 56px;
+    font-size: 30px;
+    font-weight: 100;
+    cursor: pointer;
+    border: none;
+}
+
+/* Contenedor del header del modal, para alinear el botón de cierre. */
+.container-body .modal-header {
+    justify-content: end;
+    display: flex;
+    border: none;
+    padding: 0;
+}
+
+/* Efecto hover del botón de cierre. */
+.container-body .close-btn-viajeros:hover {
+    background-color: #fff;
+    border: none;
+}
+
+/* --- CLASE DE UTILIDAD FLEX --- */
+.container-body .flex {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+/* Título de viajero en el acordeón. */
+.cont-viajeros-titu {
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- CONTENEDOR PARA INPUTS DE FECHA --- */
+/* Alinea los dos inputs de fecha uno al lado del otro. */
+.container-body .input-date {
+    width: 100%;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* --- SELECTOR DE VIAJEROS PERSONALIZADO --- */
+/* Contenedor principal del selector desplegable. */
+.container-body .custom-select-viajeros {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    font-family: Poppins;
+}
+
+/* Estilo para el texto del paso activo en la barra de progreso. */
+.multisteps-form__progress-btn.js-active h3.pasos {
+    color: #ff7500;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Estilo para la descripción del paso en la barra de progreso. */
+.multisteps-form__progress p {
+    font-size: 17px;
+    font-weight: 400;
+    color: #0D2333;
+    opacity: 40%;
+}
+
+/* --- DISPLAY DEL SELECTOR DE VIAJEROS --- */
+/* La parte visible del selector que muestra el resumen. */
+.container-body .select-display-viajeros {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+/* Flecha del selector. */
+.container-body .arrow-viajeros {
+    margin-left: 10px;
+}
+
+/* Por defecto, el panel de opciones está oculto. */
+.options-viajeros-container {
+    display: none;
+}
+
+/* --- PANEL DE OPCIONES DEL SELECTOR DE VIAJEROS --- */
+/* El contenedor desplegable con los contadores y campos de edad. */
+.container-body .options-viajeros-container {
+    position: absolute;
+    width: -webkit-fill-available;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
+    padding: 10px 30px;
+    font-size: 16px;
+}
+
+/* Fila para cada opción (Adultos, Menores). */
+.container-body .option-viajeros {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Estilo para los inputs de edad. */
+.container-body .ages-container input {
+    display: block;
+    margin: 5px 0;
+    padding: 5px;
+    width: 83%;
+}
+
+/* Título de los planes (Plus/Pro). */
+.cont-plus-viaj h3 {
+    font-size: 26px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    line-height: 1.2;
+}
+
+/* Título para la sección de edades. */
+.container-body .ages-container h4 {
+    margin: 10px 0 5px;
+}
+
+/* --- BOTONES DEL SELECTOR DE VIAJEROS (BORRAR/APLICAR) --- */
+.container-body .buttons-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+/* Estilo común de los botones. */
+.container-body .buttons-container button {
+    margin-left: 10px;
+    padding: 10px 30px;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Poppins;
+    font-size: 16px;
+}
+
+/* Botón "Borrar". */
+.container-body .buttons-container button.clean-btn-travelers {
+    background-color: #173748;
+}
+
+/* Botón "Aplicar". */
+.container-body .buttons-container button.apply-btn-travelers {
+    background-color: #ff7500;
+}
+
+/* Texto del resumen de viajeros. */
+.container-body .travelers-count p {
+    font-size: 14px;
+}
+
+/* --- ESTILOS PARA FORMULARIO MULTI-PASOS --- */
+/* Borde inferior para los pasos completados en la barra de progreso. */
+.container-body .multisteps-form__progress-btn.js-completed {
+    border-bottom: 4px solid #ff7500;
+}
+
+/* Color del texto para pasos completados. */
+.container-body .multisteps-form__progress-btn.js-completed h3,
+.container-body .multisteps-form__progress-btn.js-completed p {
+    color: #868e96;
+    opacity: 1;
+}
+
+/* Color para el título del paso activo. */
+.multisteps-form__progress-btn.js-active h3.pasos {
+    color: #ff7500;
+}
+
+/* --- LÍNEA DIVISORIA GRIS --- */
+/* Usada en las tablas de detalles y resúmenes. */
+.linea-gris {
+    border: none;
+    height: 1px;
+    background-color: #D7E2EE !important;
+    width: 100%;
+    margin: 8px 0;
+}
+
+/* Utilidad para alinear texto a la derecha. */
+.text-right {
+    text-align: right !important;
+}
+
+/* --- BOTONES DE CONTADOR (+/-) --- */
+.container-body .btn-count button {
+    border-radius: 30px;
+    padding: 5px 10px;
+    border: 1px solid #f2f2f2;
+    background-color: #f2f2f2;
+    cursor: pointer;
+    margin: 0 2px;
+    width: 34px;
+    height: 33px;
+    color: #000;
+}
+
+/* Estilo al enfocar un botón de contador. */
+.container-body .btn-count button:focus {
+    color: #FF7500;
+}
+
+/* --- VISIBILIDAD DE PASOS --- */
+.container-body .step {
+    display: none;
+}
+.container-body .step.active {
+    display: block;
+}
+
+/* --- ESTADO VACÍO DEL FORMULARIO --- */
+/* Mensaje que se muestra antes de llenar el formulario. */
+.container-body .empty-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 700px;
+}
+.container-body .empty-form img {
+    width: 150px;
+}
+
+/* --- CONTENEDOR DEL FORMULARIO MULTI-PASOS --- */
+.container-body .multisteps-form {
+    width: 100%;
+}
+
+/* --- BARRA DE PROGRESO --- */
+.container-body .multisteps-form__progress {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    box-shadow: 0px 4px 16px 0px #1122110d;
+    padding: 16px 24px 0 24px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+/* Título dentro de un panel de paso. */
+.container-body .multisteps-form__title {
+     margin: 0 0 18px;
+}
+
+/* --- BOTONES DE LA BARRA DE PROGRESO --- */
+.container-body .multisteps-form__progress-btn {
+    transition-property: all;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+    transition-delay: 0s;
+    position: relative;
+    padding-top: 20px;
+    color: rgba(108, 117, 125, 0.7);
+    border: none;
+    background-color: transparent;
+    outline: none !important;
+    display: grid;
+    border-bottom: 3px solid #fff;
+    padding: 16px;
+    text-align: justify;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Título (Paso X) dentro del botón de progreso. */
+.container-body .multisteps-form__progress-btn h3 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* --- CLASE PARA MOSTRAR ELEMENTOS DESPUÉS DE UNA ACCIÓN --- */
+.container-body .showAfterModal {
+    display: block !important;
+}
+
+/* Línea vertical divisoria entre los botones de paso. */
+.container-body .multisteps-form__progress-btn:after {
+    position: absolute;
+    top: 15px;
+    transition-property: all;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+    transition-delay: 0s;
+    display: block;
+    width: 1px;
+    height: 40px;
+    content: "";
+    background-color: #d7e2ee;
+    z-index: 1;
+}
+
+/* Estilo de fuente normal para botones de paso. */
+.container-body .multisteps-form__progress-btn {
+    font-weight: 400;
+}
+
+/* Estilo de fuente en negrita para el botón de paso activo. */
+.container-body .multisteps-form__progress-btn.js-active {
+    font-weight: 600;
+}
+
+/* Oculta el divisor del primer botón de paso. */
+.container-body .multisteps-form__progress-btn:first-child:after {
+    display: none;
+}
+
+/* --- ESTADO ACTIVO DEL BOTÓN DE PROGRESO --- */
+/* Define el color y el borde inferior para el paso activo. */
+.container-body .multisteps-form__progress-btn.js-active {
+    color: #000;
+    border-bottom: 4px solid #ff7500;
+    transition: 0.3s;
+}
+
+.container-body .multisteps-form__progress-btn.js-active:before {
+    -webkit-transform: translateX(-50%) scale(1.2);
+    transform: translateX(-50%) scale(1.2);
+    background-color: currentColor;
+}
+
+/* --- PANELES DE CONTENIDO DE LOS PASOS --- */
+.container-body .multisteps-form__form {
+    position: relative;
+}
+
+/* Estilo base para los paneles de cada paso. */
+.container-body .multisteps-form__panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Estilo para el panel activo (visible). */
+.container-body .multisteps-form__panel.js-active {
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- ANIMACIONES DE TRANSICIÓN DE PANELES --- */
+/* Modifica estas clases para cambiar las animaciones entre pasos. */
+.container-body .multisteps-form__panel[data-animation="scaleOut"] {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+.container-body .multisteps-form__panel[data-animation="scaleOut"].js-active {
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+    transition-delay: 0s;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+.container-body .multisteps-form__panel[data-animation="slideHorz"] {
+    left: 50px;
+}
+.container-body .multisteps-form__panel[data-animation="slideHorz"].js-active {
+    transition-property: all;
+    transition-duration: 0.25s;
+    transition-timing-function: cubic-bezier(0.2, 1.13, 0.38, 1.43);
+    transition-delay: 0s;
+    left: 0;
+}
+.container-body .multisteps-form__panel[data-animation="slideVert"] {
+    top: 30px;
+}
+.container-body .multisteps-form__panel[data-animation="slideVert"].js-active {
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+    transition-delay: 0s;
+    top: 0;
+}
+.container-body .multisteps-form__panel[data-animation="fadeIn"].js-active {
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: linear;
+    transition-delay: 0s;
+}
+.container-body .multisteps-form__panel[data-animation="scaleIn"] {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+.container-body .multisteps-form__panel[data-animation="scaleIn"].js-active {
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+    transition-delay: 0s;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+/* --- TARJETAS DE PLANES (PLUS Y PRO) --- */
+/* Estilo base para las tarjetas de selección de plan. */
+.container-body .card-plan {
+    border: 2px solid #f2f2f2;
+    padding: 20px 15px 20px 15px;
+    border-radius: 10px;
+    transition: border 0.3s ease;
+    display: block;
+}
+
+/* Efecto hover para las tarjetas de plan. */
+.container-body .card-plan:hover {
+    cursor: pointer;
+    box-shadow: 0px 4px 16px 0px #1122110d;
+    transition: border 0.3s ease;
+}
+
+/* Estilo cuando una tarjeta está seleccionada. */
+.container-body .card-plan.checked {
+    border: 2px solid #007bff;
+}
+
+/* --- LÓGICA DE SELECCIÓN DE PLAN CON RADIO BUTTONS --- */
+.container-body .box-select {
+    padding: 0;
+}
+/* Oculta los inputs de radio reales. */
+.container-body .box-select input,
+.container-body .box-select2 input {
+    display: none;
+}
+/* Cambia el borde de la tarjeta cuando el radio button asociado está seleccionado. */
+.container-body .box-select input[type="radio"]:checked+.card-planSelect1 {
+    border: 2px solid #ff6b00;
+    box-shadow: 0px 4px 16px 0px #1122110d;
+}
+.container-body .box-select2 input[type="radio"]:checked+.card-planSelect2 {
+    border: 2px solid #173748;
+    box-shadow: 0px 4px 16px 0px #1122110d;
+}
+
+/* Espaciado para la segunda tarjeta de plan. */
+.container-body .card-plan2 {
+    margin-top: 20px;
+}
+
+/* Efecto hover específico para la tarjeta 1. */
+.container-body .card-plan1:hover {
+    border: 2px solid #ff6b00;
+}
+
+/* Efecto hover específico para la tarjeta 2. */
+.container-body .card-plan2:hover {
+    border: 2px solid #173748;
+}
+
+/* --- BOTÓN "SELECCIONAR" EN LAS TARJETAS DE PLAN --- */
+/* Botón para el Plan Plus (naranja). */
+.container-body .card-plan1 label.btn-positiva {
+    width: 33%;
+    background-color: #ff7500;
+    margin: 0;
+    height: 48px;
+    padding: 10px 30px 10px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border-radius: 7px;
+}
+/* Botón para el Plan Pro (azul oscuro). */
+.container-body .card-plan2 label.btn-positiva {
+    width: 33%;
+    background-color: #173748;
+    margin: 0;
+    height: 48px;
+    padding: 10px 30px 10px 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo del texto "Ver detalle cobertura". */
+.container-body .card-plan-details p {
+    width: 80%;
+    padding: 12px 0;
+    margin: 0;
+    margin-right: 7px;
+}
+
+/* --- CONTENEDOR "VER DETALLE" --- */
+/* Fondo y color para el contenedor del Plan Plus. */
+.container-body .card-plan1 .card-plan-details .toggle-details {
+    background: #fbd3b54c;
+    color: #ff6b00;
+    width: 100%;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 5px 15px 5px 15px;
+}
+/* Fondo y color para el contenedor del Plan Pro. */
+.container-body .card-plan2 .card-plan-details .toggle-details {
+    background: #17374812;
+    color: #173748;
+    width: 100%;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 5px 15px 5px 15px;
+}
+
+/* --- TABLA DE DETALLES DEL PLAN --- */
+/* Título de la tabla de detalles (naranja). */
+.container-body .card-plan1 table .detailsTitle {
+    background-color: #ff7500;
+    border-radius: 35px;
+    height: 36px;
+    color: #173748;
+}
+.container-body .card-plan2 table .detailsTitle {
+    background-color: #ff7500;
+    border-radius: 35px;
+    height: 36px;
+    color: #173748;
+}
+
+/* Estilo para celdas (th, td) en la tabla de detalles. */
+.container-body .details-hidden table tr th, .container-body .details-hidden table tr td {
+    border-bottom: 1px solid #EEEEEE;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* --- LAYOUT INTERNO DE LAS TARJETAS DE PLAN --- */
+.container-body .card-plan-flex {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Columna del título del plan. */
+.container-body .card-plan-title {
+    width: 33%;
+    border-right: 2px solid #d7e2ee;
+    padding-right: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+/* Icono del plan. */
+.container-body .card-plan-title img {
+    width: 35px;
+    margin-right: 10px;
+}
+/* Subtítulo del plan ("viajero"). */
+.container-body .card-plan-title span {
+    font-weight: 400;
+    font-size: 17px;
+}
+
+/* --- CAJA DE PRECIO EN TARJETA DE PLAN --- */
+.container-body .card-plan-price {
+    background: #f9faf9;
+    border-radius: 10px;
+    padding: 15px;
+    width: auto;
+    color: #6e6e6e;
+}
+.container-body .card-plan-price p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+.container-body .card-plan-price p span {
+    font-size: 19px;
+    font-weight: 600;
+}
+/* Estilo del precio en la sección de checkout. */
+.container-body .checkout .card-plan-price p {
+    font-size: 22px;
+}
+
+/* --- DESCRIPCIÓN DEL PLAN --- */
+.container-body .card-plan-description {
+    width: 70%;
+    padding-left: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+}
+.container-body .card-plan-description h5 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: -0.03em;
+}
+
+/* Estilo específico para el contenedor del checkbox de términos en el paso 4. */
+.container-body .radioContainer.radioContainer3{
+    margin: 0; 
+    padding: 0;
+}
+/* --- LISTAS (UL) --- */
+.container-body ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Icono de check para los ítems de lista. */
+.container-body ul li::before {
+    content: url("https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/check.svg/ffb3dbec-82fd-69a7-747c-7cee05f32e0c?t=1732808723354");
+    margin-right: 10px;
+}
+
+/* --- DETALLES DEL PLAN --- */
+.container-body .card-plan-details {
+    margin-top: 20px;
+}
+
+/* Contenedor fieldset. */
+.container-body fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+/* --- LÓGICA PARA MOSTRAR/OCULTAR DETALLES DEL PLAN --- */
+.container-body .input-details-plan {
+    display: none; /* El checkbox real está oculto */
+}
+
+/* Estilo del label que funciona como botón para mostrar detalles. */
+.container-body .label-details-plan {
+    display: block;
+    width: 67%;
+    overflow: hidden;
+    margin: 0 15px 0 0 !important;
+}
+
+/* Estilo cuando el plan está seleccionado. */
+.container-body .card-plan input[type="radio"]:checked+.label-details-plan {
+    border: 2px solid #3b73f1;
+    padding: 20px 35px;
+    margin-top: 0;
+    border-radius: 20px;
+    background: #3b73f117;
+}
+
+/* Contenedor de los detalles ocultos (la tabla). */
+.container-body .details-hidden {
+    height: auto;
+    overflow-y: auto;
+}
+
+/* --- TEXTO DE VIGENCIA --- */
+/* Estilo para el texto "Vigencia del...". */
+.container-body .vigency-data {
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    background: #f9faf9;
+    font-size: 12px;
+    font-weight: 400;
+    color: #6e6e6e;
+    display: flex;
+}
+
+/* --- ESTILOS DE TABLA --- */
+.container-body table {
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 100%;
+}
+.container-body table tr th,
+.container-body table tr td {
+    border: none;
+    padding: 5px !important;
+    background: #ffff !important;
+    border-bottom: none !important
+}
+.container-body table tr th {
+    border-bottom: 1px solid #bbb;
+    text-align: left;
+    font-weight: 400;
+}
+
+/* --- LAYOUTS DE COLUMNAS (NO UTILIZADO AMPLIAMENTE) --- */
+.container-body .two-columns {
+    display: flex;
+    flex-direction: row;
+}
+.container-body .one-column {
+    width: 50%;
+    margin-right: 10px;
+}
+
+/* Estilo para labels en el formulario de niños. */
+.container-body #form-children label {
+    font-size: 14px;
+}
+
+/* --- ÍCONOS EN INPUTS --- */
+/* Añade un ícono de origen al input correspondiente. */
+.container-body .origin-input {
+    background: url("https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-origen.svg");
+}
+/* Añade un ícono de destino. */
+.container-body .destino-input {
+    background: url("https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-destino.svg");
+}
+/* Añade un ícono de calendario. */
+.container-body .date-input {
+    background: url("https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-calendario.svg");
+    padding-left: 35px !important;
+}
+/* Añade un ícono de personas. */
+.container-body .viajeros-input {
+    background: url("https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-personas.svg");
+}
+/* Posicionamiento y padding para los íconos en los inputs. */
+.container-body .origin-input,
+.container-body .destino-input,
+.container-body .date-input,
+.container-body .viajeros-input {
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: 10px;
+    padding-left: 30px !important;
+}
+
+/* --- ESTILOS DEL ACORDEÓN (PASO 2) --- */
+/* Ítem individual del acordeón. */
+.container-body .acordeon__item {
+    border-bottom: 1px solid #dadada;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+}
+/* El input de radio que controla el estado del acordeón (oculto). */
+.container-body .acordeon .acordeon-input {
+    display: none;
+}
+/* El título clickeable del acordeón. */
+.container-body .acordeon__titulo {
+    padding: 15px;
+    border-bottom: 1px solid #fff;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+/* El contenido desplegable del acordeón. */
+.container-body .acordeon__contenido {
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    transition: all 0.5s;
+}
+/* Muestra el contenido cuando el input de radio está seleccionado. */
+.container-body .acordeon input:checked~.acordeon__contenido {
+    height: auto;
+    margin: 15px 0;
+}
+
+/* --- ESTILOS DE LA BARRA DE SCROLL --- */
+/* Modifica estos estilos para personalizar la barra de scroll. */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #ff7500;
+    border-radius: 10px;
+    border: 3px solid #f0f0f0;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #e56400;
+}
+/* Scrollbar para el segundo plan (azul). */
+#detailsHidden2::-webkit-scrollbar-thumb {
+    background: #173748;
+    border-radius: 10px;
+    border: 3px solid #f0f0f0;
+}
+#detailsHidden2::-webkit-scrollbar-thumb:hover {
+    background: #173748;
+}
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* --- MENSAJE DE ERROR PARA VIAJEROS --- */
+.error-message-viajeros {
+    color: #e60003;
+    display: none;
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.03em;
+}
+
+/* --- ESTILOS PARA MODAL TIPO "TOAST" (NOTIFICACIÓN) --- */
+.container-body .modal-toast-gen .modal {
+    background-color: transparent !important;
+    z-index: 9;
+}
+/* Posicionamiento del toast en la esquina superior derecha. */
+.container-body .modal-toast-gen .modal-cont-viajeros {
+    margin: 0;
+    position: absolute;
+    right: 0px;
+    top: 10px;
+    box-shadow: 0px 4px 16px 0px #0000000d;
+    border: none;
+    width: 54%;
+}
+/* Estilo del texto y la barra lateral del toast. */
+.container-body .modal-toast-gen .modal-text {
+    flex-direction: row;
+    align-items: start;
+    text-align: start;
+    justify-content: flex-start;
+    margin-right: 15px;
+    border-left: 5px solid red;
+    border-radius: 5px;
+}
+.container-body .modal-toast-gen .modal-text img {
+    margin: 5px 10px;
+    width: 24px;
+    height: 24px;
+}
+.container-body .modal-toast-gen .modal-text span {
+    font-size: 16px;
+    font-weight: 600;
+}
+.container-body .modal-toast-gen #closeModaltToast {
+    background: transparent;
+    border: none;
+    color: gray;
+    cursor: pointer;
+}
+
+/* --- HEADER DE IDA Y VUELTA --- */
+.container-body .ida-vuelta {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    width: 100%;
+}
+.container-body .ida-vuelta img {
+    width: 100%;
+}
+.container-body .ida-vuelta h4 {
+    font-size: 30px;
+    font-weight: 600;
+    text-align: left;
+    margin: 0;
+}
+.container-body .ida-vuelta div {
+    display: flex;
+    justify-content: center;
+    width: 33%;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- CONTENEDOR PARA INPUTS DE EDAD (EN EL SELECTOR DE VIAJEROS) --- */
+.container-body .rowContainerInput {
+    flex-wrap: wrap;
+    gap: 0px 10px;
+    display: flex;
+}
+.container-body .rowContainerInput .ageDivInput {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+.container-body .rowContainerInput .age-input.viajeros-input {
+    width: 80%;
+}
+
+/* --- CARRITO DE COMPRAS --- */
+.carrito-viajeros>.flex {
+    align-items: flex-start;
+}
+
+/* --- CONTENEDOR PARA CHECKBOX CON ÍCONO DE INFORMACIÓN (PEPS) --- */
+.checkbox-info-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+.checkbox-info-container input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #dadada;
+    border-radius: 4px;
+    margin: 0;
+    flex-shrink: 0;
+}
+.checkbox-info-container label {
+    margin: 0;
+    font-weight: 400;
+    flex-grow: 1;
+}
+.info-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+/* --- FLECHA DEL ACORDEÓN (CON INTERCAMBIO DE IMAGEN) --- */
+.acordeon-arrow-container {
+    width: 20px;
+    height: 20px;
+}
+/* La flecha hacia arriba está oculta por defecto. */
+.acordeon-arrow.arrow-up {
+    display: none;
+}
+.acordeon-arrow {
+    width: 100%;
+    height: 100%;
+}
+/* Cuando el acordeón está abierto, se oculta la flecha hacia abajo. */
+.container-body .acordeon input:checked~.acordeon__titulo .arrow-down {
+    display: none;
+}
+/* Y se muestra la flecha hacia arriba. */
+.container-body .acordeon input:checked~.acordeon__titulo .arrow-up {
+    display: block;
+}
+
+/* --- RESPONSIVE DESIGN (TABLETS Y MÓVILES) --- */
+/* Modifica aquí los estilos para pantallas de hasta 997px de ancho. */
+@media (max-width: 997px) {
+    .container-body {
+        padding: 25px 20px 75px;
+    }
+    .container-body .container-cotizador {
+        display: block;
+    }
+    .container-body .empty-form {
+        height: 1300px;
+    }
+    .container-body .div-form,
+    .container-body .div-order {
+        width: 100%;
+        margin: 0;
+        margin-top: 15px;
+        max-width: 100%;
+        padding: 10px;
+    }
+    .container-body .div-order {
+        min-height: 1300px;
+    }
+    .container-body .card-plan .flex {
+        flex-direction: column;
+    }
+    .container-body .form-row-formViajerosDate {
+        display: block;
+    }
+    .container-body .card-plan-flex {
+        flex-direction: column;
+    }
+    .container-body .card-plan-title,
+    .container-body .card-plan-description {
+        width: 100%;
+        border: none;
+    }
+    .container-body .card-plan-title {
+        display: flex;
+    }
+    .container-body .card-plan-title .flex {
+        margin-right: 20px;
+    }
+    .container-body .card-plan1 label.btn-positiva,
+    .container-body .card-plan2 label.btn-positiva {
+        margin-top: 15px;
+        width: auto;
+    }
+    .container-body .multisteps-form__progress {
+        grid-template-columns: none;
+    }
+    .container-body .btn-count button {
+        padding: 5px 10px;
+    }
+    .container-body .btn-count {
+        display: flex;
+        align-items: center;
+    }
+    .container-body .buttons-container {
+        flex-direction: column;
+    }
+    .container-body .apply-btn-travelers {
+        margin-top: 15px;
+    }
+    .container-body .form-grid-phone {
+        grid-template-columns: 1fr;
+    }
+    .container-body .grid-img {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 10px;
+    }
+    .container-body .grid-img img {
+        border: none;
+    }
+    .container-body .multisteps-form__form .checkout {
+        flex-direction: column;
+    }
+    .container-body .modal-cont-viajeros {
+        width: 75%;
+        height: fit-content;
+    }
+    .container-body .ida-vuelta {
+        flex-direction: column;
+    }
+    .container-body .ida-vuelta div {
+        width: 100%;
+    }
+    .container-body .option-viajeros {
+        flex-direction: column;
+    }
+    .container-body .rowContainerInput {
+        display: block;
+        width: 80%;
+    }
+    .container-body .rowContainerInput .ageDivInput {
+        width: 100%;
+    }
+    .container-body .rowContainerInput .age-input.viajeros-input {
+        width: 100%;
+    }
+    .container-body .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .container-body .modal-toast-gen .modal-cont-viajeros {
+        width: 95%;
+    }
+    .container-body .label-details-plan {
+        height: auto;
+        width: 100%;
+    }
+}
+
+/* --- ESTILOS PARA PANTALLAS GRANDES --- */
+/* Modifica aquí los estilos para pantallas de 1680px o más de ancho. */
+@media (min-width: 1680px) {
+    .container-body {
+        padding: 50px 200px 75px;
+    }
+}
