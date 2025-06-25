@@ -47,11 +47,13 @@ body {
 }
 
 .Cont-res-EX h4 {
-    color: #173748
+    color: #173748;
+    margin: 0;
 }
 
 .Cont-res-EX span {
-    color: #FF7500
+    color: #FF7500;
+    margin: 0;
 }
 
 .Cont-form-title {
@@ -116,12 +118,12 @@ body {
     flex-direction: row;
 }
 
-.Cont-gen-plan .radio{
+.Cont-gen-plan .radio {
     width: 18px;
 
 }
 
-.Cont-radio{
+.Cont-radio {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -239,7 +241,8 @@ input, select, textarea {
     font-weight: 400;
     color: #000;
     text-transform: uppercase;
-    cursor: pointer; /* Agregar cursor pointer */
+    cursor: pointer;
+    /* Agregar cursor pointer */
 }
 
 /* --- ESTILOS PARA PERSONALIZAR EL ÍCONO DEL CALENDARIO --- */
@@ -253,7 +256,7 @@ input, select, textarea {
 }
 
 .Cont-Gen-Ex .date-Ex::-webkit-calendar-picker-indicator {
- display: none;
+    display: none;
 }
 
 .Cont-form {
@@ -412,10 +415,10 @@ input, select, textarea {
     font-family: Poppins, sans-serif;
     font-weight: 400;
     visibility: hidden;
-    width: 354px;
+    width: 400px;
     background-color: #FFF;
     color: #000000;
-    text-align: center;
+    text-align: left;
     border-radius: 6px;
     padding: 8px;
     border-radius: 5px;
@@ -426,7 +429,7 @@ input, select, textarea {
     position: absolute;
     z-index: 1;
     bottom: 111%;
-    left: 50%;
+    left: -239%;
     margin-left: -373px;
     /* Efecto de transición suave */
     opacity: 0;
@@ -448,6 +451,7 @@ input, select, textarea {
     font-weight: 500;
     line-height: 18px;
     letter-spacing: -0.03em;
+    margin: 0;
 }
 
 .Cont-btn-Ex {
@@ -471,6 +475,7 @@ input, select, textarea {
     font-size: 16px;
     font-weight: 600;
     font-family: Poppins, sans-serif;
+    cursor: pointer;
 }
 
 .btn-continua-EX {
@@ -483,6 +488,7 @@ input, select, textarea {
     font-size: 16px;
     font-weight: 600;
     font-family: Poppins, sans-serif;
+    cursor: pointer;
 }
 
 
@@ -601,12 +607,337 @@ input, select, textarea {
     font-size: 14px;
 }
 
-hr {
+.linea-gris-EX {
     width: 100%;
     padding: 0;
     border: 1px solid #D7E2EE;
 }
 
 .Cont-radio input[type="radio"] {
-    display: none; /* Ocultar inicialmente los radio buttons */
+    display: none;
+    /* Ocultar inicialmente los radio buttons */
+}
+
+.Cont-personas-adi {
+    display: flex;
+    flex-direction: row;
+}
+
+.Cont-des-an {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.Cont-adic-gen {
+    display: none;
+    gap: 10px;
+    flex-direction: column;
+    font-size: 14px;
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+    color: #112211;
+}
+
+.Cont-cont-ex {
+    display: flex;
+    flex-direction: row;
+    width: 20%;
+    border-radius: 10px;
+    border: 1px solid #DADADA;
+    height: 38px;
+    padding: 3px 13px 3px 13px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.Cont-min {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F5F5F5;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.Cont-max {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F5F5F5;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.Cont-title-plan {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: #173748;
+    font-family: Poppins, sans-serif;
+}
+
+.Cont-title-plan h6 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.Cont-title-plan h5 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+
+.Cont-desc-resul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    color: #173748;
+}
+
+.Cont-desc-ti h6 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #173748;
+    margin: 0;
+    text-align: left;
+}
+
+
+.Cont-desc-p p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #333742;
+    margin: 0;
+    text-align: left;
+}
+
+.Cont-res-to {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Poppins, sans-serif;
+    color: #333333;
+    padding: 20px;
+    border: 1px solid #F2F2F2;
+    border-radius: 10px;
+    box-shadow: 0px 4px 16px 0px #0000000D;
+}
+
+.Cont-boton-ex {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+}
+
+.btn-asegurado {
+    padding: 8px 30px 8px 30px;
+    background-color: #173748;
+    color: #fff;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: Poppins, sans-serif;
+    border: none;
+}
+
+.btn-mascotas {
+    padding: 8px 30px 8px 30px;
+    background-color: #FF7500;
+    color: #fff;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: Poppins, sans-serif;
+    border: none;
+}
+
+.Cont-boton-cont {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.btn-cont {
+    padding: 12px 30px 12px 30px;
+    border-radius: 7px;
+    background-color: #FF9338;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: Poppins, sans-serif;
+    border: none;
+}
+
+.vista-resumen-item {
+    display: none;
+}
+
+/* Toast */
+.Toast-Ex {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 540px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 2000;
+    font-family: Poppins, sans-serif;
+    /* Estado inicial: oculto fuera de la pantalla */
+    transform: translateX(120%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.5s ease, opacity 0.5s ease, visibility 0.5s;
+}
+
+.linea-nar-EX{
+    border: 2px solid #FF7500;
+    width: 20%;
+}
+
+/* NUEVA CLASE .show: Hace visible el toast con una animación */
+.Toast-Ex.show {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.toast-img-Ex {
+    border-left: 3px solid #E60003;
+    padding-left: 15px;
+    flex-shrink: 0;
+    height: 51px; 
+}
+
+.toast-img-Ex img {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.toast-desc-Ex {
+    flex-grow: 1;
+}
+
+.Toast-Ex h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.Toast-Ex p {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 4px 0 0;
+}
+
+
+.Toast-cierre-ex {
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+.Toast-cierre-ex:hover {
+    opacity: 1;
+}
+.Toast-cierre-ex img {
+    width: 20px;
+    height: 20px;
+    display: block;
+    position: fixed;
+    top: 20px;
+    right: 8px;
+}
+
+/*Estilos para el pop up*/
+.Fondo-pop-up-EX{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.pop-up-Ex {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 345px;
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 15px 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    color: #173748;
+}
+
+.pop-up-Ex-img{
+    padding: 14px;
+    display: flex;
+    justify-content: center;
+}
+
+.pop-up-Ex-title{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.pop-up-Ex-desc{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.pop-up-Ex-title h2{
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.pop-up-Ex-title p{
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.pop-up-cierre-ex{
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.cont-btn-Ex{
+    display: flex;
+    justify-content: right;
 }
