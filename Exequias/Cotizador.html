@@ -11,31 +11,301 @@
   <main class="Cont-Gen-Ex">
     <div class="Cont-Ex">
       <div class="Cont-cotiz-Ex">
+
         <div class="Cont-form-Ex">
-          <form>
+          <form class="form-Ex">
             <div class="Cont-form-title">
-              <h1>Cotiza, compra y <spam>asegúrate​​​​​​​ con toda
-                tu familia</spam></h1>
+              <h1>Cotiza, compra y <span>asegúrate​​​​​​​ con toda tu familia</span>
+              </h1>
             </div>
-            <div class="form-anual__campo">
-              <label for="tipoDocumento">Tipo de documento<span class="campo-obligatorio">*</span></label>
-              <select id="tipoDocumento" required>
-                <option value="" selected disabled>Seleccione</option>
-              </select>
-              <p class="error-message" id="value-error">Selecciona una opción</p>
+            <div class="Cont-form">
+              <div class="form-Ex-camp">
+                <label for="grupo-fam-Ex">Selecciona el grupo familiar que quieres asegurar*</label>
+                <select id="grupo-fam-Ex" required>
+                  <option value="" selected disabled>Seleccione</option>
+                </select>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
+              <div class="form-Ex-camp">
+                <label for="grupo-fam-Ex">Tu fecha de nacimiento*</label>
+                <input type="date" class="date-Ex" id="fechaN" required>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
             </div>
+
+            <div class="Cont-form-Seg">
+              <p>¿Quieres adicionar más beneficios?</p>
+              <div class="chekbox-info-Ex">
+                <input type="checkbox" id="peps" name="peps">
+                <label for="peps">¿Eres una persona políticamente Expuesta (PEPS)?</label>
+                <div class="tooltip-cont-Ex">
+                  <img
+                    src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-tooltip.svg"
+                    alt="Info" class="info-icon">
+                  <span class="tooltip-text">Una Persona Expuesta Políticamente (PEP) es aquella que desempeña o ha
+                    desempeñado funciones públicas destacadas.</span>
+                </div>
+              </div>
+              <div class="chekbox-info-Ex">
+                <input type="checkbox" id="proteccion" name="proteccion">
+                <label for="proteccion">Protección Garantizada</label>
+                <div class="tooltip-cont-Ex">
+                  <img
+                    src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-tooltip.svg"
+                    alt="Info" class="info-icon">
+                  <span class="tooltip-text">Una Persona Expuesta Políticamente (PEP) es aquella que desempeña o ha
+                    desempeñado funciones públicas destacadas.</span>
+                </div>
+              </div>
+              <div class="chekbox-info-Ex">
+                <input type="checkbox" id="asistencia" name="asistencia">
+                <label for="asistencia">Asistencia Exequial Mascota</label>
+                <div class="tooltip-cont-Ex">
+                  <img
+                    src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-tooltip.svg"
+                    alt="Info" class="info-icon">
+                  <span class="tooltip-text">Una Persona Expuesta Políticamente (PEP) es aquella que desempeña o ha
+                    desempeñado funciones públicas destacadas.</span>
+                </div>
+              </div>
+              <div class="chekbox-info-Ex">
+                <input type="checkbox" id="adicional" name="adicional">
+                <label for="adicional">Personas Adicionales</label>
+                <a href="">Conocer más</a>
+              </div>
+            </div>
+            <div class="Cont-plan-Ex">
+              <div class="Cont-titulo-plan">
+                <p>Selecciona el plan ideal para ti*</p> <a href="">Conocerlos planes</a>
+              </div>
+
+              <div class="Cont-gen-plan">
+                <div class="Cont-plan-des">
+                  <div class="Cont-radio">
+                    <input type="radio" class="radio plan-radio-input" name="plan" value="total" id="plan-total">
+                    <h3>Plan total</h3>
+                  </div>
+                  <p>Se reembolsa hasta: 12.5 SMLMV</p>
+                </div>
+                <div class="Cont-plan-total">
+                  <p>$ 0</p>
+                </div>
+              </div>
+
+              <div class="Cont-gen-plan">
+                <div class="Cont-plan-des">
+                  <div class="Cont-radio">
+                    <input type="radio" class="radio plan-radio-input" name="plan" value="mas" id="plan-mas">
+                    <h3>Plan más</h3>
+                  </div>
+                  <p>Se reembolsa hasta: 10 SMLMV</p>
+                </div>
+                <div class="Cont-plan-total">
+                  <p>$ 0</p>
+                </div>
+              </div>
+
+              <div class="Cont-gen-plan">
+                <div class="Cont-plan-des">
+                  <div class="Cont-radio">
+                    <input type="radio" class="radio plan-radio-input" name="plan" value="plus" id="plan-plus">
+                    <h3>Plan plus</h3>
+                  </div>
+                  <p>Se reembolsa hasta: 7 SMLMV</p>
+                </div>
+                <div class="Cont-plan-total">
+                  <p>$ 0</p>
+                </div>
+              </div>
+
+              <div class="Cont-gen-plan">
+                <div class="Cont-plan-des">
+                  <div class="Cont-radio">
+                    <input type="radio" class="radio plan-radio-input" name="plan" value="esencial" id="plan-esencial">
+                    <h3>Plan esencial</h3>
+                  </div>
+                  <p>Se reembolsa hasta: 6 SMLMV</p>
+                </div>
+                <div class="Cont-plan-total">
+                  <p>$ 0</p>
+                </div>
+              </div>
+            </div>
+            <div class="chekbox-info-po">
+              <input type="checkbox" id="politica" name="politica">
+              <label for="politica">He leído y autorizo el tratamiento de datos personales según
+                <br>la <a href="">Política de privacidad de Positiva</a></label>
+            </div>
+            <div class="Cont-btn-Ex">
+              <button class="btn-cotiza-EX" id="cotizar">Cotizar</button>
+            </div>
+          </form>
         </div>
 
         <div class="Cont-res-EX">
-          <div class="form-anual__campo">
-            <label for="tipoDocumento">Tipo de documento<span class="campo-obligatorio">*</span></label>
-            <select id="tipoDocumento" required>
-              <option value="" selected disabled>Seleccione</option>
-            </select>
-            <p class="error-message" id="value-error">Selecciona una opción</p>
+          <h4>
+            <span>Resultado</span> de la cotización
+          </h4>
+          <div class="Cont-costoseg-Ex">
+            <div class="Cont-cost-EX">
+              <p>El costo de tu seguro es</p>
+            </div>
+            <div class="Cont-pre-EX">
+              <h4>------</h4>
+              <p>____</p>
+            </div>
           </div>
+          <div class="Cont-dil-EX">
+            <img src="https://positivapruebas.com.co/wp-content/uploads/resultado-form-positiva.png">
+            <p>Diligencia el formulario de cotización
+              <br>para conocer el costo y las coberturas del seguro
+            </p>
+          </div>
+          <!--Formulario plan total-->
+          <form class="Cont-form-total">
+            <div class="form-re-camp">
+              <div class="form-re-one form-sel-min">
+                <label for="tipo-documento">Tipo de documento*</label>
+                <select id="tipo-documento" required>
+                  <option value="" selected disabled>Selecciona</option>
+                </select>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
+              <div class="form-re-one form-sel-max">
+                <label for="documento">Número de documento*</label>
+                <input type="number" id="documento" value="Ingresa" required>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
+            </div>
+
+            <div class="form-re-camp">
+              <div class="form-re-one form-se-maximo">
+                <label for="fecha-expe">Fecha de expedición del documento*</label>
+                <input type="date" class="date-Ex" id="fecha-expe" required>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
+            </div>
+
+            <div class="form-re-camp">
+              <div class="form-re-one">
+                <label for="primer-nombre">Primer nombre*</label>
+                <input type="text" id="primer-nombre" value="Ingresa" required>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
+              <div class="form-re-one">
+                <label for="segundo-nombre">Segundo nombre</label>
+                <input type="text" id="segundo-nombre" value="Ingresa" required>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
+            </div>
+
+            <div class="form-re-camp">
+              <div class="form-re-one">
+                <label for="primer-apellido">Primer apellido*</label>
+                <input type="text" id="primer-apellido" value="Ingresa" required>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
+              <div class="form-re-one">
+                <label for="segundo-apellido">Segundo apellido</label>
+                <input type="text" id="segundo-apellido" value="Ingresa" required>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
+            </div>
+
+            <div class="form-re-camp">
+              <div class="form-re-one">
+                <label for="fecha-nac">Fecha de nacimiento*</label>
+                <input type="date" class="date-Ex" id="fecha-nac" required>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
+              <div class="form-re-one">
+                <label for="departamento">Departamento*</label>
+                <select id="departamento" required>
+                  <option value="" selected disabled>Selecciona</option>
+                </select>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
+            </div>
+
+            <div class="form-re-camp">
+              <div class="form-re-one">
+                <label for="ciudad">Ciudad*</label>
+                <select id="ciudad" required>
+                  <option value="" selected disabled>Selecciona</option>
+                </select>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
+              <div class="form-re-one">
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" value="Ingresa" required>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
+            </div>
+
+            <div class="form-re-camp">
+              <div class="form-re-one">
+                <label for="celular">Celular*</label>
+                <input type="text" id="celular" value="Ingresa" required>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
+              <div class="form-re-one">
+                <label for="correo">Correo electrónico*</label>
+                <input type="email" id="correo" value="Ingresa" required>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
+            </div>
+
+            <div class="form-re-camp">
+              <div class="form-re-one form-se-maximo">
+                <label for="ciuu">Actividad CIIU*</label>
+                <select id="ciuu" required>
+                  <option value="" selected disabled>Selecciona</option>
+                </select>
+                <p class="mensaje-error-EX" id="value-error">Campo obligatorio</p>
+              </div>
+            </div>
+
+            <div class="checkbox-form">
+              <div class="chekbox-info-Ex">
+                <input type="checkbox" id="peps" name="peps">
+                <label for="peps">¿Eres una persona políticamente Expuesta (PEPS)?</label>
+                <div class="tooltip-cont-Ex">
+                  <img
+                    src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-tooltip.svg"
+                    alt="Info" class="info-icon">
+                  <span class="tooltip-text">Una Persona Expuesta Políticamente (PEP) es aquella que desempeña o ha
+                    desempeñado funciones públicas destacadas.</span>
+                </div>
+              </div>
+
+              <div class="chekbox-info-Ex">
+                <input type="checkbox" id="peps" name="peps">
+                <label for="peps">Existe algún vinculo entre usted y una persona Públicamente expuesta?</label>
+                <div class="tooltip-cont-Ex">
+                  <img
+                    src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-tooltip.svg"
+                    alt="Info" class="info-icon">
+                  <span class="tooltip-text">Una Persona Expuesta Políticamente (PEP) es aquella que desempeña o ha
+                    desempeñado funciones públicas destacadas.</span>
+                </div>
+              </div>
+
+              <div class="chekbox-info-po">
+                <input type="checkbox" id="politica" name="politica">
+                <label for="politica">He leído y autorizo el tratamiento de datos personales según
+                  <br>la <a href="">Política de privacidad de Positiva</a></label>
+              </div>
+              <hr>
+            </div>
+
+            <div class="Cont-btn-Ex">
+              <button class="btn-continua-EX" id="continuar">continuar</button>
+            </div>
+
+          </form>
+
+
         </div>
-        </form>
       </div>
     </div>
   </main>

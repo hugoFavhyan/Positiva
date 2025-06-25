@@ -1,620 +1,369 @@
-// Clase base para validaciones
-class Validator {
-    constructor(inputElement) {
-        this.inputElement = inputElement;
-        this.errorElement = inputElement.nextElementSibling;
-    }
-    showError(message) {
-        this.inputElement.style.borderColor = "red";
-        if (this.errorElement) {
-            this.errorElement.textContent = message;
-            this.errorElement.style.display = "block";
-        }
-    }
-    clearError() {
-        this.inputElement.style.borderColor = "#e0e0e0";
-        if (this.errorElement) {
-            this.errorElement.style.display = "none";
-        }
-    }
-    // Valida para que los input de texto no puedan colocar numeros
-    static validateAlphanumeric(inputElement) {
-        inputElement.addEventListener("keypress", (event) => {
-            const char = String.fromCharCode(event.which);
-            const alphanumericRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]$/;
-            if (!alphanumericRegex.test(char)) {
-                event.preventDefault();
-            }
-        });
-    }
-    // Nueva validación para direcciones que permite #, - y caracteres alfanuméricos
-    static validateAddress(inputElement) {
-        inputElement.addEventListener("keypress", (event) => {
-            const char = String.fromCharCode(event.which);
-            const addressRegex = /^[a-zA-Z0-9 #-]$/;
-            if (!addressRegex.test(char)) {
-                event.preventDefault();
-            }
-        });
-    }
-    // Valida que solo se puedan ingresar números
-    static validateNumbers(inputElement) {
-        inputElement.addEventListener("keypress", (event) => {
-            const char = event.key;
-            const numbersRegex = /^\d$/;
-            if (!numbersRegex.test(char)) {
-                event.preventDefault();
-            }
-        });
-    }
-}
-// =================================================================
-// NUEVA CLASE PARA CENTRALIZAR MENSAJES DE ERROR
-// =================================================================
-class ErrorMessages {
+class Validador {
     constructor() {
-        this.messages = {
-            REQUIRED: "Este campo es obligatorio.",
-            INVALID_EMAIL_STRUCTURE: "Estructura de correo inválida.",
-            PHONE_LENGTH: "El campo debe tener al menos 10 dígitos.",
-            AGE_RANGE_FIELD: "No cumples con el rango de edad.",
-            INVALID_CITY: "Por favor, selecciona una ciudad válida de la lista.",
-            AGE_RANGE_MODAL: {
-                title: "Edad no permitida",
-                body: "La edad debe estar entre 2 y 65 años para continuar."
-            },
-            EMAIL_MISMATCH_MODAL: {
-                title: "Los correos no coinciden",
-                body: "Valida que hayas escrito el correo de forma correcta."
-            },
-            DATA_AUTH_MODAL: {
-                title: "Aceptar tratamiento de datos",
-                body: "Debes aceptar el tratamiento de datos personales para continuar con el proceso. Por favor, marca la casilla correspondiente."
-            },
-            // AÑADIMOS LA NUEVA ENTRADA PARA EL TOAST AQUÍ
-            FORM_INCOMPLETE_TOAST: {
-                primary: "Por favor, completa todos los campos obligatorios.",
-                secondary: "Los campos pendientes están resaltados para tu referencia."
+        this.precios = {
+            casado: {
+                proteccionGarantizada: {
+                    total: 960633,
+                    mas: 709097,
+                    plus: 534111,
+                    esencial: 429121
+                }
             }
         };
+        this.init();
     }
-    /**
-     * Obtiene un mensaje de error por su clave.
-     * @param {string} key La clave del mensaje a obtener.
-     * @returns {string|object} El mensaje o un objeto con title y body.
-     */
-    get(key) {
-        return this.messages[key] || "Error desconocido.";
-    }
-}
-// Clase para manejar validación de emails con comportamiento específico
-class EmailValidator extends Validator {
-    constructor(inputElement, errorMessages) {
-        super(inputElement);
-        this.errorMessages = errorMessages;
-        this.setupEmailValidation();
-    }
-    setupEmailValidation() {
-        this.inputElement.addEventListener("input", () => {
-            const currentEmail = this.inputElement.value;
-            if (currentEmail.includes("@")) {
-                const [user, domain] = currentEmail.split("@");
-                if (domain.startsWith("-")) {
-                    this.inputElement.value = `${user}@`;
-                    return;
-                }
-                if (domain.endsWith("-")) {
-                    this.inputElement.value = `${user}@${domain.slice(0, -1)}`;
-                    return;
-                }
-            }
-        });
-        this.inputElement.addEventListener("keypress", (event) => {
-            const char = event.key;
-            const currentEmail = this.inputElement.value;
-            const emailRegex = /^[a-zA-Z0-9@.-]$/;
-            if (!emailRegex.test(char)) {
-                event.preventDefault();
-                return;
-            }
-            if (char === "@") {
-                if (currentEmail.length === 0 || currentEmail.includes("@")) {
-                    event.preventDefault();
-                    return;
-                }
-            }
-            if (char === " ") {
-                event.preventDefault();
-                return;
-            }
-            if (currentEmail.includes("@")) {
-                const domain = currentEmail.split("@")[1];
-                if (char === "-") {
-                    if (domain.length === 0 || (domain.length > 0 && domain[domain.length - 1] === "-")) {
-                        event.preventDefault();
-                        return;
-                    }
-                }
-            }
-        });
-    }
-    validateStructure() {
-        const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.inputElement.value);
-        if (!isValid) {
-            this.showError(this.errorMessages.get('INVALID_EMAIL_STRUCTURE'));
-            return false;
+
+    init() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.inicializarComponentes());
         } else {
-            this.clearError();
-            return true;
+            this.inicializarComponentes();
         }
     }
-}
-// Clase para validación de teléfonos
-class PhoneValidator extends Validator {
-    constructor(inputElement, errorMessages) {
-        super(inputElement);
-        this.errorMessages = errorMessages;
-        this.setupPhoneValidation();
-    }
-    validatePhone() {
-        const isValid = this.inputElement.value.trim().length >= 10;
-        if (!isValid) {
-            this.showError(this.errorMessages.get('PHONE_LENGTH'));
-            return false;
-        } else {
-            this.clearError();
-            return true;
-        }
-    }
-    setupPhoneValidation() {
-        Validator.validateNumbers(this.inputElement);
-    }
-}
-// Clase para validación de fechas de nacimiento
-class BirthDateValidator extends Validator {
-    constructor(inputElement, errorMessages) {
-        super(inputElement);
-        this.errorMessages = errorMessages;
-    }
-    validateAge() {
-        if (this.inputElement.value === "") return true; // No validar si está vacío, se manejará en 'REQUIRED'
-        const birthDate = new Date(this.inputElement.value);
-        const today = new Date();
-        let age = today.getFullYear() - birthDate.getFullYear();
-        const month = today.getMonth() - birthDate.getMonth();
-        if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-        const isValid = age >= 2 && age <= 65;
-        if (!isValid) {
-            this.showError(this.errorMessages.get('AGE_RANGE_FIELD'));
-            return false;
-        } else {
-            this.clearError();
-            return true;
-        }
-    }
-}
 
-
-// Clase para manejar modales
-class ModalManager {
-    constructor() {
-        this.modals = new Map();
-        this.setupGlobalListeners();
-    }
-    setupGlobalListeners() {
-        window.addEventListener("click", (e) => {
-            this.modals.forEach((data, key) => {
-                if (e.target === data.modal) {
-                    this.closeModal(key);
-                }
-            });
-        });
-    }
-    registerModal(name, modalEl, closeEl) {
-        this.modals.set(name, {
-            modal: modalEl,
-            close: closeEl
-        });
-        closeEl.addEventListener("click", () => this.closeModal(name));
-    }
-    openModal(name) {
-        const md = this.modals.get(name);
-        if (md) {
-            md.modal.classList.add("active");
-        }
-    }
-    closeModal(name) {
-        const md = this.modals.get(name);
-        if (md) {
-            md.modal.classList.remove("active");
-        }
-    }
-}
-// Clase principal para manejar el formulario
-class PersonalDataForm {
-    constructor() {
-        this.mediaQuery = window.matchMedia("(max-width: 768px)");
-        this.locationService = new LocationService();
-        this.modalManager = new ModalManager();
-        this.errorMessages = new ErrorMessages();
-        this.cityAutocomplete = null;
-        this.elements = {};
-        this.validators = {};
-        this.isValid = false;
-
-        // --- INICIO: Definiciones para validación específica ---
-        this.blockedCedula = "123456789"; // ¡CAMBIA ESTE NÚMERO POR LA CÉDULA REAL!
-
-        // ===== ¡NUEVO! Define aquí la fecha de expedición específica que causará el error =====
-        // El formato DEBE SER AÑO-MES-DÍA (YYYY-MM-DD)
-        this.incorrectExpeditionDate = "2014-06-25";
-
-        this.blockedCedulaMessage = {
-            title: "No es posible continuar con el proceso",
-            body: "El tipo y número de documento ingresados no han superado las validaciones establecidas.\n\nSi tienes alguna inquietud, comunícate con nuestro equipo de soporte para obtener más información."
-        };
-
-        this.invalidDateForBlockedCedulaMessage = {
-            title: "Fecha de expedición no válida",
-            body: "Por favor, asegúrate de que la fecha de expedición del documento sea correcta para continuar."
-        };
-        // --- FIN: Definiciones ---
+    // Método que agrupa todos los inicializadores
+    inicializarComponentes() {
+        this.inicializarCalendario();
+        this.inicializarSelectorFamilia();
+        this.inicializarCheckboxes();
+        this.inicializarPlanRadios();
+        this.inicializarBotonCotizar();
     }
 
-    async init() {
-        this.getElements();
-        this.setupSelectOptions();
-        this.setupValidations();
-        await this.loadLocationData();
-        this.setupCityAutocomplete();
-        this.setupModals();
-        this.setupEventListeners();
+    inicializarCalendario() {
+        const fechaInput = document.getElementById('fechaN');
+        if (!fechaInput) return;
+        this.crearOverlayCalendario(fechaInput);
+        this.agregarValidaciones(fechaInput);
     }
 
-    getElements() {
-        const elementIds = [
-            'tipoDocumento', 'numeroDocumento', 'direccionResidencia', 'primerNombre',
-            'apellido', 'genero', 'correoElectronico', 'confirmarCorreo', 'telefono',
-            'ciudad', 'resultado-ciudad', 'fechaNacimiento', 'fechaExpedicion',
-            'autorizacionDatos', 'formularioDatosPersonales',
-            'modalValidationTitle', 'modalValidationMessage'
+    inicializarSelectorFamilia() {
+        const selectorFamilia = document.getElementById('grupo-fam-Ex');
+        if (!selectorFamilia) return;
+
+        // Agregar opciones al selector
+        const opciones = [
+            { value: 'soltero', text: 'Soltero' },
+            { value: 'casado', text: 'Casado' },
+            { value: 'familia', text: 'Familia con hijos' }
         ];
-        elementIds.forEach(id => {
-            this.elements[id] = document.getElementById(id);
+
+        opciones.forEach(opcion => {
+            const option = document.createElement('option');
+            option.value = opcion.value;
+            option.textContent = opcion.text;
+            selectorFamilia.appendChild(option);
         });
-        this.elements.formGroup = document.querySelector(".form-anual__grupo");
-        this.elements.containerCheckbox = document.querySelector(".etiqueta-checkbox");
-        this.elements.botonContinuar = document.querySelector(".boton-continuar");
-    }
 
-    setupSelectOptions() {
-        const documentTypes = [{ text: "Cédula de Ciudadanía", value: "Cédula de Ciudadanía" }, { text: "NIT", value: "Número de Identificación Tributaria" }];
-        const genderTypes = [{ text: "Masculino", value: "Masculino" }, { text: "Femenino", value: "Femenino" }];
-        this.mapDataToSelect(documentTypes, this.elements.tipoDocumento);
-        this.mapDataToSelect(genderTypes, this.elements.genero);
-    }
-
-    mapDataToSelect(options, selectElement) {
-        options.forEach(option => {
-            const optionElement = document.createElement("option");
-            optionElement.value = option.value;
-            optionElement.textContent = option.text;
-            selectElement.appendChild(optionElement);
+        // Agregar evento de cambio
+        selectorFamilia.addEventListener('change', () => {
+            this.manejarSeleccionFamilia();
         });
     }
 
-    setupValidations() {
-        Validator.validateAddress(this.elements.direccionResidencia);
-        Validator.validateAlphanumeric(this.elements.primerNombre);
-        Validator.validateAlphanumeric(this.elements.apellido);
-        Validator.validateNumbers(this.elements.numeroDocumento);
-        this.validators.emailPrimary = new EmailValidator(this.elements.correoElectronico, this.errorMessages);
-        this.validators.emailConfirm = new EmailValidator(this.elements.confirmarCorreo, this.errorMessages);
-        this.validators.phone = new PhoneValidator(this.elements.telefono, this.errorMessages);
-        this.validators.birthDate = new BirthDateValidator(this.elements.fechaNacimiento, this.errorMessages);
-        this.setupErrorClearing();
+    manejarSeleccionFamilia() {
+        const selectorFamilia = document.getElementById('grupo-fam-Ex');
+        const checkProteccion = document.getElementById('proteccion');
+
+        if (!selectorFamilia || !checkProteccion) return;
+
+        console.log('Familia seleccionada:', selectorFamilia.value);
+        this.actualizarPrecios();
     }
 
-    setupErrorClearing() {
-        const inputs = this.elements.formularioDatosPersonales.querySelectorAll("input, select");
-        inputs.forEach(input => {
-            input.addEventListener("input", () => this.clearFieldError(input));
-        });
-    }
+    inicializarCheckboxes() {
+        const checkboxes = ['peps', 'proteccion', 'asistencia', 'adicional', 'politica'];
 
-    clearFieldError(input) {
-        input.style.borderColor = "#e0e0e0";
-        const errorMessage = input.nextElementSibling;
-        if (errorMessage && errorMessage.classList.contains('error-message')) {
-            errorMessage.style.display = "none";
-        }
-    }
+        checkboxes.forEach(id => {
+            const checkbox = document.getElementById(id);
+            if (checkbox) {
+                checkbox.addEventListener('change', (e) => {
+                    console.log(`Checkbox ${id} cambiado:`, e.target.checked);
 
-    async loadLocationData() {
-        try {
-            await this.locationService.loadLocations();
-        } catch (error) {
-            console.error("Error al cargar datos de ubicación:", error);
-        }
-    }
-
-    setupCityAutocomplete() {
-        this.cityAutocomplete = new CityAutocomplete(this.locationService, this.elements.ciudad, this.elements["resultado-ciudad"]);
-    }
-
-    setupModals() {
-        const modalValidations = document.getElementById("modalValidations");
-        const closeModal = modalValidations.querySelector(".close");
-        this.modalManager.registerModal("validations", modalValidations, closeModal);
-    }
-
-    setupEventListeners() {
-        this.elements.botonContinuar.addEventListener("click", (event) => this.handleSubmit(event));
-        this.elements.numeroDocumento.addEventListener("blur", () => this.validateBlockedCedulaOnBlur());
-    }
-
-    showCustomValidationErrorModal(errorData) {
-        this.elements.modalValidationTitle.textContent = errorData.title;
-        this.elements.modalValidationMessage.innerHTML = errorData.body.replace(/\n/g, '<br>');
-        const refContainer = document.getElementById('modalValidationReferenceContainer');
-        const refInput = document.getElementById('modalValidationReferenceInput');
-        if (errorData.reference) {
-            refInput.value = errorData.reference;
-            refContainer.style.display = 'block';
-        } else {
-            refContainer.style.display = 'none';
-        }
-        this.modalManager.openModal("validations");
-    }
-
-    validateBlockedCedulaOnBlur() {
-        const documentoValue = this.elements.numeroDocumento.value.trim();
-        if (documentoValue === this.blockedCedula) {
-            this.showCustomValidationErrorModal(this.blockedCedulaMessage);
-            this.showFieldError(this.elements.numeroDocumento, "Este número de documento no puede continuar.");
-        }
-    }
-
-    validateForm() {
-        let isFormValid = true;
-        const inputs = this.elements.formularioDatosPersonales.querySelectorAll("input[required], select[required]");
-        inputs.forEach(input => this.clearFieldError(input));
-
-        // --- INICIO: LÓGICA DE VALIDACIÓN ACTUALIZADA ---
-        const documentoValue = this.elements.numeroDocumento.value.trim();
-        const fechaExpedicionValue = this.elements.fechaExpedicion.value;
-
-        if (documentoValue === this.blockedCedula) {
-            // Escenario 1: La cédula es la bloqueada Y la fecha de expedición es la fecha incorrecta específica.
-            if (fechaExpedicionValue === this.incorrectExpeditionDate) {
-                this.showCustomValidationErrorModal(this.invalidDateForBlockedCedulaMessage);
-                this.showFieldError(this.elements.fechaExpedicion, 'Fecha de expedición no válida.');
-                return false;
+                    // Si es el checkbox de protección, actualizar precios
+                    if (id === 'proteccion') {
+                        this.actualizarPrecios();
+                    }
+                });
             }
+        });
+    }
 
-            // Escenario 2: La cédula es la bloqueada, pero con cualquier otra fecha (o si está vacía).
-            this.showCustomValidationErrorModal(this.blockedCedulaMessage);
-            return false;
-        }
-        // --- FIN: LÓGICA DE VALIDACIÓN ACTUALIZADA ---
-
-        inputs.forEach(input => {
-            if ((input.type === 'checkbox' && !input.checked) || !input.value) {
-                if (input.id !== 'autorizacionDatos') {
-                    this.showFieldError(input, this.errorMessages.get('REQUIRED'));
-                    isFormValid = false;
+    inicializarPlanRadios() {
+        const radios = document.querySelectorAll('.plan-radio-input');
+        radios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    console.log('Plan seleccionado:', e.target.value);
+                    this.actualizarResultadoFinal(e.target.value);
                 }
-            }
-        });
-
-        if (!this.validateCity(this.elements.ciudad)) isFormValid = false;
-        if (!this.validators.emailPrimary.validateStructure()) isFormValid = false;
-        if (!this.validators.emailConfirm.validateStructure()) isFormValid = false;
-        if (!this.validators.phone.validatePhone()) isFormValid = false;
-
-        if (!this.validators.birthDate.validateAge()) {
-            const error = this.errorMessages.get('AGE_RANGE_MODAL');
-            this.showCustomValidationErrorModal(error);
-            return false;
-        }
-
-        if (this.elements.correoElectronico.value !== this.elements.confirmarCorreo.value) {
-            const error = this.errorMessages.get('EMAIL_MISMATCH_MODAL');
-            this.showCustomValidationErrorModal(error);
-            return false;
-        }
-
-        if (!this.elements.autorizacionDatos.checked) {
-            const error = this.errorMessages.get('DATA_AUTH_MODAL');
-            this.showCustomValidationErrorModal(error);
-            isFormValid = false;
-        }
-
-        return isFormValid;
-    }
-
-    validateCity(cityInput) {
-        const value = cityInput.value.trim().toLowerCase();
-        const parts = value.split(" - ");
-        if (parts.length === 2) {
-            const municipalityInput = parts[0].trim();
-            const departmentInput = parts[1].trim();
-            const isValid = this.locationService.municipalities.some(m => m.nombreMunicipio.toLowerCase() === municipalityInput) &&
-                this.locationService.departments.some(d => d.NombreDepartamento.toLowerCase() === departmentInput);
-            if (!isValid) {
-                this.showFieldError(cityInput, this.errorMessages.get('INVALID_CITY'));
-                return false;
-            }
-        } else {
-            if (!value) {
-                this.showFieldError(cityInput, this.errorMessages.get('REQUIRED'));
-                return false;
-            }
-            this.showFieldError(cityInput, this.errorMessages.get('INVALID_CITY'));
-            return false;
-        }
-        this.clearFieldError(cityInput);
-        return true;
-    }
-
-    showFieldError(input, message) {
-        input.style.borderColor = "red";
-        const errorMessage = input.nextElementSibling;
-        if (errorMessage && errorMessage.classList.contains('error-message')) {
-            errorMessage.textContent = message;
-            errorMessage.style.display = "block";
-        }
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-        if (this.validateForm()) {
-            this.onFormSuccess();
-        } else {
-            this.onFormError();
-        }
-    }
-
-    onFormSuccess() {
-        console.log("Formulario válido");
-        if (this.mediaQuery.matches) {
-            this.elements.formGroup.style.rowGap = "10px";
-        } else {
-            this.elements.formGroup.style.rowGap = "20px";
-        }
-        this.elements.containerCheckbox.style.marginTop = "0";
-        document.getElementById("form-anual").style.display = "none";
-        document.getElementById("resumen-compra").style.display = "block";
-        this.populateSummary();
-    }
-
-    onFormError() {
-        console.log("Formulario inválido");
-        if (this.mediaQuery.matches) {
-            this.elements.formGroup.style.rowGap = "10px";
-        } else {
-            this.elements.formGroup.style.rowGap = "30px";
-        }
-
-        // Se eliminó la condición 'if (!isModalActive)'
-        const toast = document.getElementById("toast");
-        toast.classList.add("showToastError");
-        setTimeout(() => {
-            toast.classList.remove("showToastError");
-        }, 3000);
-    }
-
-    populateSummary() {
-        const summaryElements = {
-            nombre: `${this.elements.primerNombre.value} ${this.elements.apellido.value}`,
-            tipoDocumentoResumen: this.elements.tipoDocumento.value,
-            documento: this.elements.numeroDocumento.value,
-            fechaExpedicionResumen: this.elements.fechaExpedicion.value,
-            direccion: this.elements.direccionResidencia.value,
-            fechaNacimientoResumen: this.elements.fechaNacimiento.value,
-            CiudadResumen: this.elements.ciudad.value,
-            email: this.elements.correoElectronico.value,
-            celular: this.elements.telefono.value
-        };
-        Object.keys(summaryElements).forEach(id => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.textContent = summaryElements[id];
-            }
-        });
-        const nameModalFinal = document.getElementById("nameText__ModalFinal");
-        if (nameModalFinal) {
-            nameModalFinal.textContent = summaryElements.nombre;
-        }
-    }
-}
-// Inicialización cuando el DOM esté listo
-document.addEventListener("DOMContentLoaded", async () => {
-    const form = new PersonalDataForm();
-    await form.init();
-    // Configuración para el modal de confirmación final
-    const modalManager = new ModalManager();
-    const confirmModalEl = document.getElementById("confirmModal");
-    const closeConfirmEl = document.getElementById("closeConfirmModal");
-    const openConfirmBtn = document.getElementById("openConfirmModal");
-    if (confirmModalEl && closeConfirmEl && openConfirmBtn) {
-        modalManager.registerModal("confirm", confirmModalEl, closeConfirmEl);
-        openConfirmBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            const userName = document.getElementById("nombre").textContent || "cliente";
-            document.getElementById("nameText__ModalFinal").textContent = userName;
-            modalManager.openModal("confirm");
-        });
-        window.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") modalManager.closeModal("confirm");
+            });
         });
     }
-    const informationModalEl = document.getElementById("modalInformation");
-    const openInformationBtn = document.getElementById("openModalInformation");
-    console.log("Modal element:", informationModalEl); // Debug
-    console.log("Open button:", openInformationBtn); // Debug
-    if (informationModalEl && openInformationBtn) {
-        // Buscar el botón de cerrar dentro del modal
-        const closeInformationEl = informationModalEl.querySelector(".modalInformation-close");
-        console.log("Close button:", closeInformationEl); // Debug
-        if (closeInformationEl) {
-            modalManager.registerModal("information", informationModalEl, closeInformationEl);
-        }
-        // Evento para abrir el modal
-        openInformationBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            console.log("Clicking open modal"); // Debug
-            // Método directo para abrir el modal
-            informationModalEl.style.display = "flex";
-            informationModalEl.classList.add("active");
-            // También usar el modalManager si está registrado
-            if (closeInformationEl) {
-                modalManager.openModal("information");
-            }
-        });
-        // Evento para cerrar el modal (método directo)
-        if (closeInformationEl) {
-            closeInformationEl.addEventListener("click", () => {
-                informationModalEl.style.display = "none";
-                informationModalEl.classList.remove("active");
-                modalManager.closeModal("information");
+
+    inicializarBotonCotizar() {
+        const botonCotizar = document.getElementById('cotizar');
+        if (botonCotizar) {
+            botonCotizar.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.procesarCotizacion();
             });
         }
-        // Cerrar modal al hacer clic fuera de él
-        window.addEventListener("click", (e) => {
-            if (e.target === informationModalEl) {
-                informationModalEl.style.display = "none";
-                informationModalEl.classList.remove("active");
-                if (closeInformationEl) {
-                    modalManager.closeModal("information");
-                }
-            }
-        });
-    } else {
-        console.error("No se encontraron los elementos del modal de información");
-        console.error("Modal:", informationModalEl);
-        console.error("Button:", openInformationBtn);
     }
-    // Event listener global para cerrar modales con Escape
-    window.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-            modalManager.closeModal("confirm");
-            modalManager.closeModal("information");
-            // Método directo también
-            if (informationModalEl) {
-                informationModalEl.style.display = "none";
-                informationModalEl.classList.remove("active");
+
+   procesarCotizacion() {
+    console.log('Procesando cotización...');
+
+    // Validar campos obligatorios
+    const camposObligatorios = [
+        { id: 'grupo-fam-Ex', nombre: 'Grupo familiar' },
+        { id: 'fechaN', nombre: 'Fecha de nacimiento' },
+        { id: 'politica', nombre: 'Política de privacidad', tipo: 'checkbox' }
+    ];
+
+    let hayErrores = false;
+
+    camposObligatorios.forEach(campo => {
+        const elemento = document.getElementById(campo.id);
+        const mensajeError = elemento?.parentElement?.querySelector('.mensaje-error-EX');
+
+        if (campo.tipo === 'checkbox') {
+            if (!elemento?.checked) {
+                if (mensajeError) mensajeError.style.display = 'block';
+                hayErrores = true;
+            } else {
+                if (mensajeError) mensajeError.style.display = 'none';
+            }
+        } else {
+            if (!elemento?.value) {
+                if (mensajeError) mensajeError.style.display = 'block';
+                hayErrores = true;
+            } else {
+                if (mensajeError) mensajeError.style.display = 'none';
             }
         }
     });
-    // Funcionalidad para el botón de recargar/editar (tu código existente)
-    const reloadButton = document.getElementById("reloadButton");
-    if (reloadButton) {
-        reloadButton.addEventListener("click", () => {
-            document.getElementById("resumen-compra").style.display = "none";
-            document.getElementById("form-anual").style.display = "block";
+
+    if (!hayErrores) {
+        // NUEVA FUNCIONALIDAD: Actualizar el precio en el resultado
+        this.actualizarPrecioEnResultado();
+        this.mostrarFormularioDetallado();
+    }
+}
+
+actualizarPrecioEnResultado() {
+    // Obtener el plan seleccionado
+    const planSeleccionado = document.querySelector('input[name="plan"]:checked');
+    const resultadoEl = document.querySelector('.Cont-pre-EX h4');
+    const periodoEl = document.querySelector('.Cont-pre-EX p');
+    
+    if (planSeleccionado && resultadoEl && periodoEl) {
+        const planValue = planSeleccionado.value;
+        const precio = this.precios.casado.proteccionGarantizada[planValue];
+        
+        if (precio) {
+            // Actualizar el precio
+            resultadoEl.textContent = `$ ${this.formatearPrecio(precio)}`;
+            // Actualizar el período
+            periodoEl.textContent = 'Anual';
+        }
+    }
+}
+
+    mostrarFormularioDetallado() {
+    const formDetallado = document.querySelector('.Cont-form-total');
+    const imagenPlaceholder = document.querySelector('.Cont-dil-EX');
+
+    if (formDetallado && imagenPlaceholder) {
+        imagenPlaceholder.style.display = 'none';     // Oculta la imagen
+        formDetallado.style.display = 'flex';         // Muestra el formulario
+        
+        this.inicializarSelectoresDetallados();
+    }
+}
+
+    inicializarSelectoresDetallados() {
+        // Tipos de documento
+        const tipoDocumento = document.getElementById('tipo-documento');
+        if (tipoDocumento) {
+            const tiposDoc = [
+                { value: 'CC', text: 'Cédula de Ciudadanía' },
+                { value: 'CE', text: 'Cédula de Extranjería' },
+                { value: 'TI', text: 'Tarjeta de Identidad' }
+            ];
+
+            tiposDoc.forEach(tipo => {
+                const option = document.createElement('option');
+                option.value = tipo.value;
+                option.textContent = tipo.text;
+                tipoDocumento.appendChild(option);
+            });
+        }
+
+        // Departamentos (ejemplo básico)
+        const departamento = document.getElementById('departamento');
+        if (departamento) {
+            const departamentos = [
+                { value: 'bogota', text: 'Bogotá D.C.' },
+                { value: 'antioquia', text: 'Antioquia' },
+                { value: 'valle', text: 'Valle del Cauca' }
+            ];
+
+            departamentos.forEach(depto => {
+                const option = document.createElement('option');
+                option.value = depto.value;
+                option.textContent = depto.text;
+                departamento.appendChild(option);
+            });
+        }
+
+        // Actividades CIIU (ejemplo básico)
+        const ciuu = document.getElementById('ciuu');
+        if (ciuu) {
+            const actividades = [
+                { value: '6201', text: 'Actividades de programación informática' },
+                { value: '4711', text: 'Comercio al por menor' },
+                { value: '8511', text: 'Educación de la primera infancia' }
+            ];
+
+            actividades.forEach(actividad => {
+                const option = document.createElement('option');
+                option.value = actividad.value;
+                option.textContent = actividad.text;
+                ciuu.appendChild(option);
+            });
+        }
+    }
+
+    actualizarPrecios() {
+        const selectorFamilia = document.getElementById('grupo-fam-Ex');
+        const checkProteccion = document.getElementById('proteccion');
+
+        if (!selectorFamilia || !checkProteccion) return;
+
+        const tipoFamilia = selectorFamilia.value;
+        const proteccionActivada = checkProteccion.checked;
+
+        const planes = document.querySelectorAll('.Cont-gen-plan');
+        const resultadoFinalEl = document.querySelector('.Cont-pre-EX h4');
+
+        console.log('Actualizando precios - Familia:', tipoFamilia, 'Protección:', proteccionActivada);
+
+        // --- ESTA ES LA LÍNEA CORREGIDA ---
+        // Ahora verifica que se haya seleccionado CUALQUIER grupo familiar (no esté vacío)
+        // y que la protección esté activada.
+        if (tipoFamilia && tipoFamilia !== '' && proteccionActivada) {
+            const precios = this.precios.casado.proteccionGarantizada;
+
+            // Actualizar precios en la lista y habilitar radios
+            planes.forEach((plan) => {
+                const radioInput = plan.querySelector('.plan-radio-input');
+                const planId = radioInput.value;
+                const precioElemento = plan.querySelector('.Cont-plan-total p');
+
+                if (precioElemento && precios[planId]) {
+                    precioElemento.textContent = `$ ${this.formatearPrecio(precios[planId])}`;
+                }
+                if (radioInput) {
+                    radioInput.disabled = false;
+                    radioInput.style.display = 'block'; // Mostrar el radio button
+                }
+            });
+        } else {
+            // Si no se cumplen las condiciones, resetea todo
+            planes.forEach(plan => {
+                const precioEl = plan.querySelector('.Cont-plan-total p');
+                const radioEl = plan.querySelector('.plan-radio-input');
+
+                if (precioEl) precioEl.textContent = '$ 0';
+                if (radioEl) {
+                    radioEl.disabled = true;
+                    radioEl.checked = false;
+                    radioEl.style.display = 'none'; // Ocultar el radio button
+                }
+                plan.classList.remove('selected');
+            });
+
+            if (resultadoFinalEl) {
+                resultadoFinalEl.textContent = '------';
+            }
+        }
+    }
+
+    actualizarResultadoFinal(planValue) {
+        const resultadoEl = document.querySelector('.Cont-pre-EX h4');
+        const precio = this.precios.casado.proteccionGarantizada[planValue];
+
+        if (resultadoEl && precio) {
+            resultadoEl.textContent = `$ ${this.formatearPrecio(precio)}`;
+        }
+
+        // Resaltado visual del plan seleccionado
+        document.querySelectorAll('.Cont-gen-plan').forEach(div => {
+            div.classList.remove('selected');
+        });
+
+        const radioSeleccionado = document.getElementById(`plan-${planValue}`);
+        if (radioSeleccionado) {
+            radioSeleccionado.closest('.Cont-gen-plan').classList.add('selected');
+        }
+    }
+
+    formatearPrecio(precio) {
+        return new Intl.NumberFormat('es-CO').format(precio);
+    }
+
+   crearOverlayCalendario(fechaInput) {
+    // Crear un div invisible que cubra el área del icono
+    const iconArea = document.createElement('div');
+    iconArea.style.position = 'absolute';
+    iconArea.style.right = '15px';
+    iconArea.style.top = '50%';
+    iconArea.style.transform = 'translateY(-50%)';
+    iconArea.style.width = '20px';
+    iconArea.style.height = '20px';
+    iconArea.style.cursor = 'pointer';
+    iconArea.style.zIndex = '10';
+    
+    // Hacer que el contenedor del input sea relativo
+    fechaInput.parentElement.style.position = 'relative';
+    fechaInput.parentElement.appendChild(iconArea);
+    
+    // Evento click en el área del icono
+    iconArea.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        fechaInput.showPicker();
+    });
+    
+    // También en el input mismo
+    fechaInput.addEventListener('click', (e) => {
+        e.stopPropagation();
+        fechaInput.showPicker();
+    });
+}
+
+    agregarValidaciones(fechaInput) {
+        fechaInput.addEventListener('change', () => {
+            console.log('Fecha seleccionada:', fechaInput.value);
+            this.validarEdadMinima(fechaInput.value);
         });
     }
-});    
+
+    validarEdadMinima(fechaNacimiento) {
+        const hoy = new Date();
+        const nacimiento = new Date(fechaNacimiento);
+        const edad = hoy.getFullYear() - nacimiento.getFullYear();
+
+        console.log('Edad calculada:', edad);
+
+        if (edad < 18) {
+            alert('Debe ser mayor de edad para contratar el seguro');
+            return false;
+        }
+        return true;
+    }
+}
+
+// Inicializar la clase cuando se carga la página
+const validador = new Validador();
