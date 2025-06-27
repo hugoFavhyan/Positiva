@@ -108,7 +108,7 @@ class InputValidator {
     }
 }
 
-// CLASES ESPECIALIZADAS QUE AHORA HEREDAN DE InputValidator
+
 class EmailValidator extends InputValidator {
     constructor(inputElement, errorMessages) {
         super(inputElement);
@@ -121,32 +121,29 @@ class EmailValidator extends InputValidator {
         this.inputElement.addEventListener("keypress", (event) => {
             const char = event.key;
             const currentEmail = this.inputElement.value;
-            const emailRegex = /^[a-zA-Z0-9@.-]$/; // Caracteres permitidos
+            const emailRegex = /^[a-zA-Z0-9@.-]$/;
 
             if (!emailRegex.test(char)) {
                 event.preventDefault();
                 return;
             }
             if (char === "@" && currentEmail.includes("@")) {
-                event.preventDefault(); // Solo un @ permitido
+                event.preventDefault();
             }
             if (char === " ") {
-                event.preventDefault(); // No se permiten espacios
+                event.preventDefault();
             }
         });
     }
 
     // Este método valida la estructura completa del correo
     validateStructure() {
-        // Regex simple para validar la estructura (usuario@dominio.com)
         const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.inputElement.value);
 
-        // Si no es válido Y el campo no está vacío, muestra el error
         if (!isValid && this.inputElement.value.length > 0) {
             this.showError(this.errorMessages.get('INVALID_EMAIL_STRUCTURE'));
             return false;
         } else {
-            // Si es válido o está vacío, limpia el error
             this.clearError();
             return true;
         }
@@ -161,11 +158,9 @@ class PhoneValidator extends InputValidator {
     validatePhone() {
         const isValid = this.inputElement.value.trim().length >= 10;
         if (!isValid) {
-            // Muestra el error si no es válido
             this.showError(this.errorMessages.get('PHONE_LENGTH'));
             return false;
         } else {
-            // Limpia el error si es válido
             this.clearError();
             return true;
         }
@@ -181,7 +176,7 @@ class BirthDateValidator extends InputValidator {
         this.errorMessages = errorMessages;
     }
     validateAge() {
-        if (this.inputElement.value === "") return true; // No validar si está vacío, se manejará en 'REQUIRED'
+        if (this.inputElement.value === "") return true;
         const birthDate = new Date(this.inputElement.value);
         const today = new Date();
         let age = today.getFullYear() - birthDate.getFullYear();
@@ -344,7 +339,7 @@ class Validador {
         this.configurarClonacionDeFormularios();
     }
 
-    // --- NUEVO: Método para configurar el Toast ---
+    // --- Método para configurar el Toast ---
     inicializarToast() {
         this.toastElement = document.getElementById('toast-notification');
         const closeButton = document.getElementById('Toast-cierre-ex');
@@ -356,24 +351,22 @@ class Validador {
         }
     }
 
-    // --- NUEVO: Método para mostrar el Toast ---
+    // --- Método para mostrar el Toast ---
     mostrarToast() {
         if (!this.toastElement) return;
 
-        // Limpiar cualquier timeout anterior para evitar que se oculte prematuramente
         if (this.toastTimeout) {
             clearTimeout(this.toastTimeout);
         }
 
         this.toastElement.classList.add('show');
 
-        // Ocultar el toast después de 4 segundos (4000 ms)
         this.toastTimeout = setTimeout(() => {
             this.ocultarToast();
         }, 4000);
     }
 
-    // --- NUEVO: Método para ocultar el Toast ---
+    // ---Método para ocultar el Toast ---
     ocultarToast() {
         if (!this.toastElement) return;
 
@@ -383,7 +376,7 @@ class Validador {
         }
     }
 
-    // --- NUEVO: SECCIÓN DE MANEJO DEL POP-UP ---
+    // --- Método para la sección de manejo del pop up---
     inicializarPopUp() {
         this.popUpElement = document.querySelector('.Fondo-pop-up-EX');
         const closeButton = document.getElementById('pop-up-cierre-ex');
@@ -412,7 +405,7 @@ class Validador {
         }
     }
 
-    // --- NUEVO: Función de validación reutilizable ---
+    // --- Método para revisar todos los campos marcados como obligatorios ---
     validarFormulario(formElement) {
         if (!formElement) return false;
 
@@ -420,7 +413,7 @@ class Validador {
         let esValido = true;
 
         camposRequeridos.forEach(campo => {
-            // Creamos un validador para cada campo para poder mostrar/ocultar su error
+
             const validator = new InputValidator(campo);
 
             if (campo.id === 'politica-cotizar' || campo.id === 'politica-continuar') {
@@ -431,11 +424,10 @@ class Validador {
 
             if ((esCheckbox && !campo.checked) || (!esCheckbox && !campo.value)) {
                 esValido = false;
-                // --- LÓGICA MEJORADA ---
-                // Usamos el sistema de errores para mostrar el mensaje
+
                 validator.showError(this.errorMessages.get('REQUIRED'));
             } else {
-                // Si el campo es válido, nos aseguramos de limpiar el error
+
                 validator.clearError();
             }
         });
@@ -443,13 +435,13 @@ class Validador {
         return esValido;
     }
 
-    // EN LA CLASE Validador, AGREGA ESTE NUEVO MÉTODO
+    // Método para limpiar los input cuando el usuario ingresa correctamente el campo ---
     configurarLimpiezaDeErroresParaFormulario(formContext) {
         const camposConValidacion = formContext.querySelectorAll('[required]');
         camposConValidacion.forEach(campo => {
-            // Ignoramos campos que ya tienen validación en tiempo real si es necesario
+
             if (campo.id.startsWith('fecha-nac-asegurado_')) {
-                return; // Ya tiene un listener 'change' de la validación de edad
+                return;
             }
 
             const validator = new InputValidator(campo);
@@ -462,7 +454,7 @@ class Validador {
     }
 
 
-    // --- NUEVO: Método para cargar datos de la API y configurar los campos ---
+    // --- Método para cargar datos de la API y configurar los campos ---
     async inicializarUbicaciones() {
         try {
             console.log("Cargando departamentos y municipios desde la API...");
@@ -471,7 +463,6 @@ class Validador {
 
             this.poblarSelectDepartamentos();
 
-            // Configurar el autocompletado para la ciudad
             const ciudadInput = document.getElementById('ciudad');
             const resultadoCiudadDiv = document.getElementById('resultado-ciudad');
             const departamentoSelect = document.getElementById('departamento');
@@ -480,17 +471,16 @@ class Validador {
 
         } catch (error) {
             console.error("No se pudieron inicializar las ubicaciones:", error);
-            // Opcional: Mostrar un mensaje de error al usuario
+
         }
     }
 
 
-    // --- NUEVO: Método para llenar el select de departamentos ---
+    // --- Método para llenar el select de departamentos ---
     poblarSelectDepartamentos() {
         const departamentoSelect = document.getElementById('departamento');
         if (!departamentoSelect) return;
 
-        // Limpiar opciones existentes (excepto la primera)
         while (departamentoSelect.options.length > 1) {
             departamentoSelect.remove(1);
         }
@@ -503,18 +493,17 @@ class Validador {
         });
     }
 
-    // --- NUEVO: Método para inicializar los contadores ---
+    // ---Método para inicializar los contadores ---
     inicializarContadores() {
         const contenedores = document.querySelectorAll('.Cont-personas-adi');
 
         contenedores.forEach(contenedor => {
             const botonMenos = contenedor.querySelector('.Cont-min');
             const botonMas = contenedor.querySelector('.Cont-max');
-            // --- CORRECCIÓN AQUÍ ---
-            // Hacemos el selector más específico para encontrar el <p> dentro de .Cont-cont-ex
+
             const valorP = contenedor.querySelector('.Cont-cont-ex p');
 
-            if (botonMenos && botonMas && valorP) { // Verificamos que todos los elementos existan
+            if (botonMenos && botonMas && valorP) {
                 botonMenos.addEventListener('click', (e) => {
                     e.preventDefault();
                     let valorActual = parseInt(valorP.textContent);
@@ -532,7 +521,7 @@ class Validador {
         });
     }
 
-    // --- NUEVO: Método para mostrar el pop-up con mensajes dinámicos ---
+    // --- Método para mostrar el pop-up con mensajes dinámicos ---
     mostrarPopUpConMensaje(errorKey) {
         if (!this.popUpElement) return;
         const errorData = this.errorMessages.get(errorKey);
@@ -543,18 +532,17 @@ class Validador {
         const cuerpoEl = this.popUpElement.querySelector('.pop-up-Ex-desc p');
         const soporteEl = this.popUpElement.querySelector('.pop-up-soporte');
 
-        // --- LÓGICA MEJORADA PARA PERSONALIZAR EL MENSAJE ---
+
         let cuerpoMensaje = errorData.body;
 
-        // Revisa si el cuerpo del mensaje contiene el marcador de posición del nombre
+
         if (cuerpoMensaje.includes('[Nombre del usuario]')) {
             const nombreInput = document.getElementById('primer-nombre');
-            // Obtiene el nombre del formulario, o usa "Usuario" si está vacío
+
             const nombreUsuario = nombreInput.value.trim() || 'Usuario';
-            // Reemplaza el marcador de posición con el nombre real
+
             cuerpoMensaje = cuerpoMensaje.replace('[Nombre del usuario]', nombreUsuario);
         }
-        // --- FIN DE LA LÓGICA MEJORADA ---
 
         if (iconoEl && errorData.icon) iconoEl.src = errorData.icon;
         if (tituloEl) tituloEl.innerHTML = errorData.title;
@@ -572,7 +560,7 @@ class Validador {
         this.mostrarPopUp();
     }
 
-    // --- NUEVO: Método que contiene la lógica de validación especial ---
+    // --- Método que contiene la lógica de validación especial de las cedulas y fecha de expedición ---
     realizarValidacionEspecial() {
         const documentoInput = document.getElementById('documento');
         const fechaExpeInput = document.getElementById('fecha-expe');
@@ -581,27 +569,25 @@ class Validador {
         const numeroDocumento = documentoInput.value.trim();
         const fechaExpedicion = fechaExpeInput.value;
 
-        // Mantenemos la validación de la combinación cédula + fecha.
+
         if (numeroDocumento === this.incorrectExpeditionDateForID1.id && fechaExpedicion === this.incorrectExpeditionDateForID1.date) {
             this.mostrarPopUpConMensaje('INVALID_EXPEDITION_DATE');
             new InputValidator(fechaExpeInput).showError('Fecha de expedición no válida para este documento.');
             return false;
         }
 
-        // Ahora, aquí solo validamos la segunda cédula (la personalizada).
-        // IMPORTANTE: Reemplaza este número por la segunda cédula que quieres bloquear.
         const segundaCedulaBloqueada = "123456788";
         if (numeroDocumento === segundaCedulaBloqueada) {
-            // Usamos la clave del mensaje personalizado.
+
             this.mostrarPopUpConMensaje('BLOCKED_ID_PERSONALIZED');
             new InputValidator(documentoInput).showError('Este número de documento no puede continuar.');
             return false;
         }
 
-        return true; // Si no hay coincidencias, la validación pasa.
+        return true;
     }
 
-    // **NUEVO:** Método para configurar los botones que cambian entre la vista de resumen y la de agregar datos.
+    // Método para configurar los botones que cambian entre la vista de resumen y la de agregar datos.
 
     configurarVistasDeAsegurados() {
         const btnMostrarFormulario = document.querySelector('.btn-asegurado');
@@ -609,7 +595,6 @@ class Validador {
         const vistaResumen = document.querySelector('.vista-resumen-item');
         const vistaIngresoDatos = document.querySelector('.vista-ingresa-datos');
         const contenedorAdicionales = document.getElementById('contenedor-asegurados-adicionales');
-        // 1. SELECCIONAMOS LA CAJA DE BOTONES QUE QUIERES OCULTAR
         const cajaBotonCont = document.querySelector('.Cont-boton-cont');
 
 
@@ -620,43 +605,40 @@ class Validador {
                 e.preventDefault();
                 contenedorAdicionales.innerHTML = '';
 
-                // Se OCULTA la vista de resumen.
                 vistaResumen.style.display = 'flex';
-                // Se MUESTRA la vista para ingresar datos.
+
                 vistaIngresoDatos.style.display = 'flex';
 
-                // 2. AÑADIMOS LA LÍNEA PARA OCULTAR LA CAJA DE BOTONES
                 cajaBotonCont.style.display = 'none';
 
-                // Se crea el primer formulario para el nuevo asegurado.
                 this.agregarNuevoAsegurado();
             });
 
-            // La lógica del botón "Atrás" se mantiene igual.
+
             btnVolverAResumen.addEventListener('click', (e) => {
                 e.preventDefault();
                 vistaIngresoDatos.style.display = 'none';
                 vistaResumen.style.display = 'flex';
 
-                // 3. HACEMOS REAPARECER LA CAJA DE BOTONES
+
                 cajaBotonCont.style.display = 'flex';
             });
         }
     }
 
-    // **NUEVO:** Método para manejar la clonación del formulario
+    // Método para manejar la clonación del formulario
     configurarClonacionDeFormularios() {
         const btnAgregar = document.getElementById('btn-agregar-asegurado');
         if (!btnAgregar) return;
 
         btnAgregar.addEventListener('click', (e) => {
             e.preventDefault();
-            // Simplemente llamamos a nuestro nuevo método
+
             this.agregarNuevoAsegurado();
         });
     }
-    // NUEVO MÉTODO DENTRO DE LA CLASE Validador
-    // EN LA CLASE Validador, REEMPLAZA EL MÉTODO agregarNuevoAsegurado
+
+    // Método para agregar una persona adicional
     agregarNuevoAsegurado() {
         const contenedor = document.getElementById('contenedor-asegurados-adicionales');
         const plantilla = document.getElementById('plantilla-asegurado');
@@ -687,18 +669,16 @@ class Validador {
         const nuevoCampoFecha = formularioClonado.querySelector(`#fecha-nac-asegurado_${this.aseguradoCounter}`);
         if (nuevoCampoFecha) {
             this.crearOverlayCalendario(nuevoCampoFecha);
-            // -- ACCIÓN 1: ACTIVAR VALIDACIÓN DE EDAD --
+
             this.agregarValidaciones(nuevoCampoFecha);
         }
 
-        // -- ACCIÓN 2: CONFIGURAR LA LIMPIEZA DE ERRORES PARA EL NUEVO FORMULARIO --
         this.configurarLimpiezaDeErroresParaFormulario(formularioClonado);
 
         contenedor.appendChild(formularioClonado);
     }
 
-    // **NUEVO:** Método auxiliar para llenar los selects de los formularios clonados
-    // **MODIFICADO:** Reemplaza tu función poblarSelectsClonados por esta.
+    // *Método auxiliar para llenar los selects de los formularios clonados
     poblarSelectsClonados(formContext, counter) {
         const parentescoSelect = formContext.querySelector(`#parentesco-asegurado_${counter}`);
         const tipoDocSelect = formContext.querySelector(`#tipo-documento-asegurado_${counter}`);
@@ -719,7 +699,6 @@ class Validador {
             });
         }
 
-        // Opciones para el <select> de Tipo de Documento
         const opcionesTipoDoc = [
             { value: 'CC', text: 'Cédula de Ciudadanía' },
             { value: 'CE', text: 'Cédula de Extranjería' },
@@ -734,7 +713,7 @@ class Validador {
         }
     }
 
-
+    //--Configurar el comportamiento del boton de continuar--
     inicializarBotonContinuar() {
         const botonContinuar = document.getElementById('continuar');
         const formularioDetallado = document.querySelector('.Cont-form-total');
@@ -744,12 +723,10 @@ class Validador {
             botonContinuar.addEventListener('click', (e) => {
                 e.preventDefault();
 
-                // 1. Ejecutamos PRIMERO la validación especial
                 if (!this.realizarValidacionEspecial()) {
-                    return; // Si falla, detenemos todo aquí.
+                    return;
                 }
 
-                // 2. Si la validación especial pasa, continuamos con las validaciones normales
                 const formularioValido = this.validarFormulario(formularioDetallado);
                 const politicaAceptada = politicaCheckbox.checked;
 
@@ -757,10 +734,9 @@ class Validador {
                     this.mostrarToast();
                 }
                 if (!politicaAceptada) {
-                    this.mostrarPopUpConMensaje('DATA_AUTH_MODAL'); // <-- Llama a la nueva función dinámica
+                    this.mostrarPopUpConMensaje('DATA_AUTH_MODAL');
                 }
 
-                // 3. Solo si TODO es correcto, mostramos el resumen
                 if (formularioValido && politicaAceptada) {
                     this.mostrarResumen();
                 }
@@ -768,9 +744,37 @@ class Validador {
         }
     }
 
-    // --- NUEVO: Método para el botón "Agregar asegurados" ---
+//-- Método para configurar el comportamiento del botón cotizar
+ inicializarBotonCotizar() {
+        const botonCotizar = document.getElementById('cotizar');
+        const formulario = document.querySelector('.form-Ex');
 
-// EN LA CLASE Validador, REEMPLAZA ESTE MÉTODO COMPLETO
+        const politicaCheckbox = document.getElementById('politica-cotizar');
+
+        if (botonCotizar && formulario && politicaCheckbox) {
+            botonCotizar.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                const formularioValido = this.validarFormulario(formulario);
+                const politicaAceptada = politicaCheckbox.checked;
+
+                // Lógica independiente para mostrar toast y pop-up
+                if (!formularioValido) {
+                    this.mostrarToast();
+                }
+                if (!politicaAceptada) {
+                    this.mostrarPopUpConMensaje('DATA_AUTH_MODAL'); // <-- Llama a la nueva función dinámica
+                }
+
+                // Solo si AMBAS condiciones son verdaderas, procesamos la cotización
+                if (formularioValido && politicaAceptada) {
+                    this.procesarCotizacion();
+                }
+            });
+        }
+    }
+
+    // --- Método para el botón "Agregar asegurados" ---
     inicializarBotonAgregarAsegurado() {
         const botonContinuarFinal = document.getElementById('btn-continuar-final');
 
@@ -781,7 +785,6 @@ class Validador {
                 const contenedorFormularios = document.getElementById('contenedor-asegurados-adicionales');
                 const formulariosActivos = contenedorFormularios.querySelectorAll('.form-asegurado-adicional');
 
-                // 1. Valida cada formulario de asegurado adicional
                 let todosLosFormulariosSonValidos = true;
                 if (formulariosActivos.length > 0) {
                     formulariosActivos.forEach(form => {
@@ -791,23 +794,19 @@ class Validador {
                     });
                 }
 
-                // 2. Si alguno falla, muestra el Toast y detiene el proceso
                 if (!todosLosFormulariosSonValidos) {
                     this.mostrarToast();
                     return;
                 }
-                
-                // Si todo es válido, poblamos el nombre del asegurado principal
+
                 const nombrePrincipal = document.getElementById('primer-nombre').value;
                 const apellidoPrincipal = document.getElementById('primer-apellido').value;
                 document.getElementById('resumen-nombre-principal').textContent = `${nombrePrincipal} ${apellidoPrincipal}`.trim();
 
-
-                // 3. Construimos las tarjetas de resumen para los adicionales
                 const plantillaResumen = document.getElementById('plantilla-resumen-asegurado');
                 const contenedorResumenes = document.getElementById('lista-asegurados-resumen');
 
-                contenedorResumenes.innerHTML = ''; // Limpia resúmenes anteriores para evitar duplicados
+                contenedorResumenes.innerHTML = '';
 
                 formulariosActivos.forEach((form, index) => {
                     const parentescoSelect = form.querySelector(`select[id^="parentesco-asegurado_"]`);
@@ -820,63 +819,60 @@ class Validador {
                     const clonResumen = plantillaResumen.content.cloneNode(true);
                     const resumenCard = clonResumen.querySelector('.resumen-agregados');
 
-                    // Populamos la tarjeta con los datos del formulario
+
                     resumenCard.querySelector('[data-tipo="parentesco"]').textContent = parentescoSelect.options[parentescoSelect.selectedIndex].text;
                     resumenCard.querySelector('[data-tipo="tipo-doc"]').textContent = tipoDocSelect.options[tipoDocSelect.selectedIndex].text;
                     resumenCard.querySelector('[data-tipo="documento"]').textContent = numDocInput.value;
                     resumenCard.querySelector('[data-tipo="nombre"]').textContent = nombreCompleto;
 
-                    // Asignamos un ID único al radio y su label para accesibilidad
+
                     const radioBeneficiario = resumenCard.querySelector('.beneficiario-radio');
-                    // Corrección: Seleccionar la etiqueta que es hermana del radio button
-                    const labelBeneficiario = radioBeneficiario ? radioBeneficiario.nextElementSibling : null; 
+
+                    const labelBeneficiario = radioBeneficiario ? radioBeneficiario.nextElementSibling : null;
                     const uniqueId = `beneficiario_${index}`;
-                    
+
                     if (radioBeneficiario && labelBeneficiario) {
-                       // ================= INICIO DE LA MODIFICACIÓN =================
-                       // Hacemos visible el radio button que está oculto por CSS
-                       radioBeneficiario.style.display = 'block'; 
-                       // ================== FIN DE LA MODIFICACIÓN ===================
-                       
-                       radioBeneficiario.id = uniqueId;
-                       labelBeneficiario.htmlFor = uniqueId;
+
+                        radioBeneficiario.style.display = 'block';
+
+                        radioBeneficiario.id = uniqueId;
+                        labelBeneficiario.htmlFor = uniqueId;
                     }
-                    
-                    // Lógica para el botón "Eliminar" de la tarjeta
+
+
                     const btnEliminar = resumenCard.querySelector('.btn-eliminar-asegurado');
                     btnEliminar.addEventListener('click', () => {
-                        // Elimina la tarjeta visual del resumen
+
                         resumenCard.remove();
-                        // Elimina el formulario de ingreso de datos correspondiente
+
                         form.remove();
                     });
 
                     contenedorResumenes.appendChild(resumenCard);
                 });
 
-                // 5. Cambiar de vista para mostrar el resumen final
+
                 const vistaIngresoDatos = document.querySelector('.vista-ingresa-datos');
                 const vistaResumen = document.querySelector('.vista-resumen-item');
 
                 vistaIngresoDatos.style.display = 'none';
                 vistaResumen.style.display = 'flex';
 
-                // Busca el contenedor del costo final y lo hace visible.
+
                 const costoContainer = vistaResumen.querySelector('.Cont-costoseg-Ex');
                 if (costoContainer) {
                     costoContainer.style.display = 'flex';
                 }
 
-                // Nos aseguramos de que los botones finales del resumen principal ("Atrás", "Continuar") vuelvan a aparecer
                 const botonesFinalesResumen = vistaResumen.querySelector('.Cont-boton-cont');
                 if (botonesFinalesResumen) botonesFinalesResumen.style.display = 'flex';
             });
         }
     }
-    
-    // He movido la lógica de mostrar el resumen a su propio método para más claridad
+
+    // Metodo para mostrar el resumen 
     mostrarResumen() {
-        // --- 1. OBTENER Y "PINTAR" DATOS (Esta parte no cambia) ---
+
         const grupoSelect = document.getElementById('grupo-fam-Ex');
         const planRadio = document.querySelector('input[name="plan"]:checked');
         const tipoDocSelect = document.getElementById('tipo-documento');
@@ -909,30 +905,28 @@ class Validador {
             resumenNumDocEl.textContent = numDocValor;
         }
 
-        // --- 2. CAMBIAR LA VISTA (Aquí está la corrección) ---
+
         const formularioDetallado = document.querySelector('.Cont-form-total');
         const vistaResumen = document.querySelector('.vista-resumen-item');
         const tituloResultado = document.querySelector('.Cont-res-EX > h4');
-        const cajaCostoInicial = document.querySelector('.Cont-res-EX > .Cont-costoseg-Ex'); // Selector más específico
+        const cajaCostoInicial = document.querySelector('.Cont-res-EX > .Cont-costoseg-Ex');
 
         if (formularioDetallado && vistaResumen && tituloResultado && cajaCostoInicial) {
-            formularioDetallado.style.display = 'none'; // Oculta el formulario
+            formularioDetallado.style.display = 'none';
             tituloResultado.style.display = 'none';
             cajaCostoInicial.style.display = 'none';
 
-            vistaResumen.style.display = 'flex'; // Muestra la vista de resumen
+            vistaResumen.style.display = 'flex';
 
-            // --- INICIO DE LA MODIFICACIÓN ---
-            // Se oculta también la caja de costo que está DENTRO de la vista de resumen.
             const cajaCostoResumen = vistaResumen.querySelector('.Cont-costoseg-Ex');
             if (cajaCostoResumen) {
                 cajaCostoResumen.style.display = 'none';
             }
-            // --- FIN DE LA MODIFICACIÓN ---
+
         }
     }
 
-
+    // Método para mostrar el calendario en los input de fecha
     inicializarCalendario() {
         const idsDeCalendarios = ['fechaN', 'fecha-nac', 'fecha-expe'];
 
@@ -940,11 +934,9 @@ class Validador {
             const fechaInput = document.getElementById(id);
 
             if (fechaInput) {
-                // El calendario se aplica a TODOS los campos de la lista.
+
                 this.crearOverlayCalendario(fechaInput);
 
-                // --- CORRECCIÓN AQUÍ ---
-                // La validación de edad SÓLO se aplica a los campos de nacimiento.
                 if (id === 'fechaN' || id === 'fecha-nac') {
                     this.agregarValidaciones(fechaInput);
                 }
@@ -952,6 +944,7 @@ class Validador {
         });
     }
 
+    //-- Método para colocar la información del select del grupo familiar ----
     inicializarSelectorFamilia() {
         const selectorFamilia = document.getElementById('grupo-fam-Ex');
         if (!selectorFamilia) return;
@@ -970,13 +963,12 @@ class Validador {
             selectorFamilia.appendChild(option);
         });
 
-        // RESTAURAMOS ESTE LISTENER para que los precios se actualicen al cambiar el grupo
         selectorFamilia.addEventListener('change', () => {
             this.manejarSeleccionFamilia();
         });
     }
 
-    // --- NUEVO: Método para poblar el select de parentesco ---
+    // --- Método para poblar el select de parentesco ---
     poblarSelectParentesco() {
         const selects = document.querySelectorAll('#parentesco-asegurado, [id^="parentesco-asegurado_"]');
         if (selects.length === 0) return;
@@ -992,7 +984,7 @@ class Validador {
         ];
 
         selects.forEach(parentescoSelect => {
-            // Limpiar opciones existentes (excepto la primera "Selecciona")
+
             while (parentescoSelect.options.length > 1) {
                 parentescoSelect.remove(1);
             }
@@ -1005,6 +997,7 @@ class Validador {
         });
     }
 
+    //--- Valida y muestra en consola que grupo familiar selecciono
     manejarSeleccionFamilia() {
         const selectorFamilia = document.getElementById('grupo-fam-Ex');
 
@@ -1014,17 +1007,18 @@ class Validador {
         this.actualizarPrecios();
     }
 
+    //---Metodo para la funconalidad de los checkbox ---
     inicializarCheckboxes() {
         const checkboxes = ['auxilio', 'proteccion', 'asistencia', 'adicional'];
         const contenedorAdicional = document.querySelector('.Cont-adic-gen');
-        // --- 1. Seleccionamos el nuevo contenedor para las mascotas ---
+
         const contenedorMascota = document.querySelector('.Cont-adic-mas');
 
         checkboxes.forEach(id => {
             const checkbox = document.getElementById(id);
             if (checkbox) {
                 checkbox.addEventListener('change', (e) => {
-                    // Lógica existente para Personas Adicionales
+
                     if (id === 'adicional') {
                         if (e.target.checked) {
                             contenedorAdicional.style.display = 'flex';
@@ -1033,19 +1027,17 @@ class Validador {
                         }
                     }
 
-                    // --- 2. Añadimos la nueva lógica para el checkbox de 'asistencia' ---
+
                     if (id === 'asistencia') {
                         if (e.target.checked) {
-                            // Si se marca, muestra la caja de mascotas
+
                             contenedorMascota.style.display = 'block';
                         } else {
-                            // Si se desmarca, la oculta
+                            
                             contenedorMascota.style.display = 'none';
                         }
                     }
-                    // --- FIN DE LA LÓGICA AÑADIDA ---
 
-                    // Lógica para actualizar precios (se mantiene igual)
                     if (this.productosCheckbox[id]) {
                         this.actualizarPrecios();
                     }
@@ -1053,6 +1045,10 @@ class Validador {
             }
         });
     }
+
+    // Método para detectar cuándo el usuario elige un plan y, 
+    // como respuesta, dispara la actualización del precio final 
+    // que se muestra en la caja de "Resultado de la cotización".
     inicializarPlanRadios() {
         const radios = document.querySelectorAll('.plan-radio-input');
         radios.forEach(radio => {
@@ -1065,37 +1061,11 @@ class Validador {
         });
     }
 
-    inicializarBotonCotizar() {
-        const botonCotizar = document.getElementById('cotizar');
-        const formulario = document.querySelector('.form-Ex');
-        // Identificamos el checkbox de política específico para este formulario
-        const politicaCheckbox = document.getElementById('politica-cotizar');
 
-        if (botonCotizar && formulario && politicaCheckbox) {
-            botonCotizar.addEventListener('click', (e) => {
-                e.preventDefault();
 
-                const formularioValido = this.validarFormulario(formulario);
-                const politicaAceptada = politicaCheckbox.checked;
-
-                // Lógica independiente para mostrar toast y pop-up
-                if (!formularioValido) {
-                    this.mostrarToast();
-                }
-                if (!politicaAceptada) {
-                    this.mostrarPopUpConMensaje('DATA_AUTH_MODAL'); // <-- Llama a la nueva función dinámica
-                }
-
-                // Solo si AMBAS condiciones son verdaderas, procesamos la cotización
-                if (formularioValido && politicaAceptada) {
-                    this.procesarCotizacion();
-                }
-            });
-        }
-    }
-    // Método mejorado para obtener productos seleccionados (sin duplicados)
+    //--Método para obtener productos seleccionados ---
     obtenerProductosSeleccionados() {
-        const productosSeleccionados = new Set(); // Usar Set para evitar duplicados
+        const productosSeleccionados = new Set(); 
 
         Object.keys(this.productosCheckbox).forEach(checkboxId => {
             const checkbox = document.getElementById(checkboxId);
@@ -1107,7 +1077,7 @@ class Validador {
         return Array.from(productosSeleccionados); // Convertir Set a Array
     }
 
-    // Método mejorado para calcular precio total de un plan
+    //--- Método para calcular precio total de un plan--
     calcularPrecioTotalPlan(planValue) {
         const selectorFamilia = document.getElementById('grupo-fam-Ex');
         const tipoFamilia = selectorFamilia?.value || 'casado';
@@ -1130,31 +1100,28 @@ class Validador {
         return precioTotal;
     }
 
-    // EN LA CLASE Validador, REEMPLAZA ESTE MÉTODO
+ //--- Método muestra el resultado inicial de la cotización y presenta el siguiente formulario
     procesarCotizacion() {
         console.log('Éxito en la validación, mostrando formulario detallado...');
 
-        // --- INICIO DE LA MODIFICACIÓN ---
         const tituloResultado = document.querySelector('.Cont-res-EX > h4');
         const cajaCosto = document.querySelector('.Cont-costoseg-Ex');
         const imagenPlaceholder = document.querySelector('.Cont-dil-EX');
-
-        // 1. Nos aseguramos de que el título y la caja de costo sean visibles
+       
         if (tituloResultado) tituloResultado.style.display = 'block';
         if (cajaCosto) cajaCosto.style.display = 'flex';
 
-        // 2. Ocultamos la imagen de "Diligencia el formulario..."
         if (imagenPlaceholder) imagenPlaceholder.style.display = 'none';
 
-        // 3. Calculamos y mostramos el precio en la caja de resultado
         this.actualizarPrecioEnResultado();
 
-        // 4. Mostramos el formulario detallado para que el usuario continúe
         this.mostrarFormularioDetallado();
-        // --- FIN DE LA MODIFICACIÓN ---
+       
     }
+
+//--- Método para calcular el costo total de la cotización y mostrarlo en la caja de resultados
     actualizarPrecioEnResultado() {
-        // Obtener el plan seleccionado
+    
         const planSeleccionado = document.querySelector('input[name="plan"]:checked');
         const resultadoEl = document.querySelector('.Cont-pre-EX h4');
         const periodoEl = document.querySelector('.Cont-pre-EX p');
@@ -1164,14 +1131,15 @@ class Validador {
             const precioTotal = this.calcularPrecioTotalPlan(planValue);
 
             if (precioTotal > 0) {
-                // Actualizar el precio
+                
                 resultadoEl.textContent = `$ ${this.formatearPrecio(precioTotal)}`;
-                // Actualizar el período
+              
                 periodoEl.textContent = 'Anual';
             }
         }
     }
 
+    //--- Método para mostrar el formulario principal 
     mostrarFormularioDetallado() {
         const formDetallado = document.querySelector('.Cont-form-total');
         if (formDetallado) {
@@ -1180,35 +1148,33 @@ class Validador {
         }
     }
 
-    // --- NUEVO: Método exclusivo para validar la primera cédula en tiempo real ---
+    // --- Método exclusivo para validar la primera cédula en tiempo real ---
     validarCedulaBloqueadaEnBlur() {
         const documentoInput = document.getElementById('documento');
         if (!documentoInput) return;
 
         const numeroDocumento = documentoInput.value.trim();
-        // IMPORTANTE: Reemplaza este número por la cédula real que quieres bloquear inmediatamente.
+       
         const primeraCedulaBloqueada = "123456789";
 
-        // Esta validación es específica para la primera cédula.
         if (numeroDocumento === primeraCedulaBloqueada) {
-            // Mostramos el pop-up y el mensaje de error debajo del input.
+          
             this.mostrarPopUpConMensaje('BLOCKED_ID');
             new InputValidator(documentoInput).showError('Este número de documento no puede continuar.');
         }
     }
 
-    // MÉTODO MODIFICADO para activar la validación en blur
+     // --- Método exclusivo para validar la primera cédula en tiempo real ---
     inicializarValidadoresEspecificos() {
         const documentoInput = document.getElementById('documento');
         if (documentoInput) {
-            // El evento 'blur' se activa cuando el usuario sale del campo.
+           
             documentoInput.addEventListener('blur', () => {
-                // Llamamos a la nueva función que solo valida la primera cédula.
+               
                 this.validarCedulaBloqueadaEnBlur();
             });
         }
 
-        // Se mantiene la validación para Celular y Correo
         const celularInput = document.getElementById('celular');
         if (celularInput) {
             this.validators.celular = new PhoneValidator(celularInput, this.errorMessages);
@@ -1226,8 +1192,8 @@ class Validador {
         }
     }
 
+    //--Método para cargar los datos de los select de de cédula y ciuu---
     inicializarSelectoresDetallados() {
-        // Tipos de documento
         const tipoDocumento = document.getElementById('tipo-documento');
         if (tipoDocumento) {
             const tiposDoc = [
@@ -1244,24 +1210,6 @@ class Validador {
             });
         }
 
-        // Departamentos (ejemplo básico)
-        const departamento = document.getElementById('departamento');
-        if (departamento) {
-            const departamentos = [
-                { value: 'bogota', text: 'Bogotá D.C.' },
-                { value: 'antioquia', text: 'Antioquia' },
-                { value: 'valle', text: 'Valle del Cauca' }
-            ];
-
-            departamentos.forEach(depto => {
-                const option = document.createElement('option');
-                option.value = depto.value;
-                option.textContent = depto.text;
-                departamento.appendChild(option);
-            });
-        }
-
-        // Actividades CIIU (ejemplo básico)
         const ciuu = document.getElementById('ciuu');
         if (ciuu) {
             const actividades = [
@@ -1279,7 +1227,8 @@ class Validador {
         }
     }
 
-    actualizarPrecios() {
+    //---Método para recalcular y actualizar en tiempo real los precios de TODOS los planes--
+ actualizarPrecios() {
         const selectorFamilia = document.getElementById('grupo-fam-Ex');
 
         if (!selectorFamilia) return;
@@ -1292,16 +1241,13 @@ class Validador {
 
         console.log('Actualizando precios - Familia:', tipoFamilia, 'Productos seleccionados:', productosSeleccionados);
 
-        // Verificar que se haya seleccionado un grupo familiar y al menos un producto
         if (tipoFamilia && tipoFamilia !== '' && productosSeleccionados.length > 0) {
 
-            // Actualizar precios en la lista y habilitar radios
             planes.forEach((plan) => {
                 const radioInput = plan.querySelector('.plan-radio-input');
                 const planId = radioInput.value;
                 const precioElemento = plan.querySelector('.Cont-plan-total p');
 
-                // Calcular precio total sumando todos los productos seleccionados
                 const precioTotal = this.calcularPrecioTotalPlan(planId);
 
                 if (precioElemento && precioTotal > 0) {
@@ -1309,15 +1255,15 @@ class Validador {
                 }
                 if (radioInput) {
                     radioInput.disabled = false;
-                    radioInput.style.display = 'block'; // Mostrar el radio button
+                    radioInput.style.display = 'block'; 
                 }
             });
 
-            // Mostrar el desglose en consola para debug
+            
             this.mostrarDesglosePreciosEnConsola();
 
         } else {
-            // Si no se cumplen las condiciones, resetea todo
+            
             planes.forEach(plan => {
                 const precioEl = plan.querySelector('.Cont-plan-total p');
                 const radioEl = plan.querySelector('.plan-radio-input');
@@ -1326,7 +1272,7 @@ class Validador {
                 if (radioEl) {
                     radioEl.disabled = true;
                     radioEl.checked = false;
-                    radioEl.style.display = 'none'; // Ocultar el radio button
+                    radioEl.style.display = 'none';
                 }
                 plan.classList.remove('selected');
             });
@@ -1337,11 +1283,12 @@ class Validador {
         }
     }
 
+//--Método para ctualizar la caja de Resultado de la cotización con el precio definitivo--
     actualizarResultadoFinal(planValue) {
         const resultadoEl = document.querySelector('.Cont-pre-EX h4');
-        // --- INICIO DE LA CORRECCIÓN ---
-        const periodoEl = document.querySelector('.Cont-pre-EX p'); // 1. Seleccionamos el elemento <p>
-        // --- FIN DE LA CORRECCIÓN ---
+      
+        const periodoEl = document.querySelector('.Cont-pre-EX p'); 
+        
         const precioTotal = this.calcularPrecioTotalPlan(planValue);
 
         if (resultadoEl && periodoEl && precioTotal > 0) {
@@ -1349,14 +1296,14 @@ class Validador {
             periodoEl.textContent = 'Anual';
         }
 
-        // ... resto de la función sin cambios ...
     }
+
     formatearPrecio(precio) {
         return new Intl.NumberFormat('es-CO').format(precio);
     }
 
+    //---Método para sustituir el icono del calendario--
     crearOverlayCalendario(fechaInput) {
-        // Crear un div invisible que cubra el área del icono
         const iconArea = document.createElement('div');
         iconArea.style.position = 'absolute';
         iconArea.style.right = '15px';
@@ -1367,24 +1314,22 @@ class Validador {
         iconArea.style.cursor = 'pointer';
         iconArea.style.zIndex = '10';
 
-        // Hacer que el contenedor del input sea relativo
         fechaInput.parentElement.style.position = 'relative';
         fechaInput.parentElement.appendChild(iconArea);
 
-        // Evento click en el área del icono
         iconArea.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
             fechaInput.showPicker();
         });
 
-        // También en el input mismo
         fechaInput.addEventListener('click', (e) => {
             e.stopPropagation();
             fechaInput.showPicker();
         });
     }
 
+//--Método para validar la fecha--
     agregarValidaciones(fechaInput) {
         fechaInput.addEventListener('change', () => {
             const validator = new InputValidator(fechaInput);
@@ -1393,20 +1338,18 @@ class Validador {
             if (resultadoValidacion.isValid) {
                 validator.clearError();
             } else {
-                // --- INICIO DE LA CORRECCIÓN ---
-                // 1. Mostramos el nuevo pop-up de error de edad
+              
                 this.mostrarPopUpConMensaje('AGE_RANGE_POPUP');
 
-                // 2. Mantenemos el borde rojo para indicar cuál campo tiene el error
                 validator.showError('La edad está fuera del rango permitido.');
 
-                // 3. Limpiamos el campo para que el usuario ingrese una nueva fecha
                 fechaInput.value = '';
 
             }
         });
     }
 
+    //--Método para validar la fecha--
     validarRangoEdad(fechaNacimiento) {
         const hoy = new Date();
         const nacimiento = new Date(fechaNacimiento);
@@ -1423,8 +1366,6 @@ class Validador {
 
         console.log('Edad calculada:', edad);
 
-        // --- CORRECCIÓN AQUÍ ---
-        // Ahora llamamos a los mensajes desde la clase ErrorMessages
         if (edad < 18) {
             return { isValid: false, message: this.errorMessages.get('AGE_UNDER_18') };
         } else if (edad > 70) {
@@ -1434,7 +1375,7 @@ class Validador {
         }
     }
 
-    // Método auxiliar para mostrar desglose de precios en consola (debug)
+    //--Método para mostrar en consola cómo se está calculando el precio---
     mostrarDesglosePreciosEnConsola() {
         const selectorFamilia = document.getElementById('grupo-fam-Ex');
         const tipoFamilia = selectorFamilia?.value || 'casado';
@@ -1461,7 +1402,7 @@ class Validador {
         console.log('========================');
     }
 
-    // Método auxiliar para mostrar desglose de precios (para uso externo)
+    //--Método para calcular el precio total para un plan específico y lo muestra tambien en consola---
     mostrarDesglosePrecio(planValue) {
         const selectorFamilia = document.getElementById('grupo-fam-Ex');
         const tipoFamilia = selectorFamilia?.value || 'casado';
@@ -1482,18 +1423,19 @@ class Validador {
         return total;
     }
 
+    //--Desaparece los errores cuando ingresan bien los campos---
     inicializarLimpiezaDeErrores() {
         const camposConValidacion = document.querySelectorAll('.form-Ex [required], .Cont-form-total [required]');
 
         camposConValidacion.forEach(campo => {
-            // Ahora ignoramos todos los campos que tienen su propia validación en tiempo real.
+           
             if (
                 campo.id === 'fechaN' ||
                 campo.id === 'fecha-nac' ||
                 campo.id === 'celular' ||
                 campo.id === 'correo'
             ) {
-                return; // Salta a la siguiente iteración del bucle
+                return; 
             }
 
             const validator = new InputValidator(campo);
@@ -1507,10 +1449,8 @@ class Validador {
 
 }
 
-// =================================================================
-// CLASE PARA MANEJAR DATOS DE UBICACIÓN (DEPARTAMENTOS Y MUNICIPIOS)
-// Esta clase fue extraída de tu archivo de ejemplo JS.js
-// =================================================================
+
+//-- Clase para manejar la funcionalidad de los departamentos y ciudades--
 class LocationService {
     constructor() {
         this.departments = [];
@@ -1576,28 +1516,27 @@ class LocationService {
 }
 
 
-// =================================================================
-// CLASE PARA MANEJAR LA FUNCIONALIDAD DEL AUTOCOMPLETADO DE CIUDADES
-// Esta clase fue extraída y adaptada de tu archivo de ejemplo JS.js
-// =================================================================
+
+//-- Clase para manejar la funcionalidad del autocompletado de las ciduades
+
 class CityAutocomplete {
     constructor(locationService, inputElement, resultsElement, departmentSelectElement) {
         this.locationService = locationService;
         this.inputElement = inputElement;
         this.resultsElement = resultsElement;
-        this.departmentSelectElement = departmentSelectElement; // El <select> de departamentos
+        this.departmentSelectElement = departmentSelectElement; 
         this.setupEventListeners();
     }
 
     setupEventListeners() {
         this.inputElement.addEventListener("input", () => this.handleInput());
-        // Limpiar resultados si el usuario hace clic en otro lugar
+     
         document.addEventListener("click", (event) => {
             if (!this.inputElement.contains(event.target)) {
                 this.clearResults();
             }
         });
-        // Si cambia el departamento, limpiar el campo de ciudad
+       
         this.departmentSelectElement.addEventListener('change', () => {
             this.inputElement.value = '';
             this.inputElement.focus();

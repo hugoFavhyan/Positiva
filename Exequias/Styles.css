@@ -216,13 +216,6 @@ body {
     gap: 4px;
 }
 
-input,
-select,
-textarea {
-    box-sizing: border-box;
-    height: 38px;
-}
-
 .form-Ex-camp label {
     font-family: Poppins, sans-serif;
     font-size: 14px;
@@ -235,6 +228,7 @@ textarea {
     padding: 8px 15px 8px 15px;
     border-radius: 9px;
     border: 1px solid #EDEDED;
+    box-sizing: border-box;
 }
 
 .Cont-Gen-Ex select {
@@ -242,12 +236,8 @@ textarea {
     padding: 8px 15px 8px 15px;
     border-radius: 9px;
     border: 1px solid #EDEDED;
-    /* Elimina la apariencia nativa */
-    /* Para navegadores basados en WebKit (Chrome, Safari) */
     -webkit-appearance: none;
-    /* Para Firefox */
     -moz-appearance: none;
-    /* Estándar */
     appearance: none;
     background-image: url('https://positivapruebas.com.co/wp-content/uploads/Cotizador-Exequias-positiva-flecha-arriba.svg');
     background-repeat: no-repeat;
@@ -256,6 +246,7 @@ textarea {
     font-size: 16px;
     font-weight: 400;
     color: #000;
+    box-sizing: border-box;
 }
 
 .Cont-Gen-Ex select:focus {
@@ -277,8 +268,9 @@ textarea {
     color: #000;
     text-transform: uppercase;
     cursor: pointer;
-    /* Agregar cursor pointer */
+    box-sizing: border-box;
 }
+
 
 /* --- ESTILOS PARA PERSONALIZAR EL ÍCONO DEL CALENDARIO --- */
 
@@ -562,6 +554,21 @@ textarea {
     font-size: 14px;
     font-weight: 600;
     font-family: Poppins, sans-serif;
+}
+
+
+/*----Hover de los botones--*/
+.btn-hover:hover {
+    background-color: #173748;
+}
+
+.btn-asegurado:hover {
+    background-color: #FF7500;
+}
+
+.btn-agregar:hover {
+    color: #173748;
+    border: 1px solid #173748;
 }
 
 
@@ -1221,50 +1228,42 @@ textarea {
     gap: 8px;
 }
 
-.beneficiario-radio{
+.beneficiario-radio {
     width: 18px !important;
 }
 
 /* --- ESTILOS PARA RADIO BUTTONS --- */
 
+/* --- ESTILOS PARA RADIO BUTTONS --- */
 
 /* Oculta el radio button original del navegador */
-.Cont-radio input[type="radio"] {
+/* Aplicamos la regla a ambos contenedores usando una coma */
+.Cont-radio input[type="radio"],
+.Cont-adi-radio input[type="radio"] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-
-    /* Dimensiones y forma del nuevo radio button */
     width: 18px;
     height: 18px;
-    border-radius: 50%; /* Círculo perfecto */
-
-    /* Borde y fondo */
-    border: 1.5px solid #D9DCE3; /* Borde gris cuando no está seleccionado */
+    border-radius: 50%;
+    border: 1.5px solid #D9DCE3;
     background-color: #fff;
-
-    /* Posicionamiento y cursor */
     cursor: pointer;
     position: relative;
-    outline: none; /* Quita el borde de foco del navegador */
-    margin: 0; /* Aseguramos que no tenga márgenes extra */
+    outline: none;
+    margin: 0;
     padding: 0 !important;
 }
 
-/* Estilo para el círculo interior morado cuando el radio está seleccionado */
-.Cont-radio input[type="radio"]:checked::before {
+/* Estilo para el círculo interior naranja cuando el radio está seleccionado */
+.Cont-radio input[type="radio"]:checked::before,
+.Cont-adi-radio input[type="radio"]:checked::before {
     content: '';
     display: block;
-    
-    /* Dimensiones del punto interior */
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    
-    /* Color del punto (morado) */
     background-color: #FF7500;
-    
-    /* Centrado perfecto del punto */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1272,6 +1271,8 @@ textarea {
 }
 
 /* Estilo del borde cuando el radio está seleccionado */
-.Cont-radio input[type="radio"]:checked {
-    border-color: #FF7500; /* Borde morado */
+.Cont-radio input[type="radio"]:checked,
+.Cont-adi-radio input[type="radio"]:checked {
+    border-color: #FF7500;
+    /* Borde naranja */
 }
