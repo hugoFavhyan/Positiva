@@ -1,4 +1,4 @@
-// #region FUNCIONES DE UTILIDAD
+
 /**
  * Una función de utilidad para formatear una cadena de fecha (YYYY-MM-DD) a DD/MM/YYYY.
  * @param {string} dateString - La cadena de fecha en formato燜YYY-MM-DD.
@@ -12,9 +12,6 @@ function formatDate(dateString) {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
 }
-// #endregion
-
-// #region DEFINICIÓN DE CLASES
 
 /**
  * Gestiona todos los diálogos modales (ventanas emergentes) en la aplicación.
@@ -471,8 +468,7 @@ class FormValidator {
                         ageErrorMsg.textContent = 'La edad del adulto debe estar entre 18 y 65 años.';
                         ageErrorMsg.style.display = 'block';
                     }
-                    // --- CAMBIO CLAVE AQUÍ ---
-                    // Llamamos al pop-up correcto: 'ageRange' en lugar de 'age'.
+                    
                     this.modalManager.show('ageRange');
                     allAgesValid = false;
                 }
