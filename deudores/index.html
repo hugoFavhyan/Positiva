@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://www.google.com/recaptcha/api.js" integrity="sha384-bNIzJ5DA2LYh7CFxSqZ/mRmRkJuicq0FcWBvtASq3UoFB+5m2pJT/cnFzoXhnBg3" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" integrity="sha384-4js4ZCmKXVnGW3ElrFvIx/SqMP2ysGt3lrJJoWSeISIi60ZNxHz/4QC56mrvohR9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" integrity="sha384-ZKfv9pk0CVHESbcws3leviVlrroUO3RVq3zHe29PVASQh/MYTd6CoiGVUxQtjNU/" crossorigin="anonymous">
+    <link rel="stylesheet" href="/deudores/style.css">
+    <title>Cotizador deudor</title>
+</head>
+<body>
+    <main class="container_cotizadorDeu">
+    <div class="CotizadorDeu_errorcitoModal">
+      <div class="CotizadorDeu_errorcitoModal_imgC">
+        <img
+          src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402976/hexagono-equis.png/d8a14433-62c2-d693-7514-30d2ead2ff16?t=1733242195610"
+          alt="exagono error"
+          class="CotizadorDeu_errorcitoModal_imgC_img"
+        />
+      </div>
+      <div class="CotizadorDeu_errorcitoModal_titleC">
+        <h3 class="CotizadorDeu_errorcitoModal_titleC_t"></h3>
+        <p class="CotizadorDeu_errorcitoModal_titleC_p"></p>
+      </div>
+      <span class="CotizadorDeu_errorcitoModal_x">&#10005;</span>
+    </div>
+
+    <div class="CotizadorDeu">
+      <a
+        href="/web/positiva/vida-individual-deudor"
+        class="CotizadorDeu_button"
+      >
+        <!-- <span class="CotizadorDeu_button_flecha">&#171;</span> -->Volver al seguro
+        deudor
+      </a>
+
+      <div class="containerFormYResult">
+        <div class="formCotizaSeguroVida">
+          <h2 class="formCotizaSeguroVida_title">
+            Cotiza tu seguro
+            <span
+              style="color: #ff7500;"
+              >de vida</span
+            >
+          </h2>
+          <!--Contenedor cotizador-->
+          <div class="formCotizaSeguroVida_formContainer">
+            <form action="" id="formCotizaSeguroVida">
+              <span class="formCotizaSeguroVida_inputContainer">
+                <label for="manejaMoto" class="formCotizaSeguroVida_label"
+                  >Manejas moto*</label
+                >
+                <select
+                  name="motoSegurosDeudores"
+                  id="motoSegurosDeudores"
+                  class="formCotizaSeguroVida_select"
+                >
+                  <option value="">Elige una opción</option>
+                </select>
+                <p
+                  class="error-message-FormDeudores"
+                  id="motoSegurosDeudoresError"
+                >
+                  Selecciona una opción
+                </p>
+              </span>
+
+              <span class="formCotizaSeguroVida_inputContainer">
+                <label for="edadPersona" class="formCotizaSeguroVida_label"
+                  >Tu edad*</label
+                >
+                <select
+                  name="edadPersona"
+                  id="edadPersona"
+                  class="formCotizaSeguroVida_select"
+                ></select>
+                
+                <span class="error-message" id="errorEdadPersona"></span>
+              </span>
+
+              <span class="formCotizaSeguroVida_inputContainer">
+                <label for="ocupacionPersona" class="formCotizaSeguroVida_label"
+                  >Ocupación*</label
+                >
+                <div class="autocomplete-container-deudores">
+                  <input
+                    name="ocupacionSegurosDeudores"
+                    id="ocupacionSegurosDeudores"
+                    class="formCotizaSeguroVida_select"
+                    type="text"
+                    placeholder="Ingrese una ocupación"
+                    
+                  />
+                  <div
+                    id="autocompleteListOcupacion"
+                    class="autocomplete-list-deudores"
+                  ></div>
+                  <p
+                    class="error-message-FormDeudores"
+                    id="ocupacionSegurosDeudoresError"
+                  >
+                    Selecciona una opción
+                  </p>
+                </div>
+              </span>
+
+              <span class="formCotizaSeguroVida_inputContainer">
+                <label for="creditoPersona" class="formCotizaSeguroVida_label"
+                  >Tipo de crédito*</label
+                >
+                <select
+                  name="tipoCreditoSegurosDeudores"
+                  id="tipoCreditoSegurosDeudores"
+                  class="formCotizaSeguroVida_select"
+                ></select>
+                
+                <p
+                  class="error-message-FormDeudores"
+                  id="tipoCreditoSegurosDeudoresError"
+                >
+                  Selecciona una opción
+                </p>
+              </span>
+
+              <div id="formCotizaSeguroVida_radios" class="containerRadiosE">
+                <label
+                  class="formCotizaSeguroVida_radios_label labelCheckEnfermedades"
+                >
+                  <input
+                    type="checkbox"
+                    name="enfermedadtotalypermanten"
+                    id="enfermedadtotalypermanten"
+                    class="formCotizaSeguroVida_radios_input"
+                  />
+                  Incapacidad total<br />
+                  y permanente
+                </label>
+                <label class="formCotizaSeguroVida_radios_label">
+                  <input
+                    type="checkbox"
+                    name="additionalOption"
+                    value="enfermedadGrave"
+                    class="formCotizaSeguroVida_radios_input"
+                    id="enfermedadesGraves"
+                  />
+                  Enfermedades graves
+                </label>
+                <label class="formCotizaSeguroVida_radios_label">
+                  <input
+                    type="checkbox"
+                    name="additionalOption"
+                    value="auxilioFunerario"
+                    class="formCotizaSeguroVida_radios_input"
+                    id="auxilioFunerioOption"
+                  />
+                  Auxilio funerario
+                </label>
+              </div>
+
+              <span class="formCotizaSeguroVida_inputContainer">
+                <label
+                  for="departamentoFormCotiza"
+                  class="formCotizaSeguroVida_label"
+                  >Ubicacion Geografica*</label
+                >
+                <div class="autocomplete-container-deudores">
+                  <input
+                    name="departamentoFormCotiza"
+                    id="departamentoFormCotiza"
+                    class="formCotizaSeguroVida_select"
+                    type="text"
+                    placeholder="Ingrese un departamento"
+                  />
+                  <div
+                    id="autocompleteListDepartamento"
+                    class="autocomplete-list-deudores"
+                  ></div>
+                  <p
+                    class="error-message-FormDeudores"
+                    id="departamentoSegurosDeudoresError"
+                  >
+                    Selecciona una opción
+                  </p>
+                </div>
+
+                <p
+                  class="error-message-FormDeudores"
+                  id="ubicacionGeograficaSegurosDeudoresError"
+                >
+                  Selecciona una opción
+                </p>
+              </span>
+
+              <span class="formCotizaSeguroVida_inputContainer">
+                <label
+                  for="valorActualDinero"
+                  class="formCotizaSeguroVida_label"
+                  >Valor actual de la deuda*</label
+                >
+                <input
+                  type="text"
+                  id="valorActualDinero"
+                  class="formCotizaSeguroVida_input"
+                  placeholder="$"
+                />
+              </span>
+
+              <div class="containerButtonSubmit">
+                <input
+                  type="submit"
+                  value="Cotizar"
+                  class="formCotizaSeguroVida_button"
+                  style="cursor: pointer"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+        <!--Contenedor resultado cotización-->
+        <div class="resultadoCotizacion">
+          <h2 class="resultadoCotizacion_title">
+            Resultado de <span style="color: #173748">la cotización</span>
+          </h2>
+          <div class="resultadoCotizacion_bgGray">
+            <div class="resultadoCotizacion_containerCosto">
+              <p class="resultadoCotizacion_containerCosto_costo">
+                El costo de tu seguro es
+              </p>
+              <p class="resultadoCotizacion_containerCosto_total">-------</p>
+            </div>
+            <p class="resultadoCotizacion_bgGray_anual">______</p>
+          </div>
+
+          <h3 class="resultadoCotizacion_incluye">Este costo incluye:</h3>
+          <div class="resultadoCotizacionImg">
+            <img
+              src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402976/Frame.png/9bd63c8b-77a7-d40c-d31c-edd8aa8f43d1?t=1732143324871"
+              alt="pc con cara sonriente"
+              class="resultadoCotizacionImg_img"
+            />
+            <p class="resultadoCotizacionImg_text">
+              Diligencia el formulario de cotización para conocer el costo y las
+              coberturas del seguro
+            </p>
+          </div>
+
+          <div class="resultadoCotizacionInfoCoti"></div>
+
+          <div class="containerButtonResultadoCotiza">
+            <form action="" id="resultadoCotizacionInfoCoti_button">
+              <input
+                class="resultadoCotizacionInfoCoti_button"
+                type="submit"
+                value="Quiero este seguro"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--Formulario contacto-->
+      <div class="containerFormContactCotiza">
+        <h3 class="containerFormContact_title">
+          Nos comunicaremos <span style="color: #ff7500">contigo</span>
+        </h3>
+        <p class="containerFormContact_p">
+          Costo aproximado de tu cotización. Si te interesa este valor, déjanos
+          tus datos para que un asesor se comunique contigo y resuelva tus
+          dudas.
+        </p>
+        <form
+          action=""
+          class="containerFormContact_form"
+          id="formNosComunicamos"
+        >
+          <span class="containerFormContact_form_span">
+            <label for="name" class="containerFormContact_form_label"
+              >Nombre*</label
+            >
+            <input
+              type="text"
+              name="name"
+              class="containerFormContact_form_input"
+              id="nameNosComunicamos"
+            />
+          </span>
+          <span class="containerFormContact_form_span">
+            <label for="lastName" class="containerFormContact_form_label"
+              >Apellido*</label
+            >
+            <input
+              type="text"
+              name="lastName"
+              class="containerFormContact_form_input"
+              id="lastNameNosComunicamos"
+            />
+          </span>
+          <span class="containerFormContact_form_span spanDosItems">
+            <div class="labelUp divIndicativo">
+              <label class="containerFormContact_form_label">Indicativo*</label>
+              <input
+                type="number"
+                name="indicativo"
+                class="containerFormContact_form_input"
+                id="indicativoNosComunicamos"
+                value="57"
+              />
+            </div>
+            <div class="labelUp divTelefonoEste">
+              <label for="telefono" class="containerFormContact_form_label"
+                >Numero Celular*</label
+              >
+              <input
+                type="text"
+                name="telefono"
+                class="containerFormContact_form_input"
+                id="telefonoNosComunicamos"
+                maxlength="10"
+                pattern="\d{10}"
+              />
+            </div>
+            </span>
+          <span class="containerFormContact_form_span">
+            <label for="email" class="containerFormContact_form_label"
+              >Correo electrónico*</label
+            >
+            <input
+              type="email"
+              name="email"
+              class="containerFormContact_form_input"
+              id="emailNosComunicamos"
+              placeholder="Ingrese"
+            />
+          </span>
+
+          <span class="containerFormContact_form_span">
+            <label
+              for="deparmentID"
+              class="containerFormContact_form_label"
+              id="selectDeparmentEditable"
+              >Departamento*</label
+            >
+            <select
+              name="deparmentID"
+              id="deparmentID"
+              class="containerFormContact_form_input"
+            >
+              <option value="" hidden selected>Selecciona tu ciudad</option>
+            </select>
+          </span>
+
+          <span class="containerFormContact_form_span">
+            <label for="townID" class="containerFormContact_form_label"
+              >Municipio*</label
+            >
+            <select
+              name="townID"
+              id="townID"
+              class="containerFormContact_form_input"
+            >
+              <option value="" hidden selected>Selecciona tu ciudad</option>
+            </select>
+          </span>
+
+          <span
+            class="containerFormContact_form_span"
+            id="formularioDeContactoCotiza"
+          >
+            <input
+              type="checkbox"
+              name="acceptarPoliticasNosComunicamos"
+              class="containerFormContact_form_input"
+              id="acceptarPoliticasNosComunicamos"
+            />
+            <label
+              for="acceptarPoliticasNosComunicamos"
+              class="containerFormContact_form_label"
+            >
+              He leído y autorizo el tratamiento de datos personales según la
+              <a href="https://positiva.gov.co/web/guest/tratamiento-de-datos-personales" target="_blank" style="color: #ff7500; font-weight: 700"
+                >Política de privacidad de Positiva</a
+              >
+              <div class="errorFormContainerSpan"></div>
+            </label>
+          </span>
+           <div id="captchaElement" class="g-recaptcha" data-sitekey="6LdaAM4UAAAAANL126nN-QWkAy2JSm-Fb6ozwRh9"></div>
+          <div class="containerButtonResultadoCotiza">
+            <input
+              type="submit"
+              value="Enviar datos"
+              class="containerFormContact_form_inputSumit"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--Modales-->
+    <div id="errorModal_CotizarSeguro" class="cotizarSeguroModal">
+      <div class="modalCotitizarSeguro_content">
+        <span class="closeModalCotizarSeguro" id="cerrarModalExitoso">
+          <img
+            src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402976/cerrar.png/23b6ddf7-46ff-086b-9b25-53720900c5df?t=1733242195721"
+            alt="cerrar modal"
+          />
+        </span>
+        <div class="ModalCotizarSeguroError">
+          <img
+            src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402976/error.svg/7adb912f-a199-02f7-74f5-3444e21f4ec9?t=1733241922197"
+            alt="imagen de error"
+            class="ModalCotizarSeguroError_img"
+          />
+          <h4 class="ModalCotizarSeguroError_title">Monto no válido</h4>
+          <hr class="ModalCotizarSeguroError_hr" />
+          <p class="ModalCotizarSeguroError_p">
+            El monto debe ser igual o mayor a $500,000 o igual o menor a
+            $14,000,000 para continuar.
+          </p>
+        </div>
+      </div>
+    </div>   
+</main>
+  <!--Cajas beneficios-->
+  <div class="containerBannerFinalisito">
+    <div class="container__bannerTitle">
+      <h1 class="titleBannerFinal">Otros <span>seguros</span> que podrían interesarte</h1>
+      <span class="title-lineBanner"></span>
+    </div>
+
+    <div class="cards-container-banner">
+      <div class="cardContainerBannersito">
+        <div class="cardBanner__containerText">
+          <img
+            class="cardBanner__card-icon"
+            src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4403000/imgBanner2.svg/c7e6c6c7-5645-8e36-f5bc-45940650a262?t=1733844389126"
+            alt=""
+          />
+          <div class="container__title-cards titleCards-1">
+            <a href="https://www.positiva.gov.co/en/web/guest/seguro-exequial-colectivo-positiva" style="text-decoration: none;" class="card-titleBanner"  target="_blank">Exequias</a>
+            <span class="title-line_cards"></span>
+          </div>
+        </div>
+        <a target="_blank" href="https://www.positiva.gov.co/en/web/guest/seguro-exequial-colectivo-positiva" class="btnBannersito">Conoce más</a>
+      </div>
+
+      <div class="cardContainerBannersito">
+        <div class="cardBanner__containerText">
+          <img
+            class="cardBanner__card-icon-2"
+            src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4403000/imgBanner1.svg/e3ae451c-892a-e782-6d62-5ce186ae0986?t=1733844328126"
+            alt=""
+          />
+          <div class="container__title-cards titleCards-2">
+            <a href="https://www.positiva.gov.co/en/web/guest/vida-grupo-eleccion-polular" style="text-decoration: none;" class="container__title-cards card-titleBanner"  target="_blank">Vida grupo</a>
+            <a href="https://www.positiva.gov.co/en/web/guest/vida-grupo-eleccion-polular" style="text-decoration: none;"  class="container__title-cards card-titleBanner"  target="_blank">elección popular</a>
+            <span class="title-line_cards"></span>
+          </div>
+        </div>
+        <a target="_blank" href="https://www.positiva.gov.co/en/web/guest/vida-grupo-eleccion-polular" class="btnBannersito">Conoce más</a>
+      </div>
+    </div>
+  </div>
+  <script src="/deudores/script.js"></script>
+</body>
+</html>
+
+
+
+
