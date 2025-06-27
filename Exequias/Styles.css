@@ -41,26 +41,903 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    font-family: Poppins, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
 }
 
-.Cont-form-title{
+.Cont-res-EX h4 {
+    color: #173748;
+    margin: 0;
+}
+
+.Cont-res-EX span {
+    color: #FF7500;
+    margin: 0;
+}
+
+.Cont-form-title {
     display: flex;
     flex-direction: column;
-    gap: 44px;
-    margin-bottom: 20px;
 }
 
 .Cont-form-title h1 {
     font-size: 36px;
     font-family: Poppins, sans-serif;
     font-weight: 700;
+    margin: 0;
 }
 
-.Cont-form-title h1{
-   color: #173748;
+.Cont-form-title h1 {
+    color: #173748;
 }
 
-.Cont-form-title spam{
-   color: #FF7500;
+.Cont-form-title span {
+    color: #FF7500;
 }
 
+.Cont-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.Cont-plan-Ex {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.Cont-plan-Ex p {
+    font-family: Poppins, sans-serif;
+}
+
+.Cont-plan-Ex a {
+    font-family: Poppins, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: #FF7500;
+    font-style: normal;
+}
+
+.Cont-titulo-plan {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+}
+
+.Cont-titulo-plan p {
+    font-weight: 600;
+    color: #333333;
+    font-size: 14px;
+}
+
+.Cont-gen-plan {
+    display: flex;
+    flex-direction: row;
+}
+
+.Cont-gen-plan .radio {
+    width: 18px;
+
+}
+
+.Cont-radio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.Cont-plan-des {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    font-family: Poppins, sans-serif;
+    font-size: 14px;
+}
+
+.Cont-plan-des h3 {
+    margin: 0;
+    font-weight: 500;
+    color: #28283D;
+}
+
+.Cont-plan-des p {
+    margin: 0;
+    font-weight: 400;
+    color: #333333;
+}
+
+.Cont-plan-total {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    font-size: 20px;
+    font-weight: 600;
+    color: #173748;
+}
+
+
+
+.Cont-form-Seg {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    font-family: Poppins, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.form-Ex {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-Ex-camp {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+input, select, textarea {
+    box-sizing: border-box;
+    height: 38px;
+}
+
+.form-Ex-camp label {
+    font-family: Poppins, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #5D6977;
+}
+
+.Cont-Gen-Ex input {
+    width: 100%;
+    padding: 8px 15px 8px 15px;
+    border-radius: 9px;
+    border: 1px solid #EDEDED;
+}
+
+.Cont-Gen-Ex select {
+    width: 100%;
+    padding: 8px 15px 8px 15px;
+    border-radius: 9px;
+    border: 1px solid #EDEDED;
+    /* Elimina la apariencia nativa */
+    /* Para navegadores basados en WebKit (Chrome, Safari) */
+    -webkit-appearance: none;
+    /* Para Firefox */
+    -moz-appearance: none;
+    /* Estándar */
+    appearance: none;
+    background-image: url('https://positivapruebas.com.co/wp-content/uploads/Cotizador-Exequias-positiva-flecha-arriba.svg');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+}
+
+.Cont-Gen-Ex select:focus {
+    outline: none;
+    border-color: #FF7500;
+    background-image: url('https://positivapruebas.com.co/wp-content/uploads/Cotizador-Exequias-positiva-flecha-abajo.svg');
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+}
+
+.Cont-Gen-Ex .date-Ex {
+    width: 100%;
+    padding: 8px 15px 8px 15px;
+    border-radius: 9px;
+    border: 1px solid #EDEDED;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    text-transform: uppercase;
+    cursor: pointer;
+    /* Agregar cursor pointer */
+}
+
+/* --- ESTILOS PARA PERSONALIZAR EL ÍCONO DEL CALENDARIO --- */
+
+.Cont-Gen-Ex .date-Ex {
+    background-image: url('https://positivapruebas.com.co/wp-content/uploads/Cotizador-Exequias-positiva-calendario.svg');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 20px;
+    padding-right: 45px;
+}
+
+.Cont-Gen-Ex .date-Ex::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.Cont-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.chekbox-info-Ex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: Poppins, sans-serif;
+    color: #000;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+
+.chekbox-info-Ex a {
+    font-family: Poppins, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    color: #FF7500;
+}
+
+/* Oculta el checkbox original */
+.chekbox-info-Ex input[type="checkbox"] {
+    display: none;
+}
+
+/* Contenedor del checkbox personalizado */
+.chekbox-info-Ex label {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+}
+
+/* Estilo base del checkbox personalizado */
+.chekbox-info-Ex label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 1px solid #dadada;
+    border-radius: 4px;
+    background-color: white;
+    transition: background-color 0.2s;
+}
+
+/* Estilo para la flecha (check) cuando está seleccionado */
+.chekbox-info-Ex input[type="checkbox"]:checked+label::after {
+    content: "✔";
+    position: absolute;
+    left: 3px;
+    top: 1px;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+
+/* Pone el texto en negrita al seleccionar */
+.chekbox-info-Ex input[type="checkbox"]:checked+label {
+    font-weight: 600;
+}
+
+/* 1. Colorea el fondo y el borde de la caja */
+.chekbox-info-Ex input[type="checkbox"]:checked+label::before {
+    background-color: #FF7500;
+}
+
+.chekbox-info-po {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: Poppins, sans-serif;
+    color: #000;
+    justify-content: space-between;
+}
+
+
+.chekbox-info-po a {
+    font-family: Poppins, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    color: #FF7500;
+}
+
+/* Oculta el checkbox original */
+.chekbox-info-po input[type="checkbox"] {
+    display: none;
+}
+
+/* Contenedor del checkbox personalizado */
+.chekbox-info-po label {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+}
+
+/* Estilo base del checkbox personalizado */
+.chekbox-info-po label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 33%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 1px solid #dadada;
+    border-radius: 4px;
+    background-color: white;
+    transition: background-color 0.2s;
+}
+
+/* Estilo para la flecha (check) cuando está seleccionado */
+.chekbox-info-po input[type="checkbox"]:checked+label::after {
+    content: "✔";
+    position: absolute;
+    left: 3px;
+    top: 1px;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+
+/* 1. Colorea el fondo y el borde de la caja */
+.chekbox-info-po input[type="checkbox"]:checked+label::before {
+    background-color: #FF7500;
+}
+
+
+.info-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+
+/* Estilos para Tooltip*/
+.tooltip-cont-Ex {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* El texto del tooltip, oculto por defecto */
+.tooltip-cont-Ex .tooltip-text {
+    font-size: 16px;
+    font-family: Poppins, sans-serif;
+    font-weight: 400;
+    visibility: hidden;
+    width: 400px;
+    background-color: #FFF;
+    color: #000000;
+    text-align: left;
+    border-radius: 6px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #FF7500;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Posicionamiento absoluto relativo al contenedor */
+    position: absolute;
+    z-index: 1;
+    bottom: 111%;
+    left: -239%;
+    margin-left: -373px;
+    /* Efecto de transición suave */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Muestra el tooltip cuando el usuario pasa el mouse sobre el contenedor */
+.tooltip-cont-Ex:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* --- MENSAJE DE ERROR PARA VIAJEROS --- */
+.mensaje-error-EX {
+    color: #e60003;
+    display: none;
+    font-family: Poppins, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: -0.03em;
+    margin: 0;
+}
+
+.Cont-btn-Ex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo boton */
+.btn-cotiza-EX {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    background-color: #FF9338;
+    color: #FFF;
+    padding: 12px 30px 12px 30px;
+    width: 119px;
+    height: 48px;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: Poppins, sans-serif;
+    cursor: pointer;
+}
+
+.btn-continua-EX {
+    background-color: #FF9338;
+    color: #FFF;
+    width: 119px;
+    height: 48px;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: Poppins, sans-serif;
+    cursor: pointer;
+}
+
+
+.Cont-costoseg-Ex {
+    display: flex;
+    flex-direction: row;
+    padding: 12px 20px 12px 20px;
+    gap: 2px;
+    background-color: #F7F7F7;
+    border-radius: 5px;
+    height: 78px;
+    align-items: start;
+}
+
+.Cont-cost-EX {
+    display: flex;
+    text-align: end;
+    font-family: Poppins, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    width: 60%;
+}
+
+.Cont-pre-EX {
+    display: flex;
+    flex-direction: column;
+    text-align: end;
+    font-family: Poppins, sans-serif;
+    width: 40%;
+}
+
+.Cont-pre-EX h4 {
+    font-size: 30px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.Cont-pre-EX p {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.Cont-dil-EX {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 328px;
+}
+
+.Cont-dil-EX img {
+    width: 89px;
+}
+
+.Cont-dil-EX p {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: Poppins, sans-serif;
+}
+
+.Cont-form-total {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Poppins, sans-serif;
+    color: #333333;
+    padding: 15px 20px 15px 20px;
+    border: 1px solid #F2F2F2;
+    border-radius: 10px;
+    box-shadow: 0px 4px 16px 0px #0000000D;
+}
+
+
+.form-re-camp {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Crea dos columnas de igual ancho */
+    gap: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #5D6977;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.form-sel-min {
+    width: 40%;
+}
+
+.form-sel-max {
+    width: 60%;
+}
+
+.form-se-maximo {
+    width: 100%;
+}
+
+.form-re-one {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+
+.checkbox-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-family: Poppins, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.linea-gris-EX {
+    width: 100%;
+    padding: 0;
+    border: 1px solid #D7E2EE;
+}
+
+.Cont-radio input[type="radio"] {
+    display: none;
+    /* Ocultar inicialmente los radio buttons */
+}
+
+.Cont-personas-adi {
+    display: flex;
+    flex-direction: row;
+}
+
+.Cont-des-an {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.Cont-adic-gen {
+    display: none;
+    gap: 10px;
+    flex-direction: column;
+    font-size: 14px;
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+    color: #112211;
+}
+
+.Cont-cont-ex {
+    display: flex;
+    flex-direction: row;
+    width: 20%;
+    border-radius: 10px;
+    border: 1px solid #DADADA;
+    height: 38px;
+    padding: 3px 13px 3px 13px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.Cont-min {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F5F5F5;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.Cont-max {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F5F5F5;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.Cont-title-plan {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: #173748;
+    font-family: Poppins, sans-serif;
+}
+
+.Cont-title-plan h6 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.Cont-title-plan h5 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+
+.Cont-desc-resul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    color: #173748;
+}
+
+.Cont-desc-ti h6 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #173748;
+    margin: 0;
+    text-align: left;
+}
+
+
+.Cont-desc-p p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #333742;
+    margin: 0;
+    text-align: left;
+}
+
+.Cont-res-to {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Poppins, sans-serif;
+    color: #333333;
+    padding: 20px;
+    border: 1px solid #F2F2F2;
+    border-radius: 10px;
+    box-shadow: 0px 4px 16px 0px #0000000D;
+}
+
+.Cont-boton-ex {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+}
+
+.btn-asegurado {
+    padding: 8px 30px 8px 30px;
+    background-color: #173748;
+    color: #fff;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: Poppins, sans-serif;
+    border: none;
+}
+
+.btn-mascotas {
+    padding: 8px 30px 8px 30px;
+    background-color: #FF7500;
+    color: #fff;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: Poppins, sans-serif;
+    border: none;
+}
+
+.Cont-boton-cont {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.btn-cont {
+    padding: 12px 30px 12px 30px;
+    border-radius: 7px;
+    background-color: #FF9338;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: Poppins, sans-serif;
+    border: none;
+}
+
+.vista-resumen-item {
+    display: none;
+}
+
+/* Toast */
+.Toast-Ex {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 540px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 2000;
+    font-family: Poppins, sans-serif;
+    /* Estado inicial: oculto fuera de la pantalla */
+    transform: translateX(120%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.5s ease, opacity 0.5s ease, visibility 0.5s;
+}
+
+.linea-nar-EX{
+    border: 2px solid #FF7500;
+    width: 20%;
+}
+
+/* NUEVA CLASE .show: Hace visible el toast con una animación */
+.Toast-Ex.show {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.toast-img-Ex {
+    border-left: 3px solid #E60003;
+    padding-left: 15px;
+    flex-shrink: 0;
+    height: 51px; 
+}
+
+.toast-img-Ex img {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.toast-desc-Ex {
+    flex-grow: 1;
+}
+
+.Toast-Ex h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.Toast-Ex p {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 4px 0 0;
+}
+
+
+.Toast-cierre-ex {
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+.Toast-cierre-ex:hover {
+    opacity: 1;
+}
+.Toast-cierre-ex img {
+    width: 20px;
+    height: 20px;
+    display: block;
+    position: fixed;
+    top: 20px;
+    right: 8px;
+}
+
+/*Estilos para el pop up*/
+.Fondo-pop-up-EX{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.pop-up-Ex {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 345px;
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 15px 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    color: #173748;
+}
+
+.pop-up-Ex-img{
+    padding: 14px;
+    display: flex;
+    justify-content: center;
+}
+
+.pop-up-Ex-title{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.pop-up-Ex-desc{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.pop-up-Ex-title h2{
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.pop-up-Ex-title p{
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.pop-up-cierre-ex{
+    width: 20px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.cont-btn-Ex{
+    display: flex;
+    justify-content: right;
+}
