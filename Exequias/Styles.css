@@ -31,6 +31,39 @@ body {
     gap: 20px;
 }
 
+.Cont-adi {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.Cont-adi-gen {
+    display: flex;
+    flex-direction: column;
+}
+
+.Cont-adi-title {
+    display: flex;
+}
+
+.Cont-adi-title p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.Cont-adi-radio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
+}
+
+.radio-adi {
+    width: 18px !important;
+}
+
 .Cont-res-EX {
     width: 55%;
     height: auto;
@@ -183,7 +216,9 @@ body {
     gap: 4px;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
     box-sizing: border-box;
     height: 38px;
 }
@@ -285,52 +320,89 @@ input, select, textarea {
     color: #FF7500;
 }
 
-/* Oculta el checkbox original */
-.chekbox-info-Ex input[type="checkbox"] {
+/* --- ESTILOS UNIFICADOS Y CORREGIDOS PARA TODOS LOS CHECKBOXES --- */
+
+/* Estilo base para los contenedores de los checkboxes */
+/* --- ESTILOS UNIFICADOS Y CORREGIDOS PARA TODOS LOS CHECKBOXES --- */
+
+/* Estilo base para los contenedores de los checkboxes */
+.chekbox-info-Ex,
+.chekbox-info-po {
+    display: flex;
+    align-items: flex-start;
+    /* Alinea los items al inicio para multilínea */
+    gap: 10px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.chekbox-info-Ex {
+    justify-content: space-between;
+}
+
+.chekbox-info-Ex a,
+.chekbox-info-po a {
+    font-weight: 600;
+    color: #FF7500;
+    text-decoration: none;
+}
+
+/* Oculta el input original del checkbox */
+.chekbox-info-Ex input[type="checkbox"],
+.chekbox-info-po input[type="checkbox"] {
     display: none;
 }
 
-/* Contenedor del checkbox personalizado */
-.chekbox-info-Ex label {
+/* Prepara la etiqueta para posicionar el recuadro y el chulito */
+.chekbox-info-Ex label,
+.chekbox-info-po label {
     position: relative;
     padding-left: 30px;
+    /* Espacio para el recuadro */
     cursor: pointer;
+    line-height: 1.5;
 }
 
-/* Estilo base del checkbox personalizado */
-.chekbox-info-Ex label::before {
+/* Estilo para el recuadro (el ::before) */
+.chekbox-info-Ex label::before,
+.chekbox-info-po label::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
+    top: 3px;
+    /* Posición fija desde arriba, alineada con la primera línea */
+    width: 18px;
+    height: 18px;
     border: 1px solid #dadada;
     border-radius: 4px;
     background-color: white;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, border-color 0.2s;
 }
 
-/* Estilo para la flecha (check) cuando está seleccionado */
-.chekbox-info-Ex input[type="checkbox"]:checked+label::after {
+/* Estilo para el chulito (el ::after) */
+.chekbox-info-Ex input[type="checkbox"]:checked+label::after,
+.chekbox-info-po input[type="checkbox"]:checked+label::after {
     content: "✔";
     position: absolute;
-    left: 3px;
-    top: 1px;
-    font-size: 12px;
+    left: 1px;
+    top: 3px;
+    font-size: 14px;
+    font-weight: bold;
     color: #FFFFFF;
+    line-height: 18px;
+    /* Centra el chulito dentro del recuadro de 18px */
+    text-align: center;
+    width: 18px;
+    /* Le damos el mismo ancho del recuadro */
 }
 
-/* Pone el texto en negrita al seleccionar */
-.chekbox-info-Ex input[type="checkbox"]:checked+label {
-    font-weight: 600;
-}
-
-/* 1. Colorea el fondo y el borde de la caja */
-.chekbox-info-Ex input[type="checkbox"]:checked+label::before {
+/* Estilo del recuadro cuando está marcado */
+.chekbox-info-Ex input[type="checkbox"]:checked+label::before,
+.chekbox-info-po input[type-="checkbox"]:checked+label::before {
     background-color: #FF7500;
+    border-color: #FF7500;
 }
+
 
 .chekbox-info-po {
     display: flex;
@@ -364,30 +436,7 @@ input, select, textarea {
     cursor: pointer;
 }
 
-/* Estilo base del checkbox personalizado */
-.chekbox-info-po label::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 33%;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
-    border: 1px solid #dadada;
-    border-radius: 4px;
-    background-color: white;
-    transition: background-color 0.2s;
-}
 
-/* Estilo para la flecha (check) cuando está seleccionado */
-.chekbox-info-po input[type="checkbox"]:checked+label::after {
-    content: "✔";
-    position: absolute;
-    left: 3px;
-    top: 1px;
-    font-size: 12px;
-    color: #FFFFFF;
-}
 
 /* 1. Colorea el fondo y el borde de la caja */
 .chekbox-info-po input[type="checkbox"]:checked+label::before {
@@ -478,6 +527,13 @@ input, select, textarea {
     cursor: pointer;
 }
 
+.btn-eliminar-asegurado {
+    padding: 10px 30px 10px 30px;
+    width: 147px;
+    height: 40px;
+    border-radius: 7px;
+}
+
 .btn-continua-EX {
     background-color: #FF9338;
     color: #FFF;
@@ -489,6 +545,23 @@ input, select, textarea {
     font-weight: 600;
     font-family: Poppins, sans-serif;
     cursor: pointer;
+}
+
+.btn-agregar {
+    display: flex;
+    background-color: #fff;
+    padding: 10px 30px 10px 30px;
+    width: 228px;
+    height: 40px;
+    color: #FF9338;
+    gap: 8px;
+    border-radius: 7px;
+    border: 1px solid #FF9338;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: Poppins, sans-serif;
 }
 
 
@@ -639,6 +712,16 @@ input, select, textarea {
     color: #112211;
 }
 
+.Cont-adic-mas {
+    display: none;
+    gap: 10px;
+    flex-direction: column;
+    font-size: 14px;
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+    color: #112211;
+}
+
 .Cont-cont-ex {
     display: flex;
     flex-direction: row;
@@ -720,6 +803,15 @@ input, select, textarea {
     text-align: left;
 }
 
+.Cont-resumen-gen {
+    padding: 29px 20px 29px 20px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #DADADA;
+    border-radius: 10px;
+    gap: 20px;
+}
+
 .Cont-res-to {
     display: flex;
     flex-direction: column;
@@ -729,17 +821,26 @@ input, select, textarea {
     font-family: Poppins, sans-serif;
     color: #333333;
     padding: 20px;
-    border: 1px solid #F2F2F2;
+    border: 1px solid #D9DCE3;
     border-radius: 10px;
-    box-shadow: 0px 4px 16px 0px #0000000D;
+
 }
 
 .Cont-boton-ex {
     display: flex;
     flex-direction: row;
     gap: 20px;
-
+    cursor: pointer;
+    justify-content: center;
 }
+
+.Cont-boton-ag {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+}
+
 
 .btn-asegurado {
     padding: 8px 30px 8px 30px;
@@ -750,6 +851,7 @@ input, select, textarea {
     font-weight: 600;
     font-family: Poppins, sans-serif;
     border: none;
+    cursor: pointer;
 }
 
 .btn-mascotas {
@@ -761,6 +863,7 @@ input, select, textarea {
     font-weight: 600;
     font-family: Poppins, sans-serif;
     border: none;
+    cursor: pointer;
 }
 
 .Cont-boton-cont {
@@ -769,6 +872,39 @@ input, select, textarea {
     gap: 20px;
     justify-content: center;
     text-align: center;
+}
+
+.Cont-boton-resumen {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+
+.btn-cont {
+    padding: 12px 30px 12px 30px;
+    border-radius: 7px;
+    background-color: #FF9338;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: Poppins, sans-serif;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-atras {
+    padding: 12px 30px 12px 30px;
+    border-radius: 7px;
+    background-color: #FF9338;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: Poppins, sans-serif;
+    border: none;
+    cursor: pointer;
 }
 
 .btn-cont {
@@ -780,10 +916,26 @@ input, select, textarea {
     font-weight: 600;
     font-family: Poppins, sans-serif;
     border: none;
+    cursor: pointer;
 }
 
 .vista-resumen-item {
     display: none;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.vista-ingresa-datos {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.Cont-form-total-asegurado {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* Toast */
@@ -808,7 +960,7 @@ input, select, textarea {
     transition: transform 0.5s ease, opacity 0.5s ease, visibility 0.5s;
 }
 
-.linea-nar-EX{
+.linea-nar-EX {
     border: 2px solid #FF7500;
     width: 20%;
 }
@@ -824,7 +976,7 @@ input, select, textarea {
     border-left: 3px solid #E60003;
     padding-left: 15px;
     flex-shrink: 0;
-    height: 51px; 
+    height: 51px;
 }
 
 .toast-img-Ex img {
@@ -858,9 +1010,11 @@ input, select, textarea {
     opacity: 0.6;
     transition: opacity 0.2s;
 }
+
 .Toast-cierre-ex:hover {
     opacity: 1;
 }
+
 .Toast-cierre-ex img {
     width: 20px;
     height: 20px;
@@ -871,15 +1025,20 @@ input, select, textarea {
 }
 
 /*Estilos para el pop up*/
-.Fondo-pop-up-EX{
+/* --- ESTILOS MEJORADOS Y COMPLETOS PARA EL POP-UP --- */
+/* --- ESTILOS MEJORADOS Y COMPLETOS PARA EL POP-UP --- */
+.Fondo-pop-up-EX {
     display: none;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #000000;
-    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
 }
 
 .pop-up-Ex {
@@ -887,57 +1046,232 @@ input, select, textarea {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 345px;
     background-color: #fff;
     border-radius: 16px;
-    padding: 15px 30px 30px 30px;
+    padding: 24px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    position: relative;
+    /* Necesario para posicionar el botón de cierre */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.pop-up-cierre-ex {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #f1f1f1;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 24px;
+    line-height: 32px;
+    color: #555;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    padding: 0;
+    /* Asegurar que no haya padding extra */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pop-up-cierre-ex:hover {
+    background-color: #e0e0e0;
+    color: #000;
+}
+
+.pop-up-cierre-ex img {
+    width: 33px;
+    /* Ajusta el tamaño del icono de cierre si es necesario */
+    height: 33px;
+}
+
+.pop-up-contenido {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.pop-up-Ex-img img {
+    width: 98px;
+    height: 98px;
+}
+
+.pop-up-Ex-title h2 {
+    font-size: 24px;
+    font-weight: 700;
     color: #173748;
-}
-
-.pop-up-Ex-img{
-    padding: 14px;
-    display: flex;
-    justify-content: center;
-}
-
-.pop-up-Ex-title{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-}
-
-.pop-up-Ex-desc{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-}
-
-.pop-up-Ex-title h2{
     margin: 0;
-    font-family: Poppins, sans-serif;
-    font-size: 25px;
-    font-weight: 600;
 }
 
-.pop-up-Ex-title p{
-    margin: 0;
-    font-family: Poppins, sans-serif;
+/* ESTILO PARA LA LÍNEA NARANJA */
+.pop-up-divider {
+    border: none;
+    border-top: 3px solid #FF7500;
+    width: 49px;
+    margin: 4px 0;
+    border-radius: 25px;
+}
+
+.pop-up-Ex-desc p {
     font-size: 16px;
+    line-height: 1.6;
+    color: #173748;
+    margin: 0;
     font-weight: 400;
 }
 
-.pop-up-cierre-ex{
-    width: 20px;
-    height: 20px;
-    background: none;
-    border: none;
+.pop-up-soporte {
+    display: none;
+    margin-top: 16px;
+    font-size: 16px;
+    color: #173748;
+    width: 100%;
+    font-weight: 400;
+}
+
+.pop-up-soporte a {
+    color: #FF7500;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+
+/* Ocultamos el input real */
+.plan-radio-input {
+    display: none;
+}
+
+/* Label como contenedor visual */
+.plan-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     cursor: pointer;
 }
 
-.cont-btn-Ex{
+.form-asegurado-adicional {
     display: flex;
-    justify-content: right;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* AGREGA ESTOS ESTILOS AL FINAL DE Styles.css */
+
+/* Estilo para cada tarjeta de resumen que se agrega dinámicamente */
+
+
+.lista-asegurados-resumen {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+}
+
+.resumen-agregados {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid #D9DCE3;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Ajuste para que el botón de eliminar se vea como en la guía */
+.btn-eliminar-asegurado {
+    background-color: #fff;
+    border: 1px solid #E60003;
+    border-radius: 7px;
+    padding: 10px 30px 10px 30px;
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: Poppins, sans-serif;
+    color: #E60003;
+    cursor: pointer;
+}
+
+.resumen-agregados .btn-eliminar-asegurado::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('https://positivapruebas.com.co/wp-content/uploads/eliminar.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.beneficiario-radio {
+    display: flex;
+    width: 18px;
+}
+
+.cont-boton-aseg {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.beneficiario-radio{
+    width: 18px !important;
+}
+
+/* --- ESTILOS PARA RADIO BUTTONS --- */
+
+
+/* Oculta el radio button original del navegador */
+.Cont-radio input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* Dimensiones y forma del nuevo radio button */
+    width: 18px;
+    height: 18px;
+    border-radius: 50%; /* Círculo perfecto */
+
+    /* Borde y fondo */
+    border: 1.5px solid #D9DCE3; /* Borde gris cuando no está seleccionado */
+    background-color: #fff;
+
+    /* Posicionamiento y cursor */
+    cursor: pointer;
+    position: relative;
+    outline: none; /* Quita el borde de foco del navegador */
+    margin: 0; /* Aseguramos que no tenga márgenes extra */
+    padding: 0 !important;
+}
+
+/* Estilo para el círculo interior morado cuando el radio está seleccionado */
+.Cont-radio input[type="radio"]:checked::before {
+    content: '';
+    display: block;
+    
+    /* Dimensiones del punto interior */
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    
+    /* Color del punto (morado) */
+    background-color: #FF7500;
+    
+    /* Centrado perfecto del punto */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Estilo del borde cuando el radio está seleccionado */
+.Cont-radio input[type="radio"]:checked {
+    border-color: #FF7500; /* Borde morado */
 }

@@ -80,6 +80,19 @@
                 <a href="">Conocer más</a>
               </div>
             </div>
+
+            <div class="Cont-adic-mas">
+              <div class="Cont-personas-adi">
+                <div class="Cont-des-an">
+                  <p>Cantidad de Mascotas</p>
+                </div>
+                <div class="Cont-cont-ex">
+                  <button class="Cont-min">-</button>
+                  <p>0</p><button class="Cont-max">+</button>
+                </div>
+              </div>
+            </div>
+
             <div class="Cont-adic-gen">
               <div class="Cont-personas-adi">
                 <div class="Cont-des-an">
@@ -173,241 +186,422 @@
               <input type="checkbox" id="politica-cotizar" name="politica-cotizar" required>
               <label for="politica-cotizar">He leído y autorizo el tratamiento de datos personales según
                 <br>la <a href="">Política de privacidad de Positiva</a></label>
+            </div>
+            <div class="Cont-btn-Ex">
+              <button class="btn-cotiza-EX" id="cotizar">Cotizar</button>
+            </div>
+          </form>
         </div>
-        <div class="Cont-btn-Ex">
-          <button class="btn-cotiza-EX" id="cotizar">Cotizar</button>
-        </div>
-        </form>
-      </div>
 
-      <div class="Cont-res-EX">
-        <h4>
-          <span>Resultado</span> de la cotización
-        </h4>
-        <div class="Cont-costoseg-Ex">
-          <div class="Cont-cost-EX">
-            <p>El costo de tu seguro es</p>
-          </div>
-          <div class="Cont-pre-EX">
-            <h4>------</h4>
-            <p>____</p>
-          </div>
-        </div>
-        <div class="Cont-dil-EX">
-          <img src="https://positivapruebas.com.co/wp-content/uploads/resultado-form-positiva.png">
-          <p>Diligencia el formulario de cotización
-            <br>para conocer el costo y las coberturas del seguro
-          </p>
-        </div>
-        <!--Formulario plan total-->
-        <form class="Cont-form-total">
-          <div class="Cont-title-plan">
-            <h6>Plan <span>total</span><br>Si tu eres el Asegurado Principal ingresa tus datos</h6>
-          </div>
-          <div class="form-re-camp">
-            <div class="form-re-one form-sel-min">
-              <label for="tipo-documento">Tipo de documento*</label>
-              <select id="tipo-documento" required>
-                <option value="" selected disabled>Selecciona</option>
-              </select>
-              <p class="mensaje-error-EX"></p>
+        <div class="Cont-res-EX">
+          <h4>
+            <span>Resultado</span> de la cotización
+          </h4>
+          <div class="Cont-costoseg-Ex">
+            <div class="Cont-cost-EX">
+              <p>El costo de tu seguro es</p>
             </div>
-            <div class="form-re-one form-sel-max">
-              <label for="documento">Número de documento*</label>
-              <input type="number" id="documento" placeholder="Ingresa" required>
-              <p class="mensaje-error-EX"></p>
+            <div class="Cont-pre-EX">
+              <h4>------</h4>
+              <p>____</p>
             </div>
           </div>
-
-          <div class="form-re-camp">
-            <div class="form-re-one form-se-maximo">
-              <label for="fecha-expe">Fecha de expedición del documento*</label>
-              <input type="date" class="date-Ex" id="fecha-expe" required>
-              <p class="mensaje-error-EX"></p>
-            </div>
+          <div class="Cont-dil-EX">
+            <img src="https://positivapruebas.com.co/wp-content/uploads/resultado-form-positiva.png">
+            <p>Diligencia el formulario de cotización
+              <br>para conocer el costo y las coberturas del seguro
+            </p>
           </div>
-
-          <div class="form-re-camp">
-            <div class="form-re-one">
-              <label for="primer-nombre">Primer nombre*</label>
-              <input type="text" id="primer-nombre" placeholder="Ingresa" required>
-              <p class="mensaje-error-EX"></p>
+          <!--Formulario plan total-->
+          <form class="Cont-form-total">
+            <div class="Cont-title-plan">
+              <h6>Plan <span>total</span><br>Si tu eres el Asegurado Principal ingresa tus datos</h6>
             </div>
-            <div class="form-re-one">
-              <label for="segundo-nombre">Segundo nombre</label>
-              <input type="text" id="segundo-nombre" placeholder="Ingresa" required>
-              <p class="mensaje-error-EX"></p>
-            </div>
-          </div>
-
-          <div class="form-re-camp">
-            <div class="form-re-one">
-              <label for="primer-apellido">Primer apellido*</label>
-              <input type="text" id="primer-apellido" placeholder="Ingresa" required>
-              <p class="mensaje-error-EX"></p>
-            </div>
-            <div class="form-re-one">
-              <label for="segundo-apellido">Segundo apellido</label>
-              <input type="text" id="segundo-apellido" placeholder="Ingresa" required>
-              <p class="mensaje-error-EX"></p>
-            </div>
-          </div>
-
-          <div class="form-re-camp">
-            <div class="form-re-one">
-              <label for="fecha-nac">Fecha de nacimiento*</label>
-              <input type="date" class="date-Ex" id="fecha-nac" required>
-              <p class="mensaje-error-EX"></p>
-            </div>
-            <div class="form-re-one">
-              <label for="departamento">Departamento*</label>
-              <select id="departamento" required>
-                <option value="" selected disabled>Selecciona</option>
-              </select>
-              <p class="mensaje-error-EX"></p>
-            </div>
-          </div>
-
-          <div class="form-re-camp">
-            <div class="form-re-one">
-              <label for="ciudad">Ciudad*</label>
-              <input type="text" id="ciudad" placeholder="Escribe para buscar tu ciudad" required>
-              <div id="resultado-ciudad" class="resultado-ciudad-EX"></div>
-              <p class="mensaje-error-EX"></p>
-            </div>
-            <div class="form-re-one">
-              <label for="direccion">Dirección</label>
-              <input type="text" id="direccion" placeholder="Ingresa" required>
-              <p class="mensaje-error-EX"></p>
-            </div>
-          </div>
-
-          <div class="form-re-camp">
-            <div class="form-re-one">
-              <label for="celular">Celular*</label>
-              <input type="text" id="celular" placeholder="Ingresa" required>
-              <p class="mensaje-error-EX"></p>
-            </div>
-            <div class="form-re-one">
-              <label for="correo">Correo electrónico*</label>
-              <input type="email" id="correo" placeholder="Ingresa" required>
-              <p class="mensaje-error-EX"></p>
-            </div>
-          </div>
-
-          <div class="form-re-camp">
-            <div class="form-re-one form-se-maximo">
-              <label for="ciuu">Actividad CIIU*</label>
-              <select id="ciuu" required>
-                <option value="" selected disabled>Selecciona</option>
-              </select>
-              <p class="mensaje-error-EX"></p>
-            </div>
-          </div>
-
-          <div class="checkbox-form">
-            <div class="chekbox-info-Ex">
-              <input type="checkbox" id="peps" name="peps">
-              <label for="peps">¿Eres una persona políticamente Expuesta (PEPS)?</label>
-              <div class="tooltip-cont-Ex">
-                <img
-                  src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-tooltip.svg"
-                  alt="Info" class="info-icon">
-                <span class="tooltip-text">Una Persona Expuesta Políticamente (PEP) es aquella que desempeña o ha
-                  desempeñado funciones públicas destacadas.</span>
+            <div class="form-re-camp">
+              <div class="form-re-one form-sel-min">
+                <label for="tipo-documento">Tipo de documento*</label>
+                <select id="tipo-documento" required>
+                  <option value="" selected disabled>Selecciona</option>
+                </select>
+                <p class="mensaje-error-EX"></p>
+              </div>
+              <div class="form-re-one form-sel-max">
+                <label for="documento">Número de documento*</label>
+                <input type="number" id="documento" placeholder="Ingresa" required>
+                <p class="mensaje-error-EX"></p>
               </div>
             </div>
 
-            <div class="chekbox-info-Ex">
-              <input type="checkbox" id="publica" name="peps">
-              <label for="publica">Existe algún vinculo entre usted y una persona Públicamente expuesta?</label>
-              <div class="tooltip-cont-Ex">
-                <img
-                  src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-tooltip.svg"
-                  alt="Info" class="info-icon">
-                <span class="tooltip-text">Una Persona Expuesta Políticamente (PEP) es aquella que desempeña o ha
-                  desempeñado funciones públicas destacadas.</span>
+            <div class="form-re-camp">
+              <div class="form-re-one form-se-maximo">
+                <label for="fecha-expe">Fecha de expedición del documento*</label>
+                <input type="date" class="date-Ex" id="fecha-expe" required>
+                <p class="mensaje-error-EX"></p>
               </div>
             </div>
 
-            <div class="chekbox-info-po">
-              <input type="checkbox" id="politica-continuar" name="politica-continuar" required>
-              <label for="politica-continuar">He leído y autorizo el tratamiento de datos personales según
-                <br>la <a href="">Política de privacidad de Positiva</a></label>
+            <div class="form-re-camp">
+              <div class="form-re-one">
+                <label for="primer-nombre">Primer nombre*</label>
+                <input type="text" id="primer-nombre" placeholder="Ingresa" required>
+                <p class="mensaje-error-EX"></p>
+              </div>
+              <div class="form-re-one">
+                <label for="segundo-nombre">Segundo nombre</label>
+                <input type="text" id="segundo-nombre" placeholder="Ingresa" required>
+                <p class="mensaje-error-EX"></p>
+              </div>
             </div>
-            <hr class="linea-gris-EX">
-          </div>
 
-          <div class="Cont-btn-Ex">
-            <button class="btn-continua-EX" id="continuar">continuar</button>
-          </div>
+            <div class="form-re-camp">
+              <div class="form-re-one">
+                <label for="primer-apellido">Primer apellido*</label>
+                <input type="text" id="primer-apellido" placeholder="Ingresa" required>
+                <p class="mensaje-error-EX"></p>
+              </div>
+              <div class="form-re-one">
+                <label for="segundo-apellido">Segundo apellido</label>
+                <input type="text" id="segundo-apellido" placeholder="Ingresa" required>
+                <p class="mensaje-error-EX"></p>
+              </div>
+            </div>
 
+            <div class="form-re-camp">
+              <div class="form-re-one">
+                <label for="fecha-nac">Fecha de nacimiento*</label>
+                <input type="date" class="date-Ex" id="fecha-nac" required>
+                <p class="mensaje-error-EX"></p>
+              </div>
+              <div class="form-re-one">
+                <label for="departamento">Departamento*</label>
+                <select id="departamento" required>
+                  <option value="" selected disabled>Selecciona</option>
+                </select>
+                <p class="mensaje-error-EX"></p>
+              </div>
+            </div>
 
+            <div class="form-re-camp">
+              <div class="form-re-one">
+                <label for="ciudad">Ciudad*</label>
+                <input type="text" id="ciudad" placeholder="Escribe para buscar tu ciudad" required>
+                <div id="resultado-ciudad" class="resultado-ciudad-EX"></div>
+                <p class="mensaje-error-EX"></p>
+              </div>
+              <div class="form-re-one">
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" placeholder="Ingresa" required>
+                <p class="mensaje-error-EX"></p>
+              </div>
+            </div>
 
+            <div class="form-re-camp">
+              <div class="form-re-one">
+                <label for="celular">Celular*</label>
+                <input type="text" id="celular" placeholder="Ingresa" required>
+                <p class="mensaje-error-EX"></p>
+              </div>
+              <div class="form-re-one">
+                <label for="correo">Correo electrónico*</label>
+                <input type="email" id="correo" placeholder="ejemplo@correo.com" required="">
+                <p class="mensaje-error-EX"></p>
+              </div>
+            </div>
 
+            <div class="form-re-camp">
+              <div class="form-re-one form-se-maximo">
+                <label for="ciuu">Actividad CIIU*</label>
+                <select id="ciuu" required>
+                  <option value="" selected disabled>Selecciona</option>
+                </select>
+                <p class="mensaje-error-EX"></p>
+              </div>
+            </div>
 
+            <div class="checkbox-form">
+              <div class="chekbox-info-Ex">
+                <input type="checkbox" id="peps" name="peps">
+                <label for="peps">¿Eres una persona políticamente Expuesta (PEPS)?</label>
+                <div class="tooltip-cont-Ex">
+                  <img
+                    src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-tooltip.svg"
+                    alt="Info" class="info-icon">
+                  <span class="tooltip-text">Una Persona Expuesta Políticamente (PEP) es aquella que desempeña o ha
+                    desempeñado funciones públicas destacadas.</span>
+                </div>
+              </div>
+
+              <div class="chekbox-info-Ex">
+                <input type="checkbox" id="publica" name="peps">
+                <label for="publica">Existe algún vinculo entre usted y una persona Públicamente expuesta?</label>
+                <div class="tooltip-cont-Ex">
+                  <img
+                    src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-tooltip.svg"
+                    alt="Info" class="info-icon">
+                  <span class="tooltip-text">Una Persona Expuesta Políticamente (PEP) es aquella que desempeña o ha
+                    desempeñado funciones públicas destacadas.</span>
+                </div>
+              </div>
+
+              <div class="chekbox-info-po">
+                <input type="checkbox" id="politica-continuar" name="politica-continuar" required>
+                <label for="politica-continuar">He leído y autorizo el tratamiento de datos personales según
+                  <br>la <a href="">Política de privacidad de Positiva</a></label>
+              </div>
+              <hr class="linea-gris-EX">
+            </div>
+
+            <div class="Cont-btn-Ex">
+              <button class="btn-continua-EX" id="continuar">continuar</button>
+            </div>
+          </form>
           <!--Resultado-->
           <div class="vista-resumen-item">
             <div class="Cont-title-plan">
-              <h5>Grupo: <span>Soltero - Plan Total</span></h5>
+              <h5 id="resumen-grupo-plan">Grupo: <span>Soltero - Plan Total</span></h5>
             </div>
-            <div class="Cont-res-to">
-              <div class="Cont-desc-resul">
-                <div class="Cont-desc-ti">
-                  <h6>Parentesco</h6>
+
+            <div class="Cont-resumen-gen">
+              <div class="Cont-res-to">
+                <div class="Cont-desc-resul">
+                  <div class="Cont-desc-ti">
+                    <h6>Parentesco</h6>
+                  </div>
+                  <div class="Cont-desc-p">
+                    <p>Asegurado principal</p>
+                  </div>
                 </div>
-                <div class="Cont-desc-p">
-                  <p>Asegurado principal</p>
+                <div class="Cont-desc-resul">
+                  <div class="Cont-desc-ti">
+                    <h6>T. Identificación</h6>
+                  </div>
+                  <div class="Cont-desc-p">
+                    <p id="resumen-tipo-doc">CC</p>
+                  </div>
+                </div>
+                <div class="Cont-desc-resul">
+                  <div class="Cont-desc-ti">
+                    <h6># Identificación</h6>
+                  </div>
+                  <div class="Cont-desc-p">
+                    <p id="resumen-num-doc">1109202920</p>
+                  </div>
+                </div>
+                <div class="Cont-desc-resul">
+                  <div class="Cont-desc-ti">
+                    <h6>Nombre</h6>
+                  </div>
+                  <div class="Cont-desc-p">
+                    <p id="resumen-nombre-principal">Laidy Andrea Ramirez Ortiz</p>
+                  </div>
+                </div>
+                <div class="Cont-desc-resul">
+                  <div class="Cont-desc-ti">
+                    <h6>Asegurado/Benef grupo familiar</h6>
+                  </div>
+                  <div class="Cont-desc-p">
+                    <p>Incluido</p>
+                  </div>
+                </div>
+                <div class="Cont-desc-resul">
+                  <div class="Cont-desc-ti">
+                    <h6>Beneficiario por fallecimiento</h6>
+                  </div>
+                  <div class="Cont-desc-p">
+                    <p></p>
+                  </div>
                 </div>
               </div>
-              <div class="Cont-desc-resul">
-                <div class="Cont-desc-ti">
-                  <h6>T. Identificación</h6>
+
+              <div id="lista-asegurados-resumen">
                 </div>
-                <div class="Cont-desc-p">
-                  <p>CC</p>
-                </div>
-              </div>
-              <div class="Cont-desc-resul">
-                <div class="Cont-desc-ti">
-                  <h6># Identificación</h6>
-                </div>
-                <div class="Cont-desc-p">
-                  <p>1109202920</p>
-                </div>
-              </div>
-              <div class="Cont-desc-resul">
-                <div class="Cont-desc-ti">
-                  <h6>Asegurado/Benef grupo familiar</h6>
-                </div>
-                <div class="Cont-desc-p">
-                  <p>Incluido</p>
-                </div>
-              </div>
-              <div class="Cont-desc-resul">
-                <div class="Cont-desc-ti">
-                  <h6>Beneficiario por fallecimiento</h6>
-                </div>
-                <div class="Cont-desc-p">
-                  <p></p>
-                </div>
-              </div>
-              <hr class="linea-gris-EX">
+
               <div class="Cont-boton-ex">
                 <button class="btn-asegurado">Agregar asegurados</button>
                 <button class="btn-mascotas">Agregar mascota</button>
               </div>
+            </div>
 
+            <div class="Cont-costoseg-Ex" style="display: flex; margin-top: 20px;">
+              <div class="Cont-cost-EX">
+                  <p>El costo de tu seguro es</p>
+              </div>
+              <div class="Cont-pre-EX">
+                  <h4>$ 644.596</h4>
+                  <p>Anual</p>
+              </div>
             </div>
             <div class="Cont-boton-cont">
-              <button class="btn-cont">Agregar asegurados</button>
-              <button class="btn-cont">Agregar mascota</button>
+              <button class="btn-atras">Atrás</button>
+              <button class="btn-cont">Continuar</button>
             </div>
           </div>
-        </form>
+
+          <!--Ingresa los datos de tu familiar-->
+          <div class="vista-ingresa-datos">
+            <div class="Cont-res-to">
+              <div class="Cont-adi">
+                <div class="Cont-title-plan">
+                  <h6>Ingresa los datos de tu familia</h6>
+                </div>
+                <div class="Cont-adi-gen">
+                  <div class="Cont-adi-title">
+                    <p>Asegurado Adicional</p>
+                  </div>
+                  <div class="Cont-adi-radio">
+                    <input type="radio" class="radio-adi" name="adicional" value="si" id="adicional-si">
+                    <label for="adicional-si">Sí</label>
+                    <input type="radio" class="radio-adi" name="adicional" value="no" id="adicional-no">
+                    <label for="adicional-no">No</label>
+                  </div>
+                </div>
+              </div>
+
+              <div id="contenedor-asegurados-adicionales">
+              </div>
+
+              <div class="Cont-boton-ag" id="cont-boton-agregar" style="margin-top: 20px;">
+                <button class="btn-agregar" id="btn-agregar-asegurado">
+                  <img
+                    src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-Exequias-positiva-icono-suma.svg">
+                  Agregar asegurado
+                </button>
+              </div>
+            </div>
+
+            <div class="Cont-boton-cont">
+              <button class="btn-atras" id="btn-atras-resumen">Atrás</button>
+              <button class="btn-cont" id="btn-continuar-final">Continuar</button>
+            </div>
+          </div>
+
+          <template id="plantilla-asegurado">
+            <div class="form-asegurado-adicional">
+              <div class="form-re-camp">
+                <div class="form-re-one form-sel-min">
+                  <label for="tipo-documento-asegurado">Tipo de documento*</label>
+                  <select id="tipo-documento-asegurado" required>
+                    <option value="" selected disabled>Selecciona</option>
+                  </select>
+                  <p class="mensaje-error-EX"></p>
+                </div>
+                <div class="form-re-one form-sel-max">
+                  <label for="documento-asegurado">Número de documento*</label>
+                  <input type="number" id="documento-asegurado" placeholder="Ingresa" required>
+                  <p class="mensaje-error-EX"></p>
+                </div>
+              </div>
+              <div class="form-re-camp">
+                <div class="form-re-one">
+                  <label for="primer-nombre-asegurado">Primer nombre*</label>
+                  <input type="text" id="primer-nombre-asegurado" placeholder="Ingresa" required>
+                  <p class="mensaje-error-EX"></p>
+                </div>
+                <div class="form-re-one">
+                  <label for="segundo-nombre-asegurado">Segundo nombre</label>
+                  <input type="text" id="segundo-nombre-asegurado" placeholder="Ingresa">
+                </div>
+              </div>
+              <div class="form-re-camp">
+                <div class="form-re-one">
+                  <label for="fecha-nac-asegurado">Fecha de nacimiento*</label>
+                  <input type="date" class="date-Ex" id="fecha-nac-asegurado" required>
+                  <p class="mensaje-error-EX"></p>
+                </div>
+                <div class="form-re-one">
+                  <label for="parentesco-asegurado">Parentesco*</label>
+                  <select id="parentesco-asegurado" required>
+                    <option value="" selected disabled>Selecciona</option>
+                  </select>
+                  <p class="mensaje-error-EX"></p>
+                </div>
+              </div>
+              <hr class="linea-gris-EX" style="margin-top: 10px;">
+            </div>
+          </template>
+
+          <template id="plantilla-asegurado">
+            <div class="Cont-form-total-asegurado"
+              style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px; border-top: 1px solid #D7E2EE; padding-top: 20px;">
+              <div class="form-re-camp">
+                <div class="form-re-one form-se-maximo">
+                  <label for="parentesco-asegurado">Parentesco*</label>
+                  <select id="parentesco-asegurado" required>
+                    <option value="" selected disabled>Selecciona</option>
+                  </select>
+                  <p class="mensaje-error-EX"></p>
+                </div>
+              </div>
+              <div class="form-re-camp">
+                <div class="form-re-one form-sel-min">
+                  <label for="tipo-documento-asegurado">Tipo*</label>
+                  <select id="tipo-documento-asegurado" required>
+                    <option value="" selected disabled>Selecciona</option>
+                  </select>
+                  <p class="mensaje-error-EX"></p>
+                </div>
+                <div class="form-re-one form-sel-max">
+                  <label for="documento-asegurado"># Documento*</label>
+                  <input type="number" id="documento-asegurado" placeholder="Ingresa" required>
+                  <p class="mensaje-error-EX"></p>
+                </div>
+              </div>
+              <div class="form-re-camp">
+                <div class="form-re-one">
+                  <label for="primer-nombre-asegurado">Primer nombre*</label>
+                  <input type="text" id="primer-nombre-asegurado" placeholder="Ingresa" required>
+                  <p class="mensaje-error-EX"></p>
+                </div>
+                <div class="form-re-one">
+                  <label for="segundo-nombre-asegurado">Segundo nombre</label>
+                  <input type="text" id="segundo-nombre-asegurado" placeholder="Ingresa">
+                  <p class="mensaje-error-EX"></p>
+                </div>
+              </div>
+              <div class="Cont-btn-Ex" style="justify-content: flex-end;">
+                <button class="btn-eliminar-asegurado"
+                  style="background-color: #e60003; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">Eliminar</button>
+              </div>
+            </div>
+          </template>
+
+          <template id="plantilla-resumen-asegurado">
+            <div class="resumen-agregados">
+                <div class="Cont-desc-resul">
+                    <div class="Cont-desc-ti"><h6>Parentesco</h6></div>
+                    <div class="Cont-desc-p"><p data-tipo="parentesco"></p></div>
+                </div>
+                <div class="Cont-desc-resul">
+                    <div class="Cont-desc-ti"><h6>T. Identificación</h6></div>
+                    <div class="Cont-desc-p"><p data-tipo="tipo-doc"></p></div>
+                </div>
+                <div class="Cont-desc-resul">
+                    <div class="Cont-desc-ti"><h6># Identificación</h6></div>
+                    <div class="Cont-desc-p"><p data-tipo="documento"></p></div>
+                </div>
+                <div class="Cont-desc-resul">
+                    <div class="Cont-desc-ti"><h6>Nombre</h6></div>
+                    <div class="Cont-desc-p"><p data-tipo="nombre"></p></div>
+                </div>
+                 <div class="Cont-desc-resul">
+                    <div class="Cont-desc-ti"><h6>Asegurado/Benef grupo familiar</h6></div>
+                    <div class="Cont-desc-p"><p>Incluido</p></div>
+                </div>
+                  <hr class="linea-gris-EX">
+                <div class="Cont-radio">
+                  <input type="radio" class="beneficiario-radio" name="beneficiario-fallecimiento">
+                  <label>Beneficiario por fallecimiento</label>
+                </div>
+                <div class="cont-boton-aseg">
+                  <button class="btn-eliminar-asegurado"><img src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-Exequias-positiva-icono-eliminar.svg">Eliminar</button>
+                </div>
+            </div>
+          </template>
+
+        </div>
       </div>
     </div>
-    </div>
+
     <!--Toast-->
     <div class="Toast-Ex" id="toast-notification">
       <div class="toast-img-Ex">
@@ -423,24 +617,25 @@
     <!--Pop-up-->
     <div class="Fondo-pop-up-EX">
       <div class="pop-up-Ex" id="pop-up-Ex">
-        <div class="cont-btn-Ex">
-          <button class="pop-up-cierre-ex" id="pop-up-cierre-ex"><img
-              src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg"></button>
-        </div>
-        <div class="pop-up-Ex-img">
-          <img src="https://positivapruebas.com.co/wp-content/uploads/error-formulario-positiva.svg">
-        </div>
-        <div class="pop-up-Ex-title">
-          <h2>Aceptar tratamiento
-            de datos</h2>
-          <hr class="linea-nar-EX">
-        </div>
-        <div class="pop-up-Ex-desc">
-          <p>Debes aceptar el tratamiento de datos personales para continuar con el proceso. Por favor, marca la casilla
-            correspondiente.</p>
+        <button class="pop-up-cierre-ex" id="pop-up-cierre-ex"><img
+            src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg"></button>
+
+
+        <div class="pop-up-contenido">
+          <div class="pop-up-Ex-img">
+            <img src="" alt="Icono del Pop-up">
+          </div>
+          <div class="pop-up-Ex-title">
+            <h2></h2>
+          </div>
+          <hr class="pop-up-divider">
+          <div class="pop-up-Ex-desc">
+            <p></p>
+          </div>
+          <div class="pop-up-soporte">
+          </div>
         </div>
       </div>
-
     </div>
   </main>
   <script src="../Exequias/js.js"></script>

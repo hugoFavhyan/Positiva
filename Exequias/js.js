@@ -8,18 +8,51 @@ class ErrorMessages {
             INVALID_CITY: "Por favor, selecciona una ciudad válida de la lista.",
             AGE_UNDER_18: "Debe ser mayor de 18 años para contratar el seguro.",
             AGE_OVER_70: "La edad máxima para contratar el seguro es de 70 años.",
-            AGE_RANGE_MODAL: {
-                title: "Edad no permitida",
-                body: "La edad debe estar entre 18 y 65 años para continuar."
+
+            AGE_RANGE_POPUP: {
+                icon: "https://positivapruebas.com.co/wp-content/uploads/error-formulario-positiva.svg",
+                title: "Algo salió mal",
+                body: "La edad del asegurado principal está fuera de rango.<br>Por favor, ajusta la edad para continuar."
             },
+
             BLOCKED_ID: {
+                icon: "https://positivapruebas.com.co/wp-content/uploads/error-formulario-positiva.svg",
                 title: "Solicitud no procesada",
-                body: "La validación de identidad no fue exitosa. Por favor, verifica que tus datos sean correctos.<br>Si tienes alguna inquietud, comunícate con nuestro equipo de soporte. "
+                body: "La validación de identidad no fue exitosa. Por favor, verifica que tus datos sean correctos.",
+                soporteText: {
+                    pre: "Si tienes alguna inquietud, comunícate con nuestro ",
+                    link: "<br>equipo de soporte.",
+                    href: "#"
+                }
             },
+
             INVALID_EXPEDITION_DATE: {
+                icon: "https://positivapruebas.com.co/wp-content/uploads/error-formulario-positiva.svg",
                 title: "Fecha de expedición no válida",
                 body: "Por favor, asegúrate de que la fecha de expedición del documento sea correcta para poder continuar con el proceso."
             },
+
+
+            DATA_AUTH_MODAL: {
+                icon: "https://positivapruebas.com.co/wp-content/uploads/error-formulario-positiva.svg",
+                title: "Aceptar tratamiento <br>de datos",
+                body: "Debes aceptar el tratamiento de datos personales para continuar con el proceso. Por favor, marca la casilla correspondiente."
+            },
+
+
+            SUCCESS_POPUP: {
+                icon: "https://positivapruebas.com.co/wp-content/uploads/check-circle-positiva.svg",
+                title: "¡Formulario enviado!",
+                body: "Tus datos han sido registrados correctamente. Pronto recibirás un correo con el resumen de tu compra."
+            },
+
+            BLOCKED_ID_PERSONALIZED: {
+                icon: "https://positivapruebas.com.co/wp-content/uploads/error-formulario-positiva.svg",
+                title: "Solicitud no procesada",
+                body: "Hola [Nombre del usuario], lo sentimos, no fue posible procesar su solicitud. La validación de identidad y seguridad no fue exitosa."
+            },
+
+
         };
     }
     get(key) {
@@ -82,14 +115,43 @@ class EmailValidator extends InputValidator {
         this.errorMessages = errorMessages;
         this.setupEmailValidation();
     }
+
+    // Este método previene que se escriban caracteres inválidos
     setupEmailValidation() {
-        // ... (el contenido del método no cambia)
+        this.inputElement.addEventListener("keypress", (event) => {
+            const char = event.key;
+            const currentEmail = this.inputElement.value;
+            const emailRegex = /^[a-zA-Z0-9@.-]$/; // Caracteres permitidos
+
+            if (!emailRegex.test(char)) {
+                event.preventDefault();
+                return;
+            }
+            if (char === "@" && currentEmail.includes("@")) {
+                event.preventDefault(); // Solo un @ permitido
+            }
+            if (char === " ") {
+                event.preventDefault(); // No se permiten espacios
+            }
+        });
     }
+
+    // Este método valida la estructura completa del correo
     validateStructure() {
-        // ... (el contenido del método no cambia)
+        // Regex simple para validar la estructura (usuario@dominio.com)
+        const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.inputElement.value);
+
+        // Si no es válido Y el campo no está vacío, muestra el error
+        if (!isValid && this.inputElement.value.length > 0) {
+            this.showError(this.errorMessages.get('INVALID_EMAIL_STRUCTURE'));
+            return false;
+        } else {
+            // Si es válido o está vacío, limpia el error
+            this.clearError();
+            return true;
+        }
     }
 }
-
 class PhoneValidator extends InputValidator {
     constructor(inputElement, errorMessages) {
         super(inputElement);
@@ -147,8 +209,16 @@ class Validador {
         this.popUpElement = null;
         this.errorMessages = new ErrorMessages();
         this.validators = {};
-        this.blockedCedula = "123456789";
-        this.incorrectExpeditionDate = "2014-06-25";
+        // Nuevo contador para los formularios clonados
+        this.aseguradoCounter = 0;
+        this.configCedulasBloqueadas = {
+            "123456789": "BLOCKED_ID",
+            "123456788": "BLOCKED_ID_PERSONALIZED"
+        };
+        this.incorrectExpeditionDateForID1 = {
+            id: "123456789",
+            date: "2014-06-25"
+        };
         this.precios = {
             casado: {
                 proteccionGarantizada: {
@@ -162,12 +232,6 @@ class Validador {
                     mas: 350000,
                     plus: 250000,
                     esencial: 180000
-                },
-                asistenciaExequialMascota: {
-                    total: 125000,
-                    mas: 98000,
-                    plus: 75000,
-                    esencial: 55000
                 },
                 auxilioFallecimientoAseguradoPrincipal: {
                     total: 320000,
@@ -189,12 +253,6 @@ class Validador {
                     plus: 210000,
                     esencial: 150000
                 },
-                asistenciaExequialMascota: {
-                    total: 105000,
-                    mas: 80000,
-                    plus: 60000,
-                    esencial: 45000
-                },
                 auxilioFallecimientoAseguradoPrincipal: {
                     total: 280000,
                     mas: 240000,
@@ -215,12 +273,6 @@ class Validador {
                     plus: 320000,
                     esencial: 220000
                 },
-                asistenciaExequialMascota: {
-                    total: 150000,
-                    mas: 115000,
-                    plus: 90000,
-                    esencial: 65000
-                },
                 auxilioFallecimientoAseguradoPrincipal: {
                     total: 380000,
                     mas: 320000,
@@ -240,12 +292,6 @@ class Validador {
                     mas: 500000,
                     plus: 380000,
                     esencial: 280000
-                },
-                asistenciaExequialMascota: {
-                    total: 180000,
-                    mas: 140000,
-                    plus: 110000,
-                    esencial: 80000
                 },
                 auxilioFallecimientoAseguradoPrincipal: {
                     total: 450000,
@@ -292,6 +338,10 @@ class Validador {
         this.inicializarPopUp();
         this.inicializarLimpiezaDeErrores();
         this.inicializarValidadoresEspecificos();
+        this.poblarSelectParentesco();
+        this.inicializarBotonAgregarAsegurado();
+        this.configurarVistasDeAsegurados();
+        this.configurarClonacionDeFormularios();
     }
 
     // --- NUEVO: Método para configurar el Toast ---
@@ -393,6 +443,23 @@ class Validador {
         return esValido;
     }
 
+    // EN LA CLASE Validador, AGREGA ESTE NUEVO MÉTODO
+    configurarLimpiezaDeErroresParaFormulario(formContext) {
+        const camposConValidacion = formContext.querySelectorAll('[required]');
+        camposConValidacion.forEach(campo => {
+            // Ignoramos campos que ya tienen validación en tiempo real si es necesario
+            if (campo.id.startsWith('fecha-nac-asegurado_')) {
+                return; // Ya tiene un listener 'change' de la validación de edad
+            }
+
+            const validator = new InputValidator(campo);
+            const evento = (campo.tagName.toLowerCase() === 'select' || campo.type === 'checkbox') ? 'change' : 'input';
+
+            campo.addEventListener(evento, () => {
+                validator.clearError();
+            });
+        });
+    }
 
 
     // --- NUEVO: Método para cargar datos de la API y configurar los campos ---
@@ -468,47 +535,205 @@ class Validador {
     // --- NUEVO: Método para mostrar el pop-up con mensajes dinámicos ---
     mostrarPopUpConMensaje(errorKey) {
         if (!this.popUpElement) return;
-
         const errorData = this.errorMessages.get(errorKey);
         if (!errorData) return;
 
+        const iconoEl = this.popUpElement.querySelector('.pop-up-Ex-img img');
         const tituloEl = this.popUpElement.querySelector('.pop-up-Ex-title h2');
         const cuerpoEl = this.popUpElement.querySelector('.pop-up-Ex-desc p');
+        const soporteEl = this.popUpElement.querySelector('.pop-up-soporte');
 
-        if (tituloEl) tituloEl.textContent = errorData.title;
-        if (cuerpoEl) cuerpoEl.innerHTML = errorData.body.replace(/\n/g, '<br>');
+        // --- LÓGICA MEJORADA PARA PERSONALIZAR EL MENSAJE ---
+        let cuerpoMensaje = errorData.body;
 
-        this.mostrarPopUp(); // Llama a la función que ya teníamos para mostrarlo
+        // Revisa si el cuerpo del mensaje contiene el marcador de posición del nombre
+        if (cuerpoMensaje.includes('[Nombre del usuario]')) {
+            const nombreInput = document.getElementById('primer-nombre');
+            // Obtiene el nombre del formulario, o usa "Usuario" si está vacío
+            const nombreUsuario = nombreInput.value.trim() || 'Usuario';
+            // Reemplaza el marcador de posición con el nombre real
+            cuerpoMensaje = cuerpoMensaje.replace('[Nombre del usuario]', nombreUsuario);
+        }
+        // --- FIN DE LA LÓGICA MEJORADA ---
+
+        if (iconoEl && errorData.icon) iconoEl.src = errorData.icon;
+        if (tituloEl) tituloEl.innerHTML = errorData.title;
+        if (cuerpoEl) cuerpoEl.innerHTML = cuerpoMensaje;
+
+        if (soporteEl) {
+            if (errorData.soporteText) {
+                const soporteHTML = `${errorData.soporteText.pre}<a href="${errorData.soporteText.href || '#'}">${errorData.soporteText.link}</a>`;
+                soporteEl.innerHTML = soporteHTML;
+                soporteEl.style.display = 'block';
+            } else {
+                soporteEl.style.display = 'none';
+            }
+        }
+        this.mostrarPopUp();
     }
 
     // --- NUEVO: Método que contiene la lógica de validación especial ---
     realizarValidacionEspecial() {
         const documentoInput = document.getElementById('documento');
         const fechaExpeInput = document.getElementById('fecha-expe');
-
-        if (!documentoInput || !fechaExpeInput) return true; // Si no existen los campos, no valida
+        if (!documentoInput || !fechaExpeInput) return true;
 
         const numeroDocumento = documentoInput.value.trim();
         const fechaExpedicion = fechaExpeInput.value;
 
-        // Escenario 1: La cédula es la bloqueada Y la fecha de expedición es la incorrecta
-        if (numeroDocumento === this.blockedCedula && fechaExpedicion === this.incorrectExpeditionDate) {
+        // Mantenemos la validación de la combinación cédula + fecha.
+        if (numeroDocumento === this.incorrectExpeditionDateForID1.id && fechaExpedicion === this.incorrectExpeditionDateForID1.date) {
             this.mostrarPopUpConMensaje('INVALID_EXPEDITION_DATE');
-            // También marcamos el campo de fecha como inválido
             new InputValidator(fechaExpeInput).showError('Fecha de expedición no válida para este documento.');
-            return false; // La validación falla
+            return false;
         }
 
-        // Escenario 2: La cédula es la bloqueada (con cualquier otra fecha)
-        if (numeroDocumento === this.blockedCedula) {
-            this.mostrarPopUpConMensaje('BLOCKED_ID');
-            // Marcamos el campo de documento como inválido
+        // Ahora, aquí solo validamos la segunda cédula (la personalizada).
+        // IMPORTANTE: Reemplaza este número por la segunda cédula que quieres bloquear.
+        const segundaCedulaBloqueada = "123456788";
+        if (numeroDocumento === segundaCedulaBloqueada) {
+            // Usamos la clave del mensaje personalizado.
+            this.mostrarPopUpConMensaje('BLOCKED_ID_PERSONALIZED');
             new InputValidator(documentoInput).showError('Este número de documento no puede continuar.');
-            return false; // La validación falla
+            return false;
         }
 
-        return true; // Si no se cumple ninguna condición, la validación especial pasa
+        return true; // Si no hay coincidencias, la validación pasa.
     }
+
+    // **NUEVO:** Método para configurar los botones que cambian entre la vista de resumen y la de agregar datos.
+
+    configurarVistasDeAsegurados() {
+        const btnMostrarFormulario = document.querySelector('.btn-asegurado');
+        const btnVolverAResumen = document.getElementById('btn-atras-resumen');
+        const vistaResumen = document.querySelector('.vista-resumen-item');
+        const vistaIngresoDatos = document.querySelector('.vista-ingresa-datos');
+        const contenedorAdicionales = document.getElementById('contenedor-asegurados-adicionales');
+        // 1. SELECCIONAMOS LA CAJA DE BOTONES QUE QUIERES OCULTAR
+        const cajaBotonCont = document.querySelector('.Cont-boton-cont');
+
+
+        if (btnMostrarFormulario && btnVolverAResumen && vistaResumen && vistaIngresoDatos && contenedorAdicionales && cajaBotonCont) {
+
+            // Lógica para el botón "Agregar asegurados"
+            btnMostrarFormulario.addEventListener('click', (e) => {
+                e.preventDefault();
+                contenedorAdicionales.innerHTML = '';
+
+                // Se OCULTA la vista de resumen.
+                vistaResumen.style.display = 'flex';
+                // Se MUESTRA la vista para ingresar datos.
+                vistaIngresoDatos.style.display = 'flex';
+
+                // 2. AÑADIMOS LA LÍNEA PARA OCULTAR LA CAJA DE BOTONES
+                cajaBotonCont.style.display = 'none';
+
+                // Se crea el primer formulario para el nuevo asegurado.
+                this.agregarNuevoAsegurado();
+            });
+
+            // La lógica del botón "Atrás" se mantiene igual.
+            btnVolverAResumen.addEventListener('click', (e) => {
+                e.preventDefault();
+                vistaIngresoDatos.style.display = 'none';
+                vistaResumen.style.display = 'flex';
+
+                // 3. HACEMOS REAPARECER LA CAJA DE BOTONES
+                cajaBotonCont.style.display = 'flex';
+            });
+        }
+    }
+
+    // **NUEVO:** Método para manejar la clonación del formulario
+    configurarClonacionDeFormularios() {
+        const btnAgregar = document.getElementById('btn-agregar-asegurado');
+        if (!btnAgregar) return;
+
+        btnAgregar.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Simplemente llamamos a nuestro nuevo método
+            this.agregarNuevoAsegurado();
+        });
+    }
+    // NUEVO MÉTODO DENTRO DE LA CLASE Validador
+    // EN LA CLASE Validador, REEMPLAZA EL MÉTODO agregarNuevoAsegurado
+    agregarNuevoAsegurado() {
+        const contenedor = document.getElementById('contenedor-asegurados-adicionales');
+        const plantilla = document.getElementById('plantilla-asegurado');
+
+        if (!contenedor || !plantilla) {
+            console.error("No se encontró el contenedor o la plantilla para los asegurados.");
+            return;
+        }
+
+        this.aseguradoCounter++;
+        const clon = plantilla.content.cloneNode(true);
+        const formularioClonado = clon.querySelector('.form-asegurado-adicional');
+
+        const campos = formularioClonado.querySelectorAll('input, select');
+        campos.forEach(campo => {
+            const antiguoId = campo.id;
+            if (!antiguoId) return;
+            const nuevoId = `${antiguoId}_${this.aseguradoCounter}`;
+            campo.id = nuevoId;
+            const etiqueta = formularioClonado.querySelector(`label[for="${antiguoId}"]`);
+            if (etiqueta) {
+                etiqueta.htmlFor = nuevoId;
+            }
+        });
+
+        this.poblarSelectsClonados(formularioClonado, this.aseguradoCounter);
+
+        const nuevoCampoFecha = formularioClonado.querySelector(`#fecha-nac-asegurado_${this.aseguradoCounter}`);
+        if (nuevoCampoFecha) {
+            this.crearOverlayCalendario(nuevoCampoFecha);
+            // -- ACCIÓN 1: ACTIVAR VALIDACIÓN DE EDAD --
+            this.agregarValidaciones(nuevoCampoFecha);
+        }
+
+        // -- ACCIÓN 2: CONFIGURAR LA LIMPIEZA DE ERRORES PARA EL NUEVO FORMULARIO --
+        this.configurarLimpiezaDeErroresParaFormulario(formularioClonado);
+
+        contenedor.appendChild(formularioClonado);
+    }
+
+    // **NUEVO:** Método auxiliar para llenar los selects de los formularios clonados
+    // **MODIFICADO:** Reemplaza tu función poblarSelectsClonados por esta.
+    poblarSelectsClonados(formContext, counter) {
+        const parentescoSelect = formContext.querySelector(`#parentesco-asegurado_${counter}`);
+        const tipoDocSelect = formContext.querySelector(`#tipo-documento-asegurado_${counter}`);
+
+        // Opciones para el <select> de Parentesco
+        const opcionesParentesco = [
+            { value: 'conyuge', text: 'Cónyuge / Compañero(a)' },
+            { value: 'hijo', text: 'Hijo(a)' },
+            { value: 'padre', text: 'Padre / Madre' },
+            { value: 'hermano', text: 'Hermano(a)' },
+            { value: 'suegro', text: 'Suegro(a)' },
+            { value: 'yerno', text: 'Yerno / Nuera' },
+            { value: 'otro', text: 'Otro Parentesco' }
+        ];
+        if (parentescoSelect) {
+            opcionesParentesco.forEach(op => {
+                parentescoSelect.add(new Option(op.text, op.value));
+            });
+        }
+
+        // Opciones para el <select> de Tipo de Documento
+        const opcionesTipoDoc = [
+            { value: 'CC', text: 'Cédula de Ciudadanía' },
+            { value: 'CE', text: 'Cédula de Extranjería' },
+            { value: 'TI', text: 'Tarjeta de Identidad' },
+            { value: 'RC', text: 'Registro Civil' },
+            { value: 'PA', text: 'Pasaporte' }
+        ];
+        if (tipoDocSelect) {
+            opcionesTipoDoc.forEach(op => {
+                tipoDocSelect.add(new Option(op.text, op.value));
+            });
+        }
+    }
+
 
     inicializarBotonContinuar() {
         const botonContinuar = document.getElementById('continuar');
@@ -532,7 +757,7 @@ class Validador {
                     this.mostrarToast();
                 }
                 if (!politicaAceptada) {
-                    this.mostrarPopUp(); // Muestra el pop-up genérico de "aceptar política"
+                    this.mostrarPopUpConMensaje('DATA_AUTH_MODAL'); // <-- Llama a la nueva función dinámica
                 }
 
                 // 3. Solo si TODO es correcto, mostramos el resumen
@@ -543,34 +768,167 @@ class Validador {
         }
     }
 
+    // --- NUEVO: Método para el botón "Agregar asegurados" ---
 
+// EN LA CLASE Validador, REEMPLAZA ESTE MÉTODO COMPLETO
+    inicializarBotonAgregarAsegurado() {
+        const botonContinuarFinal = document.getElementById('btn-continuar-final');
+
+        if (botonContinuarFinal) {
+            botonContinuarFinal.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                const contenedorFormularios = document.getElementById('contenedor-asegurados-adicionales');
+                const formulariosActivos = contenedorFormularios.querySelectorAll('.form-asegurado-adicional');
+
+                // 1. Valida cada formulario de asegurado adicional
+                let todosLosFormulariosSonValidos = true;
+                if (formulariosActivos.length > 0) {
+                    formulariosActivos.forEach(form => {
+                        if (!this.validarFormulario(form)) {
+                            todosLosFormulariosSonValidos = false;
+                        }
+                    });
+                }
+
+                // 2. Si alguno falla, muestra el Toast y detiene el proceso
+                if (!todosLosFormulariosSonValidos) {
+                    this.mostrarToast();
+                    return;
+                }
+                
+                // Si todo es válido, poblamos el nombre del asegurado principal
+                const nombrePrincipal = document.getElementById('primer-nombre').value;
+                const apellidoPrincipal = document.getElementById('primer-apellido').value;
+                document.getElementById('resumen-nombre-principal').textContent = `${nombrePrincipal} ${apellidoPrincipal}`.trim();
+
+
+                // 3. Construimos las tarjetas de resumen para los adicionales
+                const plantillaResumen = document.getElementById('plantilla-resumen-asegurado');
+                const contenedorResumenes = document.getElementById('lista-asegurados-resumen');
+
+                contenedorResumenes.innerHTML = ''; // Limpia resúmenes anteriores para evitar duplicados
+
+                formulariosActivos.forEach((form, index) => {
+                    const parentescoSelect = form.querySelector(`select[id^="parentesco-asegurado_"]`);
+                    const tipoDocSelect = form.querySelector(`select[id^="tipo-documento-asegurado_"]`);
+                    const numDocInput = form.querySelector(`input[id^="documento-asegurado_"]`);
+                    const nombre = form.querySelector(`input[id^="primer-nombre-asegurado_"]`).value;
+                    const segundoNombre = form.querySelector(`input[id^="segundo-nombre-asegurado_"]`).value;
+                    const nombreCompleto = `${nombre} ${segundoNombre}`.trim();
+
+                    const clonResumen = plantillaResumen.content.cloneNode(true);
+                    const resumenCard = clonResumen.querySelector('.resumen-agregados');
+
+                    // Populamos la tarjeta con los datos del formulario
+                    resumenCard.querySelector('[data-tipo="parentesco"]').textContent = parentescoSelect.options[parentescoSelect.selectedIndex].text;
+                    resumenCard.querySelector('[data-tipo="tipo-doc"]').textContent = tipoDocSelect.options[tipoDocSelect.selectedIndex].text;
+                    resumenCard.querySelector('[data-tipo="documento"]').textContent = numDocInput.value;
+                    resumenCard.querySelector('[data-tipo="nombre"]').textContent = nombreCompleto;
+
+                    // Asignamos un ID único al radio y su label para accesibilidad
+                    const radioBeneficiario = resumenCard.querySelector('.beneficiario-radio');
+                    // Corrección: Seleccionar la etiqueta que es hermana del radio button
+                    const labelBeneficiario = radioBeneficiario ? radioBeneficiario.nextElementSibling : null; 
+                    const uniqueId = `beneficiario_${index}`;
+                    
+                    if (radioBeneficiario && labelBeneficiario) {
+                       // ================= INICIO DE LA MODIFICACIÓN =================
+                       // Hacemos visible el radio button que está oculto por CSS
+                       radioBeneficiario.style.display = 'block'; 
+                       // ================== FIN DE LA MODIFICACIÓN ===================
+                       
+                       radioBeneficiario.id = uniqueId;
+                       labelBeneficiario.htmlFor = uniqueId;
+                    }
+                    
+                    // Lógica para el botón "Eliminar" de la tarjeta
+                    const btnEliminar = resumenCard.querySelector('.btn-eliminar-asegurado');
+                    btnEliminar.addEventListener('click', () => {
+                        // Elimina la tarjeta visual del resumen
+                        resumenCard.remove();
+                        // Elimina el formulario de ingreso de datos correspondiente
+                        form.remove();
+                    });
+
+                    contenedorResumenes.appendChild(resumenCard);
+                });
+
+                // 5. Cambiar de vista para mostrar el resumen final
+                const vistaIngresoDatos = document.querySelector('.vista-ingresa-datos');
+                const vistaResumen = document.querySelector('.vista-resumen-item');
+
+                vistaIngresoDatos.style.display = 'none';
+                vistaResumen.style.display = 'flex';
+
+                // Busca el contenedor del costo final y lo hace visible.
+                const costoContainer = vistaResumen.querySelector('.Cont-costoseg-Ex');
+                if (costoContainer) {
+                    costoContainer.style.display = 'flex';
+                }
+
+                // Nos aseguramos de que los botones finales del resumen principal ("Atrás", "Continuar") vuelvan a aparecer
+                const botonesFinalesResumen = vistaResumen.querySelector('.Cont-boton-cont');
+                if (botonesFinalesResumen) botonesFinalesResumen.style.display = 'flex';
+            });
+        }
+    }
+    
     // He movido la lógica de mostrar el resumen a su propio método para más claridad
     mostrarResumen() {
-        const formularioDetallado = document.querySelector('.Cont-form-total');
-        const vistaResumenItems = document.querySelectorAll('.vista-resumen-item');
-
-        // Recoger y pintar datos
+        // --- 1. OBTENER Y "PINTAR" DATOS (Esta parte no cambia) ---
+        const grupoSelect = document.getElementById('grupo-fam-Ex');
+        const planRadio = document.querySelector('input[name="plan"]:checked');
         const tipoDocSelect = document.getElementById('tipo-documento');
         const numDocInput = document.getElementById('documento');
-        const auxilioCheckbox = document.getElementById('auxilio');
-        const tipoDocTexto = tipoDocSelect.options[tipoDocSelect.selectedIndex].text;
-        const numDocValor = numDocInput.value;
-        const tieneBeneficioFallecimiento = auxilioCheckbox.checked;
 
-        document.getElementById('resumen-tipo-doc').textContent = tipoDocTexto;
-        document.getElementById('resumen-num-doc').textContent = numDocValor;
-        document.getElementById('resumen-beneficiario-fallecimiento').textContent = tieneBeneficioFallecimiento ? 'Incluido' : 'No incluido';
+        const grupoTexto = grupoSelect ? grupoSelect.options[grupoSelect.selectedIndex].text : '';
+        const tipoDocTexto = tipoDocSelect ? tipoDocSelect.options[tipoDocSelect.selectedIndex].text : '';
+        const numDocValor = numDocInput ? numDocInput.value : '';
 
-        // Cambiar la vista
-        if (formularioDetallado && vistaResumenItems.length > 0) {
-            formularioDetallado.style.display = 'none';
-            vistaResumenItems.forEach(item => {
-                if (item.classList.contains('Cont-boton-ex') || item.classList.contains('Cont-boton-cont')) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'block';
-                }
-            });
+        let planTexto = '';
+        if (planRadio) {
+            const planContenedor = planRadio.closest('.Cont-gen-plan');
+            const h3Plan = planContenedor.querySelector('h3');
+            if (h3Plan) {
+                planTexto = h3Plan.textContent;
+            }
+        }
+
+        const resumenGrupoPlanEl = document.getElementById('resumen-grupo-plan');
+        const resumenTipoDocEl = document.getElementById('resumen-tipo-doc');
+        const resumenNumDocEl = document.getElementById('resumen-num-doc');
+
+        if (resumenGrupoPlanEl) {
+            resumenGrupoPlanEl.textContent = `${grupoTexto} - ${planTexto}`;
+        }
+        if (resumenTipoDocEl) {
+            resumenTipoDocEl.textContent = tipoDocTexto;
+        }
+        if (resumenNumDocEl) {
+            resumenNumDocEl.textContent = numDocValor;
+        }
+
+        // --- 2. CAMBIAR LA VISTA (Aquí está la corrección) ---
+        const formularioDetallado = document.querySelector('.Cont-form-total');
+        const vistaResumen = document.querySelector('.vista-resumen-item');
+        const tituloResultado = document.querySelector('.Cont-res-EX > h4');
+        const cajaCostoInicial = document.querySelector('.Cont-res-EX > .Cont-costoseg-Ex'); // Selector más específico
+
+        if (formularioDetallado && vistaResumen && tituloResultado && cajaCostoInicial) {
+            formularioDetallado.style.display = 'none'; // Oculta el formulario
+            tituloResultado.style.display = 'none';
+            cajaCostoInicial.style.display = 'none';
+
+            vistaResumen.style.display = 'flex'; // Muestra la vista de resumen
+
+            // --- INICIO DE LA MODIFICACIÓN ---
+            // Se oculta también la caja de costo que está DENTRO de la vista de resumen.
+            const cajaCostoResumen = vistaResumen.querySelector('.Cont-costoseg-Ex');
+            if (cajaCostoResumen) {
+                cajaCostoResumen.style.display = 'none';
+            }
+            // --- FIN DE LA MODIFICACIÓN ---
         }
     }
 
@@ -593,6 +951,7 @@ class Validador {
             }
         });
     }
+
     inicializarSelectorFamilia() {
         const selectorFamilia = document.getElementById('grupo-fam-Ex');
         if (!selectorFamilia) return;
@@ -617,6 +976,35 @@ class Validador {
         });
     }
 
+    // --- NUEVO: Método para poblar el select de parentesco ---
+    poblarSelectParentesco() {
+        const selects = document.querySelectorAll('#parentesco-asegurado, [id^="parentesco-asegurado_"]');
+        if (selects.length === 0) return;
+
+        const opciones = [
+            { value: 'conyuge', text: 'Cónyuge / Compañero(a)' },
+            { value: 'hijo', text: 'Hijo / Hija' },
+            { value: 'padre', text: 'Padre / Madre' },
+            { value: 'hermano', text: 'Hermano / Hermana' },
+            { value: 'suegro', text: 'Suegro(a)' },
+            { value: 'yerno', text: 'Yerno / Nuera' },
+            { value: 'otro', text: 'Otro' }
+        ];
+
+        selects.forEach(parentescoSelect => {
+            // Limpiar opciones existentes (excepto la primera "Selecciona")
+            while (parentescoSelect.options.length > 1) {
+                parentescoSelect.remove(1);
+            }
+            opciones.forEach(opcion => {
+                const optionEl = document.createElement('option');
+                optionEl.value = opcion.value;
+                optionEl.textContent = opcion.text;
+                parentescoSelect.appendChild(optionEl);
+            });
+        });
+    }
+
     manejarSeleccionFamilia() {
         const selectorFamilia = document.getElementById('grupo-fam-Ex');
 
@@ -629,11 +1017,14 @@ class Validador {
     inicializarCheckboxes() {
         const checkboxes = ['auxilio', 'proteccion', 'asistencia', 'adicional'];
         const contenedorAdicional = document.querySelector('.Cont-adic-gen');
+        // --- 1. Seleccionamos el nuevo contenedor para las mascotas ---
+        const contenedorMascota = document.querySelector('.Cont-adic-mas');
 
         checkboxes.forEach(id => {
             const checkbox = document.getElementById(id);
             if (checkbox) {
                 checkbox.addEventListener('change', (e) => {
+                    // Lógica existente para Personas Adicionales
                     if (id === 'adicional') {
                         if (e.target.checked) {
                             contenedorAdicional.style.display = 'flex';
@@ -642,7 +1033,19 @@ class Validador {
                         }
                     }
 
-                    // RESTAURAMOS ESTA LÓGICA para que los precios se actualicen al marcar un beneficio
+                    // --- 2. Añadimos la nueva lógica para el checkbox de 'asistencia' ---
+                    if (id === 'asistencia') {
+                        if (e.target.checked) {
+                            // Si se marca, muestra la caja de mascotas
+                            contenedorMascota.style.display = 'block';
+                        } else {
+                            // Si se desmarca, la oculta
+                            contenedorMascota.style.display = 'none';
+                        }
+                    }
+                    // --- FIN DE LA LÓGICA AÑADIDA ---
+
+                    // Lógica para actualizar precios (se mantiene igual)
                     if (this.productosCheckbox[id]) {
                         this.actualizarPrecios();
                     }
@@ -680,7 +1083,7 @@ class Validador {
                     this.mostrarToast();
                 }
                 if (!politicaAceptada) {
-                    this.mostrarPopUp();
+                    this.mostrarPopUpConMensaje('DATA_AUTH_MODAL'); // <-- Llama a la nueva función dinámica
                 }
 
                 // Solo si AMBAS condiciones son verdaderas, procesamos la cotización
@@ -727,12 +1130,29 @@ class Validador {
         return precioTotal;
     }
 
+    // EN LA CLASE Validador, REEMPLAZA ESTE MÉTODO
     procesarCotizacion() {
         console.log('Éxito en la validación, mostrando formulario detallado...');
-        // La única acción necesaria es mostrar el formulario de la derecha.
-        this.mostrarFormularioDetallado();
-    }
 
+        // --- INICIO DE LA MODIFICACIÓN ---
+        const tituloResultado = document.querySelector('.Cont-res-EX > h4');
+        const cajaCosto = document.querySelector('.Cont-costoseg-Ex');
+        const imagenPlaceholder = document.querySelector('.Cont-dil-EX');
+
+        // 1. Nos aseguramos de que el título y la caja de costo sean visibles
+        if (tituloResultado) tituloResultado.style.display = 'block';
+        if (cajaCosto) cajaCosto.style.display = 'flex';
+
+        // 2. Ocultamos la imagen de "Diligencia el formulario..."
+        if (imagenPlaceholder) imagenPlaceholder.style.display = 'none';
+
+        // 3. Calculamos y mostramos el precio en la caja de resultado
+        this.actualizarPrecioEnResultado();
+
+        // 4. Mostramos el formulario detallado para que el usuario continúe
+        this.mostrarFormularioDetallado();
+        // --- FIN DE LA MODIFICACIÓN ---
+    }
     actualizarPrecioEnResultado() {
         // Obtener el plan seleccionado
         const planSeleccionado = document.querySelector('input[name="plan"]:checked');
@@ -754,29 +1174,41 @@ class Validador {
 
     mostrarFormularioDetallado() {
         const formDetallado = document.querySelector('.Cont-form-total');
-        const imagenPlaceholder = document.querySelector('.Cont-dil-EX');
-
-        if (formDetallado && imagenPlaceholder) {
-            imagenPlaceholder.style.display = 'none';     // Oculta la imagen
-            formDetallado.style.display = 'flex';         // Muestra el formulario
-
+        if (formDetallado) {
+            formDetallado.style.display = 'flex';
             this.inicializarSelectoresDetallados();
         }
     }
 
+    // --- NUEVO: Método exclusivo para validar la primera cédula en tiempo real ---
+    validarCedulaBloqueadaEnBlur() {
+        const documentoInput = document.getElementById('documento');
+        if (!documentoInput) return;
+
+        const numeroDocumento = documentoInput.value.trim();
+        // IMPORTANTE: Reemplaza este número por la cédula real que quieres bloquear inmediatamente.
+        const primeraCedulaBloqueada = "123456789";
+
+        // Esta validación es específica para la primera cédula.
+        if (numeroDocumento === primeraCedulaBloqueada) {
+            // Mostramos el pop-up y el mensaje de error debajo del input.
+            this.mostrarPopUpConMensaje('BLOCKED_ID');
+            new InputValidator(documentoInput).showError('Este número de documento no puede continuar.');
+        }
+    }
+
+    // MÉTODO MODIFICADO para activar la validación en blur
     inicializarValidadoresEspecificos() {
-        // --- AÑADIMOS LA VALIDACIÓN EN TIEMPO REAL PARA EL DOCUMENTO ---
         const documentoInput = document.getElementById('documento');
         if (documentoInput) {
-            // El evento 'blur' se activa cuando el usuario sale del campo
+            // El evento 'blur' se activa cuando el usuario sale del campo.
             documentoInput.addEventListener('blur', () => {
-                // Llamamos a la función de validación especial que ya creamos
-                this.realizarValidacionEspecial();
+                // Llamamos a la nueva función que solo valida la primera cédula.
+                this.validarCedulaBloqueadaEnBlur();
             });
         }
-        // --- FIN DEL CÓDIGO AÑADIDO ---
 
-        // Validación para el Celular (se mantiene igual)
+        // Se mantiene la validación para Celular y Correo
         const celularInput = document.getElementById('celular');
         if (celularInput) {
             this.validators.celular = new PhoneValidator(celularInput, this.errorMessages);
@@ -785,7 +1217,6 @@ class Validador {
             });
         }
 
-        // Validación para el Correo (se mantiene igual)
         const correoInput = document.getElementById('correo');
         if (correoInput) {
             this.validators.correo = new EmailValidator(correoInput, this.errorMessages);
@@ -962,8 +1393,16 @@ class Validador {
             if (resultadoValidacion.isValid) {
                 validator.clearError();
             } else {
-                validator.showError(resultadoValidacion.message);
-                fechaInput.value = ''; // Limpiar el campo si la fecha no es válida
+                // --- INICIO DE LA CORRECCIÓN ---
+                // 1. Mostramos el nuevo pop-up de error de edad
+                this.mostrarPopUpConMensaje('AGE_RANGE_POPUP');
+
+                // 2. Mantenemos el borde rojo para indicar cuál campo tiene el error
+                validator.showError('La edad está fuera del rango permitido.');
+
+                // 3. Limpiamos el campo para que el usuario ingrese una nueva fecha
+                fechaInput.value = '';
+
             }
         });
     }
@@ -1047,13 +1486,15 @@ class Validador {
         const camposConValidacion = document.querySelectorAll('.form-Ex [required], .Cont-form-total [required]');
 
         camposConValidacion.forEach(campo => {
-            // --- CORRECCIÓN AQUÍ ---
-            // Ahora solo ignoramos los campos de fecha de nacimiento, que tienen validación especial.
-            // El campo 'fecha-expe' ya no será ignorado.
-            if (campo.id === 'fechaN' || campo.id === 'fecha-nac') {
-                return;
+            // Ahora ignoramos todos los campos que tienen su propia validación en tiempo real.
+            if (
+                campo.id === 'fechaN' ||
+                campo.id === 'fecha-nac' ||
+                campo.id === 'celular' ||
+                campo.id === 'correo'
+            ) {
+                return; // Salta a la siguiente iteración del bucle
             }
-            // --- FIN DE LA CORRECCIÓN ---
 
             const validator = new InputValidator(campo);
             const evento = (campo.tagName.toLowerCase() === 'select' || campo.type === 'checkbox') ? 'change' : 'input';
