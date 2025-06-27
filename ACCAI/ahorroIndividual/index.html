@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="containerGestionaAhorro">
+        <div class="containerTextoGestiona">
+            <h2 class="h2Gestiona">Gestiona </h2>
+            <h3 class="h3Gestiona">
+                tu ahorro individual
+            </h3>
+            <hr class="hrGestionaAhorro">
+
+        </div>
+        <div class="cardsGestionaAhorro">
+            <div class="cardsGestionaAhorro_item ">
+               
+                    <img src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4595874/vincula.svg/0582ba3a-a65e-0e76-7e86-574a646d5cbb?t=1750969127308"
+                        alt="">
+                    <h2>
+                        Vincúlate o Trasládate a nuestra ACCAI
+                    </h2>
+                    <hr>
+
+                <div class="cardsGestionaAhorro_link ">
+                    <img src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4595874/flechaIz.svg/32160d7c-fc2b-dcc5-3d4d-920617ed9d99?t=1750969412288"
+                        alt="">
+                    <a href="#" class="cardsGestionaAhorro_a">Conocer más</a>
+                    <img src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4595874/flechas.svg/af036b0c-fc4e-e5d2-3c29-f8885b94e0a9?t=1750969411950"
+                        alt="">
+                </div>
+            </div>
+            <div class="cardsGestionaAhorro_item">
+                    <img src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4595874/asistencia.svg/828a25f6-3b4b-a35a-f59b-38ab1a0ed7de?t=1750969127020"
+                        alt="">
+                    <h2>
+                        Solicita asistencia
+                    </h2>
+                    <hr>
+
+                <div class="cardsGestionaAhorro_link">
+                    <img src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4595874/flechaIz.svg/32160d7c-fc2b-dcc5-3d4d-920617ed9d99?t=1750969412288"
+                        alt="">
+                    <a href="#" class="cardsGestionaAhorro_a">Conocer más</a>
+                    <img src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4595874/flechas.svg/af036b0c-fc4e-e5d2-3c29-f8885b94e0a9?t=1750969411950"
+                        alt="">
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+   <script>
+    document.querySelectorAll('.cardsGestionaAhorro_item').forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            item.classList.add('hoversito');
+            const link = item.querySelector('.cardsGestionaAhorro_link');
+            if (link) link.classList.add('hoversito');
+        });
+
+        item.addEventListener('mouseleave', () => {
+            item.classList.remove('hoversito');
+            const link = item.querySelector('.cardsGestionaAhorro_link');
+            if (link) link.classList.remove('hoversito');
+        });
+    });
+</script>
+
+</body>
+
+</html>

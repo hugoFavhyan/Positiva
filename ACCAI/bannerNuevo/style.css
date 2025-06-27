@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+.containerBannerACCAI {
+    padding: 148px 0 0;
+    background: url("https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4595874/background.jpg/6ee75b70-28c5-9d20-3e94-6041ef556e6f?t=1751033568183") top / cover no-repeat;
+
+}
+.containerBannerACCAI2 {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    width: 100%;
+    max-width: 1440px;
+    margin: auto;
+}
+.containerText {
+    padding: 0 0 0 8%;
+}
+.containerText>img {
+    width: 308.56060791015625px;
+    margin-bottom: 20px;
+}
+
+.containerText>h2 {
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #173748;
+}
+
+.containerIMG {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.containerIMG>img {
+    width: 100%;
+    max-width: 530px;
+}
+
+@media (max-width: 768px) {
+    .containerBannerACCAI2 {
+        grid-template-columns: 1fr;
+        align-items: center;
+        justify-items: center;
+        justify-content: center;
+
+    }
+
+    .containerText {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+    }
+    .containerText {
+    padding: 0 20px 0 20px;
+}
+}

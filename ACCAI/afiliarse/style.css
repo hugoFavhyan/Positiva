@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+.containerAfiliacion {
+    display: grid;
+    grid-template-columns: 35% 65%;
+}
+
+.containerTextAfiliacion>h2 {
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    color: #173748;
+}
+
+.containerTextAfiliacion>hr {
+    width: 60px;
+    height: 5px;
+    background: #FF7500;
+    border: none;
+    border-radius: 10px;
+    margin-left: 0;
+
+}
+
+.containerNumeroAfiliacion {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.containerNumeroText {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+
+}
+
+.tituloysubti {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.tituloysubti h3 {
+    font-family: Roboto;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0;
+    color: #173748;
+
+}
+
+.tituloysubti p {
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #173748;
+    margin: 0;
+
+
+}
+
+.orangeLink {
+    color: #FF7500;
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .containerAfiliacion {
+
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 20px;
+    }
+}
