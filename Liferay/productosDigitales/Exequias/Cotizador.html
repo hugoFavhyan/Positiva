@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>title</title>
+  <link rel="stylesheet" href="../Exequias/Styles.css">
+</head>
+
+<body>
+  <main class="Cont-Gen-Ex">
+    <div class="Cont-Ex">
+      <div class="Cont-cotiz-Ex">
+
+        <div class="Cont-form-Ex">
+          <form class="form-Ex">
+            <div class="Cont-form-title">
+              <h1>Cotiza, compra y <span>asegúrate​​​​​​​ con toda tu familia</span>
+              </h1>
+            </div>
+            <div class="Cont-form">
+              <div class="form-Ex-camp">
+                <label for="grupo-fam-Ex">Selecciona el grupo familiar que quieres asegurar*</label>
+                <select id="grupo-fam-Ex" required>
+                  <option value="" selected disabled>Seleccione</option>
+                </select>
+                <p class="mensaje-error-EX"></p>
+              </div>
+              <div class="form-Ex-camp">
+                <label for="grupo-fam-Ex">Tu fecha de nacimiento*</label>
+                <input type="date" class="date-Ex" id="fechaN" required>
+                <p class="mensaje-error-EX"></p>
+              </div>
+            </div>
+
+            <div class="Cont-form-Seg">
+              <p>¿Quieres adicionar más beneficios?</p>
+              <div class="chekbox-info-Ex">
+                <input type="checkbox" id="auxilio" name="auxilio">
+                <label for="auxilio">Auxilio por fallecimiento de asegurado principal</label>
+                <div class="tooltip-cont-Ex">
+                  <img
+                    src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-tooltip.svg"
+                    alt="Info" class="info-icon">
+                  <span class="tooltip-text"><b>Auxilio por Fallecimiento del Asegurado Principal</b><br>
+                    En caso del fallecimiento por cualquier causa del asegurado principal, este amparo adicional
+                    garantiza el pago de tres (3) SMMLV al beneficiario designado, esto sería adicional a los gastos
+                    funerarios elegidos según el plan.</span>
+                </div>
+              </div>
+              <div class="chekbox-info-Ex">
+                <input type="checkbox" id="proteccion" name="proteccion">
+                <label for="proteccion">Protección Garantizada</label>
+                <div class="tooltip-cont-Ex">
+                  <img
+                    src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-tooltip.svg"
+                    alt="Info" class="info-icon">
+                  <span class="tooltip-text"><b>Protección Garantizada</b><br>
+                    En caso del fallecimiento por cualquier causa del asegurado principal, este amparo adicional
+                    garantiza por doce (12) meses más la cobertura de la póliza, sin pago de prima al grupo
+                    sobreviviente una vez termine la vigencia</span>
+                </div>
+              </div>
+              <div class="chekbox-info-Ex">
+                <input type="checkbox" id="asistencia" name="asistencia">
+                <label for="asistencia">Asistencia Exequial Mascota</label>
+                <div class="tooltip-cont-Ex">
+                  <img
+                    src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-tooltip.svg"
+                    alt="Info" class="info-icon">
+                  <span class="tooltip-text"><b>Asistencia Exequial para Mascota</b><br>
+                    Si tienes mascota note preocupes, se otorga cobertura de asistencia exequial para tres (3) mascotas
+                    (perros y/o gatos) por grupo familiar por vigencia, la cual es suministrada por proveedores líderes
+                    en este tipo de servicios.</span>
+                </div>
+              </div>
+              <div class="chekbox-info-Ex">
+                <input type="checkbox" id="adicional" name="adicional">
+                <label for="adicional">Personas Adicionales</label>
+                <a href="">Conocer más</a>
+              </div>
+            </div>
+            <div class="Cont-adic-gen">
+              <div class="Cont-personas-adi">
+                <div class="Cont-des-an">
+                  <p>Hasta 40 años</p>
+                </div>
+                <div class="Cont-cont-ex">
+                  <button class="Cont-min">-</button>
+                  <p>0</p><button class="Cont-max">+</button>
+                </div>
+              </div>
+
+              <div class="Cont-personas-adi">
+                <div class="Cont-des-an">
+                  <p>De 41 a 60 años</p>
+                </div>
+                <div class="Cont-cont-ex">
+                  <button class="Cont-min">-</button>
+                  <p>0</p><button class="Cont-max">+</button>
+                </div>
+              </div>
+
+              <div class="Cont-personas-adi">
+                <div class="Cont-des-an">
+                  <p>De 61 a 70 años</p>
+                </div>
+                <div class="Cont-cont-ex">
+                  <button class="Cont-min">-</button>
+                  <p>0</p><button class="Cont-max">+</button>
+                </div>
+              </div>
+
+            </div>
+            <div class="Cont-plan-Ex">
+              <div class="Cont-titulo-plan">
+                <p>Selecciona el plan ideal para ti*</p> <a href="">Conocerlos planes</a>
+              </div>
+
+              <div class="Cont-gen-plan">
+                <div class="Cont-plan-des">
+                  <div class="Cont-radio">
+                    <input type="radio" class="radio plan-radio-input" name="plan" value="total" id="plan-total">
+                    <h3>Plan total</h3>
+                  </div>
+                  <p>Se reembolsa hasta: 12.5 SMLMV</p>
+                </div>
+                <div class="Cont-plan-total">
+                  <p>$ 0</p>
+                </div>
+              </div>
+
+              <div class="Cont-gen-plan">
+                <div class="Cont-plan-des">
+                  <div class="Cont-radio">
+                    <input type="radio" class="radio plan-radio-input" name="plan" value="mas" id="plan-mas">
+                    <h3>Plan más</h3>
+                  </div>
+                  <p>Se reembolsa hasta: 10 SMLMV</p>
+                </div>
+                <div class="Cont-plan-total">
+                  <p>$ 0</p>
+                </div>
+              </div>
+
+              <div class="Cont-gen-plan">
+                <div class="Cont-plan-des">
+                  <div class="Cont-radio">
+                    <input type="radio" class="radio plan-radio-input" name="plan" value="plus" id="plan-plus">
+                    <h3>Plan plus</h3>
+                  </div>
+                  <p>Se reembolsa hasta: 7 SMLMV</p>
+                </div>
+                <div class="Cont-plan-total">
+                  <p>$ 0</p>
+                </div>
+              </div>
+
+              <div class="Cont-gen-plan">
+                <div class="Cont-plan-des">
+                  <div class="Cont-radio">
+                    <input type="radio" class="radio plan-radio-input" name="plan" value="esencial" id="plan-esencial">
+                    <h3>Plan esencial</h3>
+                  </div>
+                  <p>Se reembolsa hasta: 6 SMLMV</p>
+                </div>
+                <div class="Cont-plan-total">
+                  <p>$ 0</p>
+                </div>
+              </div>
+            </div>
+            <div class="chekbox-info-po">
+              <input type="checkbox" id="politica-cotizar" name="politica-cotizar" required>
+              <label for="politica-cotizar">He leído y autorizo el tratamiento de datos personales según
+                <br>la <a href="">Política de privacidad de Positiva</a></label>
+        </div>
+        <div class="Cont-btn-Ex">
+          <button class="btn-cotiza-EX" id="cotizar">Cotizar</button>
+        </div>
+        </form>
+      </div>
+
+      <div class="Cont-res-EX">
+        <h4>
+          <span>Resultado</span> de la cotización
+        </h4>
+        <div class="Cont-costoseg-Ex">
+          <div class="Cont-cost-EX">
+            <p>El costo de tu seguro es</p>
+          </div>
+          <div class="Cont-pre-EX">
+            <h4>------</h4>
+            <p>____</p>
+          </div>
+        </div>
+        <div class="Cont-dil-EX">
+          <img src="https://positivapruebas.com.co/wp-content/uploads/resultado-form-positiva.png">
+          <p>Diligencia el formulario de cotización
+            <br>para conocer el costo y las coberturas del seguro
+          </p>
+        </div>
+        <!--Formulario plan total-->
+        <form class="Cont-form-total">
+          <div class="Cont-title-plan">
+            <h6>Plan <span>total</span><br>Si tu eres el Asegurado Principal ingresa tus datos</h6>
+          </div>
+          <div class="form-re-camp">
+            <div class="form-re-one form-sel-min">
+              <label for="tipo-documento">Tipo de documento*</label>
+              <select id="tipo-documento" required>
+                <option value="" selected disabled>Selecciona</option>
+              </select>
+              <p class="mensaje-error-EX"></p>
+            </div>
+            <div class="form-re-one form-sel-max">
+              <label for="documento">Número de documento*</label>
+              <input type="number" id="documento" placeholder="Ingresa" required>
+              <p class="mensaje-error-EX"></p>
+            </div>
+          </div>
+
+          <div class="form-re-camp">
+            <div class="form-re-one form-se-maximo">
+              <label for="fecha-expe">Fecha de expedición del documento*</label>
+              <input type="date" class="date-Ex" id="fecha-expe" required>
+              <p class="mensaje-error-EX"></p>
+            </div>
+          </div>
+
+          <div class="form-re-camp">
+            <div class="form-re-one">
+              <label for="primer-nombre">Primer nombre*</label>
+              <input type="text" id="primer-nombre" placeholder="Ingresa" required>
+              <p class="mensaje-error-EX"></p>
+            </div>
+            <div class="form-re-one">
+              <label for="segundo-nombre">Segundo nombre</label>
+              <input type="text" id="segundo-nombre" placeholder="Ingresa" required>
+              <p class="mensaje-error-EX"></p>
+            </div>
+          </div>
+
+          <div class="form-re-camp">
+            <div class="form-re-one">
+              <label for="primer-apellido">Primer apellido*</label>
+              <input type="text" id="primer-apellido" placeholder="Ingresa" required>
+              <p class="mensaje-error-EX"></p>
+            </div>
+            <div class="form-re-one">
+              <label for="segundo-apellido">Segundo apellido</label>
+              <input type="text" id="segundo-apellido" placeholder="Ingresa" required>
+              <p class="mensaje-error-EX"></p>
+            </div>
+          </div>
+
+          <div class="form-re-camp">
+            <div class="form-re-one">
+              <label for="fecha-nac">Fecha de nacimiento*</label>
+              <input type="date" class="date-Ex" id="fecha-nac" required>
+              <p class="mensaje-error-EX"></p>
+            </div>
+            <div class="form-re-one">
+              <label for="departamento">Departamento*</label>
+              <select id="departamento" required>
+                <option value="" selected disabled>Selecciona</option>
+              </select>
+              <p class="mensaje-error-EX"></p>
+            </div>
+          </div>
+
+          <div class="form-re-camp">
+            <div class="form-re-one">
+              <label for="ciudad">Ciudad*</label>
+              <input type="text" id="ciudad" placeholder="Escribe para buscar tu ciudad" required>
+              <div id="resultado-ciudad" class="resultado-ciudad-EX"></div>
+              <p class="mensaje-error-EX"></p>
+            </div>
+            <div class="form-re-one">
+              <label for="direccion">Dirección</label>
+              <input type="text" id="direccion" placeholder="Ingresa" required>
+              <p class="mensaje-error-EX"></p>
+            </div>
+          </div>
+
+          <div class="form-re-camp">
+            <div class="form-re-one">
+              <label for="celular">Celular*</label>
+              <input type="text" id="celular" placeholder="Ingresa" required>
+              <p class="mensaje-error-EX"></p>
+            </div>
+            <div class="form-re-one">
+              <label for="correo">Correo electrónico*</label>
+              <input type="email" id="correo" placeholder="Ingresa" required>
+              <p class="mensaje-error-EX"></p>
+            </div>
+          </div>
+
+          <div class="form-re-camp">
+            <div class="form-re-one form-se-maximo">
+              <label for="ciuu">Actividad CIIU*</label>
+              <select id="ciuu" required>
+                <option value="" selected disabled>Selecciona</option>
+              </select>
+              <p class="mensaje-error-EX"></p>
+            </div>
+          </div>
+
+          <div class="checkbox-form">
+            <div class="chekbox-info-Ex">
+              <input type="checkbox" id="peps" name="peps">
+              <label for="peps">¿Eres una persona políticamente Expuesta (PEPS)?</label>
+              <div class="tooltip-cont-Ex">
+                <img
+                  src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-tooltip.svg"
+                  alt="Info" class="info-icon">
+                <span class="tooltip-text">Una Persona Expuesta Políticamente (PEP) es aquella que desempeña o ha
+                  desempeñado funciones públicas destacadas.</span>
+              </div>
+            </div>
+
+            <div class="chekbox-info-Ex">
+              <input type="checkbox" id="publica" name="peps">
+              <label for="publica">Existe algún vinculo entre usted y una persona Públicamente expuesta?</label>
+              <div class="tooltip-cont-Ex">
+                <img
+                  src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-tooltip.svg"
+                  alt="Info" class="info-icon">
+                <span class="tooltip-text">Una Persona Expuesta Políticamente (PEP) es aquella que desempeña o ha
+                  desempeñado funciones públicas destacadas.</span>
+              </div>
+            </div>
+
+            <div class="chekbox-info-po">
+              <input type="checkbox" id="politica-continuar" name="politica-continuar" required>
+              <label for="politica-continuar">He leído y autorizo el tratamiento de datos personales según
+                <br>la <a href="">Política de privacidad de Positiva</a></label>
+            </div>
+            <hr class="linea-gris-EX">
+          </div>
+
+          <div class="Cont-btn-Ex">
+            <button class="btn-continua-EX" id="continuar">continuar</button>
+          </div>
+
+
+
+
+
+          <!--Resultado-->
+          <div class="vista-resumen-item">
+            <div class="Cont-title-plan">
+              <h5>Grupo: <span>Soltero - Plan Total</span></h5>
+            </div>
+            <div class="Cont-res-to">
+              <div class="Cont-desc-resul">
+                <div class="Cont-desc-ti">
+                  <h6>Parentesco</h6>
+                </div>
+                <div class="Cont-desc-p">
+                  <p>Asegurado principal</p>
+                </div>
+              </div>
+              <div class="Cont-desc-resul">
+                <div class="Cont-desc-ti">
+                  <h6>T. Identificación</h6>
+                </div>
+                <div class="Cont-desc-p">
+                  <p>CC</p>
+                </div>
+              </div>
+              <div class="Cont-desc-resul">
+                <div class="Cont-desc-ti">
+                  <h6># Identificación</h6>
+                </div>
+                <div class="Cont-desc-p">
+                  <p>1109202920</p>
+                </div>
+              </div>
+              <div class="Cont-desc-resul">
+                <div class="Cont-desc-ti">
+                  <h6>Asegurado/Benef grupo familiar</h6>
+                </div>
+                <div class="Cont-desc-p">
+                  <p>Incluido</p>
+                </div>
+              </div>
+              <div class="Cont-desc-resul">
+                <div class="Cont-desc-ti">
+                  <h6>Beneficiario por fallecimiento</h6>
+                </div>
+                <div class="Cont-desc-p">
+                  <p></p>
+                </div>
+              </div>
+              <hr class="linea-gris-EX">
+              <div class="Cont-boton-ex">
+                <button class="btn-asegurado">Agregar asegurados</button>
+                <button class="btn-mascotas">Agregar mascota</button>
+              </div>
+
+            </div>
+            <div class="Cont-boton-cont">
+              <button class="btn-cont">Agregar asegurados</button>
+              <button class="btn-cont">Agregar mascota</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+    <!--Toast-->
+    <div class="Toast-Ex" id="toast-notification">
+      <div class="toast-img-Ex">
+        <img src="https://positivapruebas.com.co/wp-content/uploads/error-hexagono-positiva.png">
+      </div>
+      <div class="toast-desc-Ex">
+        <h3>Por favor, completa todos los campos obligatorios antes de continuar</h3>
+        <p>Los campos pendientes están resaltados para tu referencia</p>
+      </div>
+      <button class="Toast-cierre-ex" id="Toast-cierre-ex"><img
+          src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-Exequias-positiva-icono-cierre-toast.svg"></button>
+    </div>
+    <!--Pop-up-->
+    <div class="Fondo-pop-up-EX">
+      <div class="pop-up-Ex" id="pop-up-Ex">
+        <div class="cont-btn-Ex">
+          <button class="pop-up-cierre-ex" id="pop-up-cierre-ex"><img
+              src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg"></button>
+        </div>
+        <div class="pop-up-Ex-img">
+          <img src="https://positivapruebas.com.co/wp-content/uploads/error-formulario-positiva.svg">
+        </div>
+        <div class="pop-up-Ex-title">
+          <h2>Aceptar tratamiento
+            de datos</h2>
+          <hr class="linea-nar-EX">
+        </div>
+        <div class="pop-up-Ex-desc">
+          <p>Debes aceptar el tratamiento de datos personales para continuar con el proceso. Por favor, marca la casilla
+            correspondiente.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <script src="../Exequias/js.js"></script>
+</body>
+
+</html>
