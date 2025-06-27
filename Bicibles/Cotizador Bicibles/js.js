@@ -1,5 +1,6 @@
 let isfourCardVisible = false;
 const mediaQuery = window.matchMedia("(max-width: 768px)");
+let toastTimeout; 
 
 const formatNumberWithDots = (value) => {
   const numberString = value.replace(/\D/g, ""); // Solo digitos
@@ -74,9 +75,9 @@ const validateValue = (value, min, max) => {
 
 // Función para mostrar el toast
 const showToast = (toast) => {
-  toast.classList.add("showToastError");
-  setTimeout(() => {
-    toast.classList.remove("showToastError");
+  toast.classList.add("show-toast-error-bici");
+  toastTimeout = setTimeout(() => {
+    toast.classList.remove("show-toast-error-bici");
   }, 3000);
 };
 
@@ -85,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const tabContents = document.querySelectorAll(".tab-content");
   const containerTabs = document.querySelector(".tab-content-container");
   const modal = document.getElementById("modal");
-  const closeModal = document.querySelector(".close");
+  const closeModal = document.querySelector(".close-btn-bici");
   const calculateButton = document.querySelector(".calculate-button");
   const radioButtons = document.querySelectorAll("input[type='radio']");
   const insuranceLink = document.querySelector(".button-section a");
@@ -96,10 +97,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const fourCard = document.querySelector(".fourCard");
   const mainCost = fourCard.querySelector(".main-cost");
   const annualText = fourCard.querySelector(".annual");
-  const modal2 = document.querySelector(".modalPremium");
+  const modal2 = document.querySelector(".modal-premium-bici");
   const btn = document.querySelector(".open-modal-btn-premium");
-  const closeModalPremium = document.querySelector(".close-modalPremium");
+  const closeModalPremium = document.querySelector(".close-modal-premium-bici");
   const toast = document.getElementById("toast");
+   const closeToast = document.querySelector(".toast-close-bici");
   const valueError = document.getElementById("value-error");
   const valueCombinedError = document.getElementById("value-combined-error");
   const valorSeguroSection = document.getElementById("valorSeguroSection");
@@ -351,5 +353,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   handleMediaQuery(mediaQuery);
   mediaQuery.addEventListener("change", handleMediaQuery);
+
+  closeToast.addEventListener("click", () => {
+    clearTimeout(toastTimeout); // Limpia el temporizador para que no intente ocultarlo de nuevo
+    toast.classList.remove("show-toast-error-bici");
+  });
 
 });

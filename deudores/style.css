@@ -11,7 +11,7 @@
 }
 
 .CotizadorDeu_button {
-  padding: 10px 12px 10px 12px;
+  padding: 10px 30px;
   gap: 5px;
   border-radius: 5px 0px 0px 0px;
   background: #ff7500;
@@ -24,7 +24,7 @@
   border-radius: 5px;
   display: flex;
   align-items: center;
-  max-width: 219px;
+  max-width: fit-content;
   margin-top: 35px;
 
 }
