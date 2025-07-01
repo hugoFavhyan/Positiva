@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html class="ltr" dir="ltr" lang="en-US">
+
+<head>
+  <link rel="stylesheet" href="Styles.css">
+  <title>Cotizador Viajero - Positiva2023 - Portal</title>
+  <meta content="initial-scale=1.0, width=device-width" name="viewport" />
+  <section class="bg-">
+    <div class="container-fluid px-0 py-0">
+      <div class="row ">
+        <div class="col-md-12">
+          <div id="fragment-4423166-ioke">
+            <div class="container-body">
+              <div class="container-cotizador">
+                <div class="div-form">
+                  <div class="basic-info">
+                    <div action="" class="form-container">
+                      <h1 class="form-title">
+                        Cotizador del Seguro <br>
+                        <span style="color: #ff7500"> Viajero</span>
+                      </h1>
+                      <div class="form-row-border-viajeros">
+                        <div class="form-subtitle" style="margin: 0">
+                          <p>
+                            <b>Importante:</b> Si seleccionas Colombia como país de
+                            origen, podrás elegir cualquier destino. Sin embargo, si
+                            seleccionas otro país como origen, el destino se ajustará
+                            automáticamente a Colombia y los demás países no estarán
+                            disponibles.
+                          </p>
+                        </div>
+                        <div class="form-row-formViajeros">
+                          <label> Origen * </label>
+                          <select name="origen" id="origenID" class="selectcontainer origin-input small-input required">
+                            <option value="" hidden selected>Seleccione</option>
+                          </select>
+                          <span id="error-origenID" style="color: red; display: none; font-size: 12px;">
+                            Selecciona la información
+                          </span>
+                        </div>
+                        <div class="form-row-formViajeros">
+                          <label> Destino * </label>
+                          <select name="destino" id="destinoID"
+                            class="selectcontainer destino-input small-input required">
+                            <option value="" hidden selected>Seleccione</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-row-formViajeros flex form-row-border-viajeros form-row-formViajerosDate">
+                        <div class="input-date">
+                          <label for="dateStart"> Fecha de viaje * </label>
+                          <input type="date" class="selectcontainer date-input small-input required" id="dateStart">
+                        </div>
+                        <div class="input-date">
+                          <label for="dateEnd" id="daysLabel"> 0 días * </label>
+                          <input type="date" class="selectcontainer date-input small-input required" id="dateEnd">
+                          <span id="error-message-dateEnd" style="color: red; display: none; font-size: 12px;">No puedes
+                            seleccionar una fecha anterior que la del inicio del viaje.</span>
+                        </div>
+                      </div>
+                      <div class="form-row-viajeros form-row-border-viajeros travelers-count">
+                        <label for="viajerosID"> Viajeros </label>
+                        <div id="viajerosSelect" class="custom-select-viajeros">
+                          <div class="select-display-viajeros viajeros-input" id="viajeros-input">
+                            <span id="travelersSummary">Seleccione</span>
+                            <img
+                              src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-flecha.svg">
+                          </div>
+                          <div id="travelersOptions" class="options-viajeros-container">
+                            <div class="option-viajeros">
+                              <label for="adultCount">Adultos:
+                              </label>
+                              <div class="btn-count form-row-border-viajeros">
+                                <button class="decrement-btn" data-counter="adultCount">
+                                  -
+                                </button>
+                                <span id="adultCount" class="">0</span>
+                                <button class="increment-btn" data-counter="adultCount">
+                                  +
+                                </button>
+                              </div>
+                            </div>
+                            <div class="option-viajeros">
+                              <label for="minorCount">Menores:
+                              </label>
+                              <div class="btn-count form-row-border-viajeros">
+                                <button class="decrement-btn" data-counter="minorCount">
+                                  -
+                                </button>
+                                <span id="minorCount">0</span>
+                                <button class="increment-btn" data-counter="minorCount">
+                                  +
+                                </button>
+                              </div>
+                            </div>
+                            <div id="agesContainer" class="ages-container"></div>
+                            <div class="buttons-container">
+                              <button class="clean-btn-travelers">Borrar</button>
+                              <button class="apply-btn-travelers">Aplicar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cuppon" style="margin-top: 30px">
+                    <h2 class="form-title2">
+                      ¿Tienes un cupón de descuento? <br>
+                      <span style="color: #ff7500"> Ingrésalo</span>
+                    </h2>
+                    <div class="form-row-formViajeros">
+                      <label> Código de descuento </label>
+                      <input type="text" id="codecupponID" name="code_cuppon" placeholder="Ingrese">
+                    </div>
+                    <div class="radioContainer">
+                      <input type="checkbox" id="accept" name="accept" value="accept">
+                      <label for="accept">He leído y autorizo el tratamiento de datos personales según
+                        la
+                        <a href="https://positiva.gov.co/web/guest/tratamiento-de-datos-personales" target="_blank"
+                          class="orange-text">Política de privacidad de
+                          Positiva</a>
+                      </label>
+                    </div>
+                    <button id="submit-button-travelers" type="button" class="submit-button-travelers">
+                      Cotizar
+                    </button>
+                    <div class="form-success-message" style="display: none">
+                      El formulario se ha enviado exitosamente.
+                    </div>
+                  </div>
+                </div>
+                <div class="div-order" style="display: block">
+                  <div class="multisteps-form">
+                    <div class="ida-vuelta">
+                      <div id="headerIda">
+                        <h4 style="color: #FF6B00">IDA</h4>
+                        <span>Colombia - Europa</span>
+                      </div>
+                      <div>
+                        <img
+                          src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-avion.png"
+                          alt="">
+                      </div>
+                      <div id="headerVuelta">
+                        <h4 style="color: #173748;">VUELTA</h4>
+                        <span>Europa - Colombia</span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="multisteps-form__progress">
+                          <button class="multisteps-form__progress-btn js-active first-step" type="button" id="step1"
+                            title="User Info">
+                            <h3 class="pasos">Paso 1</h3>
+                            <p>Plan</p>
+                          </button>
+                          <button class="multisteps-form__progress-btn" type="button" title="Address" id="step2">
+                            <h3 class="pasos">Paso 2</h3>
+                            <p>Viajeros</p>
+                          </button>
+                          <button class="multisteps-form__progress-btn" type="button" title="Order Info" id="step3">
+                            <h3 class="pasos">Paso 3</h3>
+                            <p>Resumen</p>
+                          </button>
+                          <button class="multisteps-form__progress-btn" type="button" title="Message" id="step4">
+                            <h3 class="pasos">Paso 4</h3>
+                            <p>Pago</p>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="defaultMessage" class="form-row-border-viajeros empty-form">
+                      <img src="https://positivapruebas.com.co/wp-content/uploads/resultado-form-positiva.png" alt="">
+                      <p style="text-align: center">
+                        Diligencia el formulario de cotización <br>
+                        para conocer el costo y las coberturas del seguro
+                      </p>
+                    </div>
+                    <div id="stepsContainer" class="row" style="display: none">
+                      <div class="col-12 m-auto">
+                        <form class="multisteps-form__form">
+                          <div class="multisteps-form__panel js-active first-step" data-animation="scaleIn">
+                            <div class="multisteps-form__content paso1">
+                              <fieldset>
+                                <div class="box-select">
+                                  <input type="radio" id="planPlus" name="TipoPlan" value="750.436"
+                                    class="required1 required2 ">
+                                  <div class="card-plan card-plan1" for="planPlus">
+                                    <div class="card-plan-flex">
+                                      <div class="card-plan-title">
+                                        <div class="flex">
+                                          <img
+                                            src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-plus-viajeros.svg"
+                                            alt="">
+                                          <div class="cont-plus-viaj">
+                                            <h3>
+                                              Plus
+                                              <span>viajero</span>
+                                          </div>
+                                          </h3>
+                                        </div>
+                                        <div class="card-plan-price">
+                                          <p style="color: #ff7500">
+                                            COP <span>750.436</span>
+                                          </p>
+                                          <p id="descuentoCardPlan1"></p>
+                                          <p style="font-weight: 400">
+                                            Precio Final:<br>
+                                            <b>COP 675.392</b>
+                                          </p>
+                                        </div>
+                                      </div>
+                                      <div class="card-plan-description">
+                                        <h5 style="color: #ff7500">
+                                          Monto máximo global
+                                        </h5>
+                                        <p>COP 60.000 DE ASISTENCIA MÉDICA</p>
+                                        <ul>
+                                          <li>
+                                            Asistencia por enfermedades
+                                            preexistentes:
+                                            USD 10.000.
+                                          </li>
+                                          <li>Pérdida de equipaje: USD 1.200.</li>
+                                          <li>
+                                            Telemedicina: Atiéndete con un
+                                            médico a
+                                            través de nuestra App móvil
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                    <div class="card-plan-details flex">
+                                      <input class="input-details-plan" type="checkbox" id="cbox1"
+                                        value="second_checkbox">
+                                      <label for="cbox1" class="label-details-plan">
+                                        <div class="toggle-details">
+                                          <img
+                                            src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-iconos-planes.svg">
+                                          <p>Ver detalle cobertura y beneficios
+                                          </p>
+                                          <img
+                                            src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-flecha-naranja.svg">
+                                        </div>
+                                      </label>
+                                      <label class="js-btn-next btn-positiva" for="planPlus"
+                                        id="btncardplan1">Seleccionar<img
+                                          src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-flecha-boton.svg"></label>
+                                    </div>
+                                    <div class="details-hidden" id="detailsHidden" style="display: none;">
+                                      <table style="margin-top: 15px; display: none;" id="detailsInternational">
+                                        <tbody>
+                                          <tr class="detailsTitle">
+                                            <th><b>Cobertura</b></th>
+                                            <th><b>Viajero Plus</b></th>
+                                          </tr>
+                                          <tr>
+                                            <td colspan="2">
+                                              <hr class="linea-gris">
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <th><b>MONEDA</b></th>
+                                            <th><b>DOLARES</b></th>
+                                          </tr>
+                                          <tr>
+                                            <td colspan="2">
+                                              <hr class="linea-gris">
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <th><b>Monto máximo Global</b></th>
+                                            <th><b>USD 60.000.000</b></th>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia médica en caso de
+                                              accidente *</td>
+                                            <td>USD 60.000.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia médica en caso de
+                                              enfermedad no preexistente
+                                              (incluido
+                                              COVID_19) </td>
+                                            <td>USD 10.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia médica en caso de
+                                              enfermedad preexistente </td>
+                                            <td>
+                                              USD 500</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Odontología de urgencia (Max. €
+                                              300 /USD 300 por pieza)</td>
+                                            <td>
+                                              USD 1000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Medicamentos ambulatorios</td>
+                                            <td>
+                                              Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Medicamentos en caso de
+                                              hospitalización</td>
+                                            <td>USD 10.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Práctica de deportes</td>
+                                            <td>USD 10.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Estado de embarazo</td>
+                                            <td>USD 2.500</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Prótesis y ortesis</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Traslados sanitarios</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Repatriaciones (Sanitaria o
+                                              Funeraria)</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Regreso de Acompañante del
+                                              titular repatriado</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Traslado de un Familiar</td>
+                                            <td>Máximo USD 400</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Estancia de un familiar (Limite
+                                              Diario)</td>
+                                            <td>Máximo USD 900</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Estancia de un familiar (Limite
+                                              total)</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Gastos de Hotel por reposo luego
+                                              de una hospitalización (Límite
+                                              Diario)
+                                            </td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Gastos de Hotel por reposo luego
+                                              de una hospitalización (Límite
+                                              Total)
+                                            </td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Acompañamiento de menores o
+                                              mayores</td>
+                                            <td>USD 8.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Regreso anticipado por siniestro
+                                              grave en el domicilio</td>
+                                            <td>USD 8.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia legal por
+                                              responsabilidad en un accidente
+                                              (Préstamo)</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Anticipo de fondos para finanzas
+                                              (Préstamo)</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia en caso de robo o
+                                              extravío de documentos, etc.
+                                            </td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Localización de equipajes</td>
+                                            <td>No incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Telemedicina - Consultas médicas
+                                              online</td>
+                                            <td>No incluido</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <table style="margin-top: 15px; display: none;" id="detailsNational">
+                                        <tbody>
+                                          <tr class="detailsTitle">
+                                            <th><b>Cobertura</b></th>
+                                            <th><b>Viajero Plus</b></th>
+                                          </tr>
+                                          <tr>
+                                            <td colspan="2">
+                                              <hr class="linea-gris">
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <th><b>Monto máximo Global</b></th>
+                                            <th><b>COP 20.000.000</b></th>
+                                          </tr>
+                                          <tr>
+                                            <td colspan="2">
+                                              <hr class="linea-gris">
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia médica en caso de
+                                              accidente *</td>
+                                            <td>COP 20.000.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia médica en caso de
+                                              enfermedad no preexistente</td>
+                                            <td>COP 20.000.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia médica en caso de
+                                              enfermedad preexistente y /o
+                                              Crónica</td>
+                                            <td>
+                                              COP 1000.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Odontología de urgencia</td>
+                                            <td>
+                                              COP 600.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Medicamentos ambulatorios</td>
+                                            <td>
+                                              COP 300.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Medicamentos en caso de
+                                              hospitalización</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Prótesis y ortesis</td>
+                                            <td>Hasta COP 500.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Práctica de deportes</td>
+                                            <td>Hasta COP 4.500.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Estado de embarazo</td>
+                                            <td>Hasta COP 4.500.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Repatriaciones (Sanitaria o
+                                              Funeraria)</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Traslado de un Familiar</td>
+                                            <td>COP 1.500.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Estancia de un familiar (Limite
+                                              Diario COP 200.000)</td>
+                                            <td>HASTA COP 600.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Acompañamiento de menores o
+                                              mayores</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Regreso anticipado por siniestro
+                                              grave en el domicilio y /o por
+                                              fallecimiento de un familiar
+                                              directo</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Diferencia de tarifa y penalidad
+                                              por viaje de regreso retrasado o
+                                              anticipado</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Reembolso Gastos funebres</td>
+                                            <td>Hasta COP 3.000.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia legal por
+                                              responsabilidad en un accidente
+                                            </td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia en caso de robo o
+                                              extravío de documentos</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Localización de equipajes</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="box-select2">
+                                  <input type="radio" id="planPro" name="TipoPlan" value="314.955"
+                                    class="required1 required2">
+                                  <div for="planPro" class="card-plan card-plan2">
+                                    <div class="card-plan-flex">
+                                      <div class="card-plan-title">
+                                        <div class="flex">
+                                          <img
+                                            src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-pro-viajeros.svg"
+                                            alt="">
+                                          <div class="cont-plus-viaj">
+                                            <h3>
+                                              Pro
+                                              <span>viajero</span>
+                                          </div>
+                                          </h3>
+                                        </div>
+                                        <div class="card-plan-price">
+                                          <p style="color: #173748">
+                                            COP <span>314.955</span>
+                                          </p>
+                                          <p id="descuentoCardPlan2" style="font-weight: 400">
+                                          </p>
+                                          <p style="font-weight: 400">
+                                            Precio Final:<br>
+                                            <b>COP 283.459</b>
+                                          </p>
+                                        </div>
+                                      </div>
+                                      <div class="card-plan-description">
+                                        <h5 style="color: #173748">
+                                          Monto maximo global
+                                        </h5>
+                                        <p>COP 35.000 DE ASISTENCIA MÉDICA</p>
+                                        <ul>
+                                          <li>
+                                            Asistencia por enfermedades
+                                            preexistentes:
+                                            USD 5.000.
+                                          </li>
+                                          <li>Perdida de equipaje: USD 1.200.</li>
+                                          <li>
+                                            Telemedicina: Atiéndete con un
+                                            medico a
+                                            través de nuestra App móvil
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                    <div class="card-plan-details flex">
+                                      <input class="input-details-plan" type="checkbox" id="cbox2"
+                                        value="second_checkbox">
+                                      <label for="cbox2" class="label-details-plan">
+                                        <div class="toggle-details">
+                                          <img
+                                            src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-planes-negro.svg">
+                                          <p>Ver detalle cobertura y beneficios
+                                          </p>
+                                          <img
+                                            src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-icono-flecha-azul.svg">
+                                        </div>
+                                      </label>
+                                      <label class="js-btn-next btn-positiva" for="planPro"
+                                        id="btncardplan2">Seleccionar</label>
+                                    </div>
+                                    <div class="details-hidden" id="detailsHidden2" style="display: none;">
+                                      <table style="margin-top: 15px; display: none;" id="detailsInternational2">
+                                        <tbody>
+                                          <tr class="detailsTitle">
+                                            <th><b>Cobertura</b></th>
+                                            <th><b>Viajero Pro</b></th>
+                                            <th><b></b></th>
+                                          </tr>
+                                          <tr>
+                                            <td colspan="2">
+                                              <hr class="linea-gris">
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <th><b>MONEDA</b></th>
+                                            <th><b>EUROS</b></th>
+                                            <th><b>DOLARES</b></th>
+                                          </tr>
+                                          <tr>
+                                            <td colspan="2">
+                                              <hr class="linea-gris">
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <th><b>Monto máximo Global</b></th>
+                                            <th><b>€ 35.000</b></th>
+                                            <th><b>USD 35.000</b></th>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia médica en caso de
+                                              accidente *</td>
+                                            <td>€ 35.000</td>
+                                            <td>USD 35.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia médica en caso de
+                                              enfermedad no preexistente
+                                              (incluido
+                                              COVID_19) </td>
+                                            <td>€ 35.000</td>
+                                            <td>USD 35.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia médica en caso de
+                                              enfermedad preexistente</td>
+                                            <td>€ 5.000</td>
+                                            <td>USD 5.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Odontología de urgencia</td>
+                                            <td>€ 500</td>
+                                            <td>USD 500</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Medicamentos ambulatorios</td>
+                                            <td>€ 800</td>
+                                            <td>USD 800</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Medicamentos en caso de
+                                              hospitalización</td>
+                                            <td>Incluido</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Práctica de deportes</td>
+                                            <td>€ 10.000</td>
+                                            <td>USD 10.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Estado de embarazo</td>
+                                            <td>€ 10.000</td>
+                                            <td>USD 10.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Prótesis y ortesis</td>
+                                            <td>€ 1300</td>
+                                            <td>USD 1300</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Traslados sanitarios</td>
+                                            <td>€ 35.000</td>
+                                            <td>USD 35.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Repatriaciones (Sanitaria o
+                                              Funeraria)</td>
+                                            <td>Incluido</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Regreso de Acompañante del
+                                              titular repatriado</td>
+                                            <td>Incluido</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Traslado de un Familiar</td>
+                                            <td>Incluido</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Estancia de un familiar (Limite
+                                              Diario)</td>
+                                            <td>€ 35.000</td>
+                                            <td>USD 35.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Estancia de un familiar (Limite
+                                              total)</td>
+                                            <td>€ 400</td>
+                                            <td>USD 400</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Gastos de Hotel por reposo luego
+                                              de una hospitalización (Límite
+                                              Diario)
+                                            </td>
+                                            <td>€ 180</td>
+                                            <td>USD 180</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Gastos de Hotel por reposo luego
+                                              de una hospitalización (Límite
+                                              Total)
+                                            </td>
+                                            <td>€ 900</td>
+                                            <td>USD 900</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Acompañamiento de menores o
+                                              mayores</td>
+                                            <td>Incluido</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Regreso anticipado por siniestro
+                                              grave en el domicilio</td>
+                                            <td>Incluido</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia legal por
+                                              responsabilidad en un accidente
+                                              (Préstamo)</td>
+                                            <td>€ 8000</td>
+                                            <td>USD 8000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Anticipo de fondos para finanzas
+                                              (Préstamo)</td>
+                                            <td>€ 8000</td>
+                                            <td>USD 8000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia en caso de robo o
+                                              extravío de documentos, etc.
+                                            </td>
+                                            <td>Incluido</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Localización de equipajes</td>
+                                            <td>Incluido</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Telemedicina - Consultas médicas
+                                              online</td>
+                                            <td>Incluido</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <table style="margin-top: 15px; display: none;" id="detailsNational2">
+                                        <tbody>
+                                          <tr class="detailsTitle">
+                                            <th><b>Cobertura</b></th>
+                                            <th><b>Viajero Pro</b></th>
+                                          </tr>
+                                          <tr>
+                                            <td colspan="2">
+                                              <hr class="linea-gris">
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <th><b>Monto máximo Global</b></th>
+                                            <th><b>COP 10.000.000</b></th>
+                                          </tr>
+                                          <tr>
+                                            <td colspan="2">
+                                              <hr class="linea-gris">
+                                            </td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia médica en caso de
+                                              accidente *</td>
+                                            <td>COP 10.000.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia médica en caso de
+                                              enfermedad no preexistente</td>
+                                            <td>COP 10.000.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia médica en caso de
+                                              enfermedad preexistente y /o
+                                              Crónica</td>
+                                            <td>
+                                              COP 500.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Odontología de urgencia</td>
+                                            <td>
+                                              COP 300.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Medicamentos ambulatorios</td>
+                                            <td>
+                                              COP 300.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Medicamentos en caso de
+                                              hospitalización</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Prótesis y ortesis</td>
+                                            <td>Hasta COP 500.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Práctica de deportes</td>
+                                            <td>Hasta COP 4.500.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Estado de embarazo</td>
+                                            <td>Hasta COP 4.500.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Repatriaciones (Sanitaria o
+                                              Funeraria)</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Traslado de un Familiar</td>
+                                            <td>COP 1.500.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Estancia de un familiar (Limite
+                                              Diario COP 200.000)</td>
+                                            <td>HASTA COP 600.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Acompañamiento de menores o
+                                              mayores</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Regreso anticipado por siniestro
+                                              grave en el domicilio y /o por
+                                              fallecimiento de un familiar
+                                              directo</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Diferencia de tarifa y penalidad
+                                              por viaje de regreso retrasado o
+                                              anticipado</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Reembolso Gastos funebres</td>
+                                            <td>Hasta COP 3.000.000</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia legal por
+                                              responsabilidad en un accidente
+                                            </td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Asistencia en caso de robo o
+                                              extravío de documentos</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Localización de equipajes</td>
+                                            <td>Incluido</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                </div>
+                              </fieldset>
+                            </div>
+                          </div>
+                          <div class="multisteps-form__panel" data-animation="scaleIn">
+                            <div class="multisteps-form__content paso2">
+                              <div class="form-row-border-viajeros carrito-viajeros">
+                                <div class="flex">
+                                  <img
+                                    src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/carrito.svg/782032ee-d764-c597-c0ee-a0505ea23612?t=1732808723166"
+                                    alt="" style="margin-right: 10px">
+                                  <div>
+                                    <h3 class="multisteps-form__title">
+                                      Tu <span style="color: #ff7500">carrito</span>
+                                    </h3>
+                                    <span class="vigency-data">Vigencia del 18/09/2024
+                                      al 29/10/2024</span>
+                                  </div>
+                                </div>
+                                <div class="min-cart">
+                                  <td id="resultadoCupon"></td>
+                                  <td id="valorDescuento"></td>
+                                </div>
+                              </div>
+                              <div id="formContainer" class="form-row-border-viajeros acordeon"></div>
+                              <div id="formContainerVoucher" class="form-row-border-viajeros">
+                              </div>
+                            </div>
+                            <div class="radioContainer radioContainer2">
+                              <input type="checkbox" id="accept2" name="accept" value="accept2" class="required2">
+                              <label for="accept2">He leído y autorizo el tratamiento de datos
+                                personales
+                                según la
+                                <a href="https://positiva.gov.co/web/guest/tratamiento-de-datos-personales"
+                                  target="_blank" class="orange-text">Política de
+                                  privacidad de Positiva</a>
+                              </label>
+                            </div>
+                            <div class="button-row d-flex mt-4" style="justify-content: center; margin-top: 15px">
+                              <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next"
+                                id="btn-continue2">
+                                Continuar
+                              </button>
+                            </div>
+                          </div>
+                          <div class="multisteps-form__panel" data-animation="scaleIn">
+                            <div class="multisteps-form__content">
+                              <div class="TotalSumary">
+                                <div class="form-row-border-viajeros">
+                                  <div class="flex">
+                                    <h3 class="multisteps-form__title">
+                                      Resumen de
+                                      <span style="color: #ff7500">compra</span>
+                                    </h3>
+                                  </div>
+                                  <div class="min-cart">
+                                    <ul>
+                                      <li>
+                                        La vigencia para su seguro de viaje va desde
+                                        el
+                                        28/09/2024 al 12/10/2024.
+                                      </li>
+                                      <li>
+                                        El tipo de plan que usted ha seleccionado
+                                        es:
+                                        VIAJERO PRO NACIONAL.
+                                      </li>
+                                      <li>
+                                        El valor a pagar por su compra con el
+                                        descuento
+                                        aplicado es de COP 283.459.
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="form-row-border-viajeros carrito-viajeros">
+                                  <div class="flex">
+                                    <img
+                                      src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/carrito.svg/782032ee-d764-c597-c0ee-a0505ea23612?t=1732808723166"
+                                      alt="" style="margin-right: 10px">
+                                    <div>
+                                      <h3 class="multisteps-form__title">
+                                        Tu <span style="color: #ff7500">carrito</span>
+                                      </h3>
+                                      <span class="vigency-data">Vigencia del
+                                        18/09/2024 al 29/10/2024</span>
+                                    </div>
+                                  </div>
+                                  <div id="carrito-viajeros" class="form-row-border-viajeros"></div>
+                                  <div class="min-cart">
+                                    <table style="margin-top: 15px">
+                                      <tbody>
+                                        <tr class="AdultosTotal">
+                                        </tr>
+                                        <tr class="MenorTotal">
+                                        </tr>
+                                        <tr>
+                                          <td id="resultadoCupon"></td>
+                                          <td id="valorDescuento"></td>
+                                        </tr>
+                                        <tr>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="button-row d-flex mt-4 col-12">
+                                <button class="btn btn-primary ml-auto js-btn-next" type="button" title="Next">
+                                  Continuar
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="multisteps-form__panel" data-animation="scaleIn">
+                            <div class="multisteps-form__content">
+                              <div class="form-row-border-viajeros">
+                                <div class="flex">
+                                  <h3 class="multisteps-form__title">
+                                    Finaliza tu <span style="color: #ff7500">pago</span>
+                                  </h3>
+                                </div>
+                                <div class="card-plan-price" style="margin-top: 20px">
+                                  <div class="grid-img">
+                                    <img
+                                      src="https://positivapruebas.com.co/wp-content/uploads/Cotizador-viajeros-positiva-logos-pagos.png">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-row-border-viajeros flex checkout">
+                                <div class="card-plan-title">
+                                  <div class="card-plan-price">
+                                    <p>TOTAL COP</p>
+                                    <p class="titulo-precio">675.392</p>
+                                  </div>
+                                </div>
+                                <div class="card-plan-description" bis_skin_checked="1">
+                                  <p>
+                                    Tu seguro de viaje ha sido activado. En breve
+                                    recibirás un correo con los detalles de tu póliza.
+                                    Si necesitas asistencia, estamos disponibles las 24
+                                    horas, los 7 días de la semana. <br>
+                                    <b>¡Disfruta de tu viaje con total tranquilidad!</b>
+                                  </p>
+                                  <div class="radioContainer radioContainer3">
+                                    <input type="checkbox" id="accept3" name="accept" value="accept3" class="required3">
+                                    <label for="accept3">
+                                      <a href="https://positiva.gov.co/web/guest/tratamiento-de-datos-personales"
+                                        class="orange-text">Terminos y
+                                        condiciones</a>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="button-row d-flex mt-4" style="justify-content: center; margin-top: 15px">
+                                <button class="btn btn-success ml-auto" type="button" title="Send"
+                                  id="enviarFormViajeros">
+                                  Finalizar compra
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal de éxito -->
+              <div id="successModal" class="modal-viajerosGen" style="display: none;">
+                <div class="modal-cont-viajeros">
+                  <div class="modal-header">
+                    <button id="closeModalSuccess" class="close-btn-viajeros">
+                      <img
+                        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg">
+                    </button>
+                  </div>
+                  <div class="modal-text flex">
+                    <img class="imgModal"
+                      src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/error.svg/94c48011-85a1-960c-c797-aae73bc072a1?t=1733237256245">
+                    <span>¡Gracias por preferirnos!</span>
+                    <div class="lineaContainerArchivosDevolucion"></div>
+                    <p>
+                      Hola,
+                      <span id="showName">María Gómez</span>.
+                      <br>
+                      Gracias por tu reciente compra. Eres una parte fundamental de lo
+                      que hacemos en Positiva, y por eso siempre estamos atentos a tus
+                      necesidades, trabajando para ofrecerte soluciones que realmente
+                      importan.
+                    </p>
+                    <p> Su referencia de pago es
+                      <br>
+                      <br>
+                      <span id="showcodeReference">154654167431</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div id="ageModal" class="modal-viajerosGen" style="display: none">
+                <div class="modal-cont-viajeros">
+                  <div class="modal-header">
+                    <button id="closeModalAgeAdults" class="close-btn-viajeros">
+                      <img
+                        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg">
+                    </button>
+                  </div>
+                  <div class="modal-text flex">
+                    <img class="imgModal"
+                      src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/error.svg/94c48011-85a1-960c-c797-aae73bc072a1?t=1733237256245">
+                    <span>Algo salió mal</span>
+                    <div class="lineaContainerArchivosDevolucion"></div>
+                    <p>
+                      Lo sentimos, la edad máxima permitida es de 65 años. Por favor, ajusta la edad
+                      para continuar.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div id="ageModalChildren" class="modal-viajerosGen" style="display: none">
+                <div class="modal-cont-viajeros">
+                  <div class="modal-header">
+                    <button id="closeModalAgeChildren" class="close-btn-viajeros">
+                      <img
+                        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg">
+                    </button>
+                  </div>
+                  <div class="modal-text flex">
+                    <img class="imgModal"
+                      src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/error.svg/94c48011-85a1-960c-c797-aae73bc072a1?t=1733237256245">
+                    <span>Algo salió mal</span>
+                    <div class="lineaContainerArchivosDevolucion"></div>
+                    <p>
+                      Lo sentimos, la edad minima permitida para menores de edad es de 12 años y la
+                      edad máxima es de
+                      17. Por
+                      favor, ajusta la edad para continuar.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div id="modalSixMonths" class="modal-viajerosGen" style="display: none">
+                <div class="modal-cont-viajeros">
+                  <div class="modal-header">
+                    <button id="closeModalSixMonths" class="close-btn-viajeros">
+                      <img
+                        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg">
+                    </button>
+                  </div>
+                  <div class="modal-text flex">
+                    <img class="imgModal"
+                      src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/error.svg/94c48011-85a1-960c-c797-aae73bc072a1?t=1733237256245">
+                    <span>Algo salió mal</span>
+                    <div class="lineaContainerArchivosDevolucion"></div>
+                    <p>
+                      Lo sentimos, la duración máxima permitida para su viaje es de 6
+                      meses.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div id="errorModal" class="modal-viajerosGen" style="display: none">
+                <div class="modal-cont-viajeros">
+                  <div class="modal-header">
+                    <button id="closeModalerrorModal" class="close-btn-viajeros">
+                      <img
+                        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg">
+                    </button>
+                  </div>
+                  <div class="modal-text flex">
+                    <img class="imgModal"
+                      src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/error.svg/94c48011-85a1-960c-c797-aae73bc072a1?t=1733237256245">
+                    <span>Lo sentimos, tu pago ha sido rechazado</span>
+                    <div class="lineaContainerArchivosDevolucion"></div>
+                    <p>
+                      Hubo un problema con la transacción. Te sugerimos verificar los detalles de tu
+                      pago o intentar
+                      nuevamente
+                      con otro método. Si necesitas ayuda, estamos disponibles para asistirte.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div id="errorCuponModal" class="modal-viajerosGen" style="display: none">
+                <div class="modal-cont-viajeros">
+                  <div class="modal-header">
+                    <button id="closeModalErrorCuponModal" class="close-btn-viajeros">
+                      <img
+                        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg">
+                    </button>
+                  </div>
+                  <div class="modal-text flex">
+                    <img class="imgModal"
+                      src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/error.svg/94c48011-85a1-960c-c797-aae73bc072a1?t=1733237256245">
+                    <span>Lo sentimos, error de validación</span>
+                    <div class="lineaContainerArchivosDevolucion"></div>
+                    <p>
+                      El cupón ingresado no es válido. Verifica el código y vuelve a intentarlo. Si el
+                      problema
+                      persiste, comunícate con nuestro equipo de soporte.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div id="MaxViajerosModal" class="modal-viajerosGen" style="display: none">
+                <div class="modal-cont-viajeros">
+                  <div class="modal-header">
+                    <button id="closeMaxViajerosModal" class="close-btn-viajeros">
+                      <img
+                        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg">
+                    </button>
+                  </div>
+                  <div class="modal-text flex">
+                    <img class="imgModal"
+                      src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/error.svg/94c48011-85a1-960c-c797-aae73bc072a1?t=1733237256245">
+                    <span>Algo salió mal</span>
+                    <div class="lineaContainerArchivosDevolucion"></div>
+                    <p>
+                      Lo sentimos, el número máximo de pasajeros permitidos es 10
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div id="emailValidatedError" class="modal-viajerosGen" style="display: none">
+                <div class="modal-cont-viajeros">
+                  <div class="modal-header">
+                    <button id="closeEmailValidatedError" class="close-btn-viajeros">
+                      <img
+                        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg">
+                    </button>
+                  </div>
+                  <div class="modal-text flex">
+                    <img class="imgModal"
+                      src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/error.svg/94c48011-85a1-960c-c797-aae73bc072a1?t=1733237256245">
+                    <span>Error en la validación de correos electrónicos</span>
+                    <div class="lineaContainerArchivosDevolucion"></div>
+                    <p>
+                      Los correos electrónicos ingresados no coinciden. Por favor, verifica que ambos
+                      campos contengan
+                      la misma
+                      dirección de correo para continuar.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div id="emailValidatedStructureError" class="modal-viajerosGen" style="display: none">
+                <div class="modal-cont-viajeros">
+                  <div class="modal-header">
+                    <button id="closeemailValidatedStructureError" class="close-btn-viajeros">
+                      <img
+                        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg">
+                    </button>
+                  </div>
+                  <div class="modal-text flex">
+                    <img class="imgModal"
+                      src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/error.svg/94c48011-85a1-960c-c797-aae73bc072a1?t=1733237256245">
+                    <span>Error en la validación de correos electrónicos</span>
+                    <div class="lineaContainerArchivosDevolucion"></div>
+                    <p>
+                      Los correos electrónicos ingresados no son validos. Por favor, verifica los
+                      correos para
+                      continuar.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div id="AcceptTermsError" class="modal-viajerosGen" style="display: none">
+                <div class="modal-cont-viajeros">
+                  <div class="modal-header">
+                    <button id="closeAcceptTermsError" class="close-btn-viajeros">
+                      <img
+                        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg">
+                    </button>
+                  </div>
+                  <div class="modal-text flex">
+                    <img class="imgModal"
+                      src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/error.svg/94c48011-85a1-960c-c797-aae73bc072a1?t=1733237256245">
+                    <span>Aceptar tratamiento de datos</span>
+                    <div class="lineaContainerArchivosDevolucion"></div>
+                    <p>
+                      Debes aceptar el tratamiento de datos personales para continuar con el proceso.
+                      Por favor, marca
+                      la casilla
+                      correspondiente.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-viajerosGen" id="modalValidations">
+                <div class="modal-cont-viajeros">
+                  <div class="modal-header">
+                    <button id="closeModalValidations" class="close-btn-viajeros"><img
+                        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg"></button>
+                  </div>
+                  <div class="modal-text flex">
+                    <img src="https://positivapruebas.com.co/wp-content/uploads/lupa-error-modal.svg" alt="Icon"
+                      class="imgModal" />
+                    <span>Fecha de expedición no válida</span>
+                    <div class="lineaContainerArchivosDevolucion"></div>
+                    <p>Por favor, asegúrate de que la fecha de expedición del documento sea correcta
+                      para continuar.</p>
+                  </div>
+                </div>
+              </div>
+              <div id="ageRangeModal" class="modal-viajerosGen" style="display: none">
+                <div class="modal-cont-viajeros">
+                  <div class="modal-header">
+                    <button id="closeModalAgeRange" class="close-btn-viajeros">
+                      <img
+                        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg">
+                    </button>
+                  </div>
+                  <div class="modal-text flex">
+                    <img class="imgModal"
+                      src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/error.svg/94c48011-85a1-960c-c797-aae73bc072a1?t=1733237256245">
+                    <span>Edad no permitida</span>
+                    <div class="lineaContainerArchivosDevolucion"></div>
+                    <p>
+                      La edad del adulto debe estar entre 18 y 65 años para continuar.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div id="documentValidationModal" class="modal-viajerosGen" style="display: none">
+                <div class="modal-cont-viajeros">
+                  <div class="modal-header">
+                    <button id="closeDocumentValidationModal" class="close-btn-viajeros">
+                      <img
+                        src="https://positivapruebas.com.co/wp-content/uploads/Formulario-bicbles-positiva-cerrar.svg">
+                    </button>
+                  </div>
+                  <div class="modal-text flex">
+                    <img class="imgModal"
+                      src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/error.svg/94c48011-85a1-960c-c797-aae73bc072a1?t=1733237256245">
+                    <span>No es posible continuar con el proceso</span>
+                    <div class="lineaContainerArchivosDevolucion"></div>
+                    <p>
+                      El tipo y número de documento ingresados no han superado las validaciones
+                      establecidas.
+                      <br><br>
+                      Si tienes alguna inquietud, comunícate con nuestro equipo de soporte para
+                      obtener más información.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div id="toast" class="modal-toast-gen" style="display: none">
+                <div class="modal-cont-viajeros">
+                  <div class="modal-text flex">
+                    <img class="imgModal-toast"
+                      src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/4402997/hexagono-de-tiempos+1.png/aee30a71-a209-719f-bcfe-9cf6d32ca112?t=1733836051059">
+                    <div>
+                      <span>Por favor, completa todos los campos obligatorios antes de
+                        continuar</span>
+                    </div>
+                    <button id="closeModaltToast" class="close-btn-viajeros">
+                      ×
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="js.js"></script>
+  </body>
+</html>
