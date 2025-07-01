@@ -22,7 +22,6 @@ a {
 /* --- Contenedor Principal del Header --- */
 .header-container {
   width: 100%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* --- Contenedor de Margenes --- */
@@ -38,6 +37,7 @@ a {
 
 .color-a {
   background-color: #123249;
+  border-radius: 0px 0px 10px 10px;
 }
 
 /* --- Barra Superior Naranja --- */
@@ -130,7 +130,7 @@ a {
   justify-content: space-between;
   align-items: center;
   padding: 10px 6%;
-  gap: 25px;
+  gap: 105px;
 }
 
 .nav-menu {
@@ -262,8 +262,76 @@ a.sub-nav-item-title {
   height: 24px;
 }
 
+/* Sub menu con 4 columnas */
+.sub-nav-4-columns {
+  display: none;
+}
+
 .sub-colum-nav .sub-nav-links a:not(:first-child) {
   padding: 0px 10px;
+}
+
+.sub-nav a:hover ~ .sub-nav-4-columns,
+.sub-nav .sub-nav-4-columns:hover {
+  display: grid;
+  grid-template-columns: repeat(4, 257px);
+  position: absolute;
+  top: 100%;
+  left: -219.5%;
+  background-color: #f6f8f7;
+  border-radius: 15px;
+  padding: 12px 15px;
+  gap: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.03);
+  z-index: 2;
+}
+
+.sub-nav-4-columns img,
+.nav-blue img {
+  width: 24px;
+}
+.sub-nav-4-columns a,
+.nav-blue .sub-nav-items a {
+  color: #123249;
+  text-align: left;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.sub-nav-4-columns a:hover {
+  color: #ff7500;
+}
+
+/* Items como submenu */
+
+.sub-nav-4-columns a.active-submenu:hover ~ .sub-items-menu,
+.sub-items-menu:hover {
+  display: block;
+}
+
+.sub-items-menu {
+  display: none;
+}
+
+.sub-items-menu li {
+  padding-left: 24px;
+}
+
+.sub-items-menu li a {
+  font-weight: 400;
+}
+
+.nav-blue .sub-nav-items {
+  right: -100%;
+  left: auto;
+}
+
+.nav-blue .sub-columns-nav .sub-colum-nav {
+  gap: 0px;
+}
+
+.nav-blue .sub-nav-items a:hover {
+  color: #ff7500;
 }
 
 /* --- Botón de Búsqueda --- */
