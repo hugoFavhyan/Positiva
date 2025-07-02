@@ -19,6 +19,10 @@ a {
   color: inherit;
 }
 
+ul {
+  list-style: none;
+}
+
 /* --- Contenedor Principal del Header --- */
 .header-container {
   width: 100%;
@@ -85,6 +89,7 @@ a {
 .base-icon-t {
   width: 32px;
   height: 32px;
+  display: block;
 }
 
 .icon-arl {
