@@ -389,16 +389,19 @@ a.sub-nav-item-title {
 }
 
 /* Estilos de la barra de scroll */
-#resultados::-webkit-scrollbar {
+#resultados::-webkit-scrollbar,
+#resultados2::-webkit-scrollbar {
   width: 10px;
 }
 
-#resultados::-webkit-scrollbar-thumb {
+#resultados::-webkit-scrollbar-thumb,
+#resultados2::-webkit-scrollbar-thumb {
   background-color: #ff6b00;
   border-radius: 3px;
 }
 
-#resultados::-webkit-scrollbar-track {
+#resultados::-webkit-scrollbar-track,
+#resultados2::-webkit-scrollbar-track {
   box-shadow: inset 0 0 3px grey;
   border-radius: 3px;
 }
@@ -441,3 +444,288 @@ a.sub-nav-item-title {
 .links_no_mostrados {
   display: none;
 }
+
+/* --- Estilos Menu Responsive --- */
+
+.header-mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .header-desktop {
+    display: none;
+  }
+  .header-mobile {
+    display: block;
+  }
+
+  /* Llamado de iconos */
+  .size-icon-20 {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+  .size-icon-28 {
+    width: 28px;
+  }
+  .icon-search {
+    background-image: url(https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/3099246/icono-busqueda-positiva-resp.svg/78fd39f3-c949-527c-1066-d3a60fa6df32?t=1751558583814);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .icon-menu {
+    background-image: url(https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/3099246/icono-menu-positiva-resp.svg/01bf2118-180a-a243-d20c-194c6dedded4?t=1751558584108);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .icon-close {
+    background-image: url(https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/3099246/icono-cerrar-positiva-resp.svg/4bfbfe48-72ba-5f09-3a8a-68785cd6a8d8?t=1751558583916);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .icon-more {
+    background-image: url(https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/3099246/icono-mas-positiva-resp.svg/2fe0579c-0371-986d-f5ef-ce74b83e0475?t=1751558584017);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .icon-size-rps {
+    background-size: 25px;
+  }
+
+  .base-icon-rps {
+    width: 25px;
+    height: 25px;
+    display: block;
+  }
+
+  /* Estilos generales */
+
+  .header-mobile {
+    width: 100%;
+  }
+
+  /* Top Bar */
+  .mobile-top {
+    width: 100%;
+    background-color: #ff7500;
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  /* Estilos basicos de los iconos */
+  .icon-style-top {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Estilos del logo */
+  .logo-mobile {
+    display: block;
+    width: 123px;
+  }
+  .logo-mobile img {
+    width: 100%;
+  }
+
+  /* Menu hamburguesa */
+  .menu-close {
+    display: none;
+  }
+
+  .menu-mobile.show {
+    display: block;
+  }
+
+  /* --- Estilos del Menu --- */
+
+  .menu-mobile-nav {
+    width: 100%;
+    background-color: #123249;
+    border-radius: 0 0 10px 10px;
+    padding: 15px 10px;
+    display: none;
+  }
+
+  .menu-mobile-nav.show {
+    display: block;
+  }
+
+  .menu-mobile-nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .menu-title-rps {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 12px;
+  }
+
+  .separator-rps {
+    width: 0.5px;
+    background-color: #ffffff;
+    height: 25px;
+  }
+
+  /* --- Estilos de los submenus */
+
+  ul.submenu-item-rps {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    position: absolute;
+    background-color: #ffffff;
+    width: 99%;
+    left: 0.5%;
+    padding: 12px 15px;
+    border-radius: 0 0 15px 15px;
+    margin-top: 15px;
+  }
+
+  li.first-title-menu-rps {
+    font-size: 18px;
+    font-weight: 600;
+    color: #123249;
+    width: 100%;
+  }
+
+  li.first-title-menu-rps a {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  li.first-title-menu-rps a i {
+    font-size: 10px;
+    color: #ff7500;
+  }
+
+  li.items-submenu-rps {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  li.items-submenu-rps a {
+    padding: 0 10px;
+  }
+
+  li.items-submenu-rps a i {
+    margin-right: 8px;
+    color: #ff7500;
+  }
+
+  /* Segundos titulos del submenu */
+  li.second-title-menu-rps {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 10px;
+    color: #123249;
+  }
+
+  li.second-title-menu-rps a i {
+    margin-right: 8px;
+    color: #ff7500;
+    font-size: 12px;
+  }
+
+  ul.second-submenu-rps {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 10px;
+    gap: 8px;
+  }
+
+  ul.second-submenu-rps li a {
+    font-size: 14px;
+    font-weight: 500;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+
+  ul.second-submenu-rps li a img {
+    margin-right: 8px;
+  }
+
+  /* Submenu sin iconos */
+  ul.no-icons-rps {
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    gap: 25px;
+    max-height: 350px;
+    overflow-y: scroll;
+  }
+
+  ul.no-icons-rps li ul {
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+  }
+
+  ul.no-icons-rps li a i {
+    margin-left: 8px;
+  }
+
+  ul.submenu-hidden {
+    display: none;
+  }
+
+  ul.show {
+    display: flex;
+  }
+
+  /* Buscador responsive */
+
+  .buscador-container-rps {
+    position: relative;
+    width: 100%;
+    background-color: #123249;
+    padding: 15px;
+    display: none;
+  }
+
+  .buscador-container-rps.show-buscador {
+    display: block;
+  }
+
+  .buscador-container-rps .buscadorPositiva input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #resultados2 {
+    width: 99%;
+    max-width: 99%;
+    display: none;
+    padding: 25px 30px 25px 30px;
+    position: absolute;
+    top: 100%;
+    left: 0.5%;
+    background-color: white !important;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 999;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid #ff6b00;
+    border-radius: 10px;
+    margin-top: 15px;
+  }
+}
+/* --- Finalizacion del Responsive ---- */

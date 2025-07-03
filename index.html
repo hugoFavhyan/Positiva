@@ -414,60 +414,301 @@
             <!-- Parte naranja del Menu Mobile -->
             <div class="mobile-top">
                 <!-- Boton de busqueda -->
-                <button class="search-toggle"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="search-toggle icon-style-top"><i class="icon-search size-icon-20"></i></button>
 
                 <!-- Logo Mobile -->
-                <a href="#"><img src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/20123/1966604/Logo+Positiva.svg/1a8aa6bd-967d-7b71-988e-7bc57dbd2092?t=1750947739488" alt="Positiva Compañía de Seguros Logo"></a>
+                <a href="#" class="logo-mobile"><img src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/20123/1966604/Logo+Positiva.svg/1a8aa6bd-967d-7b71-988e-7bc57dbd2092?t=1750947739488" alt="Positiva Compañía de Seguros Logo"></a>
 
                 <!-- Botones del Menu hamburguesa -->
                 <div class="menu-hamburguesa">
-                    <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
-                    <button class="menu-close"><i class="fa-solid fa-xmark"></i></button>
+                    <button class="menu-toggle icon-style-top"><i class="icon-menu size-icon-20"></i></button>
+                    <button class="menu-close icon-style-top"><i class="icon-close size-icon-20"></i></button>
                 </div>
             </div>
 
             <!-- Parte azul del Menu Mobile -->
              <div class="menu-mobile">
                 <!-- Buscador -->
+                    <div class="buscador-container-rps">
+                        <!-- INICIO: CÓDIGO DEL BUSCADOR -->
+                        <div class="buscadorPositiva">
+                            <input title="Buscador de positiva" type="text" placeholder="Buscar" id="inputBusqueda2"
+                                tabindex="1" />
+                            <!-- La lista de resultados se generará aquí -->
+                            <div id="resultados2"></div>
+                        </div>
 
+                        <!-- Este div está oculto, pero el JavaScript lo usa para encontrar los enlaces buscables -->
+                        <div class="links_no_mostrados">
+                            <a class="buscable" href="/web/positiva/seguros">Seguros de vida para ti y tu familia</a>
+                            <a class="buscable" href="/web/positiva/accidentes-personales-individual">Accidentes personales individuales</a>
+                            <a class="buscable" href="/web/positiva/seguro-de-viajero">Seguro Viajero Positiva</a>
+                            <a class="buscable" href="/web/positiva/bici-usuario">Biciusuarios</a>
+                            <a class="buscable" href="/web/positiva/positiva-vida-familia-anual-mas">Seguro vida anual/más</a>
+                            <a class="buscable" href="/web/positiva/vida-individual-deudor">Vida individual deudor</a>
+                            <a class="buscable" href="/web/positiva/largo-plazo-inversion">Largo plazo inversión</a>
+                            <a class="buscable" href="/web/positiva/ahorro-y-vida">Seguro ahorro y vida Positiva</a>
+                            <a class="buscable" href="/web/positiva/inversion-positiva">Seguro inversión Positiva</a>
+                            <a class="buscable" href="/web/positiva/rentas-vitalicias">Rentas Vitalicias</a>
+                            <a class="buscable" href="/web/positiva/renta-vitalicia-inmobiliaria">Seguro renta vitalicia inmobiliaria inmediata</a>
+                            <a class="buscable" href="/web/positiva/exequias">Exequias</a>
+                            <a class="buscable" href="/web/positiva/beps-beneficio-economico-periodico">BEPS - Beneficio Económico Periódico</a>
+                            <a class="buscable" href="/web/positiva/seguros-de-vida-colectivos">Seguros de vida corporativos</a>
+                            <a class="buscable" href="/web/positiva/vigila-tu-vida">Vigila tu vida</a>
+                            <a class="buscable" href="/web/positiva/vida-grupo-convenio-uso">Vida grupo Convenio uso</a>
+                            <a class="buscable" href="/web/positiva/vida-grupo-eleccion-polular">Vida grupo elección popular</a>
+                            <a class="buscable" href="/web/positiva/vida-grupo-deudores">Vida grupo deudores</a>
+                            <a class="buscable" href="/web/positiva/vida-grupo-integral">Vida grupo integral</a>
+                            <a class="buscable" href="/web/positiva/accidentes-personales-complemento-riesgos-laborales">Accidentes personales complemento riesgos laborales</a>
+                            <a class="buscable" href="/web/positiva/accidentes-personales-colectivos">Accidentes personales colectivos</a>
+                            <a class="buscable" href="/web/positiva/accidente-estudiantil-generacion-p">Accidente estudiantil generación Positiva</a>
+                            <a class="buscable" href="/web/positiva/seguro-de-desempleo">Seguro de desempleo</a>
+                            <a class="buscable" href="/web/positiva/conmutacion-pensional">Conmutación pensional</a>
+                            <a class="buscable" href="/web/positiva/seguro-exequial-colectivo-positiva">Seguro exequial colectivo Positiva</a>
+                            <a class="buscable" href="/web/positiva/cirugia-positiva%C2%A0">Cirugía positiva</a>
+                            <a class="buscable" href="/web/positiva/arl">ARL</a>
+                            <a class="buscable" href="/web/positiva/reporta-tus-accidentes-de-trabajo-y-enfermedades-laborales">Reporta tus accidentes de trabajo y enfermedades laborales</a>
+                            <a class="buscable" href="/web/positiva/reconocimiento-de-reembolsos-por-prestaciones-asistenciales">Reconocimiento de reembolsos por prestaciones asistenciales</a>
+                            <a class="buscable" href="/web/positiva/como-reportar-un-accidente-de-trabajo-o-enfermedad-laboral">¿Cómo reportar un accidente de trabajo o enfermedad laboral?</a>
+                            <a class="buscable" href="/web/positiva/como-afiliarme-a-la-arl">¿Cómo afiliarme a la ARL?</a>
+                            <a class="buscable" href="/web/positiva/novedades_laborales_de_trabajadores_dependientes">Novedades laborales de trabajadores dependientes</a>
+                            <a class="buscable" href="/web/positiva/reclasificacion-de-la-clase-de-riesgo-laboral-de-las-empresas-afiliadas">Reclasificación de la clase de riesgo laboral de las empresas afiliadas</a>
+                            <a class="buscable" href="/web/positiva/calificacion-de-origen-y-perdida-de-capacidad-laboral-de-un-accidente-o-enfermedad">Calificación de origen y pérdida de capacidad laboral de un accidente o enfermedad</a>
+                            <a class="buscable" href="/web/positiva/autorizacion-de-servicios-de-salud-al-trabajador-que-sufra-un-accidente-de-trabajo-y/o-enfermedad-laboral">Autorización de servicios de salud para ARL, póliza de salud y póliza escolar.</a>
+                            <a class="buscable" href="/web/positiva/reconocimiento-y-pago-de-pension-por-invalidez">Reconocimiento y pago de pensión por invalidez</a>
+                            <a class="buscable" href="/web/positiva/reconocimiento-y-pago-de-pension-de-sobreviviente">Reconocimiento y pago de pensión de sobreviviente</a>
+                            <a class="buscable" href="/web/positiva/reconocimiento-y-pago-de-auxilio-funerario">Reconocimiento y pago de auxilio funerario</a>
+                            <a class="buscable" href="/web/positiva/reconocimiento-de-incapacidad-temporal">Reconocimiento de incapacidad temporal</a>
+                            <a class="buscable" href="/web/positiva/reconocimiento-de-reembolsos-por-prestaciones-asistenciales">Reconocimiento de prestaciones asistenciales</a>
+                            <a class="buscable" href="/web/positiva/reconocimiento-y-pago-de-indemnizacion-por-incapacidad-permanente-parcial">Reconocimiento y pago de indemnización por incapacidad permanente parcial</a>
+                            <a class="buscable" href="/web/positiva/paga-aportes-laborales">Paga aportes laborales</a>
+                            <a class="buscable" href="/web/positiva/pensionados">Pensionados</a>
+                            <a class="buscable" href="/web/positiva/intermediarios">Intermediarios Positiva</a>
+                            <a class="buscable" href="/web/positiva/requisitos-y-formulario-de-vinculacion">Requisitos y formulario de vinculación</a>
+                            <a class="buscable" href="/web/positiva/idoneidad">Idoneidad</a>
+                            <a class="buscable" href="/web/positiva/contratacion-y-proveedores">Contratación y proveedores</a>
+                            <a class="buscable" href="/web/positiva/proveedores-certificado-de-impuesto">Certificado de impuesto</a>
+                            <a class="buscable" href="/web/positiva/reembolso">Reembolso</a>
+                            <a class="buscable" href="/web/positiva/escuelas-de-formacion-positiva-cuida">Escuelas de formación positiva cuida</a>
+                            <a class="buscable" href="/web/positiva/contratacion">Contratación</a>
+                            <a class="buscable" href="/web/positiva/contratacion_carpetas">Contratación carpetas</a>
+                            <a class="buscable" href="/web/positiva/proceso-de-contratacion">Proceso de contratación</a>
+                            <a class="buscable" href="/web/positiva/plan-anual-de-adquisiciones">Plan anual de adquisiciones</a>
+                            <a class="buscable" href="/web/positiva/envivo">EnVivo</a>
+                            <a class="buscable" href="/web/positiva/pago-polizas-de-vida">Realiza tus pagos en línea</a>
+                            <a class="buscable" href="/web/positiva/como-adquirir-mi-seguro-de-vida">Cómo adquirir mi seguro de vida</a>
+                            <a class="buscable" href="/web/positiva/como-reclamar-mi-seguro-de-vida">Cómo reclamar mi seguro de vida</a>
+                            <a class="buscable" href="/web/positiva/preguntas-frecuentes">Preguntas frecuentes</a>
+                            <a class="buscable" href="/web/positiva/plataforma-estrategica">Plataforma Estratégica</a>
+                            <a class="buscable" href="/web/positiva/presupuesto">Presupuesto</a>
+                            <a class="buscable" href="/web/positiva/presidencia-y-oficinas">Presidencia y oficinas</a>
+                            <a class="buscable" href="/web/positiva/mapa-descriptivo-de-procesos">Mapa Descriptivo de Procesos</a>
+                            <a class="buscable" href="/web/positiva/estructura-organica">Estructura Orgánica - Organigramas</a>
+                            <a class="buscable" href="/web/positiva/politicas-de-privacidad-y-condiciones-de-uso">Políticas de privacidad y condiciones de uso</a>
+                            <a class="buscable" href="/web/positiva/aviso-cookies">Qué son las cookies</a>
+                            <a class="buscable" href="/web/positiva/tratamiento-de-datos-personales">Tratamiento de datos personales</a>
+                            <a class="buscable" href="/web/positiva/invitaciones-publicas">Invitaciones públicas</a>
+                            <a class="buscable" href="/web/positiva/invitaciones-publicas-documentos">Invitaciones públicas - Documentos</a>
+                            <a class="buscable" href="/web/positiva/invitacion-publica-nº1-2023">Invitación pública Nº1 - 2023</a>
+                            <a class="buscable" href="/web/positiva/invitacion-de-meritos-nro.-04">Invitación de méritos Nro. 04</a>
+                            <a class="buscable" href="/web/positiva/invitaciones-de-meritos">Invitaciones de Méritos</a>
+                            <a class="buscable" href="/web/positiva/invitaciones-de-meritos-documentos">Invitación de mérito 2021</a>
+                            <a class="buscable" href="/web/positiva/proteccion">Protección, Derechos de Autor y propiedad intelectual</a>
+                            <a class="buscable" href="/web/positiva/canales-de-atencion">Canales de atención y servicios</a>
+                            <a class="buscable" href="/web/positiva/denuncias-de-acoso-sexual-y/o-discriminacion">Denuncias acoso sexual y/o discriminación</a>
+                            <a class="buscable" href="/web/positiva/red-asistencial-polizas-de-salud">Red asistencial pólizas de salud</a>
+                            <a class="buscable" href="/web/positiva/mapa-del-sitio">Mapa del sitio</a>
+                            <a class="buscable" href="/web/positiva/plan-anticorrupcion-y-de-atencion-al-ciudadano">Plan anticorrupción y de atención al ciudadano</a>
+                            <a class="buscable" href="/web/positiva/cartillas">Cartillas de educación financiera Positivas</a>
+                            <a class="buscable" href="/web/positiva/capsulas-financieras">Cápsulas financieras</a>
+                            <a class="buscable" href="/web/positiva/articulos">Artículos</a>
+                            <a class="buscable" href="/web/positiva/infografias">Infografías</a>
+                            <a class="buscable" href="/web/positiva/podcast">Podcast</a>
+                            <a class="buscable" href="/web/positiva/normatividad">Normatividad</a>
+                            <a class="buscable" href="/web/positiva/taller-y/o-conferencias">Talleres y/o conferencias</a>
+                            <a class="buscable" href="/web/positiva/actividades-didacticas">Actividades didácticas</a>
+                            <a class="buscable" href="/web/positiva/tramites-vida-individual">Trámites vida individual</a>
+                            <a class="buscable" href="/web/positiva/tramites-de-siniestros">Trámites de Siniestros</a>
+                            <a class="buscable" href="/web/positiva/tramites-vida-grupo">Trámites vida grupo</a>
+                            <a class="buscable" href="/web/positiva/tramites-sarlaft">Trámites Sarlaft</a>
+                            <a class="buscable" href="/web/positiva/directorio-de-entidades">Directorio de entidades</a>
+                            <a class="buscable" href="/web/positiva/vicepresidencias">Vicepresidencias</a>
+                        </div>
+                        <!-- FIN: CÓDIGO DEL BUSCADOR -->
+                    </div>
 
                 <!-- Menu mobile -->
                  <nav class="menu-mobile-nav">
                     <ul>
                         <li>
-                            <a href="#"><img src="" alt="">ARL</a>
+                            <a href="#" class="menu-title-rps"><i class="icon-arl base-icon-rps icon-size-rps"></i>ARL</a>
                             <!-- Sub Menu - ARL- Mobile -->
-                            <ul>
-                                <li class="mobile-firts-title-menu"><a href="#">Riesgos laborales<i class="fa-solid fa-angles-right"></i></a></li>
-                                <li><a href="#"><i class="fa-solid fa-angles-right"></i>Portal Transaccional ARL</a></li>
-                                <li><a href="#"><i class="fa-solid fa-angles-right"></i>Reportar accidente o enfermedad</a></li>
-                                <li><a href="#"><i class="fa-solid fa-angles-right"></i>Pagar o solicitar devolución</a></li>
-                                <li><a href="#"><i class="fa-solid fa-angles-right"></i>Soluciones digitales</a></li>
-                                <li><a href="#"><i class="fa-solid fa-angles-right"></i>Descargar derechos y deberes de los afiliados SGRL</a></li>
+                            <ul class="submenu-item-rps">
+                                <li class="first-title-menu-rps"><a href="#">Riesgos laborales<i class="fa-solid fa-angles-right"></i></a></li>
+                                <li class="separator-sub-nav"></li>
+                                <li class="items-submenu-rps"><a href="#"><i class="fa-solid fa-angles-right"></i>Portal Transaccional ARL</a></li>
+                                <li class="items-submenu-rps"><a href="#"><i class="fa-solid fa-angles-right"></i>Reportar accidente o enfermedad</a></li>
+                                <li class="items-submenu-rps"><a href="#"><i class="fa-solid fa-angles-right"></i>Pagar o solicitar devolución</a></li>
+                                <li class="items-submenu-rps"><a href="#"><i class="fa-solid fa-angles-right"></i>Soluciones digitales</a></li>
+                                <li class="items-submenu-rps"><a href="#"><i class="fa-solid fa-angles-right"></i>Descargar derechos y deberes de los afiliados SGRL</a></li>
                             </ul>
                         </li>
+                        <li class="separator-rps"></li>
                         <li>
-                            <a href="#"><img src="" alt="">SEGUROS</a>
+                            <a href="#" class="menu-title-rps"><i class="icon-seg base-icon-rps icon-size-rps"></i>SEGUROS</a>
                             <!-- Sub Menu - SEGUROS - Mobile -->
-                             <ul>
-                                <li class="mobile-firts-title-menu"><a href="">Seguros de vida corporativos<i class="fa-solid fa-angles-right"></i></a></li>
-                                <li><a href=""><i class="fa-solid fa-angles-right"></i>Vida grupo</a></li>
-                                <li><a href=""><i class="fa-solid fa-angles-right"></i>Accidentes personales</a></li>
-                                <li><a href=""><i class="fa-solid fa-angles-right"></i>Otros productos</a></li>
-                                <li class="mobile-firts-title-menu"><a href="">Seguros de vida para ti y tu familia<i class="fa-solid fa-angles-right"></i></a></li>
-                                <li><a href=""><i class="fa-solid fa-angles-right"></i>Vida individual</a></li>
-                                <li><a href=""><i class="fa-solid fa-angles-right"></i>Accidentes personales</a></li>
-                                <li><a href=""><i class="fa-solid fa-angles-right"></i>Otros productos</a></li>
+                             <ul class="submenu-item-rps">
+                                <li class="first-title-menu-rps"><a href="">Seguros de vida corporativos<i class="fa-solid fa-angles-right"></i></a></li>
+                                <li class="separator-sub-nav"></li>
+                                <li class="second-title-menu-rps">
+                                    <a href=""><i class="fa-solid fa-angles-right"></i>Vida grupo</a>
+                                    <ul class="second-submenu-rps">
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1.png/fec2b30a-259c-46f7-903b-53fe9ad86f48?t=1734746119783" class="menuSeguro-sublist-img" alt="">Vigila tu vida</a></li>
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%281%29.png/80116009-7d5b-1eee-72df-bfa47ca51fae?t=1734746120168" alt="">Vida grupo Convenio uso</a></li>
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%282%29.png/c64862a4-62bb-cf58-c1b1-925e218f1953?t=1734746120635" alt="">Vida grupo elección popular</a></li>
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%283%29.png/81098f37-b521-cc22-1a82-6032c334dc42?t=1734746121015" alt="">Vida grupo deudores</a></li>
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%284%29.png/1af975b8-0138-ad63-9004-0a2302590ed8?t=1734746121386" alt="">Vida grupo integral</a></li>
+                                        <li><a href=""><img src="https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/3099246/icono-beneficios-por-incapacidad-positiva.svg/f05ae23a-fb13-9049-7a40-c8bced5bca5a?t=1750975313831" alt="">Beneficios por incapacidad</a></li>
+                                    </ul>
+                                </li>
+                                <li class="second-title-menu-rps">
+                                    <a href=""><i class="fa-solid fa-angles-right"></i>Accidentes personales</a>
+                                    <ul class="second-submenu-rps">
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1.png/fec2b30a-259c-46f7-903b-53fe9ad86f48?t=1734746119783" alt=""></i>Accidentes personales colectivos</a></li>
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%281%29.png/80116009-7d5b-1eee-72df-bfa47ca51fae?t=1734746120168" alt=""></i>Accidente Estudiantil Generación P</a></li>
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%282%29.png/c64862a4-62bb-cf58-c1b1-925e218f1953?t=1734746120635" alt=""></i>AP complemento riesgos laborales</a></li>
+                                    </ul>
+                                </li>
+                                <li class="second-title-menu-rps">
+                                    <a href=""><i class="fa-solid fa-angles-right"></i>Otros productos</a>
+                                    <ul class="second-submenu-rps">
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%285%29.png/6b0b9f7e-4fb1-576e-4f72-6341c992c2a4?t=1734746121741" alt="">Seguro de desempleo</a></li>
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%286%29.png/df862c12-cf7b-d716-0a35-61051df2c101?t=1734746118653" alt="">Conmutación pensional</a></li>
+                                        <li><a href="#"><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%287%29.png/61964bcc-4c59-c30a-6fbb-e6964306dabc?t=1734746119051" alt="">Exequias</a></li>
+                                        <li><a href="#"><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%288%29.png/32f5bc32-b37f-9574-4380-288edb66925a?t=1734746119425" alt="">Cirugía positiva</a></li>
+                                    </ul>
+                                </li>
+                                <li class="first-title-menu-rps"><a href="">Seguros de vida para ti y tu familia<i class="fa-solid fa-angles-right"></i></a></li>
+                                <li class="separator-sub-nav"></li>
+                                <li class="second-title-menu-rps">
+                                    <a href=""><i class="fa-solid fa-angles-right"></i>Vida individual</a>
+                                    <ul class="second-submenu-rps">
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%283%29+%281%29.png/20d5b4e4-9ea0-b93d-9fe9-b207b3c68bd6?t=1734748782866" class="menuSeguro-sublist-img" alt="">Positiva vida anual / más</a></li>
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%284%29+%281%29.png/a23da41c-abe3-f61a-8244-2579c0d3b7cd?t=1734748783248" alt="">Vida deudor</a></li>
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%285%29+%281%29.png/80669d3b-9c47-4966-606f-0cbbae8c321e?t=1734748783709" alt="">Largo plazo inversión</a></li>
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%286%29+%281%29.png/111b9e0d-7f1f-60b1-64cf-4791e5685b97?t=1734748784137" alt="">Ahorro y vida</a></li>
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/eAye7i.tif.png/e9fd43dc-bec6-9742-e5f6-a252ee7e39f6?t=1734748784552" alt="">Inversión Positiva / Total</a></li>
+                                    </ul>
+                                </li>
+                                <li class="second-title-menu-rps">
+                                    <a href=""><i class="fa-solid fa-angles-right"></i>Accidentes personales</a>
+                                    <ul class="second-submenu-rps">
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%289%29.png/d88b5803-17d4-fc0b-8fdb-598e7f215b1a?t=1734748785804" alt=""></i>Accidentes personales individuales</a> </li>
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%281%29+%281%29.png/ded3b830-c02a-389b-d218-c42d07f2113b?t=1734748782067" alt=""></i>Seguro de viajeros</a></li>
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%282%29+%281%29.png/d912a5d6-256e-5cfe-166a-177e65281c86?t=1734748782446" alt=""></i>Bicibles</a></li>
+                                    </ul>
+                                </li>
+                                <li class="second-title-menu-rps">
+                                    <a href=""><i class="fa-solid fa-angles-right"></i>Otros productos</a>
+                                    <ul class="second-submenu-rps">
+                                        <li> <a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%286%29.png/df862c12-cf7b-d716-0a35-61051df2c101?t=1734746118653" alt="">Rentas vitalicias</a></li>
+                                        <li><a href=""><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%287%29+%281%29.png/0f702ff1-c1b7-32d9-fa85-02733a2c2984?t=1734748784960" alt="">Rentas vitalicias inmobiliaria</a></li>
+                                        <li><a href="#"><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%287%29.png/61964bcc-4c59-c30a-6fbb-e6964306dabc?t=1734746119051" alt="">Exequias individuales</a></li>
+                                        <li><a href="#"><img src="https://positiva.gov.co/documents/2978451/3178077/Capa_1+%288%29+%281%29.png/e626e6f2-b1b5-549b-0503-36f0d8babaa3?t=1734748785363" alt="">BEPS</a></li>
+                                    </ul>
+                                </li>
                              </ul>
                         </li>
+                        <li class="separator-rps"></li>
                         <li>
-                            <a href="#"><img src="" alt="">ACCAI</a>
+                            <a href="#" class="menu-title-rps"><i class="icon-accai base-icon-rps icon-size-rps"></i>ACCAI</a>
+                            <ul class="submenu-item-rps">
+                                <li class="first-title-menu-rps"><a href="#">ACCAI</a></li>
+                                <li class="separator-sub-nav"></li>
+                                <li class="items-submenu-rps"><a href=""><i class="fa-solid fa-angles-right"></i>(Administradora del Componente Complementario de Ahorro Individual)</a></li>
+                            </ul>
                         </li>
+                        <li class="separator-rps"></li>
                         <li>
-                            <a href="#"><img src="" alt="">PENSIONADOS</a>
+                            <a href="#" class="menu-title-rps"><i class="icon-pens base-icon-rps icon-size-rps"></i>PENSIONADOS</a>
+                            <ul class="submenu-item-rps">
+                                <li class="first-title-menu-rps"><a href="#">Pensionados<i class="fa-solid fa-angles-right"></i></a></li>
+                                <li class="separator-sub-nav"></li>
+                                <li class="items-submenu-rps"><a href=""><i class="fa-solid fa-angles-right"></i>Ingreso al portal</a></li>
+                                <li class="items-submenu-rps"><a href=""><i class="fa-solid fa-angles-right"></i>Solicitud de Certificado de Pensión</a></li>
+                                <li class="items-submenu-rps"><a href=""><i class="fa-solid fa-angles-right"></i>Solicitud de desprendible de nomina</a></li>
+                                <li class="items-submenu-rps"><a href=""><i class="fa-solid fa-angles-right"></i>Solicitud de Certificación de ingresos</a></li>
+                                <li class="items-submenu-rps"><a href=""><i class="fa-solid fa-angles-right"></i>Cambio de EPS</a></li>
+                                <li class="items-submenu-rps"><a href=""><i class="fa-solid fa-angles-right"></i>Sustitución pensional en conmutación y rentas vitalicias</a></li>
+                                <li class="items-submenu-rps"><a href=""><i class="fa-solid fa-angles-right"></i>Pago de mesadas para residentes en el exterior</a></li>
+                                <li class="items-submenu-rps"><a href=""><i class="fa-solid fa-angles-right"></i>Apertura de cuenta para pago pensional</a></li>
+                                <li class="items-submenu-rps"><a href=""><i class="fa-solid fa-angles-right"></i>Cancelación de descuentos por préstamos</a></li>
+                                <li class="items-submenu-rps"><a href=""><i class="fa-solid fa-angles-right"></i>Pago de beneficios BEP</a></li>
+                                <li class="items-submenu-rps"><a href=""><i class="fa-solid fa-angles-right"></i>Reporte de novedades</a></li>
+                            </ul>
                         </li>
+                        <li class="separator-rps"></li>
                         <li>
-                            <a href="#"><img src="" alt="">MAS</a>
+                            <a href="#" class="menu-title-rps"><i class="icon-more base-icon-rps icon-size-rps"></i>MAS</a>
+                            <ul class="submenu-item-rps no-icons-rps">
+                                <li><a href="#" class="">Transparencia y acceso a la información pública</a></li>
+                                <li>
+                                    <a href="#" class="">Atención y servicio a la ciudadanía<i class="fa-solid fa-chevron-down"></i></a>
+                                    <ul class="submenu-hidden">
+                                        <li><a href="#" class="">Deberes y Derechos del ciudadano</a></li>
+                                        <li>
+                                            <a href="#" class="">Sistema de atención al consumidor financiero<i class="fa-solid fa-chevron-down"></i></a>
+                                            <ul class="submenu-hidden">
+                                                <li><a href="#" class="">Defensor del consumidor</a></li>
+                                                <li><a href="#" class="">Política de atención y servicio al ciudadano</a></li>
+                                                <li><a href="#" class="">PQRD</a></li>
+                                                <li><a href="#" class="">Educación financiera</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#" class="">Participación ciudadana</a></li>
+                                        <li><a href="#" class="">Denuncia actos de fraude o corrupción</a></li>
+                                        <li><a href="#" class="">Denuncias de acoso y discriminación</a></li>
+                                        <li><a href="#" class="">Modelo asistencial</a></li>
+                                        <li><a href="#" class="">Gestión de continuidad de negocio</a></li>
+                                        <li>
+                                            <a href="" class="">Avisos y edictos<i class="fa-solid fa-chevron-down"></i></a>
+                                            <ul class="submenu-hidden">
+                                                <li><a href="#" class="">Edictos recaudo y cartera</a></li>
+                                                <li><a href="#" class="">Edictos riesgo laborales</a></li>
+                                                <li><a href="#" class="">Edictos conmutaciones pensionales</a></li>
+                                                <li><a href="#" class="">Edictos renta vitalicia</a></li>
+                                                <li><a href="#" class="">Cobro coactivo</a></li>
+                                                <li><a href="#" class="">Devolución de PQRD</a></li>
+                                                <li><a href="#" class="">Devolución de siniestro</a></li>
+                                                <li><a href="#" class="">Notificaciones y dictámenes de calificación</a></li>
+                                                <li><a href="#" class="">Notificaciones de asuntos disciplinarios</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#" class="">Inclusión positiva y accesibilidad web</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="">Participa<i class="fa-solid fa-chevron-down"></i></a>
+                                    <ul class="submenu-hidden">
+                                        <li><a href="#" class="">Información de niños y adolecentes</a></li>
+                                        <li><a href="#" class="">Conoce más sobre participa</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="">Canales de atención<i class="fa-solid fa-chevron-down"></i></a>
+                                    <ul class="submenu-hidden">
+                                        <li><a href="#" class="">Puntos de atención</a></li>
+                                        <li><a href="#" class="">Chat</a></li>
+                                        <li><a href="#" class="">Red asistencial de urgencias para AP y ARL</a></li>
+                                        <li><a href="#" class="">PQRD</a></li>
+                                        <li><a href="#" class="">Sucursales Positiva</a></li>
+                                        <li><a href="#" class="">Portal transaccional</a></li>
+                                        <li><a href="#" class="">Denuncias de fraude o corrupción</a></li>
+                                        <li><a href="#" class="">Denuncias d acoso</a></li>
+                                        <li><a href="#" class="">Conoce más sobre nuestros canales de atención</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                  </nav>
