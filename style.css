@@ -1,0 +1,731 @@
+/* --- Estilos Generales y Tipografía --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  /* Color de fondo para que el header se distinga */
+  background-color: #f4f4f4;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* --- Contenedor Principal del Header --- */
+.header-container {
+  width: 100%;
+}
+
+/* --- Contenedor de Margenes --- */
+
+.width-container {
+  width: 100%;
+}
+
+/* --- Colores de los contenderes --- */
+.color-n {
+  background-color: #ff7500;
+}
+
+.color-a {
+  background-color: #123249;
+  border-radius: 0px 0px 10px 10px;
+}
+
+/* --- Barra Superior Naranja --- */
+.top-bar {
+  max-width: 1440px;
+  margin: auto;
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 105px;
+  padding: 8px 4%;
+  /* Padding para espacio interior */
+}
+
+.logo-container img {
+  height: 44px;
+  /* Ajusta la altura del logo */
+  vertical-align: middle;
+}
+
+.top-links {
+  display: flex;
+  align-items: center;
+  gap: 52px;
+  /* Espacio entre elementos */
+}
+
+.top-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* Espacio entre icono y texto */
+  font-weight: 800;
+  /* El texto se ve más grueso que 400 en la imagen */
+  font-size: 15px;
+  transition: opacity 0.3s;
+}
+
+.top-links a:hover {
+  opacity: 0.8;
+}
+
+/* --- Crecion de iconos para el Top Bar --- */
+.base-icon-t {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+
+.icon-arl {
+  background-image: url(https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/3099246/icono-arl-positiva-header.svg/6c41883e-23eb-aabb-a38f-0ea4ecdd93f3?t=1750951173314);
+  background-size: 32px 32px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.icon-seg {
+  background-image: url(https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/3099246/icono-seguros-positiva-header.svg/85a34c7b-b675-a9b7-eea2-085049b7e6f8?t=1750951173091);
+  background-size: 32px 32px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.icon-accai {
+  background-image: url(https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/3099246/icono-accai-positiva-header.svg/83ddaa30-04fe-0b09-8fdb-e6ef664307ab?t=1750951173385);
+  background-size: 32px 32px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.icon-pens {
+  background-image: url(https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/3099246/icono-pensionados-positiva-header.svg/13829e41-ef3e-8084-f45d-b0c2b5b7e314?t=1750951173210);
+  background-size: 32px 32px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.top-links .separator {
+  width: 1.5px;
+  height: 25px;
+  background-color: #ffffff;
+}
+
+/* --- Barra de Navegación Principal Azul --- */
+.main-nav {
+  max-width: 1440px;
+  margin: auto;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 6%;
+  gap: 105px;
+}
+
+.nav-menu {
+  width: calc(100% - 144px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  /* Espacio entre opciones del menú */
+}
+
+.nav-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* Espacio entre texto y flecha */
+  font-size: 16px;
+  font-weight: 400;
+  padding: 10px 0;
+  transition: opacity 0.3s;
+  text-align: center;
+}
+
+.nav-menu a:hover {
+  opacity: 0.8;
+}
+
+.nav-menu a .fa-chevron-down {
+  font-size: 12px;
+  /* Flecha desplegable más pequeña */
+}
+
+/* --- Sub Menu --- */
+.sub-nav {
+  position: relative;
+}
+
+.sub-nav-items {
+  width: 350px;
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #f6f8f7;
+  border-radius: 15px;
+  padding: 12px 15px;
+  gap: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.03);
+  z-index: 2;
+}
+
+.sub-nav a:hover ~ .sub-nav-items,
+.sub-nav .sub-nav-items:hover {
+  display: flex;
+}
+
+.sub-nav-items a {
+  color: #123249;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.sub-nav-items a i {
+  margin-left: auto;
+  color: #ff7500;
+  font-size: 10px;
+}
+
+/* Separador en el SubMenu */
+.separator-sub-nav {
+  width: 100%;
+  height: 1px;
+  background-color: #b3b7c3;
+  display: block;
+}
+
+/* Links del sub Menu */
+.sub-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 10px;
+}
+
+.sub-nav-links a {
+  font-size: 14px;
+  font-weight: 400;
+  display: flex;
+  align-items: start;
+}
+
+.sub-nav-links a i {
+  margin-top: 5px;
+  margin-left: 0;
+  font-size: 11px;
+}
+
+a.sub-nav-item-title {
+  color: #123249;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Sub Menu con dos columnas */
+.sub-nav-items.sub-columns-nav {
+  flex-direction: row;
+  width: auto;
+  gap: 50px;
+  padding: 12px 26px;
+}
+
+.sub-colum-nav {
+  width: 320px;
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-colum-nav a {
+  align-items: center;
+}
+
+.sub-nav-links a img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Sub menu con 4 columnas */
+.sub-nav-4-columns {
+  display: none;
+}
+
+.sub-colum-nav .sub-nav-links a:not(:first-child) {
+  padding: 0px 10px;
+}
+
+.sub-nav a:hover ~ .sub-nav-4-columns,
+.sub-nav .sub-nav-4-columns:hover {
+  display: grid;
+  grid-template-columns: repeat(4, 257px);
+  position: absolute;
+  top: 100%;
+  left: -219.5%;
+  background-color: #f6f8f7;
+  border-radius: 15px;
+  padding: 12px 15px;
+  gap: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.03);
+  z-index: 2;
+}
+
+.sub-nav-4-columns img,
+.nav-blue img {
+  width: 24px;
+}
+.sub-nav-4-columns a,
+.nav-blue .sub-nav-items a {
+  color: #123249;
+  text-align: left;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.sub-nav-4-columns a:hover {
+  color: #ff7500;
+}
+
+/* Items como submenu */
+
+.sub-nav-4-columns a.active-submenu:hover ~ .sub-items-menu,
+.sub-items-menu:hover {
+  display: block;
+}
+
+.sub-items-menu {
+  display: none;
+}
+
+.sub-items-menu li {
+  padding-left: 24px;
+}
+
+.sub-items-menu li a {
+  font-weight: 400;
+}
+
+.nav-blue .sub-nav-items {
+  right: -100%;
+  left: auto;
+}
+
+.nav-blue .sub-columns-nav .sub-colum-nav {
+  gap: 0px;
+}
+
+.nav-blue .sub-nav-items a:hover {
+  color: #ff7500;
+}
+
+/* --- Botón de Búsqueda --- */
+.buscador-container {
+  position: relative;
+  /* Necesario para el menú desplegable de resultados */
+}
+
+/* Estilos para el componente de búsqueda */
+.buscadorPositiva input[type="text"] {
+  font-family: "Poppins", sans-serif;
+  background-color: rgba(255, 255, 255, 0);
+  max-width: 144px;
+  padding: 8px;
+  color: #ffffff;
+  font-size: 1em;
+  font-weight: 400;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.buscadorPositiva input::placeholder {
+  /* Icono de búsqueda en el placeholder */
+  background-image: url("https://positiva.gov.co/documents/751499/754032/icon-search.svg/faf63a68-caad-7fe0-37ba-8adb88596fda?t=1695351149467");
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding-left: 25px;
+  opacity: 1;
+}
+
+/* Estilo para el contenedor de resultados */
+#resultados {
+  width: 290px;
+  max-width: 300px;
+  display: none;
+  padding: 25px 30px 25px 30px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white !important;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 999;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid #ff6b00;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+/* Estilos de la barra de scroll */
+#resultados::-webkit-scrollbar,
+#resultados2::-webkit-scrollbar {
+  width: 10px;
+}
+
+#resultados::-webkit-scrollbar-thumb,
+#resultados2::-webkit-scrollbar-thumb {
+  background-color: #ff6b00;
+  border-radius: 3px;
+}
+
+#resultados::-webkit-scrollbar-track,
+#resultados2::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 3px grey;
+  border-radius: 3px;
+}
+
+.resultadosTitulo {
+  display: block;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 0.875em;
+  line-height: 34.5px;
+  color: #c1c1c1 !important;
+  text-decoration: none !important;
+  position: relative;
+  padding-bottom: 1px;
+}
+
+.resultadosBuscados {
+  display: block;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 0.875em;
+  line-height: 34.5px;
+  color: #123249 !important;
+  text-decoration: none !important;
+  position: relative;
+  padding-bottom: 1px;
+}
+
+.resultadosBuscados:hover {
+  color: #ff7500 !important;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.resultadosBuscados:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+}
+
+/* Este contenedor está oculto pero es necesario para la funcionalidad de búsqueda */
+.links_no_mostrados {
+  display: none;
+}
+
+/* --- Estilos Menu Responsive --- */
+
+.header-mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .header-desktop {
+    display: none;
+  }
+  .header-mobile {
+    display: block;
+  }
+
+  /* Llamado de iconos */
+  .size-icon-20 {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+  .size-icon-28 {
+    width: 28px;
+  }
+  .icon-search {
+    background-image: url(https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/3099246/icono-busqueda-positiva-resp.svg/78fd39f3-c949-527c-1066-d3a60fa6df32?t=1751558583814);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .icon-menu {
+    background-image: url(https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/3099246/icono-menu-positiva-resp.svg/01bf2118-180a-a243-d20c-194c6dedded4?t=1751558584108);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .icon-close {
+    background-image: url(https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/3099246/icono-cerrar-positiva-resp.svg/4bfbfe48-72ba-5f09-3a8a-68785cd6a8d8?t=1751558583916);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .icon-more {
+    background-image: url(https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/3099246/icono-mas-positiva-resp.svg/2fe0579c-0371-986d-f5ef-ce74b83e0475?t=1751558584017);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .icon-size-rps {
+    background-size: 25px;
+  }
+
+  .base-icon-rps {
+    width: 25px;
+    height: 25px;
+    display: block;
+  }
+
+  /* Estilos generales */
+
+  .header-mobile {
+    width: 100%;
+  }
+
+  /* Top Bar */
+  .mobile-top {
+    width: 100%;
+    background-color: #ff7500;
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  /* Estilos basicos de los iconos */
+  .icon-style-top {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Estilos del logo */
+  .logo-mobile {
+    display: block;
+    width: 123px;
+  }
+  .logo-mobile img {
+    width: 100%;
+  }
+
+  /* Menu hamburguesa */
+  .menu-close {
+    display: none;
+  }
+
+  .menu-mobile.show {
+    display: block;
+  }
+
+  /* --- Estilos del Menu --- */
+
+  .menu-mobile-nav {
+    width: 100%;
+    background-color: #123249;
+    border-radius: 0 0 10px 10px;
+    padding: 15px 10px;
+    display: none;
+  }
+
+  .menu-mobile-nav.show {
+    display: block;
+  }
+
+  .menu-mobile-nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .menu-title-rps {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 12px;
+  }
+
+  .separator-rps {
+    width: 0.5px;
+    background-color: #ffffff;
+    height: 25px;
+  }
+
+  /* --- Estilos de los submenus */
+
+  ul.submenu-item-rps {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    position: absolute;
+    background-color: #ffffff;
+    width: 99%;
+    left: 0.5%;
+    padding: 12px 15px;
+    border-radius: 0 0 15px 15px;
+    margin-top: 15px;
+  }
+
+  li.first-title-menu-rps {
+    font-size: 18px;
+    font-weight: 600;
+    color: #123249;
+    width: 100%;
+  }
+
+  li.first-title-menu-rps a {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  li.first-title-menu-rps a i {
+    font-size: 10px;
+    color: #ff7500;
+  }
+
+  li.items-submenu-rps {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  li.items-submenu-rps a {
+    padding: 0 10px;
+  }
+
+  li.items-submenu-rps a i {
+    margin-right: 8px;
+    color: #ff7500;
+  }
+
+  /* Segundos titulos del submenu */
+  li.second-title-menu-rps {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 10px;
+    color: #123249;
+  }
+
+  li.second-title-menu-rps a i {
+    margin-right: 8px;
+    color: #ff7500;
+    font-size: 12px;
+  }
+
+  ul.second-submenu-rps {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 10px;
+    gap: 8px;
+  }
+
+  ul.second-submenu-rps li a {
+    font-size: 14px;
+    font-weight: 500;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+
+  ul.second-submenu-rps li a img {
+    margin-right: 8px;
+  }
+
+  /* Submenu sin iconos */
+  ul.no-icons-rps {
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    gap: 25px;
+    max-height: 350px;
+    overflow-y: scroll;
+  }
+
+  ul.no-icons-rps li ul {
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+  }
+
+  ul.no-icons-rps li a i {
+    margin-left: 8px;
+  }
+
+  ul.submenu-hidden {
+    display: none;
+  }
+
+  ul.show {
+    display: flex;
+  }
+
+  /* Buscador responsive */
+
+  .buscador-container-rps {
+    position: relative;
+    width: 100%;
+    background-color: #123249;
+    padding: 15px;
+    display: none;
+  }
+
+  .buscador-container-rps.show-buscador {
+    display: block;
+  }
+
+  .buscador-container-rps .buscadorPositiva input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #resultados2 {
+    width: 99%;
+    max-width: 99%;
+    display: none;
+    padding: 25px 30px 25px 30px;
+    position: absolute;
+    top: 100%;
+    left: 0.5%;
+    background-color: white !important;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 999;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid #ff6b00;
+    border-radius: 10px;
+    margin-top: 15px;
+  }
+}
+/* --- Finalizacion del Responsive ---- */
