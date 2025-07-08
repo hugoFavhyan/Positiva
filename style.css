@@ -16,16 +16,23 @@ body {
 
 a {
   text-decoration: none;
-  color: inherit;
+  color: #ffffff;
+}
+
+a:hover {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
 }
 
 ul {
   list-style: none;
+  margin: 0px;
 }
 
 /* --- Contenedor Principal del Header --- */
 .header-container {
   width: 100%;
+  z-index: 999;
 }
 
 /* --- Contenedor de Margenes --- */
@@ -452,6 +459,9 @@ a.sub-nav-item-title {
 }
 
 @media only screen and (max-width: 768px) {
+  .header-container {
+    position: fixed;
+  }
   .header-desktop {
     display: none;
   }
@@ -468,7 +478,7 @@ a.sub-nav-item-title {
   .size-icon-28 {
     width: 28px;
   }
-  .icon-search {
+  .icon-search-rps {
     background-image: url(https://webserver-portalsegurospositiva-uat.lfr.cloud/documents/2978451/3099246/icono-busqueda-positiva-resp.svg/78fd39f3-c949-527c-1066-d3a60fa6df32?t=1751558583814);
     background-position: center;
     background-repeat: no-repeat;
@@ -596,11 +606,22 @@ a.sub-nav-item-title {
     margin-top: 15px;
   }
 
+  ul.submenu-item-rps li a {
+    color: #123249;
+  }
+
   li.first-title-menu-rps {
+    width: 100%;
+  }
+
+  li.first-title-menu-rps a {
     font-size: 18px;
     font-weight: 600;
     color: #123249;
-    width: 100%;
+  }
+
+  li.first-title-menu-rps a:hover {
+    color: #ff7500;
   }
 
   li.first-title-menu-rps a {
